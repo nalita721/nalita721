@@ -1,6 +1,4 @@
-import { Redis } from '@upstash/redis'
-
-const kv = Redis.fromEnv()
+import { kv } from './_redis'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const VALID_SLOTS = new Set(['morning', 'evening'])

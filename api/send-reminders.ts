@@ -1,6 +1,4 @@
-import { Redis } from '@upstash/redis'
-
-const kv = Redis.fromEnv()
+import { kv } from './_redis'
 
 const RESEND_API_URL = 'https://api.resend.com/emails'
 const SITE_URL = process.env.SITE_URL ?? 'https://toeic-nu.vercel.app'
