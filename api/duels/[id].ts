@@ -1,5 +1,5 @@
-import { getSessionEmail } from '../_auth'
-import { getDuel, redactForViewer } from '../_duel'
+import { getSessionEmail } from '../_auth.js'
+import { getDuel, redactForViewer } from '../_duel.js'
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'GET') {

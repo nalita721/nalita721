@@ -1,5 +1,5 @@
-import { kv } from './_redis'
-import { getSessionEmail } from './_auth'
+import { kv } from './_redis.js'
+import { getSessionEmail } from './_auth.js'
 
 const MAX_BODY_BYTES = 200_000
 

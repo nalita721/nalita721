@@ -1,4 +1,4 @@
-import { consumeLoginToken, createSession, setSessionCookie } from '../_auth'
+import { consumeLoginToken, createSession, setSessionCookie } from '../_auth.js'
 
 const SITE_URL = process.env.SITE_URL ?? 'https://toeic-nu.vercel.app'
 

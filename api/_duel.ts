@@ -1,7 +1,7 @@
 import { randomBytes } from 'crypto'
-import { kv } from './_redis'
-import { allWords, vocabChapters } from '../src/data/vocabulary'
-import type { VocabWord } from '../src/lib/types'
+import { kv } from './_redis.js'
+import { allWords, vocabChapters } from '../src/data/vocabulary.js'
+import type { VocabWord } from '../src/lib/types.js'
 
 const DUEL_WORD_COUNT = 8
 

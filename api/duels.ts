@@ -1,8 +1,8 @@
-import { kv } from './_redis'
-import { getSessionEmail } from './_auth'
-import { getOrCreateUser } from './_account'
-import { buildDuelQuestions, randomDuelId, saveDuel, type DuelState } from './_duel'
-import { vocabChapters } from '../src/data/vocabulary'
+import { kv } from './_redis.js'
+import { getSessionEmail } from './_auth.js'
+import { getOrCreateUser } from './_account.js'
+import { buildDuelQuestions, randomDuelId, saveDuel, type DuelState } from './_duel.js'
+import { vocabChapters } from '../src/data/vocabulary.js'
 
 export default async function handler(req: any, res: any) {
   const email = await getSessionEmail(req)

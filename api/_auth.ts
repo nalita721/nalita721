@@ -1,5 +1,5 @@
 import { randomBytes } from 'crypto'
-import { kv } from './_redis'
+import { kv } from './_redis.js'
 
 export const SESSION_COOKIE = 'toeic_session'
 const SESSION_TTL_SEC = 60 * 60 * 24 * 30

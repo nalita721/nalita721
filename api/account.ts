@@ -1,5 +1,5 @@
-import { getSessionEmail } from './_auth'
-import { getOrCreateUser, updateDisplayName } from './_account'
+import { getSessionEmail } from './_auth.js'
+import { getOrCreateUser, updateDisplayName } from './_account.js'
 
 export default async function handler(req: any, res: any) {
   const email = await getSessionEmail(req)

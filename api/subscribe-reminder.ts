@@ -1,4 +1,4 @@
-import { kv } from './_redis'
+import { kv } from './_redis.js'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const VALID_SLOTS = new Set(['morning', 'evening'])

@@ -1,7 +1,7 @@
-import { kv } from './_redis'
-import { getSessionEmail } from './_auth'
-import { getOrCreateUser, getUserByFriendCode } from './_account'
-import type { CefrCode } from '../src/lib/types'
+import { kv } from './_redis.js'
+import { getSessionEmail } from './_auth.js'
+import { getOrCreateUser, getUserByFriendCode } from './_account.js'
+import type { CefrCode } from '../src/lib/types.js'
 
 interface ProgressSnapshotLite {
   xp?: number

@@ -1,4 +1,4 @@
-import type { VocabChapter } from '../lib/types'
+import type { VocabChapter } from '../lib/types.js'
 
 export const vocabChapters: VocabChapter[] = [
   {

@@ -1,4 +1,4 @@
-import { createLoginToken, isRateLimited, isValidEmail, normalizeEmail } from '../_auth'
+import { createLoginToken, isRateLimited, isValidEmail, normalizeEmail } from '../_auth.js'
 
 const RESEND_API_URL = 'https://api.resend.com/emails'
 const SITE_URL = process.env.SITE_URL ?? 'https://toeic-nu.vercel.app'

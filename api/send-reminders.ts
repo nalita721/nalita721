@@ -1,4 +1,4 @@
-import { kv } from './_redis'
+import { kv } from './_redis.js'
 
 const RESEND_API_URL = 'https://api.resend.com/emails'
 const SITE_URL = process.env.SITE_URL ?? 'https://toeic-nu.vercel.app'

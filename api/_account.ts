@@ -1,5 +1,5 @@
 import { randomBytes } from 'crypto'
-import { kv } from './_redis'
+import { kv } from './_redis.js'
 
 export interface UserRecord {
   email: string
