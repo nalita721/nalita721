@@ -6,6 +6,7 @@ import { isDue } from '../lib/srs'
 import type { StatPart } from '../lib/types'
 import { SkillAccuracyChart } from '../components/charts/SkillAccuracyChart'
 import { MockScoreTrendChart } from '../components/charts/MockScoreTrendChart'
+import { scoreToCefr } from '../data/cefr'
 
 const PART_LABELS: Record<StatPart, string> = {
   vocabulary: 'คำศัพท์',
@@ -21,6 +22,7 @@ export default function DashboardPage() {
   const srsMap = useProgressStore((s) => s.srsMap)
   const partStats = useProgressStore((s) => s.partStats)
   const mockResults = useProgressStore((s) => s.mockResults)
+  const levelTestResult = useProgressStore((s) => s.levelTestResult)
 
   const words = allWords()
   const dueCount = words.filter((w) => isDue(srsMap[w.id] ?? { wordId: w.id, interval: 0, ease: 2.5, repetitions: 0, dueDate: new Date(0).toISOString() })).length
@@ -33,6 +35,36 @@ export default function DashboardPage() {
         <h1 className="text-2xl font-bold text-stone-800">สวัสดี! พร้อมฝึกสอบ TOEIC วันนี้หรือยัง</h1>
         <p className="text-stone-500 mt-1">ติดตามความคืบหน้าและฝึกฝนต่อเนื่องเพื่อผลลัพธ์ที่ดีที่สุด</p>
       </div>
+
+      {levelTestResult ? (
+        <Card className="flex items-center justify-between flex-wrap gap-3">
+          <div className="flex items-center gap-3">
+            <span
+              className="flex items-center justify-center w-12 h-12 rounded-xl font-extrabold text-lg"
+              style={{ backgroundColor: scoreToCefr(levelTestResult.totalScore).bgColor, color: scoreToCefr(levelTestResult.totalScore).color }}
+            >
+              {levelTestResult.cefr}
+            </span>
+            <div>
+              <p className="font-semibold text-stone-800">ระดับภาษาของคุณ: {scoreToCefr(levelTestResult.totalScore).nameTh}</p>
+              <p className="text-sm text-stone-500">คะแนนโดยประมาณ {levelTestResult.totalScore}/990</p>
+            </div>
+          </div>
+          <Link to="/level-test">
+            <Button variant="secondary">ทดสอบอีกครั้ง</Button>
+          </Link>
+        </Card>
+      ) : (
+        <Card className="flex items-center justify-between flex-wrap gap-3 bg-brand-50 border-brand-200">
+          <div>
+            <p className="font-semibold text-stone-800">ยังไม่รู้ระดับภาษาของตัวเอง?</p>
+            <p className="text-sm text-stone-500">ลองทำแบบทดสอบวัดระดับตามมาตรฐาน CEFR (A1–C1) ใช้เวลาประมาณ 25 นาที</p>
+          </div>
+          <Link to="/level-test">
+            <Button>วัดระดับตอนนี้</Button>
+          </Link>
+        </Card>
+      )}
 
       <div className="grid gap-4 sm:grid-cols-3">
         <Card>

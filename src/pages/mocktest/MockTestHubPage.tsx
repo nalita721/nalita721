@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Card } from '../../components/ui'
 import { FULL_EXAM_READING_COUNT, FULL_EXAM_LISTENING_COUNT, FULL_EXAM_TOTAL_COUNT } from '../../data/fullMockExam'
 import { mockTestQuestions, MOCK_TEST_DURATION_SEC } from '../../data/mockTest'
+import { LEVEL_TEST_TOTAL_QUESTIONS, LEVEL_TEST_DURATION_SEC } from '../../data/levelTest'
 
 export default function MockTestHubPage() {
   return (
@@ -11,7 +12,17 @@ export default function MockTestHubPage() {
         <p className="text-stone-500 mt-1">เลือกรูปแบบข้อสอบจำลองที่เหมาะกับเวลาที่คุณมี</p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-3">
+        <Link to="/level-test">
+          <Card className="h-full hover:shadow-md hover:-translate-y-0.5 transition cursor-pointer border-brand-200 bg-brand-50">
+            <span className="text-3xl">🌐</span>
+            <h2 className="font-semibold text-stone-800 mt-2">แบบทดสอบวัดระดับ (CEFR)</h2>
+            <p className="text-sm text-stone-500 mt-1">
+              {LEVEL_TEST_TOTAL_QUESTIONS} ข้อ • {LEVEL_TEST_DURATION_SEC / 60} นาที — รู้ระดับภาษาของตัวเองตามมาตรฐานสากล A1–C1
+            </p>
+          </Card>
+        </Link>
+
         <Link to="/mock-test/mini">
           <Card className="h-full hover:shadow-md hover:-translate-y-0.5 transition cursor-pointer">
             <span className="text-3xl">⚡</span>

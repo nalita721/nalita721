@@ -21,6 +21,7 @@ import FullMockTestPage from './pages/mocktest/FullMockTestPage'
 import GamesHubPage from './pages/games/GamesHubPage'
 import GrammarBlitzPage from './pages/games/GrammarBlitzPage'
 import SettingsPage from './pages/SettingsPage'
+import LevelTestPage from './pages/LevelTestPage'
 
 export default function App() {
   return (
@@ -59,6 +60,7 @@ export default function App() {
           <Route path="/games/grammar-blitz" element={<GrammarBlitzPage />} />
 
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/level-test" element={<LevelTestPage />} />
         </Routes>
       </main>
     </div>

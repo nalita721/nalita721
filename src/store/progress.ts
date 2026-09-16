@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { newCard, reviewCard } from '../lib/srs'
 import type {
+  LevelTestResult,
   MockTestResult,
   PartStat,
   QuizQuality,
@@ -20,6 +21,7 @@ interface ProgressState {
   srsMap: Record<string, SrsCardState>
   partStats: Record<StatPart, PartStat>
   mockResults: MockTestResult[]
+  levelTestResult: LevelTestResult | null
 
   addXp: (amount: number) => void
   touchStreak: () => void
@@ -27,6 +29,7 @@ interface ProgressState {
   reviewWord: (wordId: string, quality: QuizQuality) => void
   recordAnswer: (part: StatPart, correct: boolean) => void
   addMockResult: (result: MockTestResult) => void
+  setLevelTestResult: (result: LevelTestResult) => void
   resetProgress: () => void
 }
 
@@ -47,6 +50,7 @@ export const useProgressStore = create<ProgressState>()(
       srsMap: {},
       partStats: emptyStats,
       mockResults: [],
+      levelTestResult: null,
 
       addXp: (amount) => set((s) => ({ xp: s.xp + amount })),
 
@@ -85,6 +89,8 @@ export const useProgressStore = create<ProgressState>()(
 
       addMockResult: (result) => set((s) => ({ mockResults: [...s.mockResults, result] })),
 
+      setLevelTestResult: (result) => set({ levelTestResult: result }),
+
       resetProgress: () =>
         set({
           xp: 0,
@@ -93,6 +99,7 @@ export const useProgressStore = create<ProgressState>()(
           srsMap: {},
           partStats: emptyStats,
           mockResults: [],
+          levelTestResult: null,
         }),
     }),
     { name: 'toeic-vocab-progress' },

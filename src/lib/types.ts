@@ -109,6 +109,16 @@ export interface MockTestResult {
   durationSec: number
 }
 
+export type CefrCode = 'A1' | 'A2' | 'B1' | 'B2' | 'C1'
+
+export interface LevelTestResult {
+  date: string
+  cefr: CefrCode
+  totalScore: number
+  listeningScore: number
+  readingScore: number
+}
+
 export type ExamPart = 1 | 2 | 3 | 4 | 5 | 6 | 7
 
 export interface ExamSubQuestion {
