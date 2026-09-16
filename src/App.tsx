@@ -1,5 +1,8 @@
+import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import { useAuthStore } from './store/auth'
+import { useProgressSync } from './lib/useProgressSync'
 import DashboardPage from './pages/DashboardPage'
 import ChapterListPage from './pages/vocabulary/ChapterListPage'
 import ChapterHubPage from './pages/vocabulary/ChapterHubPage'
@@ -22,8 +25,17 @@ import GamesHubPage from './pages/games/GamesHubPage'
 import GrammarBlitzPage from './pages/games/GrammarBlitzPage'
 import SettingsPage from './pages/SettingsPage'
 import LevelTestPage from './pages/LevelTestPage'
+import LoginPage from './pages/LoginPage'
 
 export default function App() {
+  const checkSession = useAuthStore((s) => s.checkSession)
+
+  useEffect(() => {
+    checkSession()
+  }, [checkSession])
+
+  useProgressSync()
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -61,6 +73,7 @@ export default function App() {
 
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/level-test" element={<LevelTestPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </main>
     </div>

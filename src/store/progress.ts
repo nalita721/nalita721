@@ -14,7 +14,7 @@ function todayKey(): string {
   return new Date().toISOString().slice(0, 10)
 }
 
-interface ProgressState {
+export interface ProgressSnapshot {
   xp: number
   streak: number
   lastActiveDay: string | null
@@ -22,7 +22,9 @@ interface ProgressState {
   partStats: Record<StatPart, PartStat>
   mockResults: MockTestResult[]
   levelTestResult: LevelTestResult | null
+}
 
+interface ProgressState extends ProgressSnapshot {
   addXp: (amount: number) => void
   touchStreak: () => void
   getCard: (wordId: string) => SrsCardState
@@ -30,6 +32,7 @@ interface ProgressState {
   recordAnswer: (part: StatPart, correct: boolean) => void
   addMockResult: (result: MockTestResult) => void
   setLevelTestResult: (result: LevelTestResult) => void
+  hydrate: (snapshot: ProgressSnapshot) => void
   resetProgress: () => void
 }
 
@@ -90,6 +93,8 @@ export const useProgressStore = create<ProgressState>()(
       addMockResult: (result) => set((s) => ({ mockResults: [...s.mockResults, result] })),
 
       setLevelTestResult: (result) => set({ levelTestResult: result }),
+
+      hydrate: (snapshot) => set(snapshot),
 
       resetProgress: () =>
         set({

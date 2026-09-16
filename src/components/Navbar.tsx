@@ -1,5 +1,6 @@
 import { Link, NavLink } from 'react-router-dom'
 import { useProgressStore } from '../store/progress'
+import { useAuthStore } from '../store/auth'
 
 const LINKS = [
   { to: '/', label: 'แดชบอร์ด', end: true },
@@ -14,6 +15,8 @@ const LINKS = [
 function UserBadges() {
   const xp = useProgressStore((s) => s.xp)
   const streak = useProgressStore((s) => s.streak)
+  const authStatus = useAuthStore((s) => s.status)
+  const email = useAuthStore((s) => s.email)
 
   return (
     <div className="flex items-center gap-3 text-sm shrink-0">
@@ -22,6 +25,18 @@ function UserBadges() {
       <Link to="/settings" title="ตั้งค่าการแจ้งเตือน" className="text-stone-500 hover:text-brand-600 transition">
         🔔
       </Link>
+      {authStatus === 'authenticated' ? (
+        <Link to="/settings" title={email ?? ''} className="text-stone-500 hover:text-brand-600 transition">
+          👤
+        </Link>
+      ) : (
+        <Link
+          to="/login"
+          className="rounded-lg bg-brand-50 text-brand-700 px-2.5 py-1 text-xs font-semibold hover:bg-brand-100 transition"
+        >
+          เข้าสู่ระบบ
+        </Link>
+      )}
     </div>
   )
 }

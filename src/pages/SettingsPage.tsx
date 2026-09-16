@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Button, Card } from '../components/ui'
+import { useAuthStore } from '../store/auth'
 
 type Slot = 'morning' | 'evening'
 
@@ -13,6 +15,9 @@ export default function SettingsPage() {
   const [slot, setSlot] = useState<Slot>('morning')
   const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
+  const authStatus = useAuthStore((s) => s.status)
+  const accountEmail = useAuthStore((s) => s.email)
+  const logout = useAuthStore((s) => s.logout)
 
   async function subscribe(enabled: boolean) {
     if (!email.trim()) return
@@ -35,7 +40,33 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6 max-w-xl mx-auto">
       <div>
-        <h1 className="text-2xl font-bold text-stone-800">🔔 แจ้งเตือนทางอีเมล</h1>
+        <h1 className="text-2xl font-bold text-stone-800">👤 บัญชีผู้ใช้</h1>
+      </div>
+
+      <Card className="space-y-3">
+        {authStatus === 'authenticated' ? (
+          <>
+            <p className="text-sm text-stone-500">เข้าสู่ระบบด้วย</p>
+            <p className="font-semibold text-stone-800">{accountEmail}</p>
+            <p className="text-xs text-stone-400">ความคืบหน้าของคุณจะถูกบันทึกและซิงก์อัตโนมัติกับบัญชีนี้</p>
+            <Button variant="secondary" onClick={logout}>
+              ออกจากระบบ
+            </Button>
+          </>
+        ) : (
+          <>
+            <p className="text-sm text-stone-500">
+              คุณยังไม่ได้เข้าสู่ระบบ — ความคืบหน้าจะถูกบันทึกไว้ในเบราว์เซอร์นี้เท่านั้น เข้าสู่ระบบเพื่อบันทึกไว้บนคลาวด์และใช้งานต่อเนื่องทุกอุปกรณ์
+            </p>
+            <Link to="/login">
+              <Button>เข้าสู่ระบบ</Button>
+            </Link>
+          </>
+        )}
+      </Card>
+
+      <div>
+        <h2 className="text-2xl font-bold text-stone-800">🔔 แจ้งเตือนทางอีเมล</h2>
         <p className="text-stone-500 mt-1">ตั้งเวลาแจ้งเตือนให้กลับมาฝึก TOEIC ทุกวัน เลือกได้ 1 ช่วงเวลา</p>
       </div>
 
