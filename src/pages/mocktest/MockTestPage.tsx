@@ -5,17 +5,12 @@ import { Button, Card, ProgressBar } from '../../components/ui'
 import { useCountdown } from '../../lib/useCountdown'
 import { useProgressStore } from '../../store/progress'
 import { speak } from '../../lib/tts'
+import { toScoreBand } from '../../lib/scoreBand'
 
 function formatTime(sec: number) {
   const m = Math.floor(sec / 60)
   const s = sec % 60
   return `${m}:${s.toString().padStart(2, '0')}`
-}
-
-function toScoreBand(correct: number, total: number): number {
-  if (total === 0) return 0
-  const raw = (correct / total) * 495
-  return Math.min(495, Math.max(5, Math.round(raw / 5) * 5))
 }
 
 export default function MockTestPage() {

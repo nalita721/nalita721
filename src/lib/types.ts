@@ -92,3 +92,30 @@ export interface MockTestResult {
   readingScore: number
   durationSec: number
 }
+
+export type ExamPart = 1 | 2 | 3 | 4 | 5 | 6 | 7
+
+export interface ExamSubQuestion {
+  id: string
+  question: string
+  choices: string[]
+  answerIndex: number
+}
+
+/**
+ * One screen of the full mock exam. Parts 1/2/5 have a single sub-question;
+ * Parts 3/4 (conversations/talks) and 6/7 (passages) share one audio script
+ * or one/more passage texts across several sub-questions, matching how the
+ * real TOEIC groups them.
+ */
+export interface ExamItem {
+  id: string
+  part: ExamPart
+  section: 'listening' | 'reading'
+  imageDescription?: string
+  audioScript?: string
+  sentence?: string
+  passageTexts?: string[]
+  transcript?: string
+  questions: ExamSubQuestion[]
+}

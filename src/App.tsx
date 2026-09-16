@@ -14,7 +14,9 @@ import ListeningPartListPage from './pages/listening/ListeningPartListPage'
 import ListeningPracticePage from './pages/listening/ListeningPracticePage'
 import ReadingListPage from './pages/reading/ReadingListPage'
 import ReadingPracticePage from './pages/reading/ReadingPracticePage'
+import MockTestHubPage from './pages/mocktest/MockTestHubPage'
 import MockTestPage from './pages/mocktest/MockTestPage'
+import FullMockTestPage from './pages/mocktest/FullMockTestPage'
 
 export default function App() {
   return (
@@ -41,7 +43,9 @@ export default function App() {
           <Route path="/reading" element={<ReadingListPage />} />
           <Route path="/reading/:passageId" element={<ReadingPracticePage />} />
 
-          <Route path="/mock-test" element={<MockTestPage />} />
+          <Route path="/mock-test" element={<MockTestHubPage />} />
+          <Route path="/mock-test/mini" element={<MockTestPage />} />
+          <Route path="/mock-test/full" element={<FullMockTestPage />} />
         </Routes>
       </main>
     </div>
