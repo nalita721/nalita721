@@ -75,6 +75,7 @@ export default function App() {
           <Route path="/mock-test/full" element={<RequireAuth><FullMockTestPage /></RequireAuth>} />
 
           <Route path="/games" element={<RequireAuth><GamesHubPage /></RequireAuth>} />
+          <Route path="/games/flashcards" element={<RequireAuth><FlashcardPage /></RequireAuth>} />
           <Route path="/games/word-rush" element={<RequireAuth><WordRushPage /></RequireAuth>} />
           <Route path="/games/matching" element={<RequireAuth><MatchingGamePage /></RequireAuth>} />
           <Route path="/games/typing" element={<RequireAuth><TypingChallengePage /></RequireAuth>} />

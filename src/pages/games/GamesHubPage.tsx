@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Card } from '../../components/ui'
 
 const GAMES = [
+  { path: '/games/flashcards', icon: '🃏', title: 'Flashcard SRS', desc: 'พลิกบัตรคำศัพท์ทบทวนความจำ สุ่มจากคำศัพท์ทั้งหมดทุกบท ตามระบบ Spaced Repetition' },
   { path: '/games/word-rush', icon: '⚡', title: 'Word Rush', desc: 'ทบทวนคำศัพท์ทุกบทแบบจับเวลา 60 วินาที ตอบให้เร็วและแม่นที่สุด' },
   { path: '/games/matching', icon: '🧩', title: 'Matching Game', desc: 'จับคู่คำศัพท์กับความหมาย สุ่มจากคำศัพท์ทั้งหมดทุกบท' },
   { path: '/games/typing', icon: '⌨️', title: 'Typing Challenge', desc: 'พิมพ์คำศัพท์จากความหมาย สุ่มจากคำศัพท์ทั้งหมดทุกบท' },

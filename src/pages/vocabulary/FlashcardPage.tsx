@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { vocabChapters } from '../../data/vocabulary'
+import { allWords, vocabChapters } from '../../data/vocabulary'
 import { useProgressStore } from '../../store/progress'
 import { isDue } from '../../lib/srs'
 import { speak } from '../../lib/tts'
@@ -9,23 +9,28 @@ import type { QuizQuality } from '../../lib/types'
 
 export default function FlashcardPage() {
   const { chapterId } = useParams()
-  const chapter = vocabChapters.find((c) => c.id === chapterId)
+  const isGlobal = chapterId === undefined
+  const chapter = isGlobal ? undefined : vocabChapters.find((c) => c.id === chapterId)
   const srsMap = useProgressStore((s) => s.srsMap)
   const reviewWord = useProgressStore((s) => s.reviewWord)
   const touchStreak = useProgressStore((s) => s.touchStreak)
 
+  const backTo = isGlobal ? '/games' : `/vocabulary/${chapterId}`
+  const title = isGlobal ? 'ทุกบท' : chapter?.titleTh ?? ''
+
   const queue = useMemo(() => {
-    if (!chapter) return []
-    const due = chapter.words.filter((w) => isDue(srsMap[w.id] ?? { wordId: w.id, interval: 0, ease: 2.5, repetitions: 0, dueDate: new Date(0).toISOString() }))
-    return due.length > 0 ? due : chapter.words
+    const sourceWords = isGlobal ? allWords() : chapter?.words
+    if (!sourceWords) return []
+    const due = sourceWords.filter((w) => isDue(srsMap[w.id] ?? { wordId: w.id, interval: 0, ease: 2.5, repetitions: 0, dueDate: new Date(0).toISOString() }))
+    return due.length > 0 ? due : sourceWords
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chapter])
+  }, [chapter, isGlobal])
 
   const [index, setIndex] = useState(0)
   const [flipped, setFlipped] = useState(false)
   const [reviewedCount, setReviewedCount] = useState(0)
 
-  if (!chapter) return <Navigate to="/vocabulary" replace />
+  if (!isGlobal && !chapter) return <Navigate to="/vocabulary" replace />
 
   const word = queue[index]
   const done = index >= queue.length
@@ -42,8 +47,8 @@ export default function FlashcardPage() {
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
       <div>
-        <Link to={`/vocabulary/${chapter.id}`} className="text-sm text-brand-600 hover:underline">← กลับ</Link>
-        <h1 className="text-xl font-bold text-stone-800 mt-2">Flashcard SRS — {chapter.titleTh}</h1>
+        <Link to={backTo} className="text-sm text-brand-600 hover:underline">← กลับ</Link>
+        <h1 className="text-xl font-bold text-stone-800 mt-2">Flashcard SRS — {title}</h1>
       </div>
 
       <ProgressBar value={reviewedCount} max={queue.length} />
@@ -53,7 +58,7 @@ export default function FlashcardPage() {
           <p className="text-2xl">🎉</p>
           <p className="text-lg font-semibold text-stone-800 mt-2">ทบทวนครบแล้ว {reviewedCount} คำ</p>
           <p className="text-sm text-stone-500 mt-1">ระบบจะเตือนให้กลับมาทบทวนคำที่ยังไม่แม่นตามรอบเวลา</p>
-          <Link to={`/vocabulary/${chapter.id}`}>
+          <Link to={backTo}>
             <Button className="mt-4">กลับไปหน้าเลือกเกม</Button>
           </Link>
         </Card>
