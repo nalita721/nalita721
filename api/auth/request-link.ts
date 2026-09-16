@@ -42,6 +42,8 @@ export default async function handler(req: any, res: any) {
   })
 
   if (!response.ok) {
+    const errorBody = await response.text().catch(() => '')
+    console.error('Resend send failed', response.status, errorBody)
     res.status(502).json({ error: 'ส่งอีเมลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง' })
     return
   }
