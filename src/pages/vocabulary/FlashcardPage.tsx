@@ -5,6 +5,8 @@ import { useProgressStore } from '../../store/progress'
 import { isDue } from '../../lib/srs'
 import { speak } from '../../lib/tts'
 import { Button, Card, ProgressBar } from '../../components/ui'
+import { WordIcon } from '../../components/WordIcon'
+import { getWordIcon } from '../../data/wordIcons'
 import type { QuizQuality } from '../../lib/types'
 
 export default function FlashcardPage() {
@@ -64,6 +66,7 @@ export default function FlashcardPage() {
         </Card>
       ) : (
         <Card className="min-h-[280px] flex flex-col items-center justify-center text-center gap-4">
+          <WordIcon iconKey={getWordIcon(word.id)} />
           <span className="text-xs uppercase tracking-wide text-stone-400">{word.pos}</span>
           <h2 className="text-3xl font-bold text-stone-800">{word.term}</h2>
           <button
