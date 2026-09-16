@@ -6,6 +6,7 @@ export const vocabChapters: VocabChapter[] = [
     title: 'Office & Human Resources',
     titleTh: 'บทที่ 1: สำนักงานและงานบุคคล',
     description: 'คำศัพท์เกี่ยวกับการสมัครงาน สัญญาจ้าง และชีวิตในออฟฟิศ',
+    cefrLevel: 'B1',
     words: [
       { id: 'ohr-1', term: 'applicant', pos: 'n.', meaningTh: 'ผู้สมัครงาน', synonym: 'candidate', exampleEn: 'Each applicant must submit a resume and cover letter.', exampleTh: 'ผู้สมัครแต่ละคนต้องส่งเรซูเม่และจดหมายสมัครงาน' },
       { id: 'ohr-2', term: 'recruit', pos: 'v.', meaningTh: 'รับสมัคร/สรรหาบุคลากร', synonym: 'hire', exampleEn: 'The company plans to recruit ten new engineers.', exampleTh: 'บริษัทวางแผนจะรับสมัครวิศวกรใหม่สิบคน' },
@@ -54,6 +55,7 @@ export const vocabChapters: VocabChapter[] = [
     title: 'Meetings & Negotiations',
     titleTh: 'บทที่ 2: การประชุมและการเจรจา',
     description: 'คำศัพท์ที่ใช้บ่อยในห้องประชุมและการเจรจาธุรกิจ',
+    cefrLevel: 'B1',
     words: [
       { id: 'mtg-1', term: 'agenda', pos: 'n.', meaningTh: 'ระเบียบวาระการประชุม', exampleEn: 'Please review the agenda before the meeting.', exampleTh: 'กรุณาตรวจสอบวาระการประชุมก่อนเริ่มประชุม' },
       { id: 'mtg-2', term: 'postpone', pos: 'v.', meaningTh: 'เลื่อนออกไป', synonym: 'delay', exampleEn: 'The meeting has been postponed until Friday.', exampleTh: 'การประชุมถูกเลื่อนออกไปเป็นวันศุกร์' },
@@ -102,6 +104,7 @@ export const vocabChapters: VocabChapter[] = [
     title: 'Travel & Transportation',
     titleTh: 'บทที่ 3: การเดินทางและการขนส่ง',
     description: 'คำศัพท์ที่พบบ่อยในหัวข้อการเดินทางเพื่อธุรกิจ สนามบิน และโรงแรม',
+    cefrLevel: 'A2',
     words: [
       { id: 'trv-1', term: 'itinerary', pos: 'n.', meaningTh: 'กำหนดการเดินทาง', exampleEn: 'Please send me the updated travel itinerary.', exampleTh: 'กรุณาส่งกำหนดการเดินทางที่อัปเดตให้ฉัน' },
       { id: 'trv-2', term: 'reservation', pos: 'n.', meaningTh: 'การจอง', synonym: 'booking', exampleEn: 'I made a reservation at the downtown hotel.', exampleTh: 'ฉันจองโรงแรมในตัวเมืองแล้ว' },
@@ -150,6 +153,7 @@ export const vocabChapters: VocabChapter[] = [
     title: 'Finance & Accounting',
     titleTh: 'บทที่ 4: การเงินและบัญชี',
     description: 'คำศัพท์เกี่ยวกับงบประมาณ ใบแจ้งหนี้ และรายงานทางการเงิน',
+    cefrLevel: 'B2',
     words: [
       { id: 'fin-1', term: 'invoice', pos: 'n.', meaningTh: 'ใบแจ้งหนี้', exampleEn: 'The invoice must be paid within 30 days.', exampleTh: 'ใบแจ้งหนี้ต้องชำระภายใน 30 วัน' },
       { id: 'fin-2', term: 'budget', pos: 'n.', meaningTh: 'งบประมาณ', exampleEn: 'The marketing budget was cut this quarter.', exampleTh: 'งบประมาณการตลาดถูกตัดในไตรมาสนี้' },
@@ -198,6 +202,7 @@ export const vocabChapters: VocabChapter[] = [
     title: 'Marketing & Advertising',
     titleTh: 'บทที่ 5: การตลาดและโฆษณา',
     description: 'คำศัพท์เกี่ยวกับแคมเปญโฆษณา แบรนด์ และการวิจัยตลาด',
+    cefrLevel: 'B2',
     words: [
       { id: 'mkt-1', term: 'campaign', pos: 'n.', meaningTh: 'แคมเปญ', exampleEn: 'The new ad campaign launches next week.', exampleTh: 'แคมเปญโฆษณาใหม่จะเปิดตัวสัปดาห์หน้า' },
       { id: 'mkt-2', term: 'target audience', pos: 'n.', meaningTh: 'กลุ่มเป้าหมาย', exampleEn: 'Our target audience is young professionals.', exampleTh: 'กลุ่มเป้าหมายของเราคือคนวัยทำงานรุ่นใหม่' },

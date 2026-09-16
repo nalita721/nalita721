@@ -12,6 +12,8 @@ import { useCountdown } from '../lib/useCountdown'
 import { useProgressStore } from '../store/progress'
 import { speak } from '../lib/tts'
 import { toScoreBand } from '../lib/scoreBand'
+import { getRecommendations } from '../lib/recommendations'
+import type { LevelTestSkill } from '../data/levelTest'
 
 function formatTime(sec: number) {
   const m = Math.floor(sec / 60)
@@ -63,9 +65,19 @@ export default function LevelTestPage() {
     const readingScore = toScoreBand(readingCorrect, readingQs.length)
     const totalScore = listeningScore + readingScore
 
+    const skillBreakdown: Record<LevelTestSkill, { correct: number; total: number }> = {
+      vocabulary: { correct: 0, total: 0 },
+      grammar: { correct: 0, total: 0 },
+      listening: { correct: 0, total: 0 },
+      reading: { correct: 0, total: 0 },
+    }
+
     items.forEach((it) => {
       it.questions.forEach((q) => {
-        recordAnswer(it.skill, finalAnswers[q.id] === q.answerIndex)
+        const correct = finalAnswers[q.id] === q.answerIndex
+        recordAnswer(it.skill, correct)
+        skillBreakdown[it.skill].total += 1
+        if (correct) skillBreakdown[it.skill].correct += 1
       })
     })
     touchStreak()
@@ -77,6 +89,7 @@ export default function LevelTestPage() {
       totalScore,
       listeningScore,
       readingScore,
+      skillBreakdown,
     })
     setPhase('finished')
   }
@@ -153,6 +166,25 @@ export default function LevelTestPage() {
             </p>
           )}
         </Card>
+
+        {result && (
+          <Card className="space-y-3">
+            <h2 className="font-semibold text-stone-800">แนะนำสำหรับคุณ</h2>
+            <p className="text-sm text-stone-500">บทเรียนที่ควรเริ่มฝึกก่อน โดยอิงจากระดับและจุดที่ยังอ่อนของคุณ</p>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {getRecommendations(result).map((card) => (
+                <Link key={card.id} to={card.to}>
+                  <div className="h-full rounded-xl border border-sand-200 bg-sand-50 px-4 py-3 hover:border-brand-400 hover:shadow-sm transition">
+                    <p className="font-semibold text-stone-800">
+                      {card.icon} {card.title}
+                    </p>
+                    <p className="text-xs text-stone-500 mt-1">{card.description}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </Card>
+        )}
 
         <div className="flex gap-3 justify-center">
           <Button onClick={beginTest}>ทำอีกครั้ง</Button>

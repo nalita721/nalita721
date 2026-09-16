@@ -2,6 +2,11 @@ import { Link } from 'react-router-dom'
 import { vocabChapters } from '../../data/vocabulary'
 import { Card, ProgressBar } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
+import { CEFR_LEVELS } from '../../data/cefr'
+
+const sortedChapters = [...vocabChapters].sort(
+  (a, b) => CEFR_LEVELS.findIndex((l) => l.code === a.cefrLevel) - CEFR_LEVELS.findIndex((l) => l.code === b.cefrLevel),
+)
 
 export default function ChapterListPage() {
   const srsMap = useProgressStore((s) => s.srsMap)
@@ -14,12 +19,21 @@ export default function ChapterListPage() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {vocabChapters.map((chapter) => {
+        {sortedChapters.map((chapter) => {
           const learned = chapter.words.filter((w) => (srsMap[w.id]?.repetitions ?? 0) > 0).length
+          const level = CEFR_LEVELS.find((l) => l.code === chapter.cefrLevel)!
           return (
             <Link key={chapter.id} to={`/vocabulary/${chapter.id}`}>
               <Card className="h-full hover:shadow-md hover:-translate-y-0.5 transition cursor-pointer">
-                <h2 className="font-semibold text-stone-800">{chapter.titleTh}</h2>
+                <div className="flex items-start justify-between gap-2">
+                  <h2 className="font-semibold text-stone-800">{chapter.titleTh}</h2>
+                  <span
+                    className="shrink-0 rounded-full text-xs font-semibold px-2 py-0.5"
+                    style={{ backgroundColor: level.bgColor, color: level.color }}
+                  >
+                    {level.code}
+                  </span>
+                </div>
                 <p className="text-sm text-stone-500 mt-1">{chapter.description}</p>
                 <div className="mt-4">
                   <div className="flex justify-between text-xs text-stone-500 mb-1">

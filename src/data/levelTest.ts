@@ -53,10 +53,12 @@ function buildVocabItems(): LevelTestItem[] {
 
 function buildGrammarItems(): LevelTestItem[] {
   const perTopic: Record<string, number> = {
+    'basic-sentence': 1,
+    'present-tenses': 1,
     'word-form': 2,
     tense: 2,
-    preposition: 2,
-    conjunction: 2,
+    preposition: 1,
+    conjunction: 1,
     'relative-clause': 1,
     comparative: 1,
   }

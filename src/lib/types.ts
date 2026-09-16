@@ -14,6 +14,7 @@ export interface VocabChapter {
   title: string
   titleTh: string
   description: string
+  cefrLevel: CefrCode
   words: VocabWord[]
 }
 
@@ -44,6 +45,7 @@ export interface GrammarTopic {
   title: string
   titleTh: string
   description: string
+  cefrLevel: CefrCode
   lesson: GrammarLesson
   questions: GrammarQuestion[]
 }
@@ -117,6 +119,7 @@ export interface LevelTestResult {
   totalScore: number
   listeningScore: number
   readingScore: number
+  skillBreakdown: Record<'vocabulary' | 'grammar' | 'listening' | 'reading', PartStat>
 }
 
 export type ExamPart = 1 | 2 | 3 | 4 | 5 | 6 | 7

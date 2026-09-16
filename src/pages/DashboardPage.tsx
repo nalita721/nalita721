@@ -7,6 +7,7 @@ import type { StatPart } from '../lib/types'
 import { SkillAccuracyChart } from '../components/charts/SkillAccuracyChart'
 import { MockScoreTrendChart } from '../components/charts/MockScoreTrendChart'
 import { scoreToCefr } from '../data/cefr'
+import { getRecommendations } from '../lib/recommendations'
 
 const PART_LABELS: Record<StatPart, string> = {
   vocabulary: 'คำศัพท์',
@@ -90,6 +91,25 @@ export default function DashboardPage() {
           <Link to="/vocabulary">
             <Button>ไปทบทวนเลย</Button>
           </Link>
+        </Card>
+      )}
+
+      {levelTestResult && (
+        <Card className="space-y-3">
+          <h2 className="font-semibold text-stone-800">แนะนำสำหรับคุณ</h2>
+          <p className="text-sm text-stone-500">บทเรียนที่ควรเริ่มฝึกก่อน โดยอิงจากระดับและจุดที่ยังอ่อนของคุณจากแบบทดสอบวัดระดับล่าสุด</p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {getRecommendations(levelTestResult).map((card) => (
+              <Link key={card.id} to={card.to}>
+                <div className="h-full rounded-xl border border-sand-200 bg-sand-50 px-4 py-3 hover:border-brand-400 hover:shadow-sm transition">
+                  <p className="font-semibold text-stone-800">
+                    {card.icon} {card.title}
+                  </p>
+                  <p className="text-xs text-stone-500 mt-1">{card.description}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </Card>
       )}
 

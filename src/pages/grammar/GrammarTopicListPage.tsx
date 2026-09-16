@@ -2,6 +2,11 @@ import { Link } from 'react-router-dom'
 import { grammarTopics } from '../../data/grammar'
 import { Card } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
+import { CEFR_LEVELS } from '../../data/cefr'
+
+const sortedTopics = [...grammarTopics].sort(
+  (a, b) => CEFR_LEVELS.findIndex((l) => l.code === a.cefrLevel) - CEFR_LEVELS.findIndex((l) => l.code === b.cefrLevel),
+)
 
 export default function GrammarTopicListPage() {
   const stats = useProgressStore((s) => s.partStats.grammar)
@@ -17,15 +22,26 @@ export default function GrammarTopicListPage() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {grammarTopics.map((topic) => (
-          <Link key={topic.id} to={`/grammar/${topic.id}`}>
-            <Card className="h-full hover:shadow-md hover:-translate-y-0.5 transition cursor-pointer">
-              <h2 className="font-semibold text-stone-800">{topic.titleTh}</h2>
-              <p className="text-sm text-stone-500 mt-1">{topic.description}</p>
-              <p className="text-xs text-stone-400 mt-3">{topic.questions.length} ข้อฝึกหัด</p>
-            </Card>
-          </Link>
-        ))}
+        {sortedTopics.map((topic) => {
+          const level = CEFR_LEVELS.find((l) => l.code === topic.cefrLevel)!
+          return (
+            <Link key={topic.id} to={`/grammar/${topic.id}`}>
+              <Card className="h-full hover:shadow-md hover:-translate-y-0.5 transition cursor-pointer">
+                <div className="flex items-start justify-between gap-2">
+                  <h2 className="font-semibold text-stone-800">{topic.titleTh}</h2>
+                  <span
+                    className="shrink-0 rounded-full text-xs font-semibold px-2 py-0.5"
+                    style={{ backgroundColor: level.bgColor, color: level.color }}
+                  >
+                    {level.code}
+                  </span>
+                </div>
+                <p className="text-sm text-stone-500 mt-1">{topic.description}</p>
+                <p className="text-xs text-stone-400 mt-3">{topic.questions.length} ข้อฝึกหัด</p>
+              </Card>
+            </Link>
+          )
+        })}
       </div>
     </div>
   )

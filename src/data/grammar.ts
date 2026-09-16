@@ -6,6 +6,7 @@ export const grammarTopics: GrammarTopic[] = [
     title: 'Word Form',
     titleTh: 'การผันรูปคำ (Noun / Verb / Adjective / Adverb)',
     description: 'จุดที่ TOEIC Part 5 ออกบ่อยที่สุด — เลือกรูปคำให้ตรงกับตำแหน่งในประโยค',
+    cefrLevel: 'B1',
     lesson: {
       emoji: '🧩',
       introTh: 'คิดว่าประโยคภาษาอังกฤษเป็นเหมือนจิ๊กซอว์ — แต่ละตำแหน่งในประโยคต้องใช้ "รูปคำ" ที่ต่างกัน ถ้าใส่ชิ้นผิดรูป ประโยคจะดูแปลกทันที เทคนิคง่ายๆ คือดูตำแหน่งของคำในประโยคก่อน แล้วค่อยเลือกรูปคำให้ตรง',
@@ -33,6 +34,7 @@ export const grammarTopics: GrammarTopic[] = [
     title: 'Verb Tense',
     titleTh: 'Tense ของกริยา',
     description: 'เลือก tense ให้สอดคล้องกับ time marker และบริบทในประโยค',
+    cefrLevel: 'B1',
     lesson: {
       emoji: '⏰',
       introTh: 'Tense ก็เหมือนการบอกว่าเหตุการณ์เกิด "เมื่อไหร่" — เคล็ดลับคือมองหา "คำบอกเวลา" (time marker) ในประโยค เพราะมันจะบอกใบ้คำตอบให้เราแทบทุกครั้ง',
@@ -59,6 +61,7 @@ export const grammarTopics: GrammarTopic[] = [
     title: 'Prepositions',
     titleTh: 'คำบุพบท',
     description: 'เลือกคำบุพบทที่ใช้คู่กับคำนาม/กริยา/สำนวนที่ TOEIC ออกบ่อย',
+    cefrLevel: 'A2',
     lesson: {
       emoji: '🧭',
       introTh: 'คำบุพบทเหมือน GPS ของประโยค — บอกตำแหน่ง เวลา และทิศทาง ข้อดีคือ TOEIC มักออกคำบุพบทที่ "จับคู่ประจำ" กับคำบางคำ (fixed pair) ถ้าจำคู่ยอดฮิตได้ ก็ตอบได้เร็วโดยไม่ต้องคิดเยอะ',
@@ -85,6 +88,7 @@ export const grammarTopics: GrammarTopic[] = [
     title: 'Conjunctions & Transitions',
     titleTh: 'คำเชื่อมประโยคและคำเชื่อมความ',
     description: 'เลือกคำเชื่อมที่แสดงความสัมพันธ์ระหว่างประโยคได้ถูกต้อง',
+    cefrLevel: 'B1',
     lesson: {
       emoji: '🔗',
       introTh: 'คำเชื่อมคือ "กาว" ที่เชื่อมความคิดสองอย่างเข้าด้วยกัน จุดสำคัญคือต้องดูว่าสิ่งที่ตามหลังคำเชื่อมเป็น "ประโยค" (มีประธาน+กริยา) หรือแค่ "คำนาม" เพราะคำเชื่อมบางคำใช้ได้แค่กับประโยคเท่านั้น',
@@ -110,6 +114,7 @@ export const grammarTopics: GrammarTopic[] = [
     title: 'Relative Clauses',
     titleTh: 'อนุประโยคขยายความ (Relative Clause)',
     description: 'เลือก relative pronoun (who / which / that / whose) ให้ถูกกับคำนามที่ถูกขยาย',
+    cefrLevel: 'B2',
     lesson: {
       emoji: '🧵',
       introTh: 'Relative clause คือประโยคเล็กๆ ที่แทรกเข้ามาเพื่อ "บอกรายละเอียดเพิ่ม" เกี่ยวกับคำนามที่อยู่ข้างหน้า เคล็ดลับคือดูว่าคำนามที่ถูกขยายเป็น "คน" หรือ "สิ่งของ" แล้วเลือกคำเชื่อมให้ตรง',
@@ -134,6 +139,7 @@ export const grammarTopics: GrammarTopic[] = [
     title: 'Comparatives & Superlatives',
     titleTh: 'การเปรียบเทียบ (Comparative / Superlative)',
     description: 'เลือกรูปเปรียบเทียบขั้นกว่าและขั้นสุดให้ถูกต้อง',
+    cefrLevel: 'A2',
     lesson: {
       emoji: '📊',
       introTh: 'การเปรียบเทียบก็แค่ตอบคำถามว่า "กำลังเทียบกันกี่สิ่ง" — ถ้าเทียบ 2 สิ่งใช้ขั้นกว่า (comparative) ถ้าเทียบตั้งแต่ 3 สิ่งขึ้นไปใช้ขั้นสุด (superlative) ง่ายๆ แค่นี้เอง',
@@ -151,6 +157,64 @@ export const grammarTopics: GrammarTopic[] = [
       { id: 'cp-3', sentence: 'Our new office is ____ than the old one.', choices: ['spacious', 'more spacious', 'most spacious', 'spaciously'], answerIndex: 1, explanation: 'เปรียบเทียบสองสิ่งใช้ comparative + than' },
       { id: 'cp-4', sentence: 'This is by far the ____ solution we have found.', choices: ['effective', 'more effective', 'most effective', 'effectively'], answerIndex: 2, explanation: '"the ____ solution we have found" เป็น superlative (the most effective)' },
       { id: 'cp-5', sentence: 'The sooner you apply, the ____ your chances of getting an interview.', choices: ['good', 'better', 'best', 'well'], answerIndex: 1, explanation: 'โครงสร้าง "The + comparative..., the + comparative..." ใช้ better' },
+    ],
+  },
+  {
+    id: 'basic-sentence',
+    title: 'Subject-Verb Agreement',
+    titleTh: 'โครงสร้างประโยคพื้นฐานและ Subject-Verb Agreement',
+    description: 'พื้นฐานที่สุดก่อนเรียนไวยากรณ์อื่น — ประธานกับกริยาต้องสอดคล้องกัน',
+    cefrLevel: 'A1',
+    lesson: {
+      emoji: '🧱',
+      introTh:
+        'ประโยคภาษาอังกฤษพื้นฐานที่สุดมีโครงสร้างง่ายๆ คือ ประธาน (Subject) + กริยา (Verb) + กรรม (Object) และมีกฎสำคัญคือกริยาต้องสอดคล้องกับประธาน (Subject-Verb Agreement) เริ่มจากตรงนี้ให้แม่นก่อน แล้วเรื่องอื่นจะตามมาเอง',
+      keyPoints: [
+        { label: 'โครงสร้างประโยคพื้นฐาน S+V+O', explanation: 'ประธาน ตามด้วยกริยา แล้วตามด้วยกรรม (ถ้ามี)', exampleEn: 'The manager signs the contract.', exampleTh: 'ผู้จัดการเซ็นสัญญา' },
+        { label: 'ประธานเอกพจน์ (he/she/it) กริยาเติม -s', explanation: 'เมื่อประธานเป็นเอกพจน์บุรุษที่สาม กริยาในรูป present simple ต้องเติม -s หรือ -es', exampleEn: 'She works in the finance department.', exampleTh: 'เธอทำงานในแผนกการเงิน' },
+        { label: 'ประธานพหูพจน์ กริยาไม่เติม -s', explanation: 'เมื่อประธานเป็นพหูพจน์หรือ I/you/we/they กริยาไม่ต้องเติม -s', exampleEn: 'The employees work every weekday.', exampleTh: 'พนักงานทำงานทุกวันธรรมดา' },
+        { label: 'Verb to be: am/is/are', explanation: 'เลือก am/is/are ให้ตรงกับประธาน (I=am, he/she/it=is, you/we/they=are)', exampleEn: 'The report is ready.', exampleTh: 'รายงานพร้อมแล้ว' },
+      ],
+      tipTh: 'เกร็ดจำง่าย: he/she/it (เอกพจน์) = กริยาเติม s เสมอ (ยกเว้น modal verb เช่น can/will) ลองท่องสั้นๆ ว่า "เอกพจน์ต้องมี S ต่อท้าย"',
+    },
+    questions: [
+      { id: 'bs-1', sentence: 'The manager ____ the weekly report every Monday.', choices: ['review', 'reviews', 'reviewing', 'reviewed'], answerIndex: 1, explanation: 'ประธานเอกพจน์ "The manager" (he/she/it) กริยาต้องเติม -s (reviews)' },
+      { id: 'bs-2', sentence: 'All employees ____ required to attend the meeting.', choices: ['is', 'are', 'am', 'be'], answerIndex: 1, explanation: 'ประธานพหูพจน์ "All employees" ใช้ verb to be เป็น "are"' },
+      { id: 'bs-3', sentence: 'She ____ in the marketing department.', choices: ['work', 'works', 'working', 'worked'], answerIndex: 1, explanation: 'ประธานเอกพจน์ "She" กริยาต้องเติม -s (works)' },
+      { id: 'bs-4', sentence: 'This invoice ____ due next week.', choices: ['is', 'are', 'am', 'were'], answerIndex: 0, explanation: 'ประธานเอกพจน์ "This invoice" (it) ใช้ verb to be เป็น "is"' },
+      { id: 'bs-5', sentence: 'I ____ a new employee at this company.', choices: ['is', 'am', 'are', 'be'], answerIndex: 1, explanation: 'ประธาน "I" ใช้ verb to be เป็น "am" เสมอ' },
+      { id: 'bs-6', sentence: 'The office ____ closed on public holidays.', choices: ['is', 'are', 'am', 'were'], answerIndex: 0, explanation: 'ประธานเอกพจน์ "The office" (it) ใช้ verb to be เป็น "is"' },
+      { id: 'bs-7', sentence: 'Customers ____ their orders online.', choices: ['place', 'places', 'placing', 'placed'], answerIndex: 0, explanation: 'ประธานพหูพจน์ "Customers" กริยาไม่เติม -s (place)' },
+      { id: 'bs-8', sentence: 'New employees ____ orientation on their first day.', choices: ['attend', 'attends', 'attending', 'to attend'], answerIndex: 0, explanation: 'ประธานพหูพจน์ "New employees" กริยาไม่เติม -s (attend)' },
+    ],
+  },
+  {
+    id: 'present-tenses',
+    title: 'Present Simple vs Present Continuous',
+    titleTh: 'Present Simple กับ Present Continuous ต่างกันอย่างไร',
+    description: 'แยกให้ออกระหว่างสิ่งที่ทำเป็นประจำกับสิ่งที่กำลังเกิดขึ้นตอนนี้',
+    cefrLevel: 'A2',
+    lesson: {
+      emoji: '🔄',
+      introTh:
+        'สอง tense นี้ทั้งคู่พูดถึง "ปัจจุบัน" แต่ต่างกันตรงที่ Present Simple ใช้กับสิ่งที่ทำเป็นประจำ/เป็นความจริงทั่วไป ส่วน Present Continuous ใช้กับสิ่งที่กำลังเกิดขึ้น ณ ตอนนี้ แยกให้ออกแล้วจะใช้ tense พื้นฐานได้แม่นยำขึ้นมาก',
+      keyPoints: [
+        { label: 'Present Simple: ทำเป็นประจำ/นิสัย', explanation: 'ใช้บอกกิจวัตรหรือสิ่งที่ทำซ้ำๆ', exampleEn: 'He checks his email every morning.', exampleTh: 'เขาเช็กอีเมลทุกเช้า' },
+        { label: 'Present Continuous: กำลังทำอยู่ตอนนี้', explanation: 'ใช้บอกสิ่งที่กำลังเกิดขึ้นขณะพูด', exampleEn: 'He is checking his email right now.', exampleTh: 'เขากำลังเช็กอีเมลอยู่ตอนนี้' },
+        { label: 'Present Simple: ความจริงทั่วไป', explanation: 'ใช้กับข้อเท็จจริงหรือสิ่งที่เป็นจริงเสมอ', exampleEn: 'The store opens at 9 a.m.', exampleTh: 'ร้านเปิดเก้าโมงเช้า' },
+        { label: 'Present Continuous: แผนที่จะเกิดในอนาคตอันใกล้', explanation: 'ใช้กับแผนหรือนัดหมายที่กำหนดไว้แล้ว', exampleEn: 'We are meeting the client tomorrow.', exampleTh: 'พรุ่งนี้เรามีนัดพบลูกค้า' },
+      ],
+      tipTh: 'เกร็ดจำง่าย: เห็นคำว่า "now/right now/at the moment/Look!" ให้คิดถึง Present Continuous เห็นคำว่า "every day/always/usually/often" ให้คิดถึง Present Simple',
+    },
+    questions: [
+      { id: 'pt-1', sentence: 'She usually ____ to work by bus.', choices: ['travel', 'travels', 'is travelling', 'was travelling'], answerIndex: 1, explanation: '"usually" บ่งบอกกิจวัตร ใช้ present simple (travels)' },
+      { id: 'pt-2', sentence: 'Look! The client ____ into the building right now.', choices: ['walks', 'walk', 'is walking', 'walked'], answerIndex: 2, explanation: '"Look! ... right now" บ่งบอกสิ่งที่กำลังเกิดขึ้น ใช้ present continuous (is walking)' },
+      { id: 'pt-3', sentence: 'The company ____ its products to over 20 countries every year.', choices: ['export', 'exports', 'is exporting', 'exported'], answerIndex: 1, explanation: '"every year" บ่งบอกความจริงทั่วไป ใช้ present simple (exports)' },
+      { id: 'pt-4', sentence: 'Right now, the team ____ on the quarterly report.', choices: ['works', 'work', 'is working', 'worked'], answerIndex: 2, explanation: '"Right now" บ่งบอกสิ่งที่กำลังเกิดขึ้น ใช้ present continuous (is working)' },
+      { id: 'pt-5', sentence: 'Water ____ at 100 degrees Celsius.', choices: ['boil', 'boils', 'is boiling', 'boiled'], answerIndex: 1, explanation: 'ข้อเท็จจริงทางวิทยาศาสตร์ ใช้ present simple (boils)' },
+      { id: 'pt-6', sentence: 'We ____ a new client at 3 p.m. tomorrow.', choices: ['meet', 'meets', 'are meeting', 'met'], answerIndex: 2, explanation: 'แผนนัดหมายที่กำหนดไว้แล้วในอนาคตอันใกล้ ใช้ present continuous (are meeting)' },
+      { id: 'pt-7', sentence: 'He ____ always late for meetings.', choices: ['is', 'are', 'am', 'be'], answerIndex: 0, explanation: 'ประธานเอกพจน์ "He" ใช้ verb to be เป็น "is"' },
+      { id: 'pt-8', sentence: 'At the moment, I ____ this email to a client.', choices: ['write', 'writes', 'am writing', 'wrote'], answerIndex: 2, explanation: '"At the moment" บ่งบอกสิ่งที่กำลังเกิดขึ้น ใช้ present continuous (am writing)' },
     ],
   },
 ]
