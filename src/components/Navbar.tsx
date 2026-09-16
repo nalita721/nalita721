@@ -15,7 +15,7 @@ export default function Navbar() {
   const streak = useProgressStore((s) => s.streak)
 
   return (
-    <header className="sticky top-0 z-10 bg-white/90 backdrop-blur border-b border-slate-200">
+    <header className="sticky top-0 z-10 bg-white/90 backdrop-blur border-b border-sand-200">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
         <NavLink to="/" className="font-bold text-brand-700 text-lg shrink-0">
           TOEIC Vocab Master
@@ -29,7 +29,7 @@ export default function Navbar() {
               end={link.end}
               className={({ isActive }) =>
                 `px-3 py-1.5 rounded-lg font-medium transition ${
-                  isActive ? 'bg-brand-600 text-white' : 'text-slate-600 hover:bg-slate-100'
+                  isActive ? 'bg-brand-600 text-white' : 'text-stone-600 hover:bg-sand-100'
                 }`
               }
             >

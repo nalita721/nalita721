@@ -76,14 +76,14 @@ export default function MatchingGamePage() {
     <div className="space-y-6 max-w-3xl mx-auto">
       <div>
         <Link to={`/vocabulary/${chapter.id}`} className="text-sm text-brand-600 hover:underline">← กลับ</Link>
-        <h1 className="text-xl font-bold text-slate-800 mt-2">Matching Game — {chapter.titleTh}</h1>
-        <p className="text-sm text-slate-500 mt-1">เวลา: {seconds}s • พลาด: {mistakes} ครั้ง</p>
+        <h1 className="text-xl font-bold text-stone-800 mt-2">Matching Game — {chapter.titleTh}</h1>
+        <p className="text-sm text-stone-500 mt-1">เวลา: {seconds}s • พลาด: {mistakes} ครั้ง</p>
       </div>
 
       {finished ? (
         <Card className="text-center py-12">
           <p className="text-2xl">✅</p>
-          <p className="text-lg font-semibold text-slate-800 mt-2">จับคู่ครบใน {seconds} วินาที (พลาด {mistakes} ครั้ง)</p>
+          <p className="text-lg font-semibold text-stone-800 mt-2">จับคู่ครบใน {seconds} วินาที (พลาด {mistakes} ครั้ง)</p>
           <Link to={`/vocabulary/${chapter.id}`}>
             <Button className="mt-4">กลับไปหน้าเลือกเกม</Button>
           </Link>
@@ -101,7 +101,7 @@ export default function MatchingGamePage() {
                     ? 'bg-emerald-50 border-emerald-300 text-emerald-600 opacity-60'
                     : selectedTerm === w.id
                     ? 'bg-brand-600 border-brand-600 text-white'
-                    : 'bg-white border-slate-200 hover:border-brand-400'
+                    : 'bg-white border-sand-200 hover:border-brand-400'
                 }`}
               >
                 {w.term}
@@ -119,7 +119,7 @@ export default function MatchingGamePage() {
                     ? 'bg-emerald-50 border-emerald-300 text-emerald-600 opacity-60'
                     : selectedMeaning === w.id
                     ? 'bg-brand-600 border-brand-600 text-white'
-                    : 'bg-white border-slate-200 hover:border-brand-400'
+                    : 'bg-white border-sand-200 hover:border-brand-400'
                 }`}
               >
                 {w.meaningTh}

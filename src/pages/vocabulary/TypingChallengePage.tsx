@@ -42,7 +42,7 @@ export default function TypingChallengePage() {
     <div className="space-y-6 max-w-xl mx-auto">
       <div>
         <Link to={`/vocabulary/${chapter.id}`} className="text-sm text-brand-600 hover:underline">← กลับ</Link>
-        <h1 className="text-xl font-bold text-slate-800 mt-2">Typing Challenge — {chapter.titleTh}</h1>
+        <h1 className="text-xl font-bold text-stone-800 mt-2">Typing Challenge — {chapter.titleTh}</h1>
       </div>
 
       <ProgressBar value={index} max={words.length} />
@@ -50,16 +50,16 @@ export default function TypingChallengePage() {
       {done ? (
         <Card className="text-center py-12">
           <p className="text-2xl">⌨️</p>
-          <p className="text-lg font-semibold text-slate-800 mt-2">ทำถูก {score}/{words.length} คำ</p>
+          <p className="text-lg font-semibold text-stone-800 mt-2">ทำถูก {score}/{words.length} คำ</p>
           <Link to={`/vocabulary/${chapter.id}`}>
             <Button className="mt-4">กลับไปหน้าเลือกเกม</Button>
           </Link>
         </Card>
       ) : (
         <Card className="space-y-4">
-          <p className="text-sm text-slate-500">พิมพ์คำศัพท์ภาษาอังกฤษที่ตรงกับความหมายนี้</p>
-          <p className="text-xl font-semibold text-slate-800">{word.meaningTh}</p>
-          <p className="text-xs text-slate-400">({word.pos})</p>
+          <p className="text-sm text-stone-500">พิมพ์คำศัพท์ภาษาอังกฤษที่ตรงกับความหมายนี้</p>
+          <p className="text-xl font-semibold text-stone-800">{word.meaningTh}</p>
+          <p className="text-xs text-stone-400">({word.pos})</p>
 
           <input
             autoFocus
@@ -68,7 +68,7 @@ export default function TypingChallengePage() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && feedback === null && checkAnswer()}
             placeholder="พิมพ์คำตอบแล้วกด Enter"
-            className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500"
+            className="w-full rounded-xl border border-sand-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500"
           />
 
           {feedback && (

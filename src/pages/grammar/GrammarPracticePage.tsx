@@ -35,7 +35,7 @@ export default function GrammarPracticePage() {
     <div className="space-y-6 max-w-2xl mx-auto">
       <div>
         <Link to="/grammar" className="text-sm text-brand-600 hover:underline">← กลับ</Link>
-        <h1 className="text-xl font-bold text-slate-800 mt-2">{topic.titleTh}</h1>
+        <h1 className="text-xl font-bold text-stone-800 mt-2">{topic.titleTh}</h1>
       </div>
 
       <ProgressBar value={index} max={topic.questions.length} />
@@ -43,15 +43,15 @@ export default function GrammarPracticePage() {
       {done ? (
         <Card className="text-center py-12">
           <p className="text-2xl">📘</p>
-          <p className="text-lg font-semibold text-slate-800 mt-2">คะแนน {score}/{topic.questions.length}</p>
+          <p className="text-lg font-semibold text-stone-800 mt-2">คะแนน {score}/{topic.questions.length}</p>
           <Link to="/grammar">
             <Button className="mt-4">กลับไปเลือกหัวข้ออื่น</Button>
           </Link>
         </Card>
       ) : (
         <Card className="space-y-4">
-          <p className="text-xs uppercase tracking-wide text-slate-400">ข้อที่ {index + 1}/{topic.questions.length}</p>
-          <p className="text-lg text-slate-800 leading-relaxed">{q.sentence}</p>
+          <p className="text-xs uppercase tracking-wide text-stone-400">ข้อที่ {index + 1}/{topic.questions.length}</p>
+          <p className="text-lg text-stone-800 leading-relaxed">{q.sentence}</p>
           <div className="grid gap-2">
             {q.choices.map((choice, i) => (
               <button
@@ -60,12 +60,12 @@ export default function GrammarPracticePage() {
                 disabled={selected !== null}
                 className={`rounded-xl border px-4 py-3 text-left text-sm transition ${
                   selected === null
-                    ? 'bg-white border-slate-200 hover:border-brand-400'
+                    ? 'bg-white border-sand-200 hover:border-brand-400'
                     : i === q.answerIndex
                     ? 'bg-emerald-50 border-emerald-400 text-emerald-700'
                     : i === selected
                     ? 'bg-rose-50 border-rose-400 text-rose-700'
-                    : 'bg-white border-slate-200 opacity-60'
+                    : 'bg-white border-sand-200 opacity-60'
                 }`}
               >
                 {choice}
@@ -74,7 +74,7 @@ export default function GrammarPracticePage() {
           </div>
 
           {selected !== null && (
-            <div className="rounded-xl bg-brand-50 border border-brand-100 px-4 py-3 text-sm text-slate-700">
+            <div className="rounded-xl bg-brand-50 border border-brand-100 px-4 py-3 text-sm text-stone-700">
               💡 {q.explanation}
             </div>
           )}

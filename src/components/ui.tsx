@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, PropsWithChildren } from 'react'
 
 export function Card({ children, className = '' }: PropsWithChildren<{ className?: string }>) {
   return (
-    <div className={`rounded-2xl bg-white shadow-sm border border-slate-200 p-5 ${className}`}>
+    <div className={`rounded-2xl bg-white shadow-sm border border-sand-200 p-5 ${className}`}>
       {children}
     </div>
   )
@@ -12,7 +12,7 @@ type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'success' | 'danger'
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: 'bg-brand-600 text-white hover:bg-brand-700',
-  secondary: 'bg-slate-100 text-slate-700 hover:bg-slate-200',
+  secondary: 'bg-sand-100 text-sand-800 hover:bg-sand-200',
   ghost: 'bg-transparent text-brand-700 hover:bg-brand-50',
   success: 'bg-emerald-600 text-white hover:bg-emerald-700',
   danger: 'bg-rose-600 text-white hover:bg-rose-700',
@@ -37,7 +37,7 @@ export function Button({
 export function ProgressBar({ value, max, colorClass = 'bg-brand-600' }: { value: number; max: number; colorClass?: string }) {
   const pct = max > 0 ? Math.min(100, Math.round((value / max) * 100)) : 0
   return (
-    <div className="h-2 w-full rounded-full bg-slate-200 overflow-hidden">
+    <div className="h-2 w-full rounded-full bg-sand-200 overflow-hidden">
       <div className={`h-full rounded-full ${colorClass} transition-all`} style={{ width: `${pct}%` }} />
     </div>
   )
@@ -54,8 +54,8 @@ export function Badge({ children, className = '' }: PropsWithChildren<{ classNam
 export function EmptyState({ title, description }: { title: string; description: string }) {
   return (
     <Card className="text-center py-12">
-      <p className="text-lg font-semibold text-slate-700">{title}</p>
-      <p className="mt-1 text-sm text-slate-500">{description}</p>
+      <p className="text-lg font-semibold text-stone-700">{title}</p>
+      <p className="mt-1 text-sm text-stone-500">{description}</p>
     </Card>
   )
 }

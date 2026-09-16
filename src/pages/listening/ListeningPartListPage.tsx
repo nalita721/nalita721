@@ -14,8 +14,8 @@ export default function ListeningPartListPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-800">Listening Practice</h1>
-        <p className="text-slate-500 mt-1">ฝึกฟังทั้ง 4 Part ด้วยเสียงสังเคราะห์ในเบราว์เซอร์ (รองรับสำเนียง US/UK/AU/CA)</p>
+        <h1 className="text-2xl font-bold text-stone-800">Listening Practice</h1>
+        <p className="text-stone-500 mt-1">ฝึกฟังทั้ง 4 Part ด้วยเสียงสังเคราะห์ในเบราว์เซอร์ (รองรับสำเนียง US/UK/AU/CA)</p>
         {!isTtsSupported() && (
           <p className="mt-2 text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
             เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง (Web Speech API) — บทฝึกยังใช้งานได้แต่จะไม่มีเสียง
@@ -27,9 +27,9 @@ export default function ListeningPartListPage() {
         {PARTS.map((p) => (
           <Link key={p.part} to={`/listening/${p.part}`}>
             <Card className="h-full hover:shadow-md hover:-translate-y-0.5 transition cursor-pointer">
-              <h2 className="font-semibold text-slate-800">{p.title}</h2>
-              <p className="text-sm text-slate-500 mt-1">{p.desc}</p>
-              <p className="text-xs text-slate-400 mt-3">{listeningByPart(p.part).length} ข้อฝึกหัด</p>
+              <h2 className="font-semibold text-stone-800">{p.title}</h2>
+              <p className="text-sm text-stone-500 mt-1">{p.desc}</p>
+              <p className="text-xs text-stone-400 mt-3">{listeningByPart(p.part).length} ข้อฝึกหัด</p>
             </Card>
           </Link>
         ))}

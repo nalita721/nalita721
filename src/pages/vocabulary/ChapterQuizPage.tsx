@@ -59,7 +59,7 @@ export default function ChapterQuizPage() {
     <div className="space-y-6 max-w-xl mx-auto">
       <div>
         <Link to={`/vocabulary/${chapter.id}`} className="text-sm text-brand-600 hover:underline">← กลับ</Link>
-        <h1 className="text-xl font-bold text-slate-800 mt-2">แบบทดสอบท้ายบท — {chapter.titleTh}</h1>
+        <h1 className="text-xl font-bold text-stone-800 mt-2">แบบทดสอบท้ายบท — {chapter.titleTh}</h1>
       </div>
 
       <ProgressBar value={index} max={quiz.length} />
@@ -67,8 +67,8 @@ export default function ChapterQuizPage() {
       {done ? (
         <Card className="text-center py-12">
           <p className="text-2xl">{score / quiz.length >= 0.8 ? '🏆' : '📝'}</p>
-          <p className="text-lg font-semibold text-slate-800 mt-2">คะแนน {score}/{quiz.length}</p>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-lg font-semibold text-stone-800 mt-2">คะแนน {score}/{quiz.length}</p>
+          <p className="text-sm text-stone-500 mt-1">
             {score / quiz.length >= 0.8 ? 'เยี่ยมมาก! บทนี้คุณแม่นแล้ว' : 'ลองฝึก Flashcard เพิ่มแล้วกลับมาทำใหม่'}
           </p>
           <div className="flex gap-3 justify-center mt-4">
@@ -79,8 +79,8 @@ export default function ChapterQuizPage() {
         </Card>
       ) : (
         <Card className="space-y-4">
-          <p className="text-sm text-slate-500">เลือกความหมายที่ถูกต้องของคำนี้</p>
-          <h2 className="text-2xl font-bold text-slate-800">{q.word.term}</h2>
+          <p className="text-sm text-stone-500">เลือกความหมายที่ถูกต้องของคำนี้</p>
+          <h2 className="text-2xl font-bold text-stone-800">{q.word.term}</h2>
           <div className="grid gap-2">
             {q.choices.map((c) => (
               <button
@@ -89,12 +89,12 @@ export default function ChapterQuizPage() {
                 disabled={selected !== null}
                 className={`rounded-xl border px-4 py-3 text-left text-sm transition ${
                   selected === null
-                    ? 'bg-white border-slate-200 hover:border-brand-400'
+                    ? 'bg-white border-sand-200 hover:border-brand-400'
                     : c.id === q.word.id
                     ? 'bg-emerald-50 border-emerald-400 text-emerald-700'
                     : c.id === selected
                     ? 'bg-rose-50 border-rose-400 text-rose-700'
-                    : 'bg-white border-slate-200 opacity-60'
+                    : 'bg-white border-sand-200 opacity-60'
                 }`}
               >
                 {c.meaningTh}

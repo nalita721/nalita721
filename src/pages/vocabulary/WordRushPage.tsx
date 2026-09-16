@@ -67,13 +67,13 @@ export default function WordRushPage() {
     <div className="space-y-6 max-w-xl mx-auto">
       <div>
         <Link to={`/vocabulary/${chapter.id}`} className="text-sm text-brand-600 hover:underline">← กลับ</Link>
-        <h1 className="text-xl font-bold text-slate-800 mt-2">Word Rush — {chapter.titleTh}</h1>
-        <p className="text-sm text-slate-500 mt-1">ตอบให้เร็วและแม่นก่อนเวลาหมด 60 วินาที</p>
+        <h1 className="text-xl font-bold text-stone-800 mt-2">Word Rush — {chapter.titleTh}</h1>
+        <p className="text-sm text-stone-500 mt-1">ตอบให้เร็วและแม่นก่อนเวลาหมด 60 วินาที</p>
       </div>
 
       {!running && !finished && (
         <Card className="text-center py-10">
-          <p className="text-slate-600 mb-4">เลือกความหมายที่ตรงกับคำศัพท์ให้เร็วที่สุด!</p>
+          <p className="text-stone-600 mb-4">เลือกความหมายที่ตรงกับคำศัพท์ให้เร็วที่สุด!</p>
           <Button onClick={startRound}>เริ่มเกม 60 วินาที</Button>
         </Card>
       )}
@@ -82,9 +82,9 @@ export default function WordRushPage() {
         <Card className="space-y-4">
           <div className="flex justify-between text-sm">
             <span className="font-semibold text-brand-600">⏱ {secondsLeft}s</span>
-            <span className="text-slate-500">คะแนน {score} • ผิด {wrong}</span>
+            <span className="text-stone-500">คะแนน {score} • ผิด {wrong}</span>
           </div>
-          <h2 className="text-2xl font-bold text-center text-slate-800">{question.word.term}</h2>
+          <h2 className="text-2xl font-bold text-center text-stone-800">{question.word.term}</h2>
           <div className="grid grid-cols-1 gap-2">
             {question.choices.map((c) => (
               <button
@@ -93,12 +93,12 @@ export default function WordRushPage() {
                 disabled={feedbackId !== null}
                 className={`rounded-xl border px-4 py-3 text-left text-sm transition ${
                   feedbackId === null
-                    ? 'bg-white border-slate-200 hover:border-brand-400'
+                    ? 'bg-white border-sand-200 hover:border-brand-400'
                     : c.id === question.word.id
                     ? 'bg-emerald-50 border-emerald-400 text-emerald-700'
                     : c.id === feedbackId
                     ? 'bg-rose-50 border-rose-400 text-rose-700'
-                    : 'bg-white border-slate-200 opacity-60'
+                    : 'bg-white border-sand-200 opacity-60'
                 }`}
               >
                 {c.meaningTh}
@@ -111,7 +111,7 @@ export default function WordRushPage() {
       {finished && (
         <Card className="text-center py-12">
           <p className="text-2xl">⚡</p>
-          <p className="text-lg font-semibold text-slate-800 mt-2">หมดเวลา! ตอบถูก {score} ข้อ (ผิด {wrong})</p>
+          <p className="text-lg font-semibold text-stone-800 mt-2">หมดเวลา! ตอบถูก {score} ข้อ (ผิด {wrong})</p>
           <div className="flex gap-3 justify-center mt-4">
             <Button onClick={startRound}>เล่นอีกครั้ง</Button>
             <Link to={`/vocabulary/${chapter.id}`}>

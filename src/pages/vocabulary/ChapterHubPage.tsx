@@ -19,8 +19,8 @@ export default function ChapterHubPage() {
     <div className="space-y-6">
       <div>
         <Link to="/vocabulary" className="text-sm text-brand-600 hover:underline">← กลับไปเลือกบท</Link>
-        <h1 className="text-2xl font-bold text-slate-800 mt-2">{chapter.titleTh}</h1>
-        <p className="text-slate-500 mt-1">{chapter.description} • {chapter.words.length} คำศัพท์</p>
+        <h1 className="text-2xl font-bold text-stone-800 mt-2">{chapter.titleTh}</h1>
+        <p className="text-stone-500 mt-1">{chapter.description} • {chapter.words.length} คำศัพท์</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -28,8 +28,8 @@ export default function ChapterHubPage() {
           <Link key={g.path} to={`/vocabulary/${chapter.id}/${g.path}`}>
             <Card className="h-full hover:shadow-md hover:-translate-y-0.5 transition cursor-pointer">
               <div className="text-3xl">{g.icon}</div>
-              <h3 className="font-semibold text-slate-800 mt-2">{g.title}</h3>
-              <p className="text-sm text-slate-500 mt-1">{g.desc}</p>
+              <h3 className="font-semibold text-stone-800 mt-2">{g.title}</h3>
+              <p className="text-sm text-stone-500 mt-1">{g.desc}</p>
             </Card>
           </Link>
         ))}

@@ -44,14 +44,14 @@ export default function ListeningPracticePage() {
       <div className="flex items-center justify-between flex-wrap gap-2">
         <div>
           <Link to="/listening" className="text-sm text-brand-600 hover:underline">← กลับ</Link>
-          <h1 className="text-xl font-bold text-slate-800 mt-2">Listening Part {partNum}</h1>
+          <h1 className="text-xl font-bold text-stone-800 mt-2">Listening Part {partNum}</h1>
         </div>
         <div className="flex gap-1">
           {ACCENTS.map((a) => (
             <button
               key={a}
               onClick={() => setAccent(a)}
-              className={`text-xs px-2.5 py-1 rounded-full border ${accent === a ? 'bg-brand-600 text-white border-brand-600' : 'bg-white border-slate-200 text-slate-500'}`}
+              className={`text-xs px-2.5 py-1 rounded-full border ${accent === a ? 'bg-brand-600 text-white border-brand-600' : 'bg-white border-sand-200 text-stone-500'}`}
             >
               {a}
             </button>
@@ -64,17 +64,17 @@ export default function ListeningPracticePage() {
       {done ? (
         <Card className="text-center py-12">
           <p className="text-2xl">🎧</p>
-          <p className="text-lg font-semibold text-slate-800 mt-2">คะแนน {score}/{items.length}</p>
+          <p className="text-lg font-semibold text-stone-800 mt-2">คะแนน {score}/{items.length}</p>
           <Link to="/listening">
             <Button className="mt-4">กลับไปเลือก Part อื่น</Button>
           </Link>
         </Card>
       ) : (
         <Card className="space-y-4">
-          <p className="text-xs uppercase tracking-wide text-slate-400">ข้อที่ {index + 1}/{items.length}</p>
+          <p className="text-xs uppercase tracking-wide text-stone-400">ข้อที่ {index + 1}/{items.length}</p>
 
           {item.imageDescription && (
-            <div className="rounded-xl bg-slate-100 px-4 py-6 text-center text-sm text-slate-600">
+            <div className="rounded-xl bg-sand-100 px-4 py-6 text-center text-sm text-stone-600">
               {item.imageDescription}
             </div>
           )}
@@ -85,7 +85,7 @@ export default function ListeningPracticePage() {
             </Button>
           )}
 
-          <p className="text-slate-800 font-medium">{item.question}</p>
+          <p className="text-stone-800 font-medium">{item.question}</p>
 
           <div className="grid gap-2">
             {item.choices.map((choice, i) => (
@@ -94,7 +94,7 @@ export default function ListeningPracticePage() {
                   <button
                     type="button"
                     onClick={() => speak(choice, accent)}
-                    className="shrink-0 rounded-lg border border-slate-200 px-2 py-2 text-sm hover:bg-slate-50"
+                    className="shrink-0 rounded-lg border border-sand-200 px-2 py-2 text-sm hover:bg-sand-50"
                     aria-label={`ฟังตัวเลือก ${String.fromCharCode(65 + i)}`}
                   >
                     🔊
@@ -105,12 +105,12 @@ export default function ListeningPracticePage() {
                   disabled={selected !== null}
                   className={`flex-1 rounded-xl border px-4 py-3 text-left text-sm transition ${
                     selected === null
-                      ? 'bg-white border-slate-200 hover:border-brand-400'
+                      ? 'bg-white border-sand-200 hover:border-brand-400'
                       : i === item.answerIndex
                       ? 'bg-emerald-50 border-emerald-400 text-emerald-700'
                       : i === selected
                       ? 'bg-rose-50 border-rose-400 text-rose-700'
-                      : 'bg-white border-slate-200 opacity-60'
+                      : 'bg-white border-sand-200 opacity-60'
                   }`}
                 >
                   {String.fromCharCode(65 + i)}. {audioOnly && selected === null ? '••• (ฟังเสียงก่อนเลือก)' : choice}
@@ -125,7 +125,7 @@ export default function ListeningPracticePage() {
                 {revealed ? 'ซ่อน Transcript' : 'แสดง Transcript'}
               </button>
               {revealed && (
-                <pre className="whitespace-pre-wrap rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-slate-600 font-sans">
+                <pre className="whitespace-pre-wrap rounded-xl bg-sand-50 border border-sand-200 px-4 py-3 text-sm text-stone-600 font-sans">
                   {item.transcript}
                 </pre>
               )}

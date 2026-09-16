@@ -100,13 +100,13 @@ export default function FullMockTestPage() {
   if (phase === 'intro') {
     return (
       <Card className="max-w-xl mx-auto text-center py-10 space-y-4">
-        <h1 className="text-2xl font-bold text-slate-800">Full Mock Test</h1>
-        <p className="text-slate-500">
+        <h1 className="text-2xl font-bold text-stone-800">Full Mock Test</h1>
+        <p className="text-stone-500">
           ข้อสอบจำลองเต็มรูปแบบ {FULL_EXAM_TOTAL_COUNT} ข้อ ตามโครงสร้าง TOEIC จริง — Listening{' '}
           {FULL_EXAM_LISTENING_COUNT} ข้อ (Part 1-4) และ Reading {FULL_EXAM_READING_COUNT} ข้อ (Part 5-7) จับเวลารวม{' '}
           {FULL_EXAM_DURATION_SEC / 60} นาที
         </p>
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-stone-400">
           หมายเหตุ: นี่คือชุดข้อสอบตัวอย่างสำหรับฝึกซ้อม ไม่ใช่คะแนน TOEIC จริง ระหว่างทำข้อสอบจะไม่มีการเฉลยทันที
           เพื่อจำลองบรรยากาศการสอบจริง
         </p>
@@ -121,15 +121,15 @@ export default function FullMockTestPage() {
     return (
       <Card className="max-w-xl mx-auto text-center py-10 space-y-3">
         <p className="text-2xl">🏆</p>
-        <h1 className="text-xl font-bold text-slate-800">สรุปผล Full Mock Test</h1>
+        <h1 className="text-xl font-bold text-stone-800">สรุปผล Full Mock Test</h1>
         {last && (
           <>
             <p className="text-3xl font-bold text-brand-600">{last.totalScore} / 990</p>
-            <div className="flex justify-center gap-6 text-sm text-slate-600 mt-2">
+            <div className="flex justify-center gap-6 text-sm text-stone-600 mt-2">
               <span>Listening: {last.listeningScore}/495</span>
               <span>Reading: {last.readingScore}/495</span>
             </div>
-            <p className="text-xs text-slate-400">ใช้เวลาทำข้อสอบ {Math.round(last.durationSec / 60)} นาที</p>
+            <p className="text-xs text-stone-400">ใช้เวลาทำข้อสอบ {Math.round(last.durationSec / 60)} นาที</p>
           </>
         )}
         <div className="flex gap-3 justify-center pt-4">
@@ -149,7 +149,7 @@ export default function FullMockTestPage() {
       <div className="flex items-center justify-between flex-wrap gap-2">
         <div>
           <span className="text-xs font-semibold text-brand-600">{PART_LABELS[item.part]}</span>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-stone-500">
             ข้อที่ {questionsBeforeCurrent + 1}
             {item.questions.length > 1 ? `-${questionsBeforeCurrent + item.questions.length}` : ''} / {FULL_EXAM_TOTAL_COUNT}
           </p>
@@ -161,7 +161,7 @@ export default function FullMockTestPage() {
                 <button
                   key={a}
                   onClick={() => setAccent(a)}
-                  className={`text-xs px-2 py-1 rounded-full border ${accent === a ? 'bg-brand-600 text-white border-brand-600' : 'bg-white border-slate-200 text-slate-500'}`}
+                  className={`text-xs px-2 py-1 rounded-full border ${accent === a ? 'bg-brand-600 text-white border-brand-600' : 'bg-white border-sand-200 text-stone-500'}`}
                 >
                   {a}
                 </button>
@@ -176,7 +176,7 @@ export default function FullMockTestPage() {
 
       <Card className="space-y-5">
         {item.imageDescription && (
-          <div className="rounded-xl bg-slate-100 px-4 py-6 text-center text-sm text-slate-600">{item.imageDescription}</div>
+          <div className="rounded-xl bg-sand-100 px-4 py-6 text-center text-sm text-stone-600">{item.imageDescription}</div>
         )}
 
         {item.audioScript && (
@@ -186,13 +186,13 @@ export default function FullMockTestPage() {
         )}
 
         {item.sentence && (
-          <p className="text-slate-800 leading-relaxed bg-slate-50 rounded-xl border border-slate-200 px-4 py-3">
+          <p className="text-stone-800 leading-relaxed bg-sand-50 rounded-xl border border-sand-200 px-4 py-3">
             {item.sentence}
           </p>
         )}
 
         {item.passageTexts?.map((text, ti) => (
-          <pre key={ti} className="whitespace-pre-wrap font-sans text-sm text-slate-700 bg-slate-50 rounded-xl border border-slate-200 px-4 py-3">
+          <pre key={ti} className="whitespace-pre-wrap font-sans text-sm text-stone-700 bg-sand-50 rounded-xl border border-sand-200 px-4 py-3">
             {text}
           </pre>
         ))}
@@ -200,7 +200,7 @@ export default function FullMockTestPage() {
         <div className="space-y-5">
           {item.questions.map((q) => (
             <div key={q.id}>
-              <p className="text-sm font-semibold text-slate-800 mb-2">{q.question}</p>
+              <p className="text-sm font-semibold text-stone-800 mb-2">{q.question}</p>
               <div className="grid gap-2">
                 {q.choices.map((choice, i) => {
                   const isSelected = answers[q.id] === i
@@ -211,7 +211,7 @@ export default function FullMockTestPage() {
                         <button
                           type="button"
                           onClick={() => speak(choice, accent)}
-                          className="shrink-0 rounded-lg border border-slate-200 px-2 py-2 text-sm hover:bg-slate-50"
+                          className="shrink-0 rounded-lg border border-sand-200 px-2 py-2 text-sm hover:bg-sand-50"
                           aria-label={`ฟังตัวเลือก ${String.fromCharCode(65 + i)}`}
                         >
                           🔊
@@ -221,7 +221,7 @@ export default function FullMockTestPage() {
                         onClick={() => selectAnswer(q.id, i)}
                         data-testid="answer-choice"
                         className={`flex-1 rounded-xl border px-4 py-2.5 text-left text-sm transition ${
-                          isSelected ? 'bg-brand-600 border-brand-600 text-white' : 'bg-white border-slate-200 hover:border-brand-400'
+                          isSelected ? 'bg-brand-600 border-brand-600 text-white' : 'bg-white border-sand-200 hover:border-brand-400'
                         }`}
                       >
                         {String.fromCharCode(65 + i)}. {hideText ? '••• (ฟังเสียงก่อนเลือก)' : choice}

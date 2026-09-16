@@ -43,7 +43,7 @@ export default function FlashcardPage() {
     <div className="space-y-6 max-w-2xl mx-auto">
       <div>
         <Link to={`/vocabulary/${chapter.id}`} className="text-sm text-brand-600 hover:underline">← กลับ</Link>
-        <h1 className="text-xl font-bold text-slate-800 mt-2">Flashcard SRS — {chapter.titleTh}</h1>
+        <h1 className="text-xl font-bold text-stone-800 mt-2">Flashcard SRS — {chapter.titleTh}</h1>
       </div>
 
       <ProgressBar value={reviewedCount} max={queue.length} />
@@ -51,16 +51,16 @@ export default function FlashcardPage() {
       {done ? (
         <Card className="text-center py-12">
           <p className="text-2xl">🎉</p>
-          <p className="text-lg font-semibold text-slate-800 mt-2">ทบทวนครบแล้ว {reviewedCount} คำ</p>
-          <p className="text-sm text-slate-500 mt-1">ระบบจะเตือนให้กลับมาทบทวนคำที่ยังไม่แม่นตามรอบเวลา</p>
+          <p className="text-lg font-semibold text-stone-800 mt-2">ทบทวนครบแล้ว {reviewedCount} คำ</p>
+          <p className="text-sm text-stone-500 mt-1">ระบบจะเตือนให้กลับมาทบทวนคำที่ยังไม่แม่นตามรอบเวลา</p>
           <Link to={`/vocabulary/${chapter.id}`}>
             <Button className="mt-4">กลับไปหน้าเลือกเกม</Button>
           </Link>
         </Card>
       ) : (
         <Card className="min-h-[280px] flex flex-col items-center justify-center text-center gap-4">
-          <span className="text-xs uppercase tracking-wide text-slate-400">{word.pos}</span>
-          <h2 className="text-3xl font-bold text-slate-800">{word.term}</h2>
+          <span className="text-xs uppercase tracking-wide text-stone-400">{word.pos}</span>
+          <h2 className="text-3xl font-bold text-stone-800">{word.term}</h2>
           <button
             onClick={() => speak(word.term)}
             className="text-brand-600 text-sm hover:underline"
@@ -73,10 +73,10 @@ export default function FlashcardPage() {
             <Button variant="secondary" onClick={() => setFlipped(true)}>เปิดดูความหมาย</Button>
           ) : (
             <div className="space-y-2">
-              <p className="text-lg text-slate-700">{word.meaningTh}</p>
-              {word.synonym && <p className="text-sm text-slate-500">คำใกล้เคียง: {word.synonym}</p>}
-              <p className="text-sm text-slate-600 italic mt-2">"{word.exampleEn}"</p>
-              <p className="text-sm text-slate-500">{word.exampleTh}</p>
+              <p className="text-lg text-stone-700">{word.meaningTh}</p>
+              {word.synonym && <p className="text-sm text-stone-500">คำใกล้เคียง: {word.synonym}</p>}
+              <p className="text-sm text-stone-600 italic mt-2">"{word.exampleEn}"</p>
+              <p className="text-sm text-stone-500">{word.exampleTh}</p>
             </div>
           )}
         </Card>
