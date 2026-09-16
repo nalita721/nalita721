@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import { allWords, vocabChapters } from '../../data/vocabulary'
 import { Button, Card, ProgressBar } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
+import { playCorrectSound, playIncorrectSound, playCompleteSound } from '../../lib/sound'
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5)
@@ -33,13 +34,20 @@ export default function TypingChallengePage() {
     const correct = input.trim().toLowerCase() === word.term.toLowerCase()
     setFeedback(correct ? 'correct' : 'wrong')
     recordAnswer('vocabulary', correct)
-    if (correct) setScore((s) => s + 1)
+    if (correct) {
+      setScore((s) => s + 1)
+      playCorrectSound()
+    } else {
+      playIncorrectSound()
+    }
   }
 
   function next() {
     setInput('')
     setFeedback(null)
+    const isLast = index + 1 >= words.length
     setIndex((i) => i + 1)
+    if (isLast) playCompleteSound()
   }
 
   return (

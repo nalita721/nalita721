@@ -7,6 +7,7 @@ import { speak } from '../../lib/tts'
 import { Button, Card, ProgressBar } from '../../components/ui'
 import { WordIcon } from '../../components/WordIcon'
 import { getWordIcon } from '../../data/wordIcons'
+import { playCompleteSound } from '../../lib/sound'
 import type { QuizQuality } from '../../lib/types'
 
 export default function FlashcardPage() {
@@ -43,7 +44,9 @@ export default function FlashcardPage() {
     touchStreak()
     setReviewedCount((c) => c + 1)
     setFlipped(false)
+    const isLast = index + 1 >= queue.length
     setIndex((i) => i + 1)
+    if (isLast) playCompleteSound()
   }
 
   return (

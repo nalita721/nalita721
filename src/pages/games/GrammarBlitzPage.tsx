@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { grammarTopics } from '../../data/grammar'
 import { Button, Card } from '../../components/ui'
 import { useCountdown } from '../../lib/useCountdown'
 import { useProgressStore } from '../../store/progress'
+import { playCorrectSound, playIncorrectSound, playCompleteSound } from '../../lib/sound'
 
 const ROUND_SECONDS = 60
 
@@ -44,13 +45,19 @@ export default function GrammarBlitzPage() {
     if (correct) {
       setScore((s) => s + 1)
       addXp(2)
+      playCorrectSound()
     } else {
       setWrong((w) => w + 1)
+      playIncorrectSound()
     }
     setTimeout(nextQuestion, 600)
   }
 
   const finished = running === false && secondsLeft === 0
+  useEffect(() => {
+    if (finished) playCompleteSound()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [finished])
 
   return (
     <div className="space-y-6 max-w-xl mx-auto">

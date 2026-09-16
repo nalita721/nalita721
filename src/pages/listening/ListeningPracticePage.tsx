@@ -5,6 +5,7 @@ import { Button, Card, ProgressBar } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
 import { speak, type Accent } from '../../lib/tts'
 import { SceneIllustration } from '../../components/SceneIllustration'
+import { playCorrectSound, playIncorrectSound, playCompleteSound } from '../../lib/sound'
 
 const ACCENTS: Accent[] = ['US', 'UK', 'AU', 'CA']
 
@@ -31,13 +32,20 @@ export default function ListeningPracticePage() {
     setSelected(i)
     const correct = i === item.answerIndex
     recordAnswer('listening', correct)
-    if (correct) setScore((s) => s + 1)
+    if (correct) {
+      setScore((s) => s + 1)
+      playCorrectSound()
+    } else {
+      playIncorrectSound()
+    }
   }
 
   function next() {
     setSelected(null)
     setRevealed(false)
+    const isLast = index + 1 >= items.length
     setIndex((i) => i + 1)
+    if (isLast) playCompleteSound()
   }
 
   return (

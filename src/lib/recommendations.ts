@@ -78,7 +78,7 @@ export function getRecommendations(result: LevelTestResult): RecommendationCard[
       id: 'mock-full',
       title: 'ฝึก Full Mock Test',
       description: 'ลองทำข้อสอบจำลองเต็มรูปแบบ 200 ข้อ ภายใต้เวลาจริง เพื่อประเมินความพร้อมสำหรับการสอบจริง',
-      to: '/mock-test/full',
+      to: '/mock-test/full/set1',
       icon: '🎯',
     })
   } else {

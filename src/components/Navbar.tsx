@@ -2,8 +2,16 @@ import { Link, NavLink } from 'react-router-dom'
 import { useProgressStore } from '../store/progress'
 import { useAuthStore } from '../store/auth'
 
-const LINKS = [
-  { to: '/', label: 'แดชบอร์ด', end: true },
+interface NavLinkItem {
+  to: string
+  label: string
+  end?: boolean
+}
+
+const AUTHED_HOME_LINK: NavLinkItem = { to: '/', label: 'แดชบอร์ด', end: true }
+const ANON_HOME_LINK: NavLinkItem = { to: '/', label: 'หน้าแรก', end: true }
+
+const REST_LINKS: NavLinkItem[] = [
   { to: '/vocabulary', label: 'คำศัพท์' },
   { to: '/grammar', label: 'ไวยากรณ์' },
   { to: '/listening', label: 'ฟัง' },
@@ -43,6 +51,9 @@ function UserBadges() {
 }
 
 export default function Navbar() {
+  const authStatus = useAuthStore((s) => s.status)
+  const links = [authStatus === 'authenticated' ? AUTHED_HOME_LINK : ANON_HOME_LINK, ...REST_LINKS]
+
   return (
     <header className="sticky top-0 z-10 bg-white/90 backdrop-blur border-b border-sand-200">
       <div className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
@@ -56,7 +67,7 @@ export default function Navbar() {
         </div>
 
         <nav className="flex items-center gap-1 text-sm overflow-x-auto -mx-1 px-1 sm:flex-wrap sm:overflow-visible sm:mx-0 sm:px-0">
-          {LINKS.map((link) => (
+          {links.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}

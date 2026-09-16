@@ -17,6 +17,15 @@ const PART_LABELS: Record<StatPart, string> = {
   mock: 'Mock Test',
 }
 
+const PRACTICE_MENU = [
+  { to: '/vocabulary', emoji: '📚', label: 'คำศัพท์รายบท', description: 'Flashcard, เกม, แบบทดสอบ', gradient: 'from-brand-500 to-brand-700' },
+  { to: '/grammar', emoji: '✍️', label: 'ฝึกไวยากรณ์', description: 'บทเรียน + แบบฝึกหัด', gradient: 'from-violet-500 to-violet-700' },
+  { to: '/listening', emoji: '🎧', label: 'ฝึกฟัง', description: 'Part 1-4 TOEIC', gradient: 'from-teal-500 to-cyan-700' },
+  { to: '/reading', emoji: '📝', label: 'ฝึกอ่าน', description: 'Part 5-7 TOEIC', gradient: 'from-amber-500 to-orange-700' },
+  { to: '/games', emoji: '🎮', label: 'เกมทบทวน', description: 'สนุกไปกับการทบทวน', gradient: 'from-rose-500 to-pink-700' },
+  { to: '/mock-test', emoji: '🏆', label: 'Mock Test', description: 'จำลองสอบเต็มรูปแบบ', gradient: 'from-emerald-500 to-emerald-700' },
+] as const
+
 export default function DashboardPage() {
   const xp = useProgressStore((s) => s.xp)
   const streak = useProgressStore((s) => s.streak)
@@ -141,12 +150,21 @@ export default function DashboardPage() {
 
         <Card>
           <h2 className="font-semibold text-stone-800 mb-3">เมนูฝึกฝน</h2>
-          <div className="grid grid-cols-2 gap-2 text-sm">
-            <Link to="/vocabulary"><Button variant="ghost" className="w-full justify-start">📚 คำศัพท์รายบท</Button></Link>
-            <Link to="/grammar"><Button variant="ghost" className="w-full justify-start">✍️ ฝึกไวยากรณ์</Button></Link>
-            <Link to="/listening"><Button variant="ghost" className="w-full justify-start">🎧 ฝึกฟัง</Button></Link>
-            <Link to="/reading"><Button variant="ghost" className="w-full justify-start">📝 ฝึกอ่าน</Button></Link>
-            <Link to="/games"><Button variant="ghost" className="w-full justify-start">🎮 เกมทบทวน</Button></Link>
+          <div className="grid grid-cols-2 gap-3">
+            {PRACTICE_MENU.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${item.gradient} p-4 text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-[0.98]`}
+              >
+                <span className="absolute -right-3 -top-3 text-5xl opacity-20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+                  {item.emoji}
+                </span>
+                <span className="relative block text-2xl">{item.emoji}</span>
+                <span className="relative mt-2 block text-sm font-semibold">{item.label}</span>
+                <span className="relative mt-0.5 block text-xs text-white/80">{item.description}</span>
+              </Link>
+            ))}
           </div>
         </Card>
       </div>

@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import { useAuthStore } from './store/auth'
 import { useProgressSync } from './lib/useProgressSync'
 import DashboardPage from './pages/DashboardPage'
+import HomePage from './pages/HomePage'
 import ChapterListPage from './pages/vocabulary/ChapterListPage'
 import ChapterHubPage from './pages/vocabulary/ChapterHubPage'
 import FlashcardPage from './pages/vocabulary/FlashcardPage'
@@ -36,6 +37,12 @@ import {
   RequireAuth,
 } from './components/gates'
 
+function RootRoute() {
+  const status = useAuthStore((s) => s.status)
+  if (status === 'authenticated') return <DashboardPage />
+  return <HomePage />
+}
+
 export default function App() {
   const checkSession = useAuthStore((s) => s.checkSession)
 
@@ -50,7 +57,7 @@ export default function App() {
       <Navbar />
       <main className="max-w-6xl mx-auto px-4 py-8">
         <Routes>
-          <Route path="/" element={<DashboardPage />} />
+          <Route path="/" element={<RootRoute />} />
 
           <Route path="/vocabulary" element={<ChapterListPage />} />
           <Route path="/vocabulary/:chapterId" element={<GatedVocabChapter><ChapterHubPage /></GatedVocabChapter>} />
@@ -72,7 +79,7 @@ export default function App() {
 
           <Route path="/mock-test" element={<MockTestHubPage />} />
           <Route path="/mock-test/mini" element={<RequireAuth><MockTestPage /></RequireAuth>} />
-          <Route path="/mock-test/full" element={<RequireAuth><FullMockTestPage /></RequireAuth>} />
+          <Route path="/mock-test/full/:setId" element={<RequireAuth><FullMockTestPage /></RequireAuth>} />
 
           <Route path="/games" element={<RequireAuth><GamesHubPage /></RequireAuth>} />
           <Route path="/games/flashcards" element={<RequireAuth><FlashcardPage /></RequireAuth>} />

@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import { allWords, vocabChapters } from '../../data/vocabulary'
 import { Button, Card, ProgressBar } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
+import { playCorrectSound, playIncorrectSound, playCompleteSound } from '../../lib/sound'
 import type { VocabWord } from '../../lib/types'
 
 function shuffle<T>(arr: T[]): T[] {
@@ -47,12 +48,17 @@ export default function ChapterQuizPage() {
     if (correct) {
       setScore((s) => s + 1)
       addXp(4)
+      playCorrectSound()
+    } else {
+      playIncorrectSound()
     }
   }
 
   function next() {
     setSelected(null)
+    const isLast = index + 1 >= quiz.length
     setIndex((i) => i + 1)
+    if (isLast) playCompleteSound()
   }
 
   return (

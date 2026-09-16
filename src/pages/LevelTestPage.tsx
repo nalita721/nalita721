@@ -13,6 +13,7 @@ import { useProgressStore } from '../store/progress'
 import { speak } from '../lib/tts'
 import { toScoreBand } from '../lib/scoreBand'
 import { getRecommendations } from '../lib/recommendations'
+import { playCompleteSound } from '../lib/sound'
 import type { LevelTestSkill } from '../data/levelTest'
 
 function formatTime(sec: number) {
@@ -92,6 +93,7 @@ export default function LevelTestPage() {
       skillBreakdown,
     })
     setPhase('finished')
+    playCompleteSound()
   }
 
   if (phase === 'intro') {

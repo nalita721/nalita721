@@ -6,6 +6,7 @@ import { useCountdown } from '../../lib/useCountdown'
 import { useProgressStore } from '../../store/progress'
 import { speak } from '../../lib/tts'
 import { toScoreBand } from '../../lib/scoreBand'
+import { playCorrectSound, playIncorrectSound, playCompleteSound } from '../../lib/sound'
 
 function formatTime(sec: number) {
   const m = Math.floor(sec / 60)
@@ -36,6 +37,8 @@ export default function MockTestPage() {
     if (selected !== null) return
     setSelected(i)
     setAnswers((prev) => ({ ...prev, [q.id]: i }))
+    if (i === q.answerIndex) playCorrectSound()
+    else playIncorrectSound()
     setTimeout(() => {
       setSelected(null)
       if (index + 1 >= total) {
@@ -63,6 +66,7 @@ export default function MockTestPage() {
       durationSec: MOCK_TEST_DURATION_SEC - secondsLeft,
     })
     setPhase('finished')
+    playCompleteSound()
   }
 
   if (phase === 'intro') {

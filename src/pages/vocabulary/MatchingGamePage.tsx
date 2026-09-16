@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import { allWords, vocabChapters } from '../../data/vocabulary'
 import { Button, Card } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
+import { playCorrectSound, playIncorrectSound, playCompleteSound } from '../../lib/sound'
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5)
@@ -48,6 +49,7 @@ export default function MatchingGamePage() {
       const accuracy = words.length / (words.length + mistakes)
       recordAnswer('vocabulary', true)
       addXp(Math.round(accuracy * 20))
+      playCompleteSound()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matched])
@@ -58,8 +60,10 @@ export default function MatchingGamePage() {
   function tryMatch(termId: string, meaningId: string) {
     if (termId === meaningId) {
       setMatched((prev) => new Set(prev).add(termId))
+      playCorrectSound()
     } else {
       setMistakes((m) => m + 1)
+      playIncorrectSound()
     }
     setSelectedTerm(null)
     setSelectedMeaning(null)

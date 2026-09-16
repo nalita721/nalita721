@@ -1,17 +1,12 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
-import {
-  fullExamItems,
-  FULL_EXAM_DURATION_SEC,
-  FULL_EXAM_LISTENING_COUNT,
-  FULL_EXAM_READING_COUNT,
-  FULL_EXAM_TOTAL_COUNT,
-} from '../../data/fullMockExam'
+import { Link, useParams } from 'react-router-dom'
+import { getExamSet } from '../../data/examSets'
 import { Button, Card, ProgressBar } from '../../components/ui'
 import { useCountdown } from '../../lib/useCountdown'
 import { useProgressStore } from '../../store/progress'
 import { speak, type Accent } from '../../lib/tts'
 import { toScoreBand } from '../../lib/scoreBand'
+import { playCompleteSound } from '../../lib/sound'
 import type { ExamPart } from '../../lib/types'
 import { SceneIllustration } from '../../components/SceneIllustration'
 
@@ -34,6 +29,8 @@ function formatTime(sec: number) {
 }
 
 export default function FullMockTestPage() {
+  const { setId } = useParams()
+  const examSet = getExamSet(setId)
   const [phase, setPhase] = useState<'intro' | 'running' | 'finished'>('intro')
   const [itemIndex, setItemIndex] = useState(0)
   const [answers, setAnswers] = useState<Record<string, number>>({})
@@ -41,8 +38,8 @@ export default function FullMockTestPage() {
   const addMockResult = useProgressStore((s) => s.addMockResult)
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
 
-  const items = fullExamItems
-  const { secondsLeft, start } = useCountdown(FULL_EXAM_DURATION_SEC, () => finish(answers))
+  const items = examSet.fullExamItems
+  const { secondsLeft, start } = useCountdown(examSet.durationSec, () => finish(answers))
 
   const questionsBeforeCurrent = useMemo(
     () => items.slice(0, itemIndex).reduce((sum, it) => sum + it.questions.length, 0),
@@ -93,19 +90,20 @@ export default function FullMockTestPage() {
       totalScore: listeningScore + readingScore,
       listeningScore,
       readingScore,
-      durationSec: FULL_EXAM_DURATION_SEC - secondsLeft,
+      durationSec: examSet.durationSec - secondsLeft,
     })
     setPhase('finished')
+    playCompleteSound()
   }
 
   if (phase === 'intro') {
     return (
       <Card className="max-w-xl mx-auto text-center py-10 space-y-4">
-        <h1 className="text-2xl font-bold text-stone-800">Full Mock Test</h1>
+        <h1 className="text-2xl font-bold text-stone-800">Full Mock Test — {examSet.label}</h1>
         <p className="text-stone-500">
-          ข้อสอบจำลองเต็มรูปแบบ {FULL_EXAM_TOTAL_COUNT} ข้อ ตามโครงสร้าง TOEIC จริง — Listening{' '}
-          {FULL_EXAM_LISTENING_COUNT} ข้อ (Part 1-4) และ Reading {FULL_EXAM_READING_COUNT} ข้อ (Part 5-7) จับเวลารวม{' '}
-          {FULL_EXAM_DURATION_SEC / 60} นาที
+          ข้อสอบจำลองเต็มรูปแบบ {examSet.totalCount} ข้อ ตามโครงสร้าง TOEIC จริง — Listening{' '}
+          {examSet.listeningCount} ข้อ (Part 1-4) และ Reading {examSet.readingCount} ข้อ (Part 5-7) จับเวลารวม{' '}
+          {examSet.durationSec / 60} นาที
         </p>
         <p className="text-xs text-stone-400">
           หมายเหตุ: นี่คือชุดข้อสอบตัวอย่างสำหรับฝึกซ้อม ไม่ใช่คะแนน TOEIC จริง ระหว่างทำข้อสอบจะไม่มีการเฉลยทันที
@@ -122,7 +120,7 @@ export default function FullMockTestPage() {
     return (
       <Card className="max-w-xl mx-auto text-center py-10 space-y-3">
         <p className="text-2xl">🏆</p>
-        <h1 className="text-xl font-bold text-stone-800">สรุปผล Full Mock Test</h1>
+        <h1 className="text-xl font-bold text-stone-800">สรุปผล Full Mock Test — {examSet.label}</h1>
         {last && (
           <>
             <p className="text-3xl font-bold text-brand-600">{last.totalScore} / 990</p>
@@ -152,7 +150,7 @@ export default function FullMockTestPage() {
           <span className="text-xs font-semibold text-brand-600">{PART_LABELS[item.part]}</span>
           <p className="text-sm text-stone-500">
             ข้อที่ {questionsBeforeCurrent + 1}
-            {item.questions.length > 1 ? `-${questionsBeforeCurrent + item.questions.length}` : ''} / {FULL_EXAM_TOTAL_COUNT}
+            {item.questions.length > 1 ? `-${questionsBeforeCurrent + item.questions.length}` : ''} / {examSet.totalCount}
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -173,7 +171,7 @@ export default function FullMockTestPage() {
         </div>
       </div>
 
-      <ProgressBar value={questionsBeforeCurrent} max={FULL_EXAM_TOTAL_COUNT} />
+      <ProgressBar value={questionsBeforeCurrent} max={examSet.totalCount} />
 
       <Card className="space-y-5">
         {item.imageId && <SceneIllustration id={item.imageId} />}

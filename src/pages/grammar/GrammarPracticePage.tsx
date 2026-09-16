@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import { grammarTopics } from '../../data/grammar'
 import { Button, Card, ProgressBar } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
+import { playCorrectSound, playIncorrectSound, playCompleteSound } from '../../lib/sound'
 
 export default function GrammarPracticePage() {
   const { topicId } = useParams()
@@ -15,20 +16,28 @@ export default function GrammarPracticePage() {
 
   if (!topic) return <Navigate to="/grammar" replace />
 
+  const total = topic.questions.length
   const q = topic.questions[index]
-  const done = index >= topic.questions.length
+  const done = index >= total
 
   function handleSelect(choiceIndex: number) {
     if (selected !== null) return
     setSelected(choiceIndex)
     const correct = choiceIndex === q.answerIndex
     recordAnswer('grammar', correct)
-    if (correct) setScore((s) => s + 1)
+    if (correct) {
+      setScore((s) => s + 1)
+      playCorrectSound()
+    } else {
+      playIncorrectSound()
+    }
   }
 
   function next() {
     setSelected(null)
+    const isLast = index + 1 >= total
     setIndex((i) => i + 1)
+    if (isLast) playCompleteSound()
   }
 
   return (

@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { allWords, vocabChapters } from '../../data/vocabulary'
 import { Button, Card } from '../../components/ui'
 import { useCountdown } from '../../lib/useCountdown'
 import { useProgressStore } from '../../store/progress'
+import { playCorrectSound, playIncorrectSound, playCompleteSound } from '../../lib/sound'
 import type { VocabWord } from '../../lib/types'
 
 const ROUND_SECONDS = 60
@@ -36,6 +37,11 @@ export default function WordRushPage() {
   const [feedbackId, setFeedbackId] = useState<string | null>(null)
 
   const { secondsLeft, running, start } = useCountdown(ROUND_SECONDS, () => {})
+  const finished = running === false && secondsLeft === 0
+  useEffect(() => {
+    if (finished) playCompleteSound()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [finished])
 
   if (!isGlobal && !chapter) return <Navigate to="/vocabulary" replace />
 
@@ -60,13 +66,13 @@ export default function WordRushPage() {
     if (correct) {
       setScore((s) => s + 1)
       addXp(2)
+      playCorrectSound()
     } else {
       setWrong((w) => w + 1)
+      playIncorrectSound()
     }
     setTimeout(nextQuestion, 500)
   }
-
-  const finished = running === false && secondsLeft === 0
 
   return (
     <div className="space-y-6 max-w-xl mx-auto">

@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import { readingPassages } from '../../data/reading'
 import { Button, Card } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
+import { playCompleteSound } from '../../lib/sound'
 
 export default function ReadingPracticePage() {
   const { passageId } = useParams()
@@ -26,6 +27,7 @@ export default function ReadingPracticePage() {
       recordAnswer('reading', correct)
     })
     setSubmitted(true)
+    playCompleteSound()
   }
 
   const score = submitted
