@@ -10,6 +10,7 @@ const LINKS = [
   { to: '/reading', label: 'อ่าน' },
   { to: '/games', label: 'เกม' },
   { to: '/mock-test', label: 'Mock Test' },
+  { to: '/friends', label: 'เพื่อน' },
 ]
 
 function UserBadges() {

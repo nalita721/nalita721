@@ -26,6 +26,15 @@ import GrammarBlitzPage from './pages/games/GrammarBlitzPage'
 import SettingsPage from './pages/SettingsPage'
 import LevelTestPage from './pages/LevelTestPage'
 import LoginPage from './pages/LoginPage'
+import FriendsPage from './pages/FriendsPage'
+import DuelPage from './pages/DuelPage'
+import {
+  GatedGrammarTopic,
+  GatedListeningPart,
+  GatedReadingPassage,
+  GatedVocabChapter,
+  RequireAuth,
+} from './components/gates'
 
 export default function App() {
   const checkSession = useAuthStore((s) => s.checkSession)
@@ -44,36 +53,39 @@ export default function App() {
           <Route path="/" element={<DashboardPage />} />
 
           <Route path="/vocabulary" element={<ChapterListPage />} />
-          <Route path="/vocabulary/:chapterId" element={<ChapterHubPage />} />
-          <Route path="/vocabulary/:chapterId/flashcards" element={<FlashcardPage />} />
-          <Route path="/vocabulary/:chapterId/matching" element={<MatchingGamePage />} />
-          <Route path="/vocabulary/:chapterId/typing" element={<TypingChallengePage />} />
-          <Route path="/vocabulary/:chapterId/wordrush" element={<WordRushPage />} />
-          <Route path="/vocabulary/:chapterId/quiz" element={<ChapterQuizPage />} />
+          <Route path="/vocabulary/:chapterId" element={<GatedVocabChapter><ChapterHubPage /></GatedVocabChapter>} />
+          <Route path="/vocabulary/:chapterId/flashcards" element={<GatedVocabChapter><FlashcardPage /></GatedVocabChapter>} />
+          <Route path="/vocabulary/:chapterId/matching" element={<GatedVocabChapter><MatchingGamePage /></GatedVocabChapter>} />
+          <Route path="/vocabulary/:chapterId/typing" element={<GatedVocabChapter><TypingChallengePage /></GatedVocabChapter>} />
+          <Route path="/vocabulary/:chapterId/wordrush" element={<GatedVocabChapter><WordRushPage /></GatedVocabChapter>} />
+          <Route path="/vocabulary/:chapterId/quiz" element={<GatedVocabChapter><ChapterQuizPage /></GatedVocabChapter>} />
 
           <Route path="/grammar" element={<GrammarTopicListPage />} />
-          <Route path="/grammar/:topicId" element={<GrammarLessonPage />} />
-          <Route path="/grammar/:topicId/practice" element={<GrammarPracticePage />} />
+          <Route path="/grammar/:topicId" element={<GatedGrammarTopic><GrammarLessonPage /></GatedGrammarTopic>} />
+          <Route path="/grammar/:topicId/practice" element={<GatedGrammarTopic><GrammarPracticePage /></GatedGrammarTopic>} />
 
           <Route path="/listening" element={<ListeningPartListPage />} />
-          <Route path="/listening/:part" element={<ListeningPracticePage />} />
+          <Route path="/listening/:part" element={<GatedListeningPart><ListeningPracticePage /></GatedListeningPart>} />
 
           <Route path="/reading" element={<ReadingListPage />} />
-          <Route path="/reading/:passageId" element={<ReadingPracticePage />} />
+          <Route path="/reading/:passageId" element={<GatedReadingPassage><ReadingPracticePage /></GatedReadingPassage>} />
 
           <Route path="/mock-test" element={<MockTestHubPage />} />
-          <Route path="/mock-test/mini" element={<MockTestPage />} />
-          <Route path="/mock-test/full" element={<FullMockTestPage />} />
+          <Route path="/mock-test/mini" element={<RequireAuth><MockTestPage /></RequireAuth>} />
+          <Route path="/mock-test/full" element={<RequireAuth><FullMockTestPage /></RequireAuth>} />
 
-          <Route path="/games" element={<GamesHubPage />} />
-          <Route path="/games/word-rush" element={<WordRushPage />} />
-          <Route path="/games/matching" element={<MatchingGamePage />} />
-          <Route path="/games/typing" element={<TypingChallengePage />} />
-          <Route path="/games/grammar-blitz" element={<GrammarBlitzPage />} />
+          <Route path="/games" element={<RequireAuth><GamesHubPage /></RequireAuth>} />
+          <Route path="/games/word-rush" element={<RequireAuth><WordRushPage /></RequireAuth>} />
+          <Route path="/games/matching" element={<RequireAuth><MatchingGamePage /></RequireAuth>} />
+          <Route path="/games/typing" element={<RequireAuth><TypingChallengePage /></RequireAuth>} />
+          <Route path="/games/grammar-blitz" element={<RequireAuth><GrammarBlitzPage /></RequireAuth>} />
 
           <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/level-test" element={<LevelTestPage />} />
+          <Route path="/level-test" element={<RequireAuth><LevelTestPage /></RequireAuth>} />
           <Route path="/login" element={<LoginPage />} />
+
+          <Route path="/friends" element={<RequireAuth><FriendsPage /></RequireAuth>} />
+          <Route path="/duels/:duelId" element={<RequireAuth><DuelPage /></RequireAuth>} />
         </Routes>
       </main>
     </div>
