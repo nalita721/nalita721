@@ -34,7 +34,7 @@ export default function GrammarPracticePage() {
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
       <div>
-        <Link to="/grammar" className="text-sm text-brand-600 hover:underline">← กลับ</Link>
+        <Link to={`/grammar/${topic.id}`} className="text-sm text-brand-600 hover:underline">← กลับไปบทเรียน</Link>
         <h1 className="text-xl font-bold text-stone-800 mt-2">{topic.titleTh}</h1>
       </div>
 

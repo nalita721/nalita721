@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import { allWords } from '../data/vocabulary'
-import { Badge, Button, Card, ProgressBar } from '../components/ui'
+import { Badge, Button, Card } from '../components/ui'
 import { useProgressStore } from '../store/progress'
 import { isDue } from '../lib/srs'
-import type { PartStat, StatPart } from '../lib/types'
+import type { StatPart } from '../lib/types'
+import { SkillAccuracyChart } from '../components/charts/SkillAccuracyChart'
+import { MockScoreTrendChart } from '../components/charts/MockScoreTrendChart'
 
 const PART_LABELS: Record<StatPart, string> = {
   vocabulary: 'คำศัพท์',
@@ -11,10 +13,6 @@ const PART_LABELS: Record<StatPart, string> = {
   listening: 'การฟัง',
   reading: 'การอ่าน',
   mock: 'Mock Test',
-}
-
-function accuracy(stat: PartStat) {
-  return stat.total > 0 ? Math.round((stat.correct / stat.total) * 100) : null
 }
 
 export default function DashboardPage() {
@@ -63,41 +61,27 @@ export default function DashboardPage() {
         </Card>
       )}
 
-      <div>
-        <h2 className="font-semibold text-stone-800 mb-3">ความแม่นยำแยกตามทักษะ</h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {(Object.keys(PART_LABELS) as StatPart[])
+      <Card>
+        <h2 className="font-semibold text-stone-800 mb-4">ความแม่นยำแยกตามทักษะ</h2>
+        <SkillAccuracyChart
+          data={(Object.keys(PART_LABELS) as StatPart[])
             .filter((k) => k !== 'mock')
-            .map((key) => {
-              const stat = partStats[key]
-              const acc = accuracy(stat)
-              return (
-                <Card key={key}>
-                  <p className="text-sm text-stone-500">{PART_LABELS[key]}</p>
-                  <p className="text-2xl font-bold text-stone-800 mt-1">{acc === null ? '—' : `${acc}%`}</p>
-                  <p className="text-xs text-stone-400 mt-1">{stat.total} ข้อที่ทำแล้ว</p>
-                  {acc !== null && <ProgressBar value={acc} max={100} colorClass={acc >= 70 ? 'bg-emerald-500' : 'bg-amber-500'} />}
-                </Card>
-              )
-            })}
-        </div>
-      </div>
+            .map((key) => ({ key, label: PART_LABELS[key], correct: partStats[key].correct, total: partStats[key].total }))}
+        />
+      </Card>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
-          <h2 className="font-semibold text-stone-800 mb-2">ผล Mock Test ล่าสุด</h2>
+          <h2 className="font-semibold text-stone-800 mb-2">แนวโน้มคะแนน Mock Test</h2>
           {lastMock ? (
-            <div className="space-y-2">
+            <div className="flex items-baseline gap-3 mb-4">
               <p className="text-3xl font-bold text-brand-600">{lastMock.totalScore} / 990</p>
-              <div className="flex gap-4 text-sm text-stone-600">
-                <span>Listening {lastMock.listeningScore}</span>
-                <span>Reading {lastMock.readingScore}</span>
-              </div>
-              <Badge>{new Date(lastMock.date).toLocaleDateString('th-TH')}</Badge>
+              <Badge>ล่าสุด {new Date(lastMock.date).toLocaleDateString('th-TH')}</Badge>
             </div>
           ) : (
-            <p className="text-sm text-stone-500">ยังไม่เคยทำ Mock Test ลองทำดูเพื่อประเมินระดับปัจจุบัน</p>
+            <p className="text-sm text-stone-500 mb-4">ยังไม่เคยทำ Mock Test ลองทำดูเพื่อประเมินระดับปัจจุบัน</p>
           )}
+          <MockScoreTrendChart results={mockResults} />
           <Link to="/mock-test" className="inline-block mt-4">
             <Button variant="secondary">{lastMock ? 'ทำ Mock Test อีกครั้ง' : 'เริ่ม Mock Test'}</Button>
           </Link>
@@ -110,6 +94,7 @@ export default function DashboardPage() {
             <Link to="/grammar"><Button variant="ghost" className="w-full justify-start">✍️ ฝึกไวยากรณ์</Button></Link>
             <Link to="/listening"><Button variant="ghost" className="w-full justify-start">🎧 ฝึกฟัง</Button></Link>
             <Link to="/reading"><Button variant="ghost" className="w-full justify-start">📝 ฝึกอ่าน</Button></Link>
+            <Link to="/games"><Button variant="ghost" className="w-full justify-start">🎮 เกมทบทวน</Button></Link>
           </div>
         </Card>
       </div>

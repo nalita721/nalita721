@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { vocabChapters } from '../../data/vocabulary'
+import { allWords, vocabChapters } from '../../data/vocabulary'
 import { Button, Card } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
 
@@ -12,15 +12,20 @@ const ROUND_SIZE = 6
 
 export default function MatchingGamePage() {
   const { chapterId } = useParams()
-  const chapter = vocabChapters.find((c) => c.id === chapterId)
+  const isGlobal = chapterId === undefined
+  const chapter = isGlobal ? undefined : vocabChapters.find((c) => c.id === chapterId)
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
   const addXp = useProgressStore((s) => s.addXp)
 
+  const backTo = isGlobal ? '/games' : `/vocabulary/${chapterId}`
+  const title = isGlobal ? 'ทุกบท' : chapter?.titleTh ?? ''
+
   const words = useMemo(() => {
-    if (!chapter) return []
-    return shuffle(chapter.words).slice(0, Math.min(ROUND_SIZE, chapter.words.length))
+    const sourceWords = isGlobal ? allWords() : chapter?.words
+    if (!sourceWords) return []
+    return shuffle(sourceWords).slice(0, Math.min(ROUND_SIZE, sourceWords.length))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chapter])
+  }, [chapter, isGlobal])
 
   const [terms] = useState(() => shuffle(words))
   const [meanings] = useState(() => shuffle(words))
@@ -47,8 +52,8 @@ export default function MatchingGamePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matched])
 
-  if (!chapter) return <Navigate to="/vocabulary" replace />
-  if (words.length === 0) return <Navigate to={`/vocabulary/${chapter.id}`} replace />
+  if (!isGlobal && !chapter) return <Navigate to="/vocabulary" replace />
+  if (words.length === 0) return <Navigate to={backTo} replace />
 
   function tryMatch(termId: string, meaningId: string) {
     if (termId === meaningId) {
@@ -75,8 +80,8 @@ export default function MatchingGamePage() {
   return (
     <div className="space-y-6 max-w-3xl mx-auto">
       <div>
-        <Link to={`/vocabulary/${chapter.id}`} className="text-sm text-brand-600 hover:underline">← กลับ</Link>
-        <h1 className="text-xl font-bold text-stone-800 mt-2">Matching Game — {chapter.titleTh}</h1>
+        <Link to={backTo} className="text-sm text-brand-600 hover:underline">← กลับ</Link>
+        <h1 className="text-xl font-bold text-stone-800 mt-2">Matching Game — {title}</h1>
         <p className="text-sm text-stone-500 mt-1">เวลา: {seconds}s • พลาด: {mistakes} ครั้ง</p>
       </div>
 
@@ -84,7 +89,7 @@ export default function MatchingGamePage() {
         <Card className="text-center py-12">
           <p className="text-2xl">✅</p>
           <p className="text-lg font-semibold text-stone-800 mt-2">จับคู่ครบใน {seconds} วินาที (พลาด {mistakes} ครั้ง)</p>
-          <Link to={`/vocabulary/${chapter.id}`}>
+          <Link to={backTo}>
             <Button className="mt-4">กลับไปหน้าเลือกเกม</Button>
           </Link>
         </Card>

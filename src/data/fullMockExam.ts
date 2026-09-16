@@ -10,6 +10,7 @@ const part1: ExamItem[] = [
     part: 1,
     section: 'listening',
     imageDescription: '🖼️ ภาพ: เพื่อนร่วมงานสองคนกำลังจับมือกันในล็อบบี้ของสำนักงาน',
+    imageId: 'handshake',
     questions: [
       {
         id: 'L1-1-q',
@@ -30,6 +31,7 @@ const part1: ExamItem[] = [
     part: 1,
     section: 'listening',
     imageDescription: '🖼️ ภาพ: ผู้หญิงกำลังพิมพ์งานบนแล็ปท็อปที่โต๊ะทำงานใกล้หน้าต่าง',
+    imageId: 'typing',
     questions: [
       {
         id: 'L1-2-q',
@@ -50,6 +52,7 @@ const part1: ExamItem[] = [
     part: 1,
     section: 'listening',
     imageDescription: '🖼️ ภาพ: พนักงานกำลังขนกล่องลงจากรถบรรทุกขนส่งสินค้า',
+    imageId: 'truck',
     questions: [
       {
         id: 'L1-3-q',
@@ -70,6 +73,7 @@ const part1: ExamItem[] = [
     part: 1,
     section: 'listening',
     imageDescription: '🖼️ ภาพ: เชฟกำลังเตรียมอาหารอยู่ในครัวของร้านอาหาร',
+    imageId: 'chef',
     questions: [
       {
         id: 'L1-4-q',
@@ -90,6 +94,7 @@ const part1: ExamItem[] = [
     part: 1,
     section: 'listening',
     imageDescription: '🖼️ ภาพ: ผู้โดยสารกำลังขึ้นรถบัสที่สถานีขนส่ง',
+    imageId: 'bus',
     questions: [
       {
         id: 'L1-5-q',
@@ -110,6 +115,7 @@ const part1: ExamItem[] = [
     part: 1,
     section: 'listening',
     imageDescription: '🖼️ ภาพ: ช่างเทคนิคกำลังซ่อมเครื่องพิมพ์ในสำนักงาน',
+    imageId: 'printer',
     questions: [
       {
         id: 'L1-6-q',

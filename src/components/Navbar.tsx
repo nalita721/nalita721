@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useProgressStore } from '../store/progress'
 
 const LINKS = [
@@ -7,6 +7,7 @@ const LINKS = [
   { to: '/grammar', label: 'ไวยากรณ์' },
   { to: '/listening', label: 'ฟัง' },
   { to: '/reading', label: 'อ่าน' },
+  { to: '/games', label: 'เกม' },
   { to: '/mock-test', label: 'Mock Test' },
 ]
 
@@ -41,6 +42,9 @@ export default function Navbar() {
         <div className="flex items-center gap-3 text-sm shrink-0">
           <span className="flex items-center gap-1 text-amber-600 font-semibold">🔥 {streak}</span>
           <span className="flex items-center gap-1 text-brand-600 font-semibold">⭐ {xp} XP</span>
+          <Link to="/settings" title="ตั้งค่าการแจ้งเตือน" className="text-stone-500 hover:text-brand-600 transition">
+            🔔
+          </Link>
         </div>
       </div>
     </header>

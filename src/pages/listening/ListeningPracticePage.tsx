@@ -4,6 +4,7 @@ import { listeningByPart } from '../../data/listening'
 import { Button, Card, ProgressBar } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
 import { speak, type Accent } from '../../lib/tts'
+import { SceneIllustration } from '../../components/SceneIllustration'
 
 const ACCENTS: Accent[] = ['US', 'UK', 'AU', 'CA']
 
@@ -73,10 +74,9 @@ export default function ListeningPracticePage() {
         <Card className="space-y-4">
           <p className="text-xs uppercase tracking-wide text-stone-400">ข้อที่ {index + 1}/{items.length}</p>
 
+          {item.imageId && <SceneIllustration id={item.imageId} />}
           {item.imageDescription && (
-            <div className="rounded-xl bg-sand-100 px-4 py-6 text-center text-sm text-stone-600">
-              {item.imageDescription}
-            </div>
+            <p className="text-center text-xs text-stone-500">{item.imageDescription}</p>
           )}
 
           {!audioOnly && (

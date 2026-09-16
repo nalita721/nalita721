@@ -6,6 +6,17 @@ export const grammarTopics: GrammarTopic[] = [
     title: 'Word Form',
     titleTh: 'การผันรูปคำ (Noun / Verb / Adjective / Adverb)',
     description: 'จุดที่ TOEIC Part 5 ออกบ่อยที่สุด — เลือกรูปคำให้ตรงกับตำแหน่งในประโยค',
+    lesson: {
+      emoji: '🧩',
+      introTh: 'คิดว่าประโยคภาษาอังกฤษเป็นเหมือนจิ๊กซอว์ — แต่ละตำแหน่งในประโยคต้องใช้ "รูปคำ" ที่ต่างกัน ถ้าใส่ชิ้นผิดรูป ประโยคจะดูแปลกทันที เทคนิคง่ายๆ คือดูตำแหน่งของคำในประโยคก่อน แล้วค่อยเลือกรูปคำให้ตรง',
+      keyPoints: [
+        { label: 'คำนาม (Noun)', explanation: 'ใช้เป็นประธานหรือกรรมของประโยค มักอยู่หลัง a/an/the หรือคำคุณศัพท์', exampleEn: 'Her presentation was impressive.', exampleTh: 'การนำเสนอของเธอน่าประทับใจ (presentation คือคำนาม)' },
+        { label: 'คำกริยา (Verb)', explanation: 'แสดงการกระทำ อยู่หลังประธานของประโยค', exampleEn: 'She presented the report.', exampleTh: 'เธอนำเสนอรายงาน (presented คือคำกริยา)' },
+        { label: 'คำคุณศัพท์ (Adjective)', explanation: 'ขยายคำนาม มักอยู่หน้าคำนามหรือหลัง verb to be', exampleEn: 'It was an impressive presentation.', exampleTh: 'มันเป็นการนำเสนอที่น่าประทับใจ (impressive ขยาย presentation)' },
+        { label: 'คำวิเศษณ์ (Adverb)', explanation: 'ขยายคำกริยา อยู่หลังกริยาหรือท้ายประโยค มักลงท้ายด้วย -ly', exampleEn: 'She presented impressively.', exampleTh: 'เธอนำเสนอได้อย่างน่าประทับใจ (impressively ขยาย presented)' },
+      ],
+      tipTh: 'เกร็ดจำง่าย: เจอ blank ระหว่าง a/an/the กับกริยา → เดาว่าเป็นคำนาม เจอ blank หลัง verb to be หรือหน้าคำนาม → เดาว่าเป็นคำคุณศัพท์!',
+    },
     questions: [
       { id: 'wf-1', sentence: 'The manager gave a very ____ presentation to the board.', choices: ['impress', 'impressive', 'impressively', 'impression'], answerIndex: 1, explanation: '"very ____" ตามด้วยคำนามที่ถูกขยาย ต้องใช้ adjective (impressive) ขยายหน้า presentation' },
       { id: 'wf-2', sentence: 'Please complete the form ____ to avoid delays.', choices: ['accurate', 'accuracy', 'accurately', 'accurateness'], answerIndex: 2, explanation: 'ขยายกริยา "complete" ต้องใช้ adverb (accurately)' },
@@ -22,6 +33,17 @@ export const grammarTopics: GrammarTopic[] = [
     title: 'Verb Tense',
     titleTh: 'Tense ของกริยา',
     description: 'เลือก tense ให้สอดคล้องกับ time marker และบริบทในประโยค',
+    lesson: {
+      emoji: '⏰',
+      introTh: 'Tense ก็เหมือนการบอกว่าเหตุการณ์เกิด "เมื่อไหร่" — เคล็ดลับคือมองหา "คำบอกเวลา" (time marker) ในประโยค เพราะมันจะบอกใบ้คำตอบให้เราแทบทุกครั้ง',
+      keyPoints: [
+        { label: 'Present Simple', explanation: 'เหตุการณ์ที่เป็นจริงเสมอ หรือทำเป็นประจำ', exampleEn: 'The store opens at 9 a.m. every day.', exampleTh: 'ร้านเปิดเก้าโมงเช้าทุกวัน' },
+        { label: 'Past Simple', explanation: 'เหตุการณ์ที่จบไปแล้วในอดีต สังเกตคำว่า yesterday, last week', exampleEn: 'We signed the contract last week.', exampleTh: 'เราเซ็นสัญญาไปเมื่อสัปดาห์ก่อน' },
+        { label: 'Present Perfect', explanation: 'เหตุการณ์เริ่มในอดีตแต่ยังเกี่ยวข้องกับปัจจุบัน สังเกตคำว่า since, for, already', exampleEn: 'She has worked here since 2020.', exampleTh: 'เธอทำงานที่นี่ตั้งแต่ปี 2020 จนถึงตอนนี้' },
+        { label: 'Future (will)', explanation: 'เหตุการณ์ที่จะเกิดในอนาคต สังเกตคำว่า tomorrow, next month', exampleEn: 'The meeting will start at 10.', exampleTh: 'การประชุมจะเริ่มตอน 10 โมง' },
+      ],
+      tipTh: 'เกร็ดจำง่าย: เจอ "since" ให้คิดถึง Present Perfect เสมอ (since = ตั้งแต่...จนถึงตอนนี้) ส่วน "yesterday/last..." คือสัญญาณของ Past Simple ชัวร์ๆ',
+    },
     questions: [
       { id: 'tn-1', sentence: 'By the time the CEO arrives, the team ____ the report.', choices: ['finishes', 'will finish', 'will have finished', 'finished'], answerIndex: 2, explanation: '"By the time" + present + future perfect (will have finished) สำหรับเหตุการณ์ที่เสร็จก่อนอีกเหตุการณ์ในอนาคต' },
       { id: 'tn-2', sentence: 'The company ____ its headquarters to Bangkok last year.', choices: ['moves', 'moved', 'has moved', 'will move'], answerIndex: 1, explanation: '"last year" เป็น time marker ของ past simple (moved)' },
@@ -37,6 +59,17 @@ export const grammarTopics: GrammarTopic[] = [
     title: 'Prepositions',
     titleTh: 'คำบุพบท',
     description: 'เลือกคำบุพบทที่ใช้คู่กับคำนาม/กริยา/สำนวนที่ TOEIC ออกบ่อย',
+    lesson: {
+      emoji: '🧭',
+      introTh: 'คำบุพบทเหมือน GPS ของประโยค — บอกตำแหน่ง เวลา และทิศทาง ข้อดีคือ TOEIC มักออกคำบุพบทที่ "จับคู่ประจำ" กับคำบางคำ (fixed pair) ถ้าจำคู่ยอดฮิตได้ ก็ตอบได้เร็วโดยไม่ต้องคิดเยอะ',
+      keyPoints: [
+        { label: 'เวลาที่ชัดเจน → at', explanation: 'ใช้กับเวลาที่ระบุแม่นยำ', exampleEn: 'The meeting starts at 3 p.m.', exampleTh: 'การประชุมเริ่มตอนบ่ายสามโมง' },
+        { label: 'วันและวันที่ → on', explanation: 'ใช้กับวัน/วันที่', exampleEn: 'The event is on Friday.', exampleTh: 'งานจัดขึ้นวันศุกร์' },
+        { label: 'เดือน/ปี/ช่วงเวลา → in', explanation: 'ใช้กับเดือน ปี หรือช่วงเวลากว้างๆ', exampleEn: 'Sales grew in 2024.', exampleTh: 'ยอดขายเติบโตในปี 2024' },
+        { label: 'กำหนดเส้นตาย → by', explanation: 'หมายถึง "ภายใน" เวลานั้น', exampleEn: 'Submit the form by Friday.', exampleTh: 'ส่งแบบฟอร์มภายในวันศุกร์' },
+      ],
+      tipTh: 'เกร็ดจำง่าย: at = จุดเวลาเป๊ะๆ, on = วัน, in = เดือน/ปี/ช่วงกว้าง — นึกภาพ "at" คือจุดเล็กๆ บนนาฬิกา ส่วน "in" คือกล่องใบใหญ่ที่ใส่เวลาไว้ข้างใน',
+    },
     questions: [
       { id: 'pp-1', sentence: 'The meeting has been scheduled ____ 10 a.m. on Monday.', choices: ['in', 'on', 'at', 'by'], answerIndex: 2, explanation: 'ใช้ "at" กับเวลาที่ระบุชัดเจน (at 10 a.m.)' },
       { id: 'pp-2', sentence: 'The report was completed ____ the deadline.', choices: ['until', 'by', 'since', 'during'], answerIndex: 1, explanation: '"by" ใช้กับ deadline หมายถึงเสร็จภายในหรือก่อนเวลาที่กำหนด' },
@@ -52,6 +85,17 @@ export const grammarTopics: GrammarTopic[] = [
     title: 'Conjunctions & Transitions',
     titleTh: 'คำเชื่อมประโยคและคำเชื่อมความ',
     description: 'เลือกคำเชื่อมที่แสดงความสัมพันธ์ระหว่างประโยคได้ถูกต้อง',
+    lesson: {
+      emoji: '🔗',
+      introTh: 'คำเชื่อมคือ "กาว" ที่เชื่อมความคิดสองอย่างเข้าด้วยกัน จุดสำคัญคือต้องดูว่าสิ่งที่ตามหลังคำเชื่อมเป็น "ประโยค" (มีประธาน+กริยา) หรือแค่ "คำนาม" เพราะคำเชื่อมบางคำใช้ได้แค่กับประโยคเท่านั้น',
+      keyPoints: [
+        { label: 'Although + ประโยค', explanation: 'แสดงความขัดแย้ง ตามด้วยประโยคเต็ม (มีประธาน+กริยา)', exampleEn: 'Although it rained, we went outside.', exampleTh: 'แม้ว่าฝนจะตก เราก็ยังออกไปข้างนอก' },
+        { label: 'Despite + คำนาม', explanation: 'แสดงความขัดแย้งเหมือนกัน แต่ตามด้วยคำนามหรือวลีเท่านั้น', exampleEn: 'Despite the rain, we went outside.', exampleTh: 'แม้จะมีฝน เราก็ยังออกไปข้างนอก' },
+        { label: 'Because + ประโยค', explanation: 'แสดงเหตุผล ตามด้วยประโยคเต็ม', exampleEn: 'We stayed in because it rained.', exampleTh: 'เราอยู่บ้านเพราะฝนตก' },
+        { label: 'Because of + คำนาม', explanation: 'แสดงเหตุผลเหมือนกัน แต่ตามด้วยคำนาม', exampleEn: 'We stayed in because of the rain.', exampleTh: 'เราอยู่บ้านเพราะฝน' },
+      ],
+      tipTh: 'เกร็ดจำง่าย: หลัง blank เป็น "ประโยคเต็ม" (มีประธาน+กริยา) → เลือก although/because หลัง blank เป็นแค่ "คำนาม" → เลือก despite/because of',
+    },
     questions: [
       { id: 'cj-1', sentence: '____ the heavy rain, the outdoor event proceeded as planned.', choices: ['Although', 'Despite', 'Because', 'If'], answerIndex: 1, explanation: '"Despite" ตามด้วยคำนาม/วลี (the heavy rain) ส่วน Although ต้องตามด้วยประโยค (clause)' },
       { id: 'cj-2', sentence: 'The project was delayed ____ a shortage of materials.', choices: ['because of', 'because', 'although', 'so that'], answerIndex: 0, explanation: '"because of" ตามด้วยคำนาม (a shortage) ส่วน because ตามด้วยประโยค' },
@@ -66,6 +110,17 @@ export const grammarTopics: GrammarTopic[] = [
     title: 'Relative Clauses',
     titleTh: 'อนุประโยคขยายความ (Relative Clause)',
     description: 'เลือก relative pronoun (who / which / that / whose) ให้ถูกกับคำนามที่ถูกขยาย',
+    lesson: {
+      emoji: '🧵',
+      introTh: 'Relative clause คือประโยคเล็กๆ ที่แทรกเข้ามาเพื่อ "บอกรายละเอียดเพิ่ม" เกี่ยวกับคำนามที่อยู่ข้างหน้า เคล็ดลับคือดูว่าคำนามที่ถูกขยายเป็น "คน" หรือ "สิ่งของ" แล้วเลือกคำเชื่อมให้ตรง',
+      keyPoints: [
+        { label: 'who → ขยายคน (เป็นประธาน)', explanation: 'ใช้แทนคนที่เป็นประธานของอนุประโยค', exampleEn: 'The manager who called you is on leave.', exampleTh: 'ผู้จัดการที่โทรหาคุณลาพักอยู่' },
+        { label: 'which → ขยายสิ่งของ', explanation: 'ใช้แทนสิ่งของหรือสัตว์', exampleEn: 'The report which she wrote was excellent.', exampleTh: 'รายงานที่เธอเขียนยอดเยี่ยมมาก' },
+        { label: 'whose → แสดงความเป็นเจ้าของ', explanation: 'ใช้แทน "ของใคร" ได้ทั้งคนและสิ่งของ', exampleEn: 'The employee whose desk is near the window requested a transfer.', exampleTh: 'พนักงานที่โต๊ะอยู่ใกล้หน้าต่างขอย้ายแผนก' },
+        { label: 'where → ขยายสถานที่', explanation: 'ใช้แทนสถานที่', exampleEn: 'This is the office where I used to work.', exampleTh: 'นี่คือออฟฟิศที่ผมเคยทำงานอยู่' },
+      ],
+      tipTh: 'เกร็ดจำง่าย: who = คน, which = ของ, whose = ของของใคร, where = สถานที่ — ท่องสั้นๆ แค่นี้ตอบได้เกินครึ่งแล้ว!',
+    },
     questions: [
       { id: 'rc-1', sentence: 'The employee ____ won the award works in the finance department.', choices: ['which', 'who', 'whose', 'where'], answerIndex: 1, explanation: 'ขยายคน (The employee) ใช้ "who"' },
       { id: 'rc-2', sentence: 'This is the report ____ was submitted yesterday.', choices: ['who', 'whose', 'which', 'whom'], answerIndex: 2, explanation: 'ขยายสิ่งของ (the report) ใช้ "which"' },
@@ -79,6 +134,17 @@ export const grammarTopics: GrammarTopic[] = [
     title: 'Comparatives & Superlatives',
     titleTh: 'การเปรียบเทียบ (Comparative / Superlative)',
     description: 'เลือกรูปเปรียบเทียบขั้นกว่าและขั้นสุดให้ถูกต้อง',
+    lesson: {
+      emoji: '📊',
+      introTh: 'การเปรียบเทียบก็แค่ตอบคำถามว่า "กำลังเทียบกันกี่สิ่ง" — ถ้าเทียบ 2 สิ่งใช้ขั้นกว่า (comparative) ถ้าเทียบตั้งแต่ 3 สิ่งขึ้นไปใช้ขั้นสุด (superlative) ง่ายๆ แค่นี้เอง',
+      keyPoints: [
+        { label: 'เทียบ 2 สิ่ง → comparative + than', explanation: 'คำสั้นเติม -er ส่วนคำยาวใช้ more + than', exampleEn: 'This plan is more efficient than the old one.', exampleTh: 'แผนนี้มีประสิทธิภาพมากกว่าแผนเก่า' },
+        { label: 'เทียบตั้งแต่ 3 สิ่ง → superlative', explanation: 'คำสั้นเติม -est ส่วนคำยาวใช้ the most', exampleEn: 'This is the most efficient plan of all.', exampleTh: 'นี่คือแผนที่มีประสิทธิภาพที่สุดในบรรดาทั้งหมด' },
+        { label: 'สังเกตคำใบ้ "than"', explanation: 'ถ้าเห็นคำว่า than ในประโยค แปลว่าต้องใช้ comparative แน่นอน', exampleEn: 'Sales were higher than expected.', exampleTh: 'ยอดขายสูงกว่าที่คาดไว้' },
+        { label: 'สังเกตคำใบ้ "the...of all/in"', explanation: 'ถ้าเห็น the + ... + of all หรือ in the company แปลว่าต้องใช้ superlative', exampleEn: 'She is the most experienced in the team.', exampleTh: 'เธอมีประสบการณ์มากที่สุดในทีม' },
+      ],
+      tipTh: 'เกร็ดจำง่าย: เห็น "than" → comparative เสมอ เห็น "the" คู่กับ "of all/in" → superlative เสมอ จำแค่นี้พอ!',
+    },
     questions: [
       { id: 'cp-1', sentence: 'This model is ____ than the previous version.', choices: ['efficient', 'more efficient', 'most efficient', 'efficiently'], answerIndex: 1, explanation: 'เปรียบเทียบสองสิ่งใช้ comparative "more efficient than"' },
       { id: 'cp-2', sentence: 'Of all the candidates, she has the ____ experience.', choices: ['more', 'most', 'much', 'many'], answerIndex: 1, explanation: 'เปรียบเทียบมากกว่าสองสิ่งใช้ superlative "the most"' },

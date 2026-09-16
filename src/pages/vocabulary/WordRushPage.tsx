@@ -20,19 +20,24 @@ function buildQuestion(word: VocabWord, pool: VocabWord[]) {
 
 export default function WordRushPage() {
   const { chapterId } = useParams()
-  const chapter = vocabChapters.find((c) => c.id === chapterId)
+  const isGlobal = chapterId === undefined
+  const chapter = isGlobal ? undefined : vocabChapters.find((c) => c.id === chapterId)
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
   const addXp = useProgressStore((s) => s.addXp)
 
   const pool = useMemo(() => allWords(), [])
+  const sourceWords = isGlobal ? pool : chapter?.words
+  const backTo = isGlobal ? '/games' : `/vocabulary/${chapterId}`
+  const title = isGlobal ? 'ทุกบท' : chapter?.titleTh ?? ''
+
   const [score, setScore] = useState(0)
   const [wrong, setWrong] = useState(0)
-  const [question, setQuestion] = useState(() => (chapter ? buildQuestion(shuffle(chapter.words)[0], pool) : null))
+  const [question, setQuestion] = useState(() => (sourceWords ? buildQuestion(shuffle(sourceWords)[0], pool) : null))
   const [feedbackId, setFeedbackId] = useState<string | null>(null)
 
   const { secondsLeft, running, start } = useCountdown(ROUND_SECONDS, () => {})
 
-  if (!chapter) return <Navigate to="/vocabulary" replace />
+  if (!isGlobal && !chapter) return <Navigate to="/vocabulary" replace />
 
   function startRound() {
     setScore(0)
@@ -42,7 +47,7 @@ export default function WordRushPage() {
   }
 
   function nextQuestion() {
-    const word = shuffle(chapter!.words)[0]
+    const word = shuffle(sourceWords!)[0]
     setQuestion(buildQuestion(word, pool))
     setFeedbackId(null)
   }
@@ -66,8 +71,8 @@ export default function WordRushPage() {
   return (
     <div className="space-y-6 max-w-xl mx-auto">
       <div>
-        <Link to={`/vocabulary/${chapter.id}`} className="text-sm text-brand-600 hover:underline">← กลับ</Link>
-        <h1 className="text-xl font-bold text-stone-800 mt-2">Word Rush — {chapter.titleTh}</h1>
+        <Link to={backTo} className="text-sm text-brand-600 hover:underline">← กลับ</Link>
+        <h1 className="text-xl font-bold text-stone-800 mt-2">Word Rush — {title}</h1>
         <p className="text-sm text-stone-500 mt-1">ตอบให้เร็วและแม่นก่อนเวลาหมด 60 วินาที</p>
       </div>
 
@@ -114,7 +119,7 @@ export default function WordRushPage() {
           <p className="text-lg font-semibold text-stone-800 mt-2">หมดเวลา! ตอบถูก {score} ข้อ (ผิด {wrong})</p>
           <div className="flex gap-3 justify-center mt-4">
             <Button onClick={startRound}>เล่นอีกครั้ง</Button>
-            <Link to={`/vocabulary/${chapter.id}`}>
+            <Link to={backTo}>
               <Button variant="secondary">กลับไปหน้าเลือกเกม</Button>
             </Link>
           </div>

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { vocabChapters } from '../../data/vocabulary'
+import { allWords, vocabChapters } from '../../data/vocabulary'
 import { Button, Card, ProgressBar } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
 
@@ -10,16 +10,20 @@ function shuffle<T>(arr: T[]): T[] {
 
 export default function TypingChallengePage() {
   const { chapterId } = useParams()
-  const chapter = vocabChapters.find((c) => c.id === chapterId)
+  const isGlobal = chapterId === undefined
+  const chapter = isGlobal ? undefined : vocabChapters.find((c) => c.id === chapterId)
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
 
-  const words = useMemo(() => (chapter ? shuffle(chapter.words) : []), [chapter])
+  const backTo = isGlobal ? '/games' : `/vocabulary/${chapterId}`
+  const title = isGlobal ? 'ทุกบท' : chapter?.titleTh ?? ''
+
+  const words = useMemo(() => shuffle(isGlobal ? allWords() : chapter?.words ?? []), [chapter, isGlobal])
   const [index, setIndex] = useState(0)
   const [input, setInput] = useState('')
   const [feedback, setFeedback] = useState<'correct' | 'wrong' | null>(null)
   const [score, setScore] = useState(0)
 
-  if (!chapter) return <Navigate to="/vocabulary" replace />
+  if (!isGlobal && !chapter) return <Navigate to="/vocabulary" replace />
 
   const word = words[index]
   const done = index >= words.length
@@ -41,8 +45,8 @@ export default function TypingChallengePage() {
   return (
     <div className="space-y-6 max-w-xl mx-auto">
       <div>
-        <Link to={`/vocabulary/${chapter.id}`} className="text-sm text-brand-600 hover:underline">← กลับ</Link>
-        <h1 className="text-xl font-bold text-stone-800 mt-2">Typing Challenge — {chapter.titleTh}</h1>
+        <Link to={backTo} className="text-sm text-brand-600 hover:underline">← กลับ</Link>
+        <h1 className="text-xl font-bold text-stone-800 mt-2">Typing Challenge — {title}</h1>
       </div>
 
       <ProgressBar value={index} max={words.length} />
@@ -51,7 +55,7 @@ export default function TypingChallengePage() {
         <Card className="text-center py-12">
           <p className="text-2xl">⌨️</p>
           <p className="text-lg font-semibold text-stone-800 mt-2">ทำถูก {score}/{words.length} คำ</p>
-          <Link to={`/vocabulary/${chapter.id}`}>
+          <Link to={backTo}>
             <Button className="mt-4">กลับไปหน้าเลือกเกม</Button>
           </Link>
         </Card>

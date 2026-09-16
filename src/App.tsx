@@ -9,6 +9,7 @@ import TypingChallengePage from './pages/vocabulary/TypingChallengePage'
 import WordRushPage from './pages/vocabulary/WordRushPage'
 import ChapterQuizPage from './pages/vocabulary/ChapterQuizPage'
 import GrammarTopicListPage from './pages/grammar/GrammarTopicListPage'
+import GrammarLessonPage from './pages/grammar/GrammarLessonPage'
 import GrammarPracticePage from './pages/grammar/GrammarPracticePage'
 import ListeningPartListPage from './pages/listening/ListeningPartListPage'
 import ListeningPracticePage from './pages/listening/ListeningPracticePage'
@@ -17,6 +18,9 @@ import ReadingPracticePage from './pages/reading/ReadingPracticePage'
 import MockTestHubPage from './pages/mocktest/MockTestHubPage'
 import MockTestPage from './pages/mocktest/MockTestPage'
 import FullMockTestPage from './pages/mocktest/FullMockTestPage'
+import GamesHubPage from './pages/games/GamesHubPage'
+import GrammarBlitzPage from './pages/games/GrammarBlitzPage'
+import SettingsPage from './pages/SettingsPage'
 
 export default function App() {
   return (
@@ -35,7 +39,8 @@ export default function App() {
           <Route path="/vocabulary/:chapterId/quiz" element={<ChapterQuizPage />} />
 
           <Route path="/grammar" element={<GrammarTopicListPage />} />
-          <Route path="/grammar/:topicId" element={<GrammarPracticePage />} />
+          <Route path="/grammar/:topicId" element={<GrammarLessonPage />} />
+          <Route path="/grammar/:topicId/practice" element={<GrammarPracticePage />} />
 
           <Route path="/listening" element={<ListeningPartListPage />} />
           <Route path="/listening/:part" element={<ListeningPracticePage />} />
@@ -46,6 +51,14 @@ export default function App() {
           <Route path="/mock-test" element={<MockTestHubPage />} />
           <Route path="/mock-test/mini" element={<MockTestPage />} />
           <Route path="/mock-test/full" element={<FullMockTestPage />} />
+
+          <Route path="/games" element={<GamesHubPage />} />
+          <Route path="/games/word-rush" element={<WordRushPage />} />
+          <Route path="/games/matching" element={<MatchingGamePage />} />
+          <Route path="/games/typing" element={<TypingChallengePage />} />
+          <Route path="/games/grammar-blitz" element={<GrammarBlitzPage />} />
+
+          <Route path="/settings" element={<SettingsPage />} />
         </Routes>
       </main>
     </div>

@@ -25,11 +25,26 @@ export interface GrammarQuestion {
   explanation: string
 }
 
+export interface GrammarKeyPoint {
+  label: string
+  explanation: string
+  exampleEn: string
+  exampleTh: string
+}
+
+export interface GrammarLesson {
+  emoji: string
+  introTh: string
+  keyPoints: GrammarKeyPoint[]
+  tipTh: string
+}
+
 export interface GrammarTopic {
   id: string
   title: string
   titleTh: string
   description: string
+  lesson: GrammarLesson
   questions: GrammarQuestion[]
 }
 
@@ -40,6 +55,7 @@ export interface ListeningItem {
   part: ListeningPartNumber
   script: string
   imageDescription?: string
+  imageId?: string
   question: string
   choices: string[]
   answerIndex: number
@@ -113,6 +129,7 @@ export interface ExamItem {
   part: ExamPart
   section: 'listening' | 'reading'
   imageDescription?: string
+  imageId?: string
   audioScript?: string
   sentence?: string
   passageTexts?: string[]

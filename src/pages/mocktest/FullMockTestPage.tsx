@@ -13,6 +13,7 @@ import { useProgressStore } from '../../store/progress'
 import { speak, type Accent } from '../../lib/tts'
 import { toScoreBand } from '../../lib/scoreBand'
 import type { ExamPart } from '../../lib/types'
+import { SceneIllustration } from '../../components/SceneIllustration'
 
 const ACCENTS: Accent[] = ['US', 'UK', 'AU', 'CA']
 
@@ -175,8 +176,9 @@ export default function FullMockTestPage() {
       <ProgressBar value={questionsBeforeCurrent} max={FULL_EXAM_TOTAL_COUNT} />
 
       <Card className="space-y-5">
+        {item.imageId && <SceneIllustration id={item.imageId} />}
         {item.imageDescription && (
-          <div className="rounded-xl bg-sand-100 px-4 py-6 text-center text-sm text-stone-600">{item.imageDescription}</div>
+          <p className="text-center text-xs text-stone-500">{item.imageDescription}</p>
         )}
 
         {item.audioScript && (
