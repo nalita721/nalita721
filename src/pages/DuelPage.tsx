@@ -76,7 +76,7 @@ export default function DuelPage() {
   async function submitAnswers(finalAnswers: (number | null)[]) {
     setSubmitting(true)
     try {
-      const res = await fetch(`/api/duels/${duelId}/answer`, {
+      const res = await fetch(`/api/duels/${duelId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

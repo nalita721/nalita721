@@ -52,7 +52,7 @@ export default function LoginPage() {
           </div>
         ) : (
           <>
-            <a href="/api/auth/google/start" className="block">
+            <a href="/api/auth/google" className="block">
               <button
                 type="button"
                 className="w-full flex items-center justify-center gap-2 rounded-xl border border-sand-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-700 hover:bg-sand-50 transition"
