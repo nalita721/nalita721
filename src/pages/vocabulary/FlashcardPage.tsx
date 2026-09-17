@@ -4,10 +4,10 @@ import { allWords, vocabChapters } from '../../data/vocabulary'
 import { useProgressStore } from '../../store/progress'
 import { isDue } from '../../lib/srs'
 import { speak } from '../../lib/tts'
-import { Button, Card, ProgressBar } from '../../components/ui'
+import { Button, Card, Modal, ProgressBar } from '../../components/ui'
 import { WordIcon } from '../../components/WordIcon'
 import { getWordIcon } from '../../data/wordIcons'
-import { playCompleteSound } from '../../lib/sound'
+import { playCompleteSound, playCorrectSound, playIncorrectSound } from '../../lib/sound'
 import type { QuizQuality } from '../../lib/types'
 
 export default function FlashcardPage() {
@@ -32,11 +32,24 @@ export default function FlashcardPage() {
   const [index, setIndex] = useState(0)
   const [flipped, setFlipped] = useState(false)
   const [reviewedCount, setReviewedCount] = useState(0)
+  const [recallOpen, setRecallOpen] = useState(false)
+  const [recallInput, setRecallInput] = useState('')
+  const [recallChecked, setRecallChecked] = useState(false)
+  const [recallCorrect, setRecallCorrect] = useState(false)
 
   if (!isGlobal && !chapter) return <Navigate to="/vocabulary" replace />
 
   const word = queue[index]
   const done = index >= queue.length
+
+  function checkRecall() {
+    if (!word || !recallInput.trim()) return
+    const correct = recallInput.trim().toLowerCase() === word.term.toLowerCase()
+    setRecallCorrect(correct)
+    setRecallChecked(true)
+    if (correct) playCorrectSound()
+    else playIncorrectSound()
+  }
 
   function handleAnswer(quality: QuizQuality) {
     if (!word) return
@@ -44,6 +57,10 @@ export default function FlashcardPage() {
     touchStreak()
     setReviewedCount((c) => c + 1)
     setFlipped(false)
+    setRecallOpen(false)
+    setRecallInput('')
+    setRecallChecked(false)
+    setRecallCorrect(false)
     const isLast = index + 1 >= queue.length
     setIndex((i) => i + 1)
     if (isLast) playCompleteSound()
@@ -88,17 +105,47 @@ export default function FlashcardPage() {
               {word.synonym && <p className="text-sm text-stone-500">คำใกล้เคียง: {word.synonym}</p>}
               <p className="text-sm text-stone-600 italic mt-2">"{word.exampleEn}"</p>
               <p className="text-sm text-stone-500">{word.exampleTh}</p>
+              {!recallOpen && (
+                <Button className="mt-2" onClick={() => setRecallOpen(true)}>✍️ เขียนทบทวนคำนี้ →</Button>
+              )}
             </div>
           )}
         </Card>
       )}
 
-      {!done && flipped && (
-        <div className="grid grid-cols-3 gap-3">
-          <Button variant="danger" onClick={() => handleAnswer(1)}>ยังไม่ได้</Button>
-          <Button variant="secondary" onClick={() => handleAnswer(3)}>พอจำได้</Button>
-          <Button variant="success" onClick={() => handleAnswer(5)}>จำได้ง่าย</Button>
-        </div>
+      {!done && recallOpen && word && (
+        <Modal>
+          <Card className="space-y-4">
+            <div>
+              <p className="font-semibold text-stone-800">✍️ เขียนทบทวนคำศัพท์</p>
+              <p className="text-xs text-stone-500 mt-1">พิมพ์คำศัพท์ภาษาอังกฤษของคำที่เพิ่งเรียนก่อนไปคำถัดไป</p>
+            </div>
+            <p className="text-sm text-stone-600">ความหมาย: <span className="font-medium text-stone-800">{word.meaningTh}</span></p>
+            <input
+              autoFocus
+              value={recallInput}
+              disabled={recallChecked}
+              onChange={(e) => setRecallInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && checkRecall()}
+              placeholder="พิมพ์คำศัพท์แล้วกด Enter"
+              className="w-full rounded-xl border border-sand-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500"
+            />
+            {recallChecked && (
+              <p className={`text-sm ${recallCorrect ? 'text-emerald-600' : 'text-rose-600'}`}>
+                {recallCorrect ? '✅ ถูกต้อง! เขียนได้แม่นยำ' : `❌ คำตอบที่ถูกต้องคือ "${word.term}"`}
+              </p>
+            )}
+            {!recallChecked ? (
+              <Button onClick={checkRecall} disabled={!recallInput.trim()}>ตรวจคำตอบ</Button>
+            ) : (
+              <div className="grid grid-cols-3 gap-2">
+                <Button variant="danger" onClick={() => handleAnswer(1)}>ยังไม่ได้</Button>
+                <Button variant="secondary" onClick={() => handleAnswer(3)}>พอจำได้</Button>
+                <Button variant="success" onClick={() => handleAnswer(5)}>จำได้ง่าย</Button>
+              </div>
+            )}
+          </Card>
+        </Modal>
       )}
     </div>
   )

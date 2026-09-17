@@ -51,6 +51,14 @@ export function Badge({ children, className = '' }: PropsWithChildren<{ classNam
   )
 }
 
+export function Modal({ children }: PropsWithChildren) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/50 backdrop-blur-sm px-4">
+      <div className="w-full max-w-sm">{children}</div>
+    </div>
+  )
+}
+
 export function EmptyState({ title, description }: { title: string; description: string }) {
   return (
     <Card className="text-center py-12">
