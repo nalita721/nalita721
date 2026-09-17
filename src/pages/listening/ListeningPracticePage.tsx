@@ -6,6 +6,7 @@ import { useProgressStore } from '../../store/progress'
 import { speak, type Accent } from '../../lib/tts'
 import { SceneIllustration } from '../../components/SceneIllustration'
 import { playCorrectSound, playIncorrectSound, playCompleteSound } from '../../lib/sound'
+import { PASS_THRESHOLD } from '../../data/learningPath'
 
 const ACCENTS: Accent[] = ['US', 'UK', 'AU', 'CA']
 
@@ -14,6 +15,7 @@ export default function ListeningPracticePage() {
   const partNum = Number(part) as 1 | 2 | 3 | 4
   const items = listeningByPart(partNum)
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
+  const passStep = useProgressStore((s) => s.passStep)
 
   const [accent, setAccent] = useState<Accent>('US')
   const [index, setIndex] = useState(0)
@@ -45,7 +47,10 @@ export default function ListeningPracticePage() {
     setRevealed(false)
     const isLast = index + 1 >= items.length
     setIndex((i) => i + 1)
-    if (isLast) playCompleteSound()
+    if (isLast) {
+      playCompleteSound()
+      if (score / items.length >= PASS_THRESHOLD) passStep('listening', String(partNum))
+    }
   }
 
   return (

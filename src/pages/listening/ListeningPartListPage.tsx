@@ -3,7 +3,9 @@ import { listeningByPart } from '../../data/listening'
 import { Card } from '../../components/ui'
 import { isTtsSupported } from '../../lib/tts'
 import { useAuthStore } from '../../store/auth'
+import { useProgressStore } from '../../store/progress'
 import { isListeningPartFree } from '../../lib/access'
+import { getEffectivePathIndex, isStepUnlocked, pathStepKey, stepIndexOfContent } from '../../data/learningPath'
 
 const PARTS = [
   { part: 1 as const, title: 'Part 1: Photographs', desc: 'ฟังประโยคบรรยายภาพ 4 ตัวเลือก แล้วเลือกข้อที่ตรงกับภาพ' },
@@ -14,6 +16,10 @@ const PARTS = [
 
 export default function ListeningPartListPage() {
   const authStatus = useAuthStore((s) => s.status)
+  const pathUnlockedIndex = useProgressStore((s) => s.pathUnlockedIndex)
+  const pathPassedSteps = useProgressStore((s) => s.pathPassedSteps)
+  const levelCefr = useProgressStore((s) => s.levelTestResult?.cefr)
+  const effectiveIndex = getEffectivePathIndex(pathUnlockedIndex, levelCefr)
 
   return (
     <div className="space-y-6">
@@ -31,13 +37,25 @@ export default function ListeningPartListPage() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         {PARTS.map((p) => {
-          const locked = authStatus !== 'authenticated' && !isListeningPartFree(String(p.part))
+          const partId = String(p.part)
+          const locked =
+            authStatus === 'authenticated'
+              ? !isStepUnlocked('listening', partId, effectiveIndex)
+              : !isListeningPartFree(partId)
+          const isCurrent = authStatus === 'authenticated' && stepIndexOfContent('listening', partId) === effectiveIndex
+          const isPassed = pathPassedSteps.includes(pathStepKey('listening', partId))
           return (
             <Link key={p.part} to={`/listening/${p.part}`}>
-              <Card className="h-full hover:shadow-md hover:-translate-y-0.5 transition cursor-pointer">
+              <Card
+                className={`h-full hover:shadow-md hover:-translate-y-0.5 transition cursor-pointer ${isCurrent ? 'ring-2 ring-brand-400' : ''}`}
+              >
                 <div className="flex items-start justify-between gap-2">
                   <h2 className="font-semibold text-stone-800">{p.title}</h2>
-                  {locked && <span title="สำหรับสมาชิก">🔒</span>}
+                  <div className="flex items-center gap-1 shrink-0">
+                    {isPassed && <span title="ผ่านแล้ว">✅</span>}
+                    {isCurrent && <span title="ขั้นตอนปัจจุบัน">🎯</span>}
+                    {locked && <span title={authStatus === 'authenticated' ? 'ยังไม่ถึงคิว' : 'สำหรับสมาชิก'}>🔒</span>}
+                  </div>
                 </div>
                 <p className="text-sm text-stone-500 mt-1">{p.desc}</p>
                 <p className="text-xs text-stone-400 mt-3">{listeningByPart(p.part).length} ข้อฝึกหัด</p>

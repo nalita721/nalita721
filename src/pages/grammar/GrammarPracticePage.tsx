@@ -4,11 +4,13 @@ import { grammarTopics } from '../../data/grammar'
 import { Button, Card, ProgressBar } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
 import { playCorrectSound, playIncorrectSound, playCompleteSound } from '../../lib/sound'
+import { PASS_THRESHOLD } from '../../data/learningPath'
 
 export default function GrammarPracticePage() {
   const { topicId } = useParams()
   const topic = grammarTopics.find((t) => t.id === topicId)
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
+  const passStep = useProgressStore((s) => s.passStep)
 
   const [index, setIndex] = useState(0)
   const [selected, setSelected] = useState<number | null>(null)
@@ -16,6 +18,7 @@ export default function GrammarPracticePage() {
 
   if (!topic) return <Navigate to="/grammar" replace />
 
+  const confirmedTopicId = topic.id
   const total = topic.questions.length
   const q = topic.questions[index]
   const done = index >= total
@@ -37,7 +40,10 @@ export default function GrammarPracticePage() {
     setSelected(null)
     const isLast = index + 1 >= total
     setIndex((i) => i + 1)
-    if (isLast) playCompleteSound()
+    if (isLast) {
+      playCompleteSound()
+      if (score / total >= PASS_THRESHOLD) passStep('grammar', confirmedTopicId)
+    }
   }
 
   return (

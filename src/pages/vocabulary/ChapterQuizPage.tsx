@@ -4,6 +4,7 @@ import { allWords, vocabChapters } from '../../data/vocabulary'
 import { Button, Card, ProgressBar } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
 import { playCorrectSound, playIncorrectSound, playCompleteSound } from '../../lib/sound'
+import { PASS_THRESHOLD } from '../../data/learningPath'
 import type { VocabWord } from '../../lib/types'
 
 function shuffle<T>(arr: T[]): T[] {
@@ -27,6 +28,7 @@ export default function ChapterQuizPage() {
   const chapter = vocabChapters.find((c) => c.id === chapterId)
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
   const addXp = useProgressStore((s) => s.addXp)
+  const passStep = useProgressStore((s) => s.passStep)
 
   const pool = useMemo(() => allWords(), [])
   const quiz = useMemo(() => (chapter ? buildQuiz(chapter.words, pool) : []), [chapter, pool])
@@ -58,7 +60,10 @@ export default function ChapterQuizPage() {
     setSelected(null)
     const isLast = index + 1 >= quiz.length
     setIndex((i) => i + 1)
-    if (isLast) playCompleteSound()
+    if (isLast) {
+      playCompleteSound()
+      if (chapter && score / quiz.length >= PASS_THRESHOLD) passStep('vocabulary', chapter.id)
+    }
   }
 
   return (

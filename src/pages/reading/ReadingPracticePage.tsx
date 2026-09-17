@@ -4,11 +4,13 @@ import { readingPassages } from '../../data/reading'
 import { Button, Card } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
 import { playCompleteSound } from '../../lib/sound'
+import { PASS_THRESHOLD } from '../../data/learningPath'
 
 export default function ReadingPracticePage() {
   const { passageId } = useParams()
   const passage = readingPassages.find((p) => p.id === passageId)
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
+  const passStep = useProgressStore((s) => s.passStep)
 
   const [answers, setAnswers] = useState<Record<string, number>>({})
   const [submitted, setSubmitted] = useState(false)
@@ -22,12 +24,13 @@ export default function ReadingPracticePage() {
 
   function submit() {
     if (!passage) return
+    const correctCount = passage.questions.filter((q) => answers[q.id] === q.answerIndex).length
     passage.questions.forEach((q) => {
-      const correct = answers[q.id] === q.answerIndex
-      recordAnswer('reading', correct)
+      recordAnswer('reading', answers[q.id] === q.answerIndex)
     })
     setSubmitted(true)
     playCompleteSound()
+    if (correctCount / passage.questions.length >= PASS_THRESHOLD) passStep('reading', passage.id)
   }
 
   const score = submitted

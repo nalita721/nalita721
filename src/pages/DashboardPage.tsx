@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
 import { allWords } from '../data/vocabulary'
-import { Badge, Button, Card } from '../components/ui'
+import { Badge, Button, Card, ProgressBar } from '../components/ui'
 import { useProgressStore } from '../store/progress'
 import { isDue } from '../lib/srs'
 import type { StatPart } from '../lib/types'
 import { SkillAccuracyChart } from '../components/charts/SkillAccuracyChart'
 import { MockScoreTrendChart } from '../components/charts/MockScoreTrendChart'
 import { scoreToCefr } from '../data/cefr'
-import { getRecommendations } from '../lib/recommendations'
+import { LEARNING_PATH, TYPE_ICON, currentPathStep, getEffectivePathIndex } from '../data/learningPath'
 
 const PART_LABELS: Record<StatPart, string> = {
   vocabulary: 'คำศัพท์',
@@ -33,11 +33,17 @@ export default function DashboardPage() {
   const partStats = useProgressStore((s) => s.partStats)
   const mockResults = useProgressStore((s) => s.mockResults)
   const levelTestResult = useProgressStore((s) => s.levelTestResult)
+  const pathUnlockedIndex = useProgressStore((s) => s.pathUnlockedIndex)
 
   const words = allWords()
   const dueCount = words.filter((w) => isDue(srsMap[w.id] ?? { wordId: w.id, interval: 0, ease: 2.5, repetitions: 0, dueDate: new Date(0).toISOString() })).length
   const learnedCount = words.filter((w) => (srsMap[w.id]?.repetitions ?? 0) > 0).length
   const lastMock = mockResults[mockResults.length - 1]
+
+  const effectivePathIndex = getEffectivePathIndex(pathUnlockedIndex, levelTestResult?.cefr)
+  const pathDone = effectivePathIndex >= LEARNING_PATH.length
+  const activeStep = currentPathStep(effectivePathIndex)
+  const upcomingSteps = LEARNING_PATH.slice(effectivePathIndex + 1, effectivePathIndex + 3)
 
   return (
     <div className="space-y-8">
@@ -103,24 +109,57 @@ export default function DashboardPage() {
         </Card>
       )}
 
-      {levelTestResult && (
-        <Card className="space-y-3">
-          <h2 className="font-semibold text-stone-800">แนะนำสำหรับคุณ</h2>
-          <p className="text-sm text-stone-500">บทเรียนที่ควรเริ่มฝึกก่อน โดยอิงจากระดับและจุดที่ยังอ่อนของคุณจากแบบทดสอบวัดระดับล่าสุด</p>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {getRecommendations(levelTestResult).map((card) => (
-              <Link key={card.id} to={card.to}>
-                <div className="h-full rounded-xl border border-sand-200 bg-sand-50 px-4 py-3 hover:border-brand-400 hover:shadow-sm transition">
-                  <p className="font-semibold text-stone-800">
-                    {card.icon} {card.title}
-                  </p>
-                  <p className="text-xs text-stone-500 mt-1">{card.description}</p>
-                </div>
-              </Link>
-            ))}
+      <Card className="space-y-4">
+        <div>
+          <h2 className="font-semibold text-stone-800">🧭 เส้นทางการเรียนของคุณ</h2>
+          <p className="text-sm text-stone-500 mt-1">
+            เรียนไปทีละขั้นตามลำดับ ไม่ต้องเดาว่าควรเริ่มตรงไหน — ทำแบบทดสอบท้ายขั้นให้ผ่าน 70% ขึ้นไปเพื่อปลดล็อกขั้นถัดไป
+          </p>
+        </div>
+
+        {pathDone ? (
+          <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-4 text-center">
+            <p className="font-semibold text-emerald-700">🎉 คุณเรียนครบทุกขั้นตอนในเส้นทางแล้ว!</p>
+            <p className="text-sm text-stone-500 mt-1">ลองฝึก Full Mock Test เพื่อประเมินความพร้อมก่อนสอบจริง</p>
+            <Link to="/mock-test" className="inline-block mt-3">
+              <Button variant="secondary">ไปที่ Mock Test</Button>
+            </Link>
           </div>
-        </Card>
-      )}
+        ) : (
+          <>
+            <div>
+              <div className="flex justify-between text-xs text-stone-500 mb-1">
+                <span>ความคืบหน้าเส้นทาง</span>
+                <span>ขั้นที่ {effectivePathIndex + 1}/{LEARNING_PATH.length}</span>
+              </div>
+              <ProgressBar value={effectivePathIndex} max={LEARNING_PATH.length} />
+            </div>
+
+            <Link to={activeStep.to}>
+              <div className="rounded-xl border border-brand-200 bg-brand-50 px-4 py-3 hover:shadow-sm hover:border-brand-400 transition">
+                <p className="text-xs text-brand-600 font-semibold">ขั้นตอนปัจจุบันของคุณ</p>
+                <p className="font-semibold text-stone-800 mt-0.5">
+                  {TYPE_ICON[activeStep.type]} {activeStep.labelTh}
+                </p>
+              </div>
+            </Link>
+
+            {upcomingSteps.length > 0 && (
+              <div>
+                <p className="text-xs text-stone-400 mb-2">ขั้นถัดไป (ปลดล็อกเมื่อผ่านขั้นปัจจุบัน)</p>
+                <div className="space-y-1.5">
+                  {upcomingSteps.map((step) => (
+                    <div key={`${step.type}:${step.id}`} className="flex items-center gap-2 text-sm text-stone-400">
+                      <span>🔒</span>
+                      <span>{TYPE_ICON[step.type]} {step.labelTh}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </>
+        )}
+      </Card>
 
       <Card>
         <h2 className="font-semibold text-stone-800 mb-4">ความแม่นยำแยกตามทักษะ</h2>

@@ -23,3 +23,18 @@ export function LockedFeature({
 export function CheckingAccess() {
   return <div className="text-center text-sm text-stone-400 py-10">กำลังตรวจสอบสิทธิ์การเข้าถึง...</div>
 }
+
+export function LockedPathStep({ currentTo, currentLabel }: { currentTo: string; currentLabel: string }) {
+  return (
+    <Card className="max-w-lg mx-auto text-center py-10 space-y-3">
+      <p className="text-3xl">🔒</p>
+      <h2 className="text-lg font-bold text-stone-800">ยังไม่ถึงคิวบทเรียนนี้</h2>
+      <p className="text-sm text-stone-500">
+        เพื่อป้องกันการเรียนกระโดดข้ามจนสับสน ระบบจะปลดล็อกบทถัดไปให้อัตโนมัติเมื่อคุณเรียนและทำแบบทดสอบของขั้นตอนปัจจุบันผ่าน (≥70%)
+      </p>
+      <Link to={currentTo} className="inline-block">
+        <Button>ไปเรียนขั้นตอนปัจจุบัน: {currentLabel}</Button>
+      </Link>
+    </Card>
+  )
+}

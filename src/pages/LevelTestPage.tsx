@@ -12,7 +12,7 @@ import { useCountdown } from '../lib/useCountdown'
 import { useProgressStore } from '../store/progress'
 import { speak } from '../lib/tts'
 import { toScoreBand } from '../lib/scoreBand'
-import { getRecommendations } from '../lib/recommendations'
+import { LEARNING_PATH, TYPE_ICON, currentPathStep, getEffectivePathIndex } from '../data/learningPath'
 import { playCompleteSound } from '../lib/sound'
 import type { LevelTestSkill } from '../data/levelTest'
 
@@ -125,6 +125,8 @@ export default function LevelTestPage() {
   if (phase === 'finished') {
     const result = useProgressStore.getState().levelTestResult
     const level = result ? scoreToCefr(result.totalScore) : CEFR_LEVELS[0]
+    const effectivePathIndex = getEffectivePathIndex(useProgressStore.getState().pathUnlockedIndex, result?.cefr)
+    const pathStep = currentPathStep(effectivePathIndex)
     return (
       <div className="max-w-xl mx-auto space-y-6">
         <Card className="text-center py-10 space-y-3">
@@ -171,20 +173,18 @@ export default function LevelTestPage() {
 
         {result && (
           <Card className="space-y-3">
-            <h2 className="font-semibold text-stone-800">แนะนำสำหรับคุณ</h2>
-            <p className="text-sm text-stone-500">บทเรียนที่ควรเริ่มฝึกก่อน โดยอิงจากระดับและจุดที่ยังอ่อนของคุณ</p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {getRecommendations(result).map((card) => (
-                <Link key={card.id} to={card.to}>
-                  <div className="h-full rounded-xl border border-sand-200 bg-sand-50 px-4 py-3 hover:border-brand-400 hover:shadow-sm transition">
-                    <p className="font-semibold text-stone-800">
-                      {card.icon} {card.title}
-                    </p>
-                    <p className="text-xs text-stone-500 mt-1">{card.description}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
+            <h2 className="font-semibold text-stone-800">🧭 เริ่มเรียนตามเส้นทางของคุณ</h2>
+            <p className="text-sm text-stone-500">
+              ระบบจัดขั้นบทเรียนให้ตรงกับระดับที่วัดได้แล้ว เรียนไปทีละขั้นตามลำดับเพื่อไม่ให้กระโดดข้ามจนสับสน
+            </p>
+            <Link to={pathStep.to}>
+              <div className="rounded-xl border border-brand-200 bg-brand-50 px-4 py-3 hover:border-brand-400 hover:shadow-sm transition">
+                <p className="text-xs text-brand-600 font-semibold">ขั้นตอนที่ {effectivePathIndex + 1}/{LEARNING_PATH.length}</p>
+                <p className="font-semibold text-stone-800 mt-0.5">
+                  {TYPE_ICON[pathStep.type]} {pathStep.labelTh}
+                </p>
+              </div>
+            </Link>
           </Card>
         )}
 

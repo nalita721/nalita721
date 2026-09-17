@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { newCard, reviewCard } from '../lib/srs'
+import { LEARNING_PATH, pathStepKey, stepIndexOfContent, type PathStepType } from '../data/learningPath'
 import type {
   LevelTestResult,
   MockTestResult,
@@ -22,6 +23,8 @@ export interface ProgressSnapshot {
   partStats: Record<StatPart, PartStat>
   mockResults: MockTestResult[]
   levelTestResult: LevelTestResult | null
+  pathUnlockedIndex: number
+  pathPassedSteps: string[]
 }
 
 interface ProgressState extends ProgressSnapshot {
@@ -32,6 +35,7 @@ interface ProgressState extends ProgressSnapshot {
   recordAnswer: (part: StatPart, correct: boolean) => void
   addMockResult: (result: MockTestResult) => void
   setLevelTestResult: (result: LevelTestResult) => void
+  passStep: (type: PathStepType, id: string) => void
   hydrate: (snapshot: ProgressSnapshot) => void
   resetProgress: () => void
 }
@@ -54,6 +58,8 @@ export const useProgressStore = create<ProgressState>()(
       partStats: emptyStats,
       mockResults: [],
       levelTestResult: null,
+      pathUnlockedIndex: 0,
+      pathPassedSteps: [],
 
       addXp: (amount) => set((s) => ({ xp: s.xp + amount })),
 
@@ -94,6 +100,16 @@ export const useProgressStore = create<ProgressState>()(
 
       setLevelTestResult: (result) => set({ levelTestResult: result }),
 
+      passStep: (type, id) =>
+        set((s) => {
+          const idx = stepIndexOfContent(type, id)
+          if (idx === -1) return s
+          const key = pathStepKey(type, id)
+          const pathPassedSteps = s.pathPassedSteps.includes(key) ? s.pathPassedSteps : [...s.pathPassedSteps, key]
+          const pathUnlockedIndex = Math.min(Math.max(s.pathUnlockedIndex, idx + 1), LEARNING_PATH.length)
+          return { pathPassedSteps, pathUnlockedIndex }
+        }),
+
       hydrate: (snapshot) => set(snapshot),
 
       resetProgress: () =>
@@ -105,6 +121,8 @@ export const useProgressStore = create<ProgressState>()(
           partStats: emptyStats,
           mockResults: [],
           levelTestResult: null,
+          pathUnlockedIndex: 0,
+          pathPassedSteps: [],
         }),
     }),
     { name: 'toeic-vocab-progress' },
