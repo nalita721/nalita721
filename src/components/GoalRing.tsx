@@ -31,7 +31,7 @@ export function GoalRing({ percent, currentScore }: { percent: number; currentSc
       <div>
         <p className="text-sm text-stone-500">เป้าหมายของคุณ</p>
         <p className="font-semibold text-stone-800">TOEIC {GOAL_SCORE}+</p>
-        {currentScore > 0 && <p className="text-xs text-stone-400 mt-1">คะแนนล่าสุด {currentScore}/990</p>}
+        {currentScore > 0 && <p className="text-xs text-stone-400 mt-1">คะแนนสูงสุดของคุณ {currentScore}/990</p>}
       </div>
     </Card>
   )
