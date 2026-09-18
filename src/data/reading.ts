@@ -5,6 +5,7 @@ export const readingPassages: ReadingPassage[] = [
     id: 'r6-1',
     part: 6,
     title: 'Part 6: Text Completion — Internal Memo',
+    difficulty: 'easy',
     text: `To: All Staff
 From: Office Administration
 Subject: Parking Lot Renovation
@@ -21,6 +22,7 @@ Please be advised that the parking lot will be closed for renovation starting Mo
     id: 'r6-2',
     part: 6,
     title: 'Part 6: Text Completion — Product Announcement',
+    difficulty: 'medium',
     text: `We are excited to announce the launch of our new product line, __(1)__ will be available in stores starting next month. This collection was designed __(2)__ customer feedback collected over the past year. Early reviewers have described the products as __(3)__ and affordable. Visit our website for more details __(4)__ the release date approaches.`,
     questions: [
       { id: 'r6-2-1', question: 'Blank (1)', choices: ['who', 'which', 'whose', 'what'], answerIndex: 1, },
@@ -33,6 +35,7 @@ Please be advised that the parking lot will be closed for renovation starting Mo
     id: 'r7-1',
     part: 7,
     title: 'Part 7: Single Passage — Email',
+    difficulty: 'medium',
     text: `From: Anna Weber, HR Manager
 To: All Employees
 Subject: Annual Health Checkup
@@ -77,6 +80,7 @@ Anna Weber`,
     id: 'r7-2',
     part: 7,
     title: 'Part 7: Single Passage — Advertisement',
+    difficulty: 'medium',
     text: `GRAND OPENING SALE — City Center Electronics
 
 Visit our newly renovated store from June 1 to June 10 and enjoy discounts of up to 40% on all laptops, cameras, and accessories. The first 100 customers each day will receive a free wireless mouse.

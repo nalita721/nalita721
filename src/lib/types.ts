@@ -82,11 +82,14 @@ export interface ReadingQuestion {
   answerIndex: number
 }
 
+export type Difficulty = 'easy' | 'medium' | 'hard'
+
 export interface ReadingPassage {
   id: string
   part: ReadingPartNumber
   title: string
   text: string
+  difficulty: Difficulty
   questions: ReadingQuestion[]
 }
 
