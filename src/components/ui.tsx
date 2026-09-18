@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, PropsWithChildren } from 'react'
 
 export function Card({ children, className = '' }: PropsWithChildren<{ className?: string }>) {
   return (
-    <div className={`rounded-2xl bg-white shadow-sm border border-sand-200 p-5 ${className}`}>
+    <div className={`rounded-2xl bg-white shadow-[0_2px_16px_rgba(86,61,44,0.07)] border border-sand-100 p-5 ${className}`}>
       {children}
     </div>
   )
@@ -11,11 +11,11 @@ export function Card({ children, className = '' }: PropsWithChildren<{ className
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'success' | 'danger'
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: 'bg-brand-600 text-white hover:bg-brand-700',
+  primary: 'bg-brand-600 text-white hover:bg-brand-700 shadow-sm shadow-brand-600/20',
   secondary: 'bg-sand-100 text-sand-800 hover:bg-sand-200',
   ghost: 'bg-transparent text-brand-700 hover:bg-brand-50',
-  success: 'bg-emerald-600 text-white hover:bg-emerald-700',
-  danger: 'bg-rose-600 text-white hover:bg-rose-700',
+  success: 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm shadow-emerald-600/20',
+  danger: 'bg-rose-600 text-white hover:bg-rose-700 shadow-sm shadow-rose-600/20',
 }
 
 export function Button({

@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Navbar from './components/Navbar'
+import Sidebar from './components/Sidebar'
+import TopBar from './components/TopBar'
 import { useAuthStore } from './store/auth'
 import { useProgressSync } from './lib/useProgressSync'
 import DashboardPage from './pages/DashboardPage'
@@ -46,6 +47,7 @@ function RootRoute() {
 
 export default function App() {
   const checkSession = useAuthStore((s) => s.checkSession)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
     checkSession()
@@ -54,9 +56,11 @@ export default function App() {
   useProgressSync()
 
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <main className="max-w-6xl mx-auto px-4 py-8">
+    <div className="min-h-screen md:flex">
+      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <div className="flex-1 min-w-0">
+        <TopBar onOpenSidebar={() => setSidebarOpen(true)} />
+        <main className="max-w-6xl mx-auto px-4 py-8">
         <Routes>
           <Route path="/" element={<RootRoute />} />
 
@@ -97,7 +101,8 @@ export default function App() {
           <Route path="/friends" element={<RequireAuth><FriendsPage /></RequireAuth>} />
           <Route path="/duels/:duelId" element={<RequireAuth><DuelPage /></RequireAuth>} />
         </Routes>
-      </main>
+        </main>
+      </div>
     </div>
   )
 }
