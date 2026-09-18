@@ -48,7 +48,7 @@ interface SidebarProps {
 export default function Sidebar({ open, onClose }: SidebarProps) {
   const authStatus = useAuthStore((s) => s.status)
   const homeLink: SidebarLink = authStatus === 'authenticated'
-    ? { to: '/', label: 'แดชบอร์ด', icon: Home, end: true }
+    ? { to: '/dashboard', label: 'แดชบอร์ด', icon: Home, end: true }
     : { to: '/', label: 'หน้าแรก', icon: Home, end: true }
   const links = [homeLink, ...LINKS]
 
@@ -64,7 +64,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         }`}
       >
         <div className="flex items-center justify-between px-5 py-5">
-          <NavLink to="/" className="text-white">
+          <NavLink to={homeLink.to} className="text-white">
             <Logo size={28} />
           </NavLink>
           <button

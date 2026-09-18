@@ -46,7 +46,6 @@ import {
 
 export default function App() {
   const checkSession = useAuthStore((s) => s.checkSession)
-  const authStatus = useAuthStore((s) => s.status)
   const location = useLocation()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -56,8 +55,7 @@ export default function App() {
 
   useProgressSync()
 
-  const isAnonymousLanding = authStatus !== 'authenticated' && location.pathname === '/'
-  if (isAnonymousLanding) return <HomePage />
+  if (location.pathname === '/') return <HomePage />
 
   return (
     <div className="min-h-screen md:flex">
@@ -66,7 +64,7 @@ export default function App() {
         <TopBar onOpenSidebar={() => setSidebarOpen(true)} />
         <main className="max-w-6xl mx-auto px-4 py-8">
         <Routes>
-          <Route path="/" element={<DashboardPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/progress" element={<RequireAuth><ProgressPage /></RequireAuth>} />
           <Route path="/study-plan" element={<RequireAuth><StudyPlanPage /></RequireAuth>} />
           <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />

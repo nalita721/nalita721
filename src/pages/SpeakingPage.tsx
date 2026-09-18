@@ -92,7 +92,7 @@ export default function SpeakingPage() {
           <p className="text-lg font-semibold text-stone-800 mt-2">ฝึกพูดครบ {SPEAKING_PROMPTS.length} คำถามแล้ว</p>
           <div className="flex gap-3 justify-center mt-4">
             <Button onClick={() => setIndex(0)}>ฝึกอีกครั้ง</Button>
-            <Link to="/">
+            <Link to="/dashboard">
               <Button variant="secondary">กลับหน้าแดชบอร์ด</Button>
             </Link>
           </div>

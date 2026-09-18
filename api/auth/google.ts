@@ -108,6 +108,6 @@ export default async function handler(req: any, res: any) {
   const normalizedEmail = claims.email.trim().toLowerCase()
   const sessionId = await createSession(normalizedEmail)
   setSessionCookie(res, sessionId)
-  res.writeHead(302, { Location: `${SITE_URL}/` })
+  res.writeHead(302, { Location: `${SITE_URL}/dashboard` })
   res.end()
 }

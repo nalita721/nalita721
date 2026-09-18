@@ -133,7 +133,7 @@ export default function FullMockTestPage() {
         )}
         <div className="flex gap-3 justify-center pt-4">
           <Button onClick={beginTest}>ทำอีกครั้ง</Button>
-          <Link to="/">
+          <Link to="/dashboard">
             <Button variant="secondary">กลับหน้าแดชบอร์ด</Button>
           </Link>
         </div>
