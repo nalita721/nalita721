@@ -95,7 +95,7 @@ export default function GrammarLessonPage() {
         </div>
       </div>
 
-      <div className="space-y-8">
+      <div className="flex flex-col gap-10">
         <Card className="bg-amber-50 border-amber-200 flex items-start gap-3">
           <span className="text-2xl">💡</span>
           <p className="text-sm text-stone-700">{lesson.tipTh}</p>
