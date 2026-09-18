@@ -1,10 +1,12 @@
 import { NavLink } from 'react-router-dom'
 import {
+  Award,
   BookOpen,
   FileText,
   Gamepad2,
   Headphones,
   Home,
+  Mic,
   PenLine,
   Settings,
   Trophy,
@@ -28,7 +30,9 @@ const LINKS: SidebarLink[] = [
   { to: '/listening', label: 'ฟัง', icon: Headphones },
   { to: '/reading', label: 'อ่าน', icon: FileText },
   { to: '/games', label: 'เกม', icon: Gamepad2 },
+  { to: '/speaking', label: 'พูด', icon: Mic },
   { to: '/mock-test', label: 'Mock Test', icon: Trophy },
+  { to: '/achievements', label: 'เหรียญรางวัล', icon: Award },
   { to: '/friends', label: 'เพื่อน', icon: Users },
 ]
 

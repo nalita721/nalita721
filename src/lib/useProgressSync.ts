@@ -5,9 +5,34 @@ import { useProgressStore, type ProgressSnapshot } from '../store/progress'
 const SYNC_DEBOUNCE_MS = 1500
 
 function snapshotOf(): ProgressSnapshot {
-  const { xp, streak, lastActiveDay, srsMap, partStats, mockResults, levelTestResult, pathUnlockedIndex, pathPassedSteps } =
-    useProgressStore.getState()
-  return { xp, streak, lastActiveDay, srsMap, partStats, mockResults, levelTestResult, pathUnlockedIndex, pathPassedSteps }
+  const {
+    xp,
+    streak,
+    lastActiveDay,
+    srsMap,
+    partStats,
+    mockResults,
+    levelTestResult,
+    pathUnlockedIndex,
+    pathPassedSteps,
+    dailyMissionDate,
+    dailyWordsReviewed,
+    dailyQuestionsAnswered,
+  } = useProgressStore.getState()
+  return {
+    xp,
+    streak,
+    lastActiveDay,
+    srsMap,
+    partStats,
+    mockResults,
+    levelTestResult,
+    pathUnlockedIndex,
+    pathPassedSteps,
+    dailyMissionDate,
+    dailyWordsReviewed,
+    dailyQuestionsAnswered,
+  }
 }
 
 async function pushProgress() {

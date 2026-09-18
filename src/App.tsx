@@ -27,6 +27,8 @@ import FullMockTestPage from './pages/mocktest/FullMockTestPage'
 import GamesHubPage from './pages/games/GamesHubPage'
 import GrammarBlitzPage from './pages/games/GrammarBlitzPage'
 import SettingsPage from './pages/SettingsPage'
+import AchievementsPage from './pages/AchievementsPage'
+import SpeakingPage from './pages/SpeakingPage'
 import LevelTestPage from './pages/LevelTestPage'
 import LoginPage from './pages/LoginPage'
 import FriendsPage from './pages/FriendsPage'
@@ -94,7 +96,10 @@ export default function App() {
           <Route path="/games/typing" element={<RequireAuth><TypingChallengePage /></RequireAuth>} />
           <Route path="/games/grammar-blitz" element={<RequireAuth><GrammarBlitzPage /></RequireAuth>} />
 
+          <Route path="/speaking" element={<RequireAuth><SpeakingPage /></RequireAuth>} />
+
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/achievements" element={<AchievementsPage />} />
           <Route path="/level-test" element={<RequireAuth><LevelTestPage /></RequireAuth>} />
           <Route path="/login" element={<LoginPage />} />
 

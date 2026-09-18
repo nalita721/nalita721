@@ -15,6 +15,12 @@ function todayKey(): string {
   return new Date().toISOString().slice(0, 10)
 }
 
+function dailyBase(s: ProgressSnapshot, today: string) {
+  return s.dailyMissionDate === today
+    ? { wordsReviewed: s.dailyWordsReviewed, questionsAnswered: s.dailyQuestionsAnswered }
+    : { wordsReviewed: 0, questionsAnswered: 0 }
+}
+
 export interface ProgressSnapshot {
   xp: number
   streak: number
@@ -25,6 +31,9 @@ export interface ProgressSnapshot {
   levelTestResult: LevelTestResult | null
   pathUnlockedIndex: number
   pathPassedSteps: string[]
+  dailyMissionDate: string | null
+  dailyWordsReviewed: number
+  dailyQuestionsAnswered: number
 }
 
 interface ProgressState extends ProgressSnapshot {
@@ -60,6 +69,9 @@ export const useProgressStore = create<ProgressState>()(
       levelTestResult: null,
       pathUnlockedIndex: 0,
       pathPassedSteps: [],
+      dailyMissionDate: null,
+      dailyWordsReviewed: 0,
+      dailyQuestionsAnswered: 0,
 
       addXp: (amount) => set((s) => ({ xp: s.xp + amount })),
 
@@ -78,21 +90,31 @@ export const useProgressStore = create<ProgressState>()(
         set((s) => {
           const current = s.srsMap[wordId] ?? newCard(wordId)
           const updated = reviewCard(current, quality)
+          const today = todayKey()
+          const base = dailyBase(s, today)
           return {
             srsMap: { ...s.srsMap, [wordId]: updated },
             xp: s.xp + (quality >= 3 ? 5 : 1),
+            dailyMissionDate: today,
+            dailyWordsReviewed: base.wordsReviewed + 1,
+            dailyQuestionsAnswered: base.questionsAnswered,
           }
         }),
 
       recordAnswer: (part, correct) =>
         set((s) => {
           const prev = s.partStats[part]
+          const today = todayKey()
+          const base = dailyBase(s, today)
           return {
             partStats: {
               ...s.partStats,
               [part]: { correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 },
             },
             xp: s.xp + (correct ? 3 : 0),
+            dailyMissionDate: today,
+            dailyWordsReviewed: base.wordsReviewed,
+            dailyQuestionsAnswered: base.questionsAnswered + 1,
           }
         }),
 
@@ -123,6 +145,9 @@ export const useProgressStore = create<ProgressState>()(
           levelTestResult: null,
           pathUnlockedIndex: 0,
           pathPassedSteps: [],
+          dailyMissionDate: null,
+          dailyWordsReviewed: 0,
+          dailyQuestionsAnswered: 0,
         }),
     }),
     { name: 'toeic-vocab-progress' },
