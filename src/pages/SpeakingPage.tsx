@@ -19,6 +19,56 @@ function pickSupportedMimeType(): string | undefined {
   return ['audio/webm', 'audio/mp4', 'audio/aac', 'audio/ogg'].find((type) => MediaRecorder.isTypeSupported(type))
 }
 
+function fileExtensionFor(mimeType: string): string {
+  if (mimeType.includes('mp4')) return 'm4a'
+  if (mimeType.includes('aac')) return 'aac'
+  if (mimeType.includes('ogg')) return 'ogg'
+  return 'webm'
+}
+
+/**
+ * Some WebKit/Safari versions fail to decode a MediaRecorder-produced Blob when played back
+ * directly via a blob: URL in an <audio> element (a long-standing WebKit quirk), even though the
+ * recording itself is valid. This forces a duration recalculation (a known workaround) and, if the
+ * element still errors out, falls back to a plain download link so the recording isn't a dead end.
+ */
+function AudioPlayback({ src, mimeType }: { src: string; mimeType: string }) {
+  const audioRef = useRef<HTMLAudioElement>(null)
+  const [playbackFailed, setPlaybackFailed] = useState(false)
+
+  function handleLoadedMetadata() {
+    const audio = audioRef.current
+    if (!audio || audio.duration !== Infinity) return
+    audio.currentTime = 1e101
+    audio.ontimeupdate = () => {
+      audio.ontimeupdate = null
+      audio.currentTime = 0
+    }
+  }
+
+  return (
+    <div className="space-y-1">
+      <p className="text-xs font-semibold text-stone-500">เสียงของคุณ</p>
+      {!playbackFailed && (
+        <audio
+          ref={audioRef}
+          controls
+          src={src}
+          className="w-full"
+          onLoadedMetadata={handleLoadedMetadata}
+          onError={() => setPlaybackFailed(true)}
+        />
+      )}
+      {playbackFailed && (
+        <p className="text-xs text-rose-600">เล่นเสียงในหน้านี้ไม่ได้ในเบราว์เซอร์นี้ ลองดาวน์โหลดไฟล์เสียงเพื่อฟังแทนด้านล่าง</p>
+      )}
+      <a href={src} download={`speaking.${fileExtensionFor(mimeType)}`} className="inline-block text-xs text-brand-600 hover:underline">
+        ⬇️ ดาวน์โหลดไฟล์เสียง
+      </a>
+    </div>
+  )
+}
+
 // The Web Speech API's SpeechRecognition — free (built into the browser, no API key), but only
 // implemented by Chromium-based browsers (Chrome, Edge). Safari and Firefox don't have it.
 interface MinimalSpeechRecognition {
@@ -45,6 +95,7 @@ export default function SpeakingPage() {
   const [audioUrl, setAudioUrl] = useState<string | null>(null)
   const [elapsed, setElapsed] = useState(0)
   const [micError, setMicError] = useState<string | null>(null)
+  const [audioMimeType, setAudioMimeType] = useState('audio/webm')
   const [transcript, setTranscript] = useState<string | null>(null)
   const [analysis, setAnalysis] = useState<SpeechAnalysis | null>(null)
 
@@ -82,11 +133,17 @@ export default function SpeakingPage() {
         if (e.data.size > 0) chunksRef.current.push(e.data)
       }
       recorder.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: recorder.mimeType || mimeType || 'audio/webm' })
-        setAudioUrl(URL.createObjectURL(blob))
         stream.getTracks().forEach((t) => t.stop())
+        if (chunksRef.current.length === 0) {
+          setMicError('บันทึกเสียงไม่สำเร็จ (ไม่มีเสียงที่บันทึกได้) ลองพูดค้างไว้อย่างน้อย 1 วินาทีแล้วลองใหม่')
+          return
+        }
+        const type = recorder.mimeType || mimeType || 'audio/webm'
+        const blob = new Blob(chunksRef.current, { type })
+        setAudioMimeType(type)
+        setAudioUrl(URL.createObjectURL(blob))
       }
-      recorder.start()
+      recorder.start(250)
       mediaRecorderRef.current = recorder
       setRecording(true)
       setElapsed(0)
@@ -201,12 +258,7 @@ export default function SpeakingPage() {
             {micError && <p className="text-xs text-rose-600 text-center">{micError}</p>}
           </div>
 
-          {audioUrl && (
-            <div className="space-y-1">
-              <p className="text-xs font-semibold text-stone-500">เสียงของคุณ</p>
-              <audio controls src={audioUrl} className="w-full" />
-            </div>
-          )}
+          {audioUrl && <AudioPlayback src={audioUrl} mimeType={audioMimeType} />}
 
           {transcript && (
             <div className="rounded-xl bg-brand-50 border border-brand-100 px-4 py-3 space-y-2">
