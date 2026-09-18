@@ -99,7 +99,9 @@ export default function HomePage() {
     <div className="min-h-screen overflow-x-hidden">
       <header className="border-b border-sand-200 bg-white/80 backdrop-blur sticky top-0 z-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
-          <Logo size={30} />
+          <Link to="/">
+            <Logo size={30} />
+          </Link>
           <div className="flex items-center gap-2 sm:gap-4">
             <Link to="/login" className="text-sm font-medium text-stone-600 hover:text-brand-600 transition hidden sm:block">
               เข้าสู่ระบบ
@@ -207,7 +209,9 @@ export default function HomePage() {
 
       <footer className="border-t border-sand-200 py-6">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <LogoMark size={22} />
+          <Link to="/">
+            <LogoMark size={22} />
+          </Link>
           <p className="text-xs text-stone-400">Learn Today, A Brighter Tomorrow</p>
         </div>
       </footer>
