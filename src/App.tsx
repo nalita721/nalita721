@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
 import TopBar from './components/TopBar'
 import { useAuthStore } from './store/auth'
@@ -41,14 +41,10 @@ import {
   RequireAuth,
 } from './components/gates'
 
-function RootRoute() {
-  const status = useAuthStore((s) => s.status)
-  if (status === 'authenticated') return <DashboardPage />
-  return <HomePage />
-}
-
 export default function App() {
   const checkSession = useAuthStore((s) => s.checkSession)
+  const authStatus = useAuthStore((s) => s.status)
+  const location = useLocation()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
@@ -57,6 +53,9 @@ export default function App() {
 
   useProgressSync()
 
+  const isAnonymousLanding = authStatus !== 'authenticated' && location.pathname === '/'
+  if (isAnonymousLanding) return <HomePage />
+
   return (
     <div className="min-h-screen md:flex">
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
@@ -64,7 +63,7 @@ export default function App() {
         <TopBar onOpenSidebar={() => setSidebarOpen(true)} />
         <main className="max-w-6xl mx-auto px-4 py-8">
         <Routes>
-          <Route path="/" element={<RootRoute />} />
+          <Route path="/" element={<DashboardPage />} />
 
           <Route path="/vocabulary" element={<ChapterListPage />} />
           <Route path="/vocabulary/:chapterId" element={<GatedVocabChapter><ChapterHubPage /></GatedVocabChapter>} />
