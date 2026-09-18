@@ -95,14 +95,16 @@ export default function GrammarLessonPage() {
         </div>
       </div>
 
-      <Card className="bg-amber-50 border-amber-200 flex items-start gap-3">
-        <span className="text-2xl">💡</span>
-        <p className="text-sm text-stone-700">{lesson.tipTh}</p>
-      </Card>
+      <div className="space-y-8">
+        <Card className="bg-amber-50 border-amber-200 flex items-start gap-3">
+          <span className="text-2xl">💡</span>
+          <p className="text-sm text-stone-700">{lesson.tipTh}</p>
+        </Card>
 
-      <Link to={`/grammar/${topic.id}/writing`}>
-        <Button className="w-full py-3 text-base shadow-sm">✍️ พร้อมแล้ว! ไปฝึกแต่งประโยค →</Button>
-      </Link>
+        <Link to={`/grammar/${topic.id}/writing`}>
+          <Button className="w-full py-3 text-base shadow-sm">✍️ พร้อมแล้ว! ไปฝึกแต่งประโยค →</Button>
+        </Link>
+      </div>
     </div>
   )
 }
