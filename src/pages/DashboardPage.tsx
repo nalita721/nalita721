@@ -91,7 +91,8 @@ export default function DashboardPage() {
   const activeStep = currentPathStep(effectivePathIndex)
   const upcomingSteps = LEARNING_PATH.slice(effectivePathIndex + 1, effectivePathIndex + 3)
 
-  const currentScore = Math.max(levelTestResult?.totalScore ?? 0, lastMock?.totalScore ?? 0)
+  const bestMockScore = mockResults.reduce((best, r) => Math.max(best, r.totalScore), 0)
+  const currentScore = Math.max(levelTestResult?.totalScore ?? 0, bestMockScore)
   const goalPercent = Math.min(100, Math.round((currentScore / GOAL_SCORE) * 100))
 
   const isMissionToday = dailyMissionDate === todayKey()

@@ -31,7 +31,8 @@ export default function ProgressPage() {
   const levelTestResult = useProgressStore((s) => s.levelTestResult)
 
   const lastMock = mockResults[mockResults.length - 1]
-  const currentScore = Math.max(levelTestResult?.totalScore ?? 0, lastMock?.totalScore ?? 0)
+  const bestMockScore = mockResults.reduce((best, r) => Math.max(best, r.totalScore), 0)
+  const currentScore = Math.max(levelTestResult?.totalScore ?? 0, bestMockScore)
   const goalPercent = Math.min(100, Math.round((currentScore / GOAL_SCORE) * 100))
 
   const skillKeys = (Object.keys(PART_LABELS) as StatPart[]).filter((k) => k !== 'mock')
