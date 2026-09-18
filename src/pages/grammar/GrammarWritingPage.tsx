@@ -66,9 +66,14 @@ export default function GrammarWritingPage() {
           />
 
           {!revealed ? (
-            <Button variant="secondary" onClick={reveal} disabled={!attempt.trim()}>
-              👀 ดูตัวอย่างประโยค
-            </Button>
+            <div>
+              <Button variant="secondary" onClick={reveal} disabled={!attempt.trim()}>
+                👀 ดูตัวอย่างประโยค
+              </Button>
+              {!attempt.trim() && (
+                <p className="text-xs text-stone-400 mt-1.5">✏️ พิมพ์ประโยคของคุณเองก่อนด้านบน แล้วปุ่มนี้จะกดได้</p>
+              )}
+            </div>
           ) : (
             <div className="space-y-3">
               <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 space-y-1">
