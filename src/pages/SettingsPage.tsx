@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Card } from '../components/ui'
+import { Button, Card, Toggle } from '../components/ui'
 import { useAuthStore } from '../store/auth'
 
 type Slot = 'morning' | 'evening'
@@ -13,13 +13,14 @@ const SLOTS: { id: Slot; label: string; time: string }[] = [
 export default function SettingsPage() {
   const [email, setEmail] = useState('')
   const [slot, setSlot] = useState<Slot>('morning')
+  const [enabled, setEnabled] = useState(false)
   const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const authStatus = useAuthStore((s) => s.status)
   const accountEmail = useAuthStore((s) => s.email)
   const logout = useAuthStore((s) => s.logout)
 
-  async function subscribe(enabled: boolean) {
+  async function subscribe(nextEnabled: boolean, nextSlot: Slot = slot) {
     if (!email.trim()) return
     setStatus('saving')
     setErrorMsg('')
@@ -27,9 +28,11 @@ export default function SettingsPage() {
       const res = await fetch('/api/subscribe-reminder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim(), slot, enabled }),
+        body: JSON.stringify({ email: email.trim(), slot: nextSlot, enabled: nextEnabled }),
       })
       if (!res.ok) throw new Error(await res.text())
+      setEnabled(nextEnabled)
+      setSlot(nextSlot)
       setStatus('saved')
     } catch {
       setStatus('error')
@@ -82,33 +85,45 @@ export default function SettingsPage() {
           />
         </div>
 
-        <div>
-          <label className="text-sm font-medium text-stone-700 block mb-2">เลือกเวลาที่อยากให้แจ้งเตือน</label>
-          <div className="grid grid-cols-2 gap-2">
+        <div className="flex items-center justify-between rounded-xl border border-sand-100 px-4 py-3">
+          <div>
+            <p className="font-medium text-stone-800">เปิดการแจ้งเตือนรายวัน</p>
+            <p className="text-xs text-stone-400">รับอีเมลเตือนให้กลับมาฝึก TOEIC ทุกวัน</p>
+          </div>
+          <Toggle
+            checked={enabled}
+            onChange={(next) => subscribe(next)}
+            label="เปิดการแจ้งเตือนรายวัน"
+          />
+        </div>
+
+        <div className={enabled ? '' : 'opacity-40 pointer-events-none'}>
+          <p className="text-sm font-medium text-stone-700 mb-2">เลือกเวลาที่อยากให้แจ้งเตือน</p>
+          <div className="divide-y divide-sand-100 rounded-xl border border-sand-100 overflow-hidden">
             {SLOTS.map((s) => (
-              <button
+              <label
                 key={s.id}
-                onClick={() => setSlot(s.id)}
-                className={`rounded-xl border px-4 py-3 text-left transition ${
-                  slot === s.id ? 'bg-brand-600 border-brand-600 text-white' : 'bg-white border-sand-200 hover:border-brand-400'
+                className={`flex items-center justify-between px-4 py-3 cursor-pointer transition ${
+                  slot === s.id ? 'bg-brand-50' : 'bg-white hover:bg-sand-50'
                 }`}
               >
-                <p className="font-medium">{s.label}</p>
-                <p className={`text-xs ${slot === s.id ? 'text-brand-100' : 'text-stone-500'}`}>{s.time}</p>
-              </button>
+                <div>
+                  <p className={`font-medium ${slot === s.id ? 'text-brand-700' : 'text-stone-700'}`}>{s.label}</p>
+                  <p className="text-xs text-stone-400">{s.time}</p>
+                </div>
+                <input
+                  type="radio"
+                  name="slot"
+                  checked={slot === s.id}
+                  onChange={() => subscribe(true, s.id)}
+                  className="w-4 h-4 accent-brand-600"
+                />
+              </label>
             ))}
           </div>
         </div>
 
-        <div className="flex gap-3">
-          <Button onClick={() => subscribe(true)} disabled={!email.trim() || status === 'saving'}>
-            เปิดการแจ้งเตือน
-          </Button>
-          <Button variant="secondary" onClick={() => subscribe(false)} disabled={!email.trim() || status === 'saving'}>
-            ยกเลิกการแจ้งเตือน
-          </Button>
-        </div>
-
+        {status === 'saving' && <p className="text-sm text-stone-400">กำลังบันทึก...</p>}
         {status === 'saved' && <p className="text-sm text-emerald-600">✅ บันทึกการตั้งค่าเรียบร้อยแล้ว</p>}
         {status === 'error' && <p className="text-sm text-rose-600">❌ {errorMsg}</p>}
       </Card>

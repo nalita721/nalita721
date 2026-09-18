@@ -4,9 +4,19 @@ import { EXAM_SETS } from '../../data/examSets'
 import { mockTestQuestions, MOCK_TEST_DURATION_SEC } from '../../data/mockTest'
 import { LEVEL_TEST_TOTAL_QUESTIONS, LEVEL_TEST_DURATION_SEC } from '../../data/levelTest'
 
+const TOEIC_PARTS = [
+  { part: 1, titleTh: 'รูปภาพ', to: '/listening/1', gradient: 'from-teal-500 to-cyan-700' },
+  { part: 2, titleTh: 'ถาม-ตอบ', to: '/listening/2', gradient: 'from-teal-500 to-cyan-700' },
+  { part: 3, titleTh: 'บทสนทนา', to: '/listening/3', gradient: 'from-teal-500 to-cyan-700' },
+  { part: 4, titleTh: 'บทพูดสั้น', to: '/listening/4', gradient: 'from-teal-500 to-cyan-700' },
+  { part: 5, titleTh: 'เติมประโยค', to: '/grammar', gradient: 'from-amber-500 to-orange-700' },
+  { part: 6, titleTh: 'เติมข้อความ', to: '/reading', gradient: 'from-amber-500 to-orange-700' },
+  { part: 7, titleTh: 'อ่านจับใจความ', to: '/reading', gradient: 'from-amber-500 to-orange-700' },
+] as const
+
 export default function MockTestHubPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div>
         <h1 className="text-2xl font-bold text-stone-800">Mock Test</h1>
         <p className="text-stone-500 mt-1">เลือกรูปแบบข้อสอบจำลองที่เหมาะกับเวลาที่คุณมี</p>
@@ -32,6 +42,24 @@ export default function MockTestHubPage() {
             </p>
           </Card>
         </Link>
+      </div>
+
+      <div>
+        <h2 className="font-semibold text-stone-800 mb-1">🧩 ฝึกฝนแยกตาม Part</h2>
+        <p className="text-sm text-stone-500 mb-3">เจาะฝึก Part ที่ยังไม่แม่น ก่อนลองทำเต็มรูปแบบ</p>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
+          {TOEIC_PARTS.map((p) => (
+            <Link
+              key={p.part}
+              to={p.to}
+              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${p.gradient} p-4 text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-[0.98]`}
+            >
+              <span className="absolute -right-3 -top-3 text-4xl font-black opacity-20">{p.part}</span>
+              <span className="relative block text-xs font-semibold text-white/80">Part {p.part}</span>
+              <span className="relative mt-1 block text-sm font-semibold">{p.titleTh}</span>
+            </Link>
+          ))}
+        </div>
       </div>
 
       <div>

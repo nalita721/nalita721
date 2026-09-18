@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Check, Circle, CheckCircle2 } from 'lucide-react'
 import { allWords } from '../data/vocabulary'
 import { Badge, Button, Card, ProgressBar } from '../components/ui'
+import { GoalRing, GOAL_SCORE } from '../components/GoalRing'
 import { useProgressStore } from '../store/progress'
 import { useAuthStore } from '../store/auth'
 import { isDue } from '../lib/srs'
@@ -29,9 +30,6 @@ const PRACTICE_MENU = [
 ] as const
 
 const THAI_DAY_ABBR = ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส']
-const GOAL_SCORE = 800
-const RING_RADIUS = 40
-const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS
 
 function todayKey() {
   return new Date().toISOString().slice(0, 10)
@@ -66,39 +64,6 @@ function StreakCalendar({ streak }: { streak: number }) {
             </div>
           )
         })}
-      </div>
-    </Card>
-  )
-}
-
-function GoalRing({ percent, currentScore }: { percent: number; currentScore: number }) {
-  const offset = RING_CIRCUMFERENCE - (percent / 100) * RING_CIRCUMFERENCE
-  return (
-    <Card className="flex items-center gap-4">
-      <div className="relative w-24 h-24 shrink-0">
-        <svg width="96" height="96" viewBox="0 0 96 96" className="-rotate-90">
-          <circle cx="48" cy="48" r={RING_RADIUS} fill="none" stroke="#E8D8C8" strokeWidth="8" />
-          <circle
-            cx="48"
-            cy="48"
-            r={RING_RADIUS}
-            fill="none"
-            stroke="#3B82C4"
-            strokeWidth="8"
-            strokeLinecap="round"
-            strokeDasharray={RING_CIRCUMFERENCE}
-            strokeDashoffset={offset}
-            className="transition-all duration-500"
-          />
-        </svg>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-lg font-bold text-stone-800">{percent}%</span>
-        </div>
-      </div>
-      <div>
-        <p className="text-sm text-stone-500">เป้าหมายของคุณ</p>
-        <p className="font-semibold text-stone-800">TOEIC {GOAL_SCORE}+</p>
-        {currentScore > 0 && <p className="text-xs text-stone-400 mt-1">คะแนนล่าสุด {currentScore}/990</p>}
       </div>
     </Card>
   )
@@ -213,11 +178,16 @@ export default function DashboardPage() {
 
       <Card className="space-y-4 relative overflow-hidden">
         <div className="pointer-events-none absolute -right-8 -bottom-8 w-40 h-40 rounded-full bg-gradient-to-br from-brand-100 to-brand-300 opacity-40" />
-        <div className="relative">
-          <h2 className="font-semibold text-stone-800">🧭 เรียนต่อจากที่ค้างไว้</h2>
-          <p className="text-sm text-stone-500 mt-1">
-            เรียนไปทีละขั้นตามลำดับ ไม่ต้องเดาว่าควรเริ่มตรงไหน — ทำแบบทดสอบท้ายขั้นให้ผ่าน 70% ขึ้นไปเพื่อปลดล็อกขั้นถัดไป
-          </p>
+        <div className="relative flex items-start justify-between gap-3">
+          <div>
+            <h2 className="font-semibold text-stone-800">🧭 เรียนต่อจากที่ค้างไว้</h2>
+            <p className="text-sm text-stone-500 mt-1">
+              เรียนไปทีละขั้นตามลำดับ ไม่ต้องเดาว่าควรเริ่มตรงไหน — ทำแบบทดสอบท้ายขั้นให้ผ่าน 70% ขึ้นไปเพื่อปลดล็อกขั้นถัดไป
+            </p>
+          </div>
+          <Link to="/study-plan" className="text-xs font-semibold text-brand-600 hover:text-brand-700 shrink-0 whitespace-nowrap">
+            ดูแผนทั้งหมด →
+          </Link>
         </div>
 
         {pathDone ? (

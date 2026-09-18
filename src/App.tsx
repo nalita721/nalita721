@@ -6,6 +6,9 @@ import { useAuthStore } from './store/auth'
 import { useProgressSync } from './lib/useProgressSync'
 import DashboardPage from './pages/DashboardPage'
 import HomePage from './pages/HomePage'
+import ProgressPage from './pages/ProgressPage'
+import StudyPlanPage from './pages/StudyPlanPage'
+import ProfilePage from './pages/ProfilePage'
 import ChapterListPage from './pages/vocabulary/ChapterListPage'
 import ChapterHubPage from './pages/vocabulary/ChapterHubPage'
 import FlashcardPage from './pages/vocabulary/FlashcardPage'
@@ -64,6 +67,9 @@ export default function App() {
         <main className="max-w-6xl mx-auto px-4 py-8">
         <Routes>
           <Route path="/" element={<DashboardPage />} />
+          <Route path="/progress" element={<RequireAuth><ProgressPage /></RequireAuth>} />
+          <Route path="/study-plan" element={<RequireAuth><StudyPlanPage /></RequireAuth>} />
+          <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
 
           <Route path="/vocabulary" element={<ChapterListPage />} />
           <Route path="/vocabulary/:chapterId" element={<GatedVocabChapter><ChapterHubPage /></GatedVocabChapter>} />

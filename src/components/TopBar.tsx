@@ -31,7 +31,7 @@ export default function TopBar({ onOpenSidebar }: { onOpenSidebar: () => void })
           </Link>
           {authStatus === 'authenticated' ? (
             <Link
-              to="/settings"
+              to="/profile"
               title={email ?? ''}
               className="flex items-center justify-center w-8 h-8 rounded-full bg-sand-900 text-white text-sm font-semibold"
             >

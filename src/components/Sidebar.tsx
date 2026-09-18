@@ -8,7 +8,9 @@ import {
   Home,
   Mic,
   PenLine,
+  Route as RouteIcon,
   Settings,
+  TrendingUp,
   Trophy,
   Users,
   X,
@@ -25,6 +27,8 @@ interface SidebarLink {
 }
 
 const LINKS: SidebarLink[] = [
+  { to: '/progress', label: 'ความก้าวหน้า', icon: TrendingUp },
+  { to: '/study-plan', label: 'แผนการเรียน', icon: RouteIcon },
   { to: '/vocabulary', label: 'คำศัพท์', icon: BookOpen },
   { to: '/grammar', label: 'ไวยากรณ์', icon: PenLine },
   { to: '/listening', label: 'ฟัง', icon: Headphones },
