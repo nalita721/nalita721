@@ -87,6 +87,7 @@ export default function FullMockTestPage() {
 
     addMockResult({
       date: new Date().toISOString(),
+      type: 'full',
       totalScore: listeningScore + readingScore,
       listeningScore,
       readingScore,

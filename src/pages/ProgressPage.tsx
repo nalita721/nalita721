@@ -31,7 +31,10 @@ export default function ProgressPage() {
   const levelTestResult = useProgressStore((s) => s.levelTestResult)
 
   const lastMock = mockResults[mockResults.length - 1]
-  const bestMockScore = mockResults.reduce((best, r) => Math.max(best, r.totalScore), 0)
+  // Only Full Mock Test results count toward the best score — Mini Mock Test is too short (fewer
+  // questions) to be a reliable measure. Older results saved before this field existed default to
+  // counting, so past scores aren't silently dropped.
+  const bestMockScore = mockResults.filter((r) => r.type !== 'mini').reduce((best, r) => Math.max(best, r.totalScore), 0)
   const currentScore = Math.max(levelTestResult?.totalScore ?? 0, bestMockScore)
   const goalPercent = Math.min(100, Math.round((currentScore / GOAL_SCORE) * 100))
 

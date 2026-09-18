@@ -117,6 +117,7 @@ export interface PartStat {
 
 export interface MockTestResult {
   date: string
+  type: 'mini' | 'full'
   totalScore: number
   listeningScore: number
   readingScore: number

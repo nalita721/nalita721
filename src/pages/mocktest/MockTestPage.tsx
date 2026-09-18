@@ -60,6 +60,7 @@ export default function MockTestPage() {
 
     addMockResult({
       date: new Date().toISOString(),
+      type: 'mini',
       totalScore: listeningScore + readingScore,
       listeningScore,
       readingScore,
