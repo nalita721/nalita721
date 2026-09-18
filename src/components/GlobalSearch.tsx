@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Search } from 'lucide-react'
 import { vocabChapters } from '../data/vocabulary'
 import { grammarTopics } from '../data/grammar'
 
@@ -65,7 +66,7 @@ export default function GlobalSearch() {
   return (
     <div ref={containerRef} className="relative w-full max-w-xs sm:max-w-sm">
       <div className="relative">
-        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-sm">🔍</span>
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" size={16} />
         <input
           value={query}
           onChange={(e) => {

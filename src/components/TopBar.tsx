@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Bell, Menu } from 'lucide-react'
 import { useAuthStore } from '../store/auth'
 import { useProgressStore } from '../store/progress'
 import GlobalSearch from './GlobalSearch'
@@ -14,10 +15,10 @@ export default function TopBar({ onOpenSidebar }: { onOpenSidebar: () => void })
       <div className="flex items-center gap-3 px-4 py-3 sm:px-6">
         <button
           onClick={onOpenSidebar}
-          className="md:hidden text-stone-500 hover:text-stone-800 text-xl leading-none shrink-0"
+          className="md:hidden text-stone-500 hover:text-stone-800 leading-none shrink-0"
           aria-label="เปิดเมนู"
         >
-          ☰
+          <Menu size={22} />
         </button>
 
         <GlobalSearch />
@@ -25,8 +26,8 @@ export default function TopBar({ onOpenSidebar }: { onOpenSidebar: () => void })
         <div className="ml-auto flex items-center gap-3 text-sm shrink-0">
           <span className="hidden sm:flex items-center gap-1 text-amber-600 font-semibold">🔥 {streak}</span>
           <span className="hidden sm:flex items-center gap-1 text-brand-600 font-semibold">⭐ {xp} XP</span>
-          <Link to="/settings" title="ตั้งค่าการแจ้งเตือน" className="text-stone-500 hover:text-brand-600 transition text-lg">
-            🔔
+          <Link to="/settings" title="ตั้งค่าการแจ้งเตือน" className="text-stone-500 hover:text-brand-600 transition">
+            <Bell size={20} />
           </Link>
           {authStatus === 'authenticated' ? (
             <Link

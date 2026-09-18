@@ -1,21 +1,35 @@
 import { NavLink } from 'react-router-dom'
+import {
+  BookOpen,
+  FileText,
+  Gamepad2,
+  Headphones,
+  Home,
+  PenLine,
+  Settings,
+  Trophy,
+  Users,
+  X,
+  type LucideIcon,
+} from 'lucide-react'
 import { useAuthStore } from '../store/auth'
+import { Logo } from './Logo'
 
 interface SidebarLink {
   to: string
   label: string
-  icon: string
+  icon: LucideIcon
   end?: boolean
 }
 
 const LINKS: SidebarLink[] = [
-  { to: '/vocabulary', label: 'คำศัพท์', icon: '📚' },
-  { to: '/grammar', label: 'ไวยากรณ์', icon: '✍️' },
-  { to: '/listening', label: 'ฟัง', icon: '🎧' },
-  { to: '/reading', label: 'อ่าน', icon: '📝' },
-  { to: '/games', label: 'เกม', icon: '🎮' },
-  { to: '/mock-test', label: 'Mock Test', icon: '🏆' },
-  { to: '/friends', label: 'เพื่อน', icon: '👥' },
+  { to: '/vocabulary', label: 'คำศัพท์', icon: BookOpen },
+  { to: '/grammar', label: 'ไวยากรณ์', icon: PenLine },
+  { to: '/listening', label: 'ฟัง', icon: Headphones },
+  { to: '/reading', label: 'อ่าน', icon: FileText },
+  { to: '/games', label: 'เกม', icon: Gamepad2 },
+  { to: '/mock-test', label: 'Mock Test', icon: Trophy },
+  { to: '/friends', label: 'เพื่อน', icon: Users },
 ]
 
 interface SidebarProps {
@@ -26,8 +40,8 @@ interface SidebarProps {
 export default function Sidebar({ open, onClose }: SidebarProps) {
   const authStatus = useAuthStore((s) => s.status)
   const homeLink: SidebarLink = authStatus === 'authenticated'
-    ? { to: '/', label: 'แดชบอร์ด', icon: '🏠', end: true }
-    : { to: '/', label: 'หน้าแรก', icon: '🏠', end: true }
+    ? { to: '/', label: 'แดชบอร์ด', icon: Home, end: true }
+    : { to: '/', label: 'หน้าแรก', icon: Home, end: true }
   const links = [homeLink, ...LINKS]
 
   return (
@@ -42,35 +56,38 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         }`}
       >
         <div className="flex items-center justify-between px-5 py-5">
-          <NavLink to="/" className="font-bold text-white text-lg leading-tight">
-            TOEIC<br />Vocab Master
+          <NavLink to="/" className="text-white">
+            <Logo size={28} />
           </NavLink>
           <button
             onClick={onClose}
-            className="md:hidden text-sand-300 hover:text-white text-xl leading-none"
+            className="md:hidden text-sand-300 hover:text-white leading-none"
             aria-label="ปิดเมนู"
           >
-            ✕
+            <X size={20} />
           </button>
         </div>
 
         <nav className="flex-1 overflow-y-auto px-3 space-y-1">
-          {links.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              end={link.end}
-              onClick={onClose}
-              className={({ isActive }) =>
-                `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition ${
-                  isActive ? 'bg-white/15 text-white' : 'text-sand-300 hover:bg-white/5 hover:text-white'
-                }`
-              }
-            >
-              <span className="text-lg">{link.icon}</span>
-              {link.label}
-            </NavLink>
-          ))}
+          {links.map((link) => {
+            const Icon = link.icon
+            return (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                end={link.end}
+                onClick={onClose}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition ${
+                    isActive ? 'bg-white/15 text-white' : 'text-sand-300 hover:bg-white/5 hover:text-white'
+                  }`
+                }
+              >
+                <Icon size={20} strokeWidth={2} />
+                {link.label}
+              </NavLink>
+            )
+          })}
         </nav>
 
         <div className="px-3 pb-5 pt-2 border-t border-white/10">
@@ -83,7 +100,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
               }`
             }
           >
-            <span className="text-lg">⚙️</span>
+            <Settings size={20} strokeWidth={2} />
             ตั้งค่า
           </NavLink>
         </div>

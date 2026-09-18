@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  font-family: 'Prompt', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Noto Sans Thai', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 body {
