@@ -14,6 +14,7 @@ import WordRushPage from './pages/vocabulary/WordRushPage'
 import ChapterQuizPage from './pages/vocabulary/ChapterQuizPage'
 import GrammarTopicListPage from './pages/grammar/GrammarTopicListPage'
 import GrammarLessonPage from './pages/grammar/GrammarLessonPage'
+import GrammarWritingPage from './pages/grammar/GrammarWritingPage'
 import GrammarPracticePage from './pages/grammar/GrammarPracticePage'
 import ListeningPartListPage from './pages/listening/ListeningPartListPage'
 import ListeningPracticePage from './pages/listening/ListeningPracticePage'
@@ -69,6 +70,7 @@ export default function App() {
 
           <Route path="/grammar" element={<GrammarTopicListPage />} />
           <Route path="/grammar/:topicId" element={<GatedGrammarTopic><GrammarLessonPage /></GatedGrammarTopic>} />
+          <Route path="/grammar/:topicId/writing" element={<GatedGrammarTopic><GrammarWritingPage /></GatedGrammarTopic>} />
           <Route path="/grammar/:topicId/practice" element={<GatedGrammarTopic><GrammarPracticePage /></GatedGrammarTopic>} />
 
           <Route path="/listening" element={<ListeningPartListPage />} />

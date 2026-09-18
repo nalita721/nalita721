@@ -18,6 +18,11 @@ export const grammarTopics: GrammarTopic[] = [
       ],
       tipTh: 'เกร็ดจำง่าย: เจอ blank ระหว่าง a/an/the กับกริยา → เดาว่าเป็นคำนาม เจอ blank หลัง verb to be หรือหน้าคำนาม → เดาว่าเป็นคำคุณศัพท์!',
     },
+    writingPrompts: [
+      { id: 'wf-w1', promptTh: 'แต่งประโยคโดยใช้คำนาม (Noun) ที่มาจากคำว่า "decide"', hintEn: 'decision', sampleAnswer: 'The manager made a difficult decision yesterday.', sampleAnswerTh: 'ผู้จัดการตัดสินใจเรื่องยากเมื่อวานนี้' },
+      { id: 'wf-w2', promptTh: 'แต่งประโยคโดยใช้คำวิเศษณ์ (Adverb) ที่ลงท้ายด้วย -ly ขยายคำกริยา', hintEn: 'quickly / efficiently / carefully', sampleAnswer: 'She completed the report efficiently before the deadline.', sampleAnswerTh: 'เธอทำรายงานเสร็จอย่างมีประสิทธิภาพก่อนถึงกำหนดส่ง' },
+      { id: 'wf-w3', promptTh: 'แต่งประโยคโดยใช้คำคุณศัพท์ (Adjective) ขยายคำนาม "presentation"', hintEn: 'impressive presentation', sampleAnswer: 'The team gave an impressive presentation to the investors.', sampleAnswerTh: 'ทีมงานนำเสนอผลงานที่น่าประทับใจให้กับนักลงทุน' },
+    ],
     questions: [
       { id: 'wf-1', sentence: 'The manager gave a very ____ presentation to the board.', choices: ['impress', 'impressive', 'impressively', 'impression'], answerIndex: 1, explanation: '"very ____" ตามด้วยคำนามที่ถูกขยาย ต้องใช้ adjective (impressive) ขยายหน้า presentation' },
       { id: 'wf-2', sentence: 'Please complete the form ____ to avoid delays.', choices: ['accurate', 'accuracy', 'accurately', 'accurateness'], answerIndex: 2, explanation: 'ขยายกริยา "complete" ต้องใช้ adverb (accurately)' },
@@ -27,6 +32,8 @@ export const grammarTopics: GrammarTopic[] = [
       { id: 'wf-6', sentence: 'Employees must submit ____ documentation before the deadline.', choices: ['require', 'required', 'requirement', 'requiring'], answerIndex: 1, explanation: 'required ทำหน้าที่ adjective ขยาย documentation (เอกสารที่จำเป็นต้องส่ง)' },
       { id: 'wf-7', sentence: 'The ____ of the merger will be announced next week.', choices: ['finalize', 'final', 'finalization', 'finally'], answerIndex: 2, explanation: 'หลัง "The ____ of" ต้องเป็นคำนาม (finalization)' },
       { id: 'wf-8', sentence: 'She answered the client\'s questions ____ during the call.', choices: ['confident', 'confidence', 'confidently', 'confident'], answerIndex: 2, explanation: 'ขยายกริยา "answered" ต้องใช้ adverb (confidently)' },
+      { id: 'wf-9', sentence: 'The team worked ____ to meet the tight deadline.', choices: ['collaborative', 'collaboratively', 'collaboration', 'collaborate'], answerIndex: 1, explanation: 'ขยายกริยา "worked" ต้องใช้ adverb (collaboratively)' },
+      { id: 'wf-10', sentence: 'Customer ____ dropped slightly after the price increase.', choices: ['satisfy', 'satisfied', 'satisfaction', 'satisfyingly'], answerIndex: 2, explanation: 'ต้องการคำนามเป็นประธานของประโยค (satisfaction)' },
     ],
   },
   {
@@ -46,6 +53,11 @@ export const grammarTopics: GrammarTopic[] = [
       ],
       tipTh: 'เกร็ดจำง่าย: เจอ "since" ให้คิดถึง Present Perfect เสมอ (since = ตั้งแต่...จนถึงตอนนี้) ส่วน "yesterday/last..." คือสัญญาณของ Past Simple ชัวร์ๆ',
     },
+    writingPrompts: [
+      { id: 'tn-w1', promptTh: 'แต่งประโยคเกี่ยวกับสิ่งที่คุณทำเป็นประจำทุกวัน โดยใช้ Present Simple', hintEn: 'every day / usually', sampleAnswer: 'I check my emails every morning before starting work.', sampleAnswerTh: 'ฉันเช็กอีเมลทุกเช้าก่อนเริ่มทำงาน' },
+      { id: 'tn-w2', promptTh: 'แต่งประโยคเกี่ยวกับเหตุการณ์ในอดีตที่จบไปแล้ว โดยใช้ Past Simple', hintEn: 'last week / yesterday', sampleAnswer: 'We signed the new contract last Monday.', sampleAnswerTh: 'เราเซ็นสัญญาฉบับใหม่เมื่อวันจันทร์ที่แล้ว' },
+      { id: 'tn-w3', promptTh: 'แต่งประโยคโดยใช้ Present Perfect กับคำว่า "since" หรือ "for"', hintEn: 'since / for', sampleAnswer: 'She has worked at this company for three years.', sampleAnswerTh: 'เธอทำงานที่บริษัทนี้มาสามปีแล้ว' },
+    ],
     questions: [
       { id: 'tn-1', sentence: 'By the time the CEO arrives, the team ____ the report.', choices: ['finishes', 'will finish', 'will have finished', 'finished'], answerIndex: 2, explanation: '"By the time" + present + future perfect (will have finished) สำหรับเหตุการณ์ที่เสร็จก่อนอีกเหตุการณ์ในอนาคต' },
       { id: 'tn-2', sentence: 'The company ____ its headquarters to Bangkok last year.', choices: ['moves', 'moved', 'has moved', 'will move'], answerIndex: 1, explanation: '"last year" เป็น time marker ของ past simple (moved)' },
@@ -54,6 +66,9 @@ export const grammarTopics: GrammarTopic[] = [
       { id: 'tn-5', sentence: 'The technician ____ the machine when the alarm went off.', choices: ['repairs', 'repaired', 'was repairing', 'has repaired'], answerIndex: 2, explanation: 'เหตุการณ์กำลังดำเนินอยู่เมื่อมีอีกเหตุการณ์เกิดขึ้นแทรก ใช้ past continuous (was repairing)' },
       { id: 'tn-6', sentence: 'The new branch ____ next month.', choices: ['opens', 'opened', 'is opening', 'has opened'], answerIndex: 2, explanation: 'แผนการที่กำหนดไว้ล่วงหน้าในอนาคตอันใกล้ ใช้ present continuous (is opening) กับ time marker next month' },
       { id: 'tn-7', sentence: 'She ____ in the marketing department since 2019.', choices: ['works', 'worked', 'has worked', 'is working'], answerIndex: 2, explanation: '"since 2019" ต้องใช้ present perfect (has worked)' },
+      { id: 'tn-8', sentence: 'By next Friday, the technicians ____ all the routine maintenance.', choices: ['complete', 'completed', 'will have completed', 'are completing'], answerIndex: 2, explanation: '"By next Friday" + เหตุการณ์ที่จะเสร็จก่อนอนาคตอีกจุดหนึ่ง ใช้ future perfect (will have completed)' },
+      { id: 'tn-9', sentence: 'The factory ____ three new production lines since it reopened.', choices: ['adds', 'added', 'has added', 'was adding'], answerIndex: 2, explanation: '"since it reopened" บ่งบอก present perfect (has added)' },
+      { id: 'tn-10', sentence: 'While the auditors ____ the accounts, the manager received an urgent call.', choices: ['review', 'reviewed', 'were reviewing', 'have reviewed'], answerIndex: 2, explanation: 'เหตุการณ์กำลังดำเนินอยู่เมื่อมีอีกเหตุการณ์แทรกเข้ามา ใช้ past continuous (were reviewing)' },
     ],
   },
   {
@@ -73,6 +88,11 @@ export const grammarTopics: GrammarTopic[] = [
       ],
       tipTh: 'เกร็ดจำง่าย: at = จุดเวลาเป๊ะๆ, on = วัน, in = เดือน/ปี/ช่วงกว้าง — นึกภาพ "at" คือจุดเล็กๆ บนนาฬิกา ส่วน "in" คือกล่องใบใหญ่ที่ใส่เวลาไว้ข้างใน',
     },
+    writingPrompts: [
+      { id: 'pp-w1', promptTh: 'แต่งประโยคบอกเวลาที่ชัดเจน โดยใช้ "at"', hintEn: 'at + เวลา', sampleAnswer: 'The meeting will begin at 9 a.m.', sampleAnswerTh: 'การประชุมจะเริ่มตอนเก้าโมงเช้า' },
+      { id: 'pp-w2', promptTh: 'แต่งประโยคบอกกำหนดเส้นตาย โดยใช้ "by"', hintEn: 'by + เวลา/วันที่', sampleAnswer: 'Please send your report by Friday.', sampleAnswerTh: 'กรุณาส่งรายงานภายในวันศุกร์' },
+      { id: 'pp-w3', promptTh: 'แต่งประโยคโดยใช้สำนวน "responsible for"', hintEn: 'responsible for', sampleAnswer: 'He is responsible for managing the sales team.', sampleAnswerTh: 'เขารับผิดชอบดูแลทีมขาย' },
+    ],
     questions: [
       { id: 'pp-1', sentence: 'The meeting has been scheduled ____ 10 a.m. on Monday.', choices: ['in', 'on', 'at', 'by'], answerIndex: 2, explanation: 'ใช้ "at" กับเวลาที่ระบุชัดเจน (at 10 a.m.)' },
       { id: 'pp-2', sentence: 'The report was completed ____ the deadline.', choices: ['until', 'by', 'since', 'during'], answerIndex: 1, explanation: '"by" ใช้กับ deadline หมายถึงเสร็จภายในหรือก่อนเวลาที่กำหนด' },
@@ -81,6 +101,9 @@ export const grammarTopics: GrammarTopic[] = [
       { id: 'pp-5', sentence: 'She is responsible ____ managing the customer accounts.', choices: ['of', 'for', 'to', 'with'], answerIndex: 1, explanation: 'สำนวน "responsible for" เป็นคู่ที่ใช้ประจำ' },
       { id: 'pp-6', sentence: 'The workshop will be held ____ the third floor conference room.', choices: ['at', 'in', 'on', 'by'], answerIndex: 1, explanation: '"in the conference room" ใช้ in กับพื้นที่ปิด/ห้อง' },
       { id: 'pp-7', sentence: 'The budget increased ____ 15 percent compared to last year.', choices: ['on', 'by', 'in', 'at'], answerIndex: 1, explanation: 'สำนวนบอกปริมาณที่เปลี่ยนแปลง "increase by + จำนวน"' },
+      { id: 'pp-8', sentence: 'The company is known ____ its excellent customer service.', choices: ['for', 'of', 'with', 'to'], answerIndex: 0, explanation: 'สำนวน "known for" เป็นคู่ที่ใช้ประจำ' },
+      { id: 'pp-9', sentence: 'Please arrive ____ the venue at least 15 minutes early.', choices: ['at', 'in', 'on', 'to'], answerIndex: 0, explanation: '"at" ใช้กับสถานที่ที่ระบุเจาะจงเป็นจุด (a venue)' },
+      { id: 'pp-10', sentence: 'The proposal was rejected ____ budget constraints.', choices: ['because', 'due to', 'so that', 'although'], answerIndex: 1, explanation: '"due to" ตามด้วยคำนาม (budget constraints) เหมือน because of' },
     ],
   },
   {
@@ -100,6 +123,11 @@ export const grammarTopics: GrammarTopic[] = [
       ],
       tipTh: 'เกร็ดจำง่าย: หลัง blank เป็น "ประโยคเต็ม" (มีประธาน+กริยา) → เลือก although/because หลัง blank เป็นแค่ "คำนาม" → เลือก despite/because of',
     },
+    writingPrompts: [
+      { id: 'cj-w1', promptTh: 'แต่งประโยคแสดงความขัดแย้ง โดยใช้ "Although" ตามด้วยประโยคเต็ม', hintEn: 'Although + subject + verb', sampleAnswer: 'Although the budget was limited, the event was a success.', sampleAnswerTh: 'แม้ว่างบประมาณจะจำกัด แต่งานก็ประสบความสำเร็จ' },
+      { id: 'cj-w2', promptTh: 'แต่งประโยคแสดงความขัดแย้ง โดยใช้ "Despite" ตามด้วยคำนาม', hintEn: 'Despite + คำนาม', sampleAnswer: 'Despite the heavy traffic, she arrived on time.', sampleAnswerTh: 'แม้จะรถติดมาก แต่เธอก็มาถึงตรงเวลา' },
+      { id: 'cj-w3', promptTh: 'แต่งสองประโยคเชื่อมด้วย "however" เพื่อแสดงความขัดแย้ง', hintEn: '..., however, ...', sampleAnswer: 'Sales were slow in January; however, they picked up in February.', sampleAnswerTh: 'ยอดขายช้าในเดือนมกราคม แต่กระเตื้องขึ้นในเดือนกุมภาพันธ์' },
+    ],
     questions: [
       { id: 'cj-1', sentence: '____ the heavy rain, the outdoor event proceeded as planned.', choices: ['Although', 'Despite', 'Because', 'If'], answerIndex: 1, explanation: '"Despite" ตามด้วยคำนาม/วลี (the heavy rain) ส่วน Although ต้องตามด้วยประโยค (clause)' },
       { id: 'cj-2', sentence: 'The project was delayed ____ a shortage of materials.', choices: ['because of', 'because', 'although', 'so that'], answerIndex: 0, explanation: '"because of" ตามด้วยคำนาม (a shortage) ส่วน because ตามด้วยประโยค' },
@@ -107,6 +135,10 @@ export const grammarTopics: GrammarTopic[] = [
       { id: 'cj-4', sentence: 'Sales dropped in the first quarter; ____, they recovered quickly.', choices: ['moreover', 'however', 'therefore', 'similarly'], answerIndex: 1, explanation: '"however" แสดงความขัดแย้ง/ตรงข้ามกับประโยคก่อนหน้า' },
       { id: 'cj-5', sentence: 'You must submit the form ____ you want a refund.', choices: ['unless', 'if', 'even though', 'in case'], answerIndex: 1, explanation: '"if" แสดงเงื่อนไข ตรงตามความหมายประโยค' },
       { id: 'cj-6', sentence: 'The manager reviewed the report ____ signing it.', choices: ['before', 'despite', 'unless', 'while'], answerIndex: 0, explanation: '"before" แสดงลำดับเหตุการณ์ที่เกิดก่อน' },
+      { id: 'cj-7', sentence: '____ the training was mandatory, several employees failed to attend.', choices: ['Despite', 'Although', 'Because of', 'Due to'], answerIndex: 1, explanation: 'ตามด้วยประโยคเต็ม (the training was mandatory) ต้องใช้ Although' },
+      { id: 'cj-8', sentence: 'The flight was delayed, ____ passengers missed their connections.', choices: ['so', 'but', 'or', 'yet'], answerIndex: 0, explanation: '"so" แสดงผลลัพธ์ที่ตามมาจากเหตุการณ์ก่อนหน้า' },
+      { id: 'cj-9', sentence: 'You should back up your files ____ the system crashes.', choices: ['in case', 'unless', 'even though', 'so that'], answerIndex: 0, explanation: '"in case" แสดงการป้องกันล่วงหน้าเผื่อเหตุการณ์ที่อาจเกิดขึ้น' },
+      { id: 'cj-10', sentence: 'The manager approved the request ____ it was submitted after the deadline.', choices: ['even though', 'because', 'so', 'in case'], answerIndex: 0, explanation: '"even though" แสดงความขัดแย้ง ตามด้วยประโยคเต็ม' },
     ],
   },
   {
@@ -126,12 +158,22 @@ export const grammarTopics: GrammarTopic[] = [
       ],
       tipTh: 'เกร็ดจำง่าย: who = คน, which = ของ, whose = ของของใคร, where = สถานที่ — ท่องสั้นๆ แค่นี้ตอบได้เกินครึ่งแล้ว!',
     },
+    writingPrompts: [
+      { id: 'rc-w1', promptTh: 'แต่งประโยคขยายคนโดยใช้ "who"', hintEn: 'who', sampleAnswer: 'The employee who won the award works in finance.', sampleAnswerTh: 'พนักงานที่ได้รับรางวัลทำงานอยู่แผนกการเงิน' },
+      { id: 'rc-w2', promptTh: 'แต่งประโยคขยายสิ่งของโดยใช้ "which"', hintEn: 'which', sampleAnswer: 'The laptop which I bought last month stopped working.', sampleAnswerTh: 'แล็ปท็อปที่ฉันซื้อเมื่อเดือนที่แล้วเสียแล้ว' },
+      { id: 'rc-w3', promptTh: 'แต่งประโยคแสดงความเป็นเจ้าของโดยใช้ "whose"', hintEn: 'whose', sampleAnswer: 'The company whose products are eco-friendly is gaining popularity.', sampleAnswerTh: 'บริษัทที่มีผลิตภัณฑ์เป็นมิตรกับสิ่งแวดล้อมกำลังได้รับความนิยม' },
+    ],
     questions: [
       { id: 'rc-1', sentence: 'The employee ____ won the award works in the finance department.', choices: ['which', 'who', 'whose', 'where'], answerIndex: 1, explanation: 'ขยายคน (The employee) ใช้ "who"' },
       { id: 'rc-2', sentence: 'This is the report ____ was submitted yesterday.', choices: ['who', 'whose', 'which', 'whom'], answerIndex: 2, explanation: 'ขยายสิ่งของ (the report) ใช้ "which"' },
       { id: 'rc-3', sentence: 'The manager ____ team exceeded its targets received a bonus.', choices: ['who', 'whose', 'which', 'that'], answerIndex: 1, explanation: 'แสดงความเป็นเจ้าของ (team ของ manager) ใช้ "whose"' },
       { id: 'rc-4', sentence: 'The office ____ we used to work is being renovated.', choices: ['which', 'where', 'who', 'whose'], answerIndex: 1, explanation: 'ขยายสถานที่ (the office) ใช้ "where"' },
       { id: 'rc-5', sentence: 'The candidates ____ resumes impressed us the most will be interviewed.', choices: ['who', 'whose', 'which', 'that'], answerIndex: 1, explanation: 'แสดงความเป็นเจ้าของ (resumes ของ candidates) ใช้ "whose"' },
+      { id: 'rc-6', sentence: 'The supplier ____ products meet our quality standards will receive a long-term contract.', choices: ['which', 'whose', 'who', 'where'], answerIndex: 1, explanation: 'แสดงความเป็นเจ้าของ (products ของ supplier) ใช้ "whose"' },
+      { id: 'rc-7', sentence: 'This is the conference room ____ we hold our weekly meetings.', choices: ['which', 'who', 'where', 'whose'], answerIndex: 2, explanation: 'ขยายสถานที่ (the conference room) ใช้ "where"' },
+      { id: 'rc-8', sentence: 'The applicant ____ we interviewed yesterday seemed very confident.', choices: ['which', 'who', 'whose', 'where'], answerIndex: 1, explanation: 'ขยายคน (the applicant) ใช้ "who"' },
+      { id: 'rc-9', sentence: 'The document ____ contains the confidential figures should not be shared.', choices: ['who', 'which', 'whose', 'where'], answerIndex: 1, explanation: 'ขยายสิ่งของ (the document) ใช้ "which"' },
+      { id: 'rc-10', sentence: 'The city ____ our new branch will be located has excellent infrastructure.', choices: ['which', 'who', 'where', 'whose'], answerIndex: 2, explanation: 'ขยายสถานที่ (the city) ใช้ "where"' },
     ],
   },
   {
@@ -151,12 +193,22 @@ export const grammarTopics: GrammarTopic[] = [
       ],
       tipTh: 'เกร็ดจำง่าย: เห็น "than" → comparative เสมอ เห็น "the" คู่กับ "of all/in" → superlative เสมอ จำแค่นี้พอ!',
     },
+    writingPrompts: [
+      { id: 'cp-w1', promptTh: 'แต่งประโยคเปรียบเทียบสองสิ่งโดยใช้ comparative + than', hintEn: '...er/more...than', sampleAnswer: "This year's sales are higher than last year's.", sampleAnswerTh: 'ยอดขายปีนี้สูงกว่าปีที่แล้ว' },
+      { id: 'cp-w2', promptTh: 'แต่งประโยคเปรียบเทียบตั้งแต่ 3 สิ่งขึ้นไปโดยใช้ superlative', hintEn: 'the ...est / the most', sampleAnswer: 'This is the most efficient method we have tried.', sampleAnswerTh: 'นี่คือวิธีที่มีประสิทธิภาพที่สุดที่เราเคยลอง' },
+      { id: 'cp-w3', promptTh: 'แต่งประโยคโดยใช้โครงสร้าง "The more..., the more..."', hintEn: 'The more..., the more...', sampleAnswer: 'The more we practice, the better we become.', sampleAnswerTh: 'ยิ่งเราฝึกฝนมากเท่าไหร่ เราก็ยิ่งเก่งขึ้นเท่านั้น' },
+    ],
     questions: [
       { id: 'cp-1', sentence: 'This model is ____ than the previous version.', choices: ['efficient', 'more efficient', 'most efficient', 'efficiently'], answerIndex: 1, explanation: 'เปรียบเทียบสองสิ่งใช้ comparative "more efficient than"' },
       { id: 'cp-2', sentence: 'Of all the candidates, she has the ____ experience.', choices: ['more', 'most', 'much', 'many'], answerIndex: 1, explanation: 'เปรียบเทียบมากกว่าสองสิ่งใช้ superlative "the most"' },
       { id: 'cp-3', sentence: 'Our new office is ____ than the old one.', choices: ['spacious', 'more spacious', 'most spacious', 'spaciously'], answerIndex: 1, explanation: 'เปรียบเทียบสองสิ่งใช้ comparative + than' },
       { id: 'cp-4', sentence: 'This is by far the ____ solution we have found.', choices: ['effective', 'more effective', 'most effective', 'effectively'], answerIndex: 2, explanation: '"the ____ solution we have found" เป็น superlative (the most effective)' },
       { id: 'cp-5', sentence: 'The sooner you apply, the ____ your chances of getting an interview.', choices: ['good', 'better', 'best', 'well'], answerIndex: 1, explanation: 'โครงสร้าง "The + comparative..., the + comparative..." ใช้ better' },
+      { id: 'cp-6', sentence: "This year's conference was ____ than last year's.", choices: ['organized', 'more organized', 'most organized', 'organizedly'], answerIndex: 1, explanation: 'เปรียบเทียบสองสิ่ง (ปีนี้กับปีที่แล้ว) ใช้ comparative + than' },
+      { id: 'cp-7', sentence: 'Among all the branches, the Bangkok office generates the ____ revenue.', choices: ['high', 'higher', 'highest', 'highly'], answerIndex: 2, explanation: 'เปรียบเทียบมากกว่าสองสิ่ง (ทุกสาขา) ใช้ superlative (the highest)' },
+      { id: 'cp-8', sentence: 'The new laptop is ____ than the model we used before.', choices: ['light', 'lighter', 'lightest', 'lightly'], answerIndex: 1, explanation: 'เปรียบเทียบสองสิ่ง คำสั้นเติม -er (lighter) + than' },
+      { id: 'cp-9', sentence: 'She is one of the ____ qualified candidates we have ever interviewed.', choices: ['more', 'most', 'much', 'many'], answerIndex: 1, explanation: '"one of the ____ qualified candidates" เป็นโครงสร้าง superlative (the most qualified)' },
+      { id: 'cp-10', sentence: 'The more feedback we collect, the ____ our product becomes.', choices: ['good', 'better', 'best', 'well'], answerIndex: 1, explanation: 'โครงสร้าง "The + comparative..., the + comparative..." ใช้ better' },
     ],
   },
   {
@@ -177,6 +229,11 @@ export const grammarTopics: GrammarTopic[] = [
       ],
       tipTh: 'เกร็ดจำง่าย: he/she/it (เอกพจน์) = กริยาเติม s เสมอ (ยกเว้น modal verb เช่น can/will) ลองท่องสั้นๆ ว่า "เอกพจน์ต้องมี S ต่อท้าย"',
     },
+    writingPrompts: [
+      { id: 'bs-w1', promptTh: 'แต่งประโยคพื้นฐานโครงสร้าง S+V+O', hintEn: 'Subject + Verb + Object', sampleAnswer: 'The team completed the project on time.', sampleAnswerTh: 'ทีมงานทำโครงการเสร็จตรงเวลา' },
+      { id: 'bs-w2', promptTh: 'แต่งประโยคที่ประธานเป็นเอกพจน์ (he/she/it) โดยเติม -s ที่กริยา', hintEn: 'he/she/it + verb-s', sampleAnswer: 'She manages the customer service team.', sampleAnswerTh: 'เธอดูแลทีมบริการลูกค้า' },
+      { id: 'bs-w3', promptTh: 'แต่งประโยคที่ประธานเป็นพหูพจน์ โดยกริยาไม่เติม -s', hintEn: 'they/we + verb', sampleAnswer: 'The employees work from home on Fridays.', sampleAnswerTh: 'พนักงานทำงานจากที่บ้านในวันศุกร์' },
+    ],
     questions: [
       { id: 'bs-1', sentence: 'The manager ____ the weekly report every Monday.', choices: ['review', 'reviews', 'reviewing', 'reviewed'], answerIndex: 1, explanation: 'ประธานเอกพจน์ "The manager" (he/she/it) กริยาต้องเติม -s (reviews)' },
       { id: 'bs-2', sentence: 'All employees ____ required to attend the meeting.', choices: ['is', 'are', 'am', 'be'], answerIndex: 1, explanation: 'ประธานพหูพจน์ "All employees" ใช้ verb to be เป็น "are"' },
@@ -186,6 +243,8 @@ export const grammarTopics: GrammarTopic[] = [
       { id: 'bs-6', sentence: 'The office ____ closed on public holidays.', choices: ['is', 'are', 'am', 'were'], answerIndex: 0, explanation: 'ประธานเอกพจน์ "The office" (it) ใช้ verb to be เป็น "is"' },
       { id: 'bs-7', sentence: 'Customers ____ their orders online.', choices: ['place', 'places', 'placing', 'placed'], answerIndex: 0, explanation: 'ประธานพหูพจน์ "Customers" กริยาไม่เติม -s (place)' },
       { id: 'bs-8', sentence: 'New employees ____ orientation on their first day.', choices: ['attend', 'attends', 'attending', 'to attend'], answerIndex: 0, explanation: 'ประธานพหูพจน์ "New employees" กริยาไม่เติม -s (attend)' },
+      { id: 'bs-9', sentence: 'Each department ____ responsible for its own budget.', choices: ['is', 'are', 'am', 'be'], answerIndex: 0, explanation: '"Each department" เป็นเอกพจน์เสมอ ใช้ verb to be เป็น "is"' },
+      { id: 'bs-10', sentence: 'The two new interns ____ orientation this week.', choices: ['attend', 'attends', 'attending', 'to attend'], answerIndex: 0, explanation: 'ประธานพหูพจน์ "The two new interns" กริยาไม่เติม -s (attend)' },
     ],
   },
   {
@@ -206,6 +265,11 @@ export const grammarTopics: GrammarTopic[] = [
       ],
       tipTh: 'เกร็ดจำง่าย: เห็นคำว่า "now/right now/at the moment/Look!" ให้คิดถึง Present Continuous เห็นคำว่า "every day/always/usually/often" ให้คิดถึง Present Simple',
     },
+    writingPrompts: [
+      { id: 'pt-w1', promptTh: 'แต่งประโยคบอกกิจวัตรประจำวันโดยใช้ Present Simple', hintEn: 'usually / every day', sampleAnswer: 'He usually arrives at the office before 8 a.m.', sampleAnswerTh: 'เขามักจะมาถึงออฟฟิศก่อนแปดโมงเช้า' },
+      { id: 'pt-w2', promptTh: 'แต่งประโยคบอกสิ่งที่กำลังเกิดขึ้นตอนนี้โดยใช้ Present Continuous', hintEn: 'right now / at the moment', sampleAnswer: 'The technicians are fixing the printer right now.', sampleAnswerTh: 'ช่างเทคนิคกำลังซ่อมเครื่องพิมพ์อยู่ตอนนี้' },
+      { id: 'pt-w3', promptTh: 'แต่งประโยคบอกแผนในอนาคตอันใกล้โดยใช้ Present Continuous', hintEn: 'tomorrow / next week', sampleAnswer: 'We are launching the new product next week.', sampleAnswerTh: 'เราจะเปิดตัวผลิตภัณฑ์ใหม่ในสัปดาห์หน้า' },
+    ],
     questions: [
       { id: 'pt-1', sentence: 'She usually ____ to work by bus.', choices: ['travel', 'travels', 'is travelling', 'was travelling'], answerIndex: 1, explanation: '"usually" บ่งบอกกิจวัตร ใช้ present simple (travels)' },
       { id: 'pt-2', sentence: 'Look! The client ____ into the building right now.', choices: ['walks', 'walk', 'is walking', 'walked'], answerIndex: 2, explanation: '"Look! ... right now" บ่งบอกสิ่งที่กำลังเกิดขึ้น ใช้ present continuous (is walking)' },
@@ -215,6 +279,8 @@ export const grammarTopics: GrammarTopic[] = [
       { id: 'pt-6', sentence: 'We ____ a new client at 3 p.m. tomorrow.', choices: ['meet', 'meets', 'are meeting', 'met'], answerIndex: 2, explanation: 'แผนนัดหมายที่กำหนดไว้แล้วในอนาคตอันใกล้ ใช้ present continuous (are meeting)' },
       { id: 'pt-7', sentence: 'He ____ always late for meetings.', choices: ['is', 'are', 'am', 'be'], answerIndex: 0, explanation: 'ประธานเอกพจน์ "He" ใช้ verb to be เป็น "is"' },
       { id: 'pt-8', sentence: 'At the moment, I ____ this email to a client.', choices: ['write', 'writes', 'am writing', 'wrote'], answerIndex: 2, explanation: '"At the moment" บ่งบอกสิ่งที่กำลังเกิดขึ้น ใช้ present continuous (am writing)' },
+      { id: 'pt-9', sentence: 'The company usually ____ its financial results at the end of each quarter.', choices: ['announce', 'announces', 'is announcing', 'announced'], answerIndex: 1, explanation: '"usually" บ่งบอกกิจวัตร ใช้ present simple (announces)' },
+      { id: 'pt-10', sentence: 'Currently, the IT team ____ a new server for the office.', choices: ['installs', 'install', 'is installing', 'installed'], answerIndex: 2, explanation: '"Currently" บ่งบอกสิ่งที่กำลังเกิดขึ้น ใช้ present continuous (is installing)' },
     ],
   },
   {
@@ -235,6 +301,11 @@ export const grammarTopics: GrammarTopic[] = [
       ],
       tipTh: 'เกร็ดจำง่าย: เจอคำขึ้นต้นประโยคที่มีความหมายเชิงปฏิเสธหรือจำกัด (never, rarely, not only, no sooner, only) ให้สลับเป็นรูปคำถามทันที (กริยาช่วย + ประธาน)',
     },
+    writingPrompts: [
+      { id: 'inv-w1', promptTh: 'แต่งประโยคขึ้นต้นด้วย "Never" แล้วสลับโครงสร้างประโยค', hintEn: 'Never + auxiliary + subject', sampleAnswer: 'Never have we faced such a difficult challenge.', sampleAnswerTh: 'เราไม่เคยเจอความท้าทายที่ยากเช่นนี้มาก่อนเลย' },
+      { id: 'inv-w2', promptTh: 'แต่งประโยคขึ้นต้นด้วย "Not only...but also"', hintEn: 'Not only...but also', sampleAnswer: 'Not only did we finish early, but we also stayed under budget.', sampleAnswerTh: 'เราไม่เพียงเสร็จก่อนกำหนดเท่านั้น แต่ยังใช้งบประมาณน้อยกว่าที่ตั้งไว้ด้วย' },
+      { id: 'inv-w3', promptTh: 'แต่งประโยคขึ้นต้นด้วย "No sooner...than"', hintEn: 'No sooner...than', sampleAnswer: 'No sooner had she arrived than the meeting began.', sampleAnswerTh: 'เธอเพิ่งมาถึงไม่ทันไร การประชุมก็เริ่มขึ้นทันที' },
+    ],
     questions: [
       { id: 'inv-1', sentence: '____ such a competitive market before entering Asia.', choices: ['The company had never faced', 'Never had the company faced', 'Never the company had faced', 'The company never had faced'], answerIndex: 1, explanation: 'ขึ้นต้นด้วย "Never" ต้องสลับโครงสร้างเป็น Never + had + subject + faced' },
       { id: 'inv-2', sentence: 'Not only ____ the deadline, but she also improved the quality of the report.', choices: ['did she meet', 'she met', 'she did meet', 'met she'], answerIndex: 0, explanation: 'ขึ้นต้นด้วย "Not only" ต้องสลับโครงสร้างเป็น did + subject + verb' },
@@ -244,6 +315,8 @@ export const grammarTopics: GrammarTopic[] = [
       { id: 'inv-6', sentence: 'Hardly ____ the presentation when the fire alarm went off.', choices: ['had she started', 'she had started', 'did she start', 'she started'], answerIndex: 0, explanation: '"Hardly...when" ต้องสลับโครงสร้างเป็น had + subject + started' },
       { id: 'inv-7', sentence: 'Not until the client signed the agreement ____ begin the project.', choices: ['did we', 'we did', 'we could', 'could we'], answerIndex: 0, explanation: '"Not until..." ต้องสลับโครงสร้างในประโยคหลักเป็น did + subject + verb base' },
       { id: 'inv-8', sentence: 'Under no circumstances ____ personal data with third parties.', choices: ['should employees share', 'employees should share', 'should share employees', 'employees share should'], answerIndex: 0, explanation: '"Under no circumstances" เป็นวลีเชิงปฏิเสธ ต้องสลับเป็น should + subject + verb base' },
+      { id: 'inv-9', sentence: 'Little ____ that the merger would face such strong opposition.', choices: ['did the board realize', 'the board realized', 'the board did realize', 'realized the board'], answerIndex: 0, explanation: 'ขึ้นต้นด้วย "Little" (เชิงปฏิเสธ) ต้องสลับเป็น did + subject + verb base' },
+      { id: 'inv-10', sentence: 'So quickly ____ the situation escalate that management had to intervene immediately.', choices: ['did', 'has', 'was', 'is'], answerIndex: 0, explanation: 'โครงสร้าง "So + adverb + did + subject + verb base + that..." ใช้เน้นความรวดเร็ว' },
     ],
   },
   {
@@ -264,6 +337,11 @@ export const grammarTopics: GrammarTopic[] = [
       ],
       tipTh: 'เกร็ดจำง่าย: หลัง suggest, recommend, require, insist, demand หรือ it is essential/important that ให้ใช้กริยารูปเดิม (base form) เสมอ ไม่ว่าประธานจะเป็นใคร',
     },
+    writingPrompts: [
+      { id: 'mix-w1', promptTh: 'แต่งประโยคเงื่อนไขแบบผสม: เงื่อนไขในอดีต ผลลัพธ์ในปัจจุบัน', hintEn: 'If + had + past participle, ...would + verb', sampleAnswer: 'If we had invested earlier, we would be ahead of our competitors now.', sampleAnswerTh: 'ถ้าเราลงทุนไปตั้งแต่แรก ตอนนี้เราคงนำหน้าคู่แข่งไปแล้ว' },
+      { id: 'mix-w2', promptTh: 'แต่งประโยคโดยใช้ subjunctive หลังคำว่า "recommend that"', hintEn: 'recommend that + verb base', sampleAnswer: 'The consultant recommended that the team revise the proposal.', sampleAnswerTh: 'ที่ปรึกษาแนะนำให้ทีมแก้ไขข้อเสนอ' },
+      { id: 'mix-w3', promptTh: 'แต่งประโยคโดยใช้โครงสร้าง "It is important that..."', hintEn: 'It is important that + verb base', sampleAnswer: 'It is important that everyone follow the new safety guidelines.', sampleAnswerTh: 'ทุกคนจำเป็นต้องปฏิบัติตามแนวทางความปลอดภัยใหม่' },
+    ],
     questions: [
       { id: 'mix-1', sentence: 'If the team ____ the deadline last month, the client would still trust us now.', choices: ['met', 'had met', 'would meet', 'meets'], answerIndex: 1, explanation: 'เงื่อนไขในอดีต ผลลัพธ์ในปัจจุบัน ใช้ If + had + past participle' },
       { id: 'mix-2', sentence: 'If he were more detail-oriented, he ____ the error before submission.', choices: ['would catch', 'would have caught', 'caught', 'catches'], answerIndex: 1, explanation: 'เงื่อนไขที่เป็นจริงเสมอ ผลลัพธ์ในอดีต ใช้ would have + past participle' },
@@ -273,6 +351,8 @@ export const grammarTopics: GrammarTopic[] = [
       { id: 'mix-6', sentence: 'The auditor insisted that the records ____ reviewed again.', choices: ['are', 'were', 'be', 'will be'], answerIndex: 2, explanation: 'หลัง insist that ต้องใช้ subjunctive (be reviewed)' },
       { id: 'mix-7', sentence: 'If the software were more reliable, we ____ so many complaints last quarter.', choices: ['wouldn\'t receive', 'wouldn\'t have received', 'don\'t receive', 'didn\'t receive'], answerIndex: 1, explanation: 'เงื่อนไขที่เป็นจริงเสมอ ผลลัพธ์ในอดีต ใช้ would not have + past participle' },
       { id: 'mix-8', sentence: 'It is important that the contract ____ before the deadline.', choices: ['is signed', 'signed', 'be signed', 'will sign'], answerIndex: 2, explanation: 'หลัง It is important that ต้องใช้ subjunctive (be signed)' },
+      { id: 'mix-9', sentence: 'If the manager had approved the budget sooner, the project ____ finished by now.', choices: ['would be', 'would have been', 'was', 'is'], answerIndex: 0, explanation: 'เงื่อนไขในอดีต ผลลัพธ์ในปัจจุบัน ใช้ would + verb base (would be)' },
+      { id: 'mix-10', sentence: 'The HR department requires that every new hire ____ an orientation session.', choices: ['attends', 'attend', 'attended', 'will attend'], answerIndex: 1, explanation: 'หลัง require that ต้องใช้ subjunctive (verb base: attend)' },
     ],
   },
   {
@@ -293,6 +373,11 @@ export const grammarTopics: GrammarTopic[] = [
       ],
       tipTh: 'เกร็ดจำง่าย: เห็น It is/was...that แปลว่ากำลังเน้นคำนาม เห็น What...is แปลว่ากำลังเน้นการกระทำหรือสิ่งของที่ต้องการ',
     },
+    writingPrompts: [
+      { id: 'clft-w1', promptTh: 'แต่งประโยคเน้นความโดยใช้ "It is/was...that"', hintEn: 'It is/was...that', sampleAnswer: 'It was the marketing team that came up with the winning idea.', sampleAnswerTh: 'ทีมการตลาดต่างหากที่คิดไอเดียที่ชนะขึ้นมา' },
+      { id: 'clft-w2', promptTh: 'แต่งประโยคเน้นความโดยขึ้นต้นด้วย "What"', hintEn: 'What...is', sampleAnswer: 'What the client wants most is faster delivery.', sampleAnswerTh: 'สิ่งที่ลูกค้าต้องการมากที่สุดคือการจัดส่งที่เร็วขึ้น' },
+      { id: 'clft-w3', promptTh: 'แต่งประโยคโดยใช้โครงสร้าง "All + clause + is"', hintEn: 'All...is', sampleAnswer: 'All we need is a little more time.', sampleAnswerTh: 'สิ่งเดียวที่เราต้องการคือเวลาอีกนิดหน่อย' },
+    ],
     questions: [
       { id: 'clft-1', sentence: 'It was Sarah ____ closed the biggest deal this year.', choices: ['that', 'whom', 'whose', 'which'], answerIndex: 0, explanation: 'โครงสร้าง It was...that ใช้เน้นบุคคล/สิ่งที่ต้องการเน้น' },
       { id: 'clft-2', sentence: '____ the company needs is a bigger marketing budget.', choices: ['What', 'That', 'Which', 'It'], answerIndex: 0, explanation: 'ขึ้นต้นประโยคด้วย What เพื่อเน้นสิ่งที่ต้องการ' },
@@ -301,6 +386,9 @@ export const grammarTopics: GrammarTopic[] = [
       { id: 'clft-5', sentence: 'It is the new pricing strategy ____ has boosted our market share.', choices: ['that', 'who', 'whom', 'whose'], answerIndex: 0, explanation: 'โครงสร้าง It is...that ใช้เน้นสิ่งของ/แนวคิดที่ต้องการเน้น' },
       { id: 'clft-6', sentence: 'All the manager wants ____ a clear weekly report.', choices: ['is', 'be', 'are', 'was being'], answerIndex: 0, explanation: 'โครงสร้าง All + clause + is ใช้เน้นว่ามีเพียงสิ่งเดียวที่ต้องการ' },
       { id: 'clft-7', sentence: 'It was in 2022 ____ the merger was finally completed.', choices: ['that', 'when', 'which', 'where'], answerIndex: 0, explanation: 'โครงสร้าง It was...that ใช้เน้นช่วงเวลา (in 2022)' },
+      { id: 'clft-8', sentence: '____ the client complained about was the delayed delivery, not the product quality.', choices: ['What', 'That', 'It', 'Which'], answerIndex: 0, explanation: 'ขึ้นต้นประโยคด้วย What เพื่อเน้นสิ่งที่เกิดขึ้น' },
+      { id: 'clft-9', sentence: 'It is our customer support team ____ truly sets us apart from competitors.', choices: ['that', 'who', 'whom', 'which'], answerIndex: 0, explanation: 'โครงสร้าง It is...that ใช้เน้นสิ่งที่ต้องการเน้นเป็นพิเศษ' },
+      { id: 'clft-10', sentence: 'All we ask ____ a little more time to finish the audit.', choices: ['is', 'are', 'be', 'was being'], answerIndex: 0, explanation: 'โครงสร้าง All + clause + is ใช้เน้นว่ามีเพียงสิ่งเดียวที่ต้องการ' },
     ],
   },
 ]

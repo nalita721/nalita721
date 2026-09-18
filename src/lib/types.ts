@@ -40,6 +40,14 @@ export interface GrammarLesson {
   tipTh: string
 }
 
+export interface WritingPrompt {
+  id: string
+  promptTh: string
+  hintEn: string
+  sampleAnswer: string
+  sampleAnswerTh: string
+}
+
 export interface GrammarTopic {
   id: string
   title: string
@@ -47,6 +55,7 @@ export interface GrammarTopic {
   description: string
   cefrLevel: CefrCode
   lesson: GrammarLesson
+  writingPrompts: WritingPrompt[]
   questions: GrammarQuestion[]
 }
 

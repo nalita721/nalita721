@@ -100,8 +100,8 @@ export default function GrammarLessonPage() {
         <p className="text-sm text-stone-700">{lesson.tipTh}</p>
       </Card>
 
-      <Link to={`/grammar/${topic.id}/practice`}>
-        <Button className="w-full py-3 text-base shadow-sm">🚀 พร้อมแล้ว! เริ่มฝึกหัด {topic.questions.length} ข้อ →</Button>
+      <Link to={`/grammar/${topic.id}/writing`}>
+        <Button className="w-full py-3 text-base shadow-sm">✍️ พร้อมแล้ว! ไปฝึกแต่งประโยค →</Button>
       </Link>
     </div>
   )
