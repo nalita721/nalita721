@@ -12,6 +12,12 @@ function formatTime(sec: number) {
   return `${m}:${s.toString().padStart(2, '0')}`
 }
 
+/** Safari's MediaRecorder doesn't support 'audio/webm' at all — it records audio/mp4 by default. */
+function pickSupportedMimeType(): string | undefined {
+  if (typeof MediaRecorder === 'undefined' || !MediaRecorder.isTypeSupported) return undefined
+  return ['audio/webm', 'audio/mp4', 'audio/aac', 'audio/ogg'].find((type) => MediaRecorder.isTypeSupported(type))
+}
+
 export default function SpeakingPage() {
   const [index, setIndex] = useState(0)
   const [recording, setRecording] = useState(false)
@@ -41,13 +47,14 @@ export default function SpeakingPage() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
       streamRef.current = stream
-      const recorder = new MediaRecorder(stream)
+      const mimeType = pickSupportedMimeType()
+      const recorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream)
       chunksRef.current = []
       recorder.ondataavailable = (e) => {
         if (e.data.size > 0) chunksRef.current.push(e.data)
       }
       recorder.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: 'audio/webm' })
+        const blob = new Blob(chunksRef.current, { type: recorder.mimeType || mimeType || 'audio/webm' })
         setAudioUrl(URL.createObjectURL(blob))
         stream.getTracks().forEach((t) => t.stop())
       }
