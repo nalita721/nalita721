@@ -214,7 +214,7 @@ export default function LevelTestPage() {
         <span className="text-xs uppercase tracking-wide text-stone-400">{SKILL_LABELS[item.skill]}</span>
 
         {item.audioScript && (
-          <Button variant="secondary" onClick={() => speak(item.audioScript!)}>
+          <Button variant="secondary" onClick={() => speak(item.audioScript!, 'US', 0.8)}>
             ▶️ ฟังเสียง
           </Button>
         )}

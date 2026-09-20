@@ -93,7 +93,7 @@ export default function ListeningPracticePage() {
           )}
 
           {!audioOnly && (
-            <Button variant="secondary" onClick={() => speak(item.script, accent)}>
+            <Button variant="secondary" onClick={() => speak(item.script, accent, 0.8)}>
               ▶️ ฟัง{partNum === 3 ? 'บทสนทนา' : 'ประกาศ'}
             </Button>
           )}
@@ -106,7 +106,7 @@ export default function ListeningPracticePage() {
                 {audioOnly && (
                   <button
                     type="button"
-                    onClick={() => speak(choice, accent)}
+                    onClick={() => speak(choice, accent, 0.8)}
                     className="shrink-0 rounded-lg border border-sand-200 px-2 py-2 text-sm hover:bg-sand-50"
                     aria-label={`ฟังตัวเลือก ${String.fromCharCode(65 + i)}`}
                   >

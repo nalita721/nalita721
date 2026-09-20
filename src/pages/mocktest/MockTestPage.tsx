@@ -189,7 +189,7 @@ export default function MockTestPage() {
         )}
 
         {q.audioScript && (
-          <Button variant="secondary" onClick={() => speak(q.audioScript!)}>▶️ ฟังเสียง</Button>
+          <Button variant="secondary" onClick={() => speak(q.audioScript!, 'US', 0.8)}>▶️ ฟังเสียง</Button>
         )}
 
         {q.context && (
