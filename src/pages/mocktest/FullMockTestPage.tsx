@@ -34,6 +34,8 @@ export default function FullMockTestPage() {
   const [phase, setPhase] = useState<'intro' | 'running' | 'finished'>('intro')
   const [itemIndex, setItemIndex] = useState(0)
   const [answers, setAnswers] = useState<Record<string, number>>({})
+  const [finalAnswers, setFinalAnswers] = useState<Record<string, number>>({})
+  const [showReview, setShowReview] = useState(false)
   const [accent, setAccent] = useState<Accent>('US')
   const addMockResult = useProgressStore((s) => s.addMockResult)
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
@@ -54,6 +56,7 @@ export default function FullMockTestPage() {
     setPhase('running')
     setItemIndex(0)
     setAnswers({})
+    setShowReview(false)
     start()
   }
 
@@ -69,19 +72,27 @@ export default function FullMockTestPage() {
     }
   }
 
-  function finish(finalAnswers: Record<string, number>) {
+  function skipItem() {
+    if (isLastItem) {
+      finish(answers)
+    } else {
+      setItemIndex((i) => i + 1)
+    }
+  }
+
+  function finish(finalAnswersArg: Record<string, number>) {
     const listeningQs = items.filter((it) => it.section === 'listening').flatMap((it) => it.questions)
     const readingQs = items.filter((it) => it.section === 'reading').flatMap((it) => it.questions)
 
-    const listeningCorrect = listeningQs.filter((q) => finalAnswers[q.id] === q.answerIndex).length
-    const readingCorrect = readingQs.filter((q) => finalAnswers[q.id] === q.answerIndex).length
+    const listeningCorrect = listeningQs.filter((q) => finalAnswersArg[q.id] === q.answerIndex).length
+    const readingCorrect = readingQs.filter((q) => finalAnswersArg[q.id] === q.answerIndex).length
 
     const listeningScore = toScoreBand(listeningCorrect, listeningQs.length)
     const readingScore = toScoreBand(readingCorrect, readingQs.length)
 
     items.forEach((it) => {
       it.questions.forEach((q) => {
-        recordAnswer(it.section, finalAnswers[q.id] === q.answerIndex)
+        recordAnswer(it.section, finalAnswersArg[q.id] === q.answerIndex)
       })
     })
 
@@ -93,6 +104,7 @@ export default function FullMockTestPage() {
       readingScore,
       durationSec: examSet.durationSec - secondsLeft,
     })
+    setFinalAnswers(finalAnswersArg)
     setPhase('finished')
     playCompleteSound()
   }
@@ -119,26 +131,74 @@ export default function FullMockTestPage() {
     const results = useProgressStore.getState().mockResults
     const last = results[results.length - 1]
     return (
-      <Card className="max-w-xl mx-auto text-center py-10 space-y-3">
-        <p className="text-2xl">🏆</p>
-        <h1 className="text-xl font-bold text-stone-800">สรุปผล Full Mock Test — {examSet.label}</h1>
-        {last && (
-          <>
-            <p className="text-3xl font-bold text-brand-600">{last.totalScore} / 990</p>
-            <div className="flex justify-center gap-6 text-sm text-stone-600 mt-2">
-              <span>Listening: {last.listeningScore}/495</span>
-              <span>Reading: {last.readingScore}/495</span>
-            </div>
-            <p className="text-xs text-stone-400">ใช้เวลาทำข้อสอบ {Math.round(last.durationSec / 60)} นาที</p>
-          </>
+      <div className={`mx-auto space-y-4 ${showReview ? 'max-w-3xl' : 'max-w-xl'}`}>
+        <Card className="text-center py-10 space-y-3">
+          <p className="text-2xl">🏆</p>
+          <h1 className="text-xl font-bold text-stone-800">สรุปผล Full Mock Test — {examSet.label}</h1>
+          {last && (
+            <>
+              <p className="text-3xl font-bold text-brand-600">{last.totalScore} / 990</p>
+              <div className="flex justify-center gap-6 text-sm text-stone-600 mt-2">
+                <span>Listening: {last.listeningScore}/495</span>
+                <span>Reading: {last.readingScore}/495</span>
+              </div>
+              <p className="text-xs text-stone-400">ใช้เวลาทำข้อสอบ {Math.round(last.durationSec / 60)} นาที</p>
+            </>
+          )}
+          <div className="flex flex-wrap gap-3 justify-center pt-4">
+            <Button onClick={beginTest}>ทำอีกครั้ง</Button>
+            <Button variant="secondary" onClick={() => setShowReview((v) => !v)}>
+              {showReview ? 'ซ่อนเฉลย' : '📋 ดูเฉลย'}
+            </Button>
+            <Link to="/dashboard">
+              <Button variant="secondary">กลับหน้าแดชบอร์ด</Button>
+            </Link>
+          </div>
+        </Card>
+
+        {showReview && (
+          <div className="space-y-3">
+            {items.map((it, itemIdx) => (
+              <Card key={itemIdx}>
+                <p className="text-xs font-semibold text-brand-600 mb-2">{PART_LABELS[it.part]}</p>
+                <div className="space-y-4">
+                  {it.questions.map((q) => {
+                    const userAnswer = finalAnswers[q.id]
+                    return (
+                      <div key={q.id}>
+                        <p className="text-sm font-medium text-stone-800 mb-2">{q.question}</p>
+                        <div className="space-y-1.5">
+                          {q.choices.map((choice, ci) => {
+                            const isCorrect = ci === q.answerIndex
+                            const isUserWrong = ci === userAnswer && !isCorrect
+                            return (
+                              <p
+                                key={ci}
+                                className={`text-sm rounded-lg px-3 py-1.5 ${
+                                  isCorrect
+                                    ? 'bg-emerald-50 text-emerald-700 font-medium'
+                                    : isUserWrong
+                                      ? 'bg-rose-50 text-rose-700'
+                                      : 'text-stone-500'
+                                }`}
+                              >
+                                {String.fromCharCode(65 + ci)}. {choice}
+                                {isCorrect && ' ✓'}
+                                {isUserWrong && ' (คำตอบของคุณ)'}
+                              </p>
+                            )
+                          })}
+                          {userAnswer === undefined && <p className="text-xs text-stone-400 italic">ไม่ได้ตอบ/ข้าม</p>}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </Card>
+            ))}
+          </div>
         )}
-        <div className="flex gap-3 justify-center pt-4">
-          <Button onClick={beginTest}>ทำอีกครั้ง</Button>
-          <Link to="/dashboard">
-            <Button variant="secondary">กลับหน้าแดชบอร์ด</Button>
-          </Link>
-        </div>
-      </Card>
+      </div>
     )
   }
 
@@ -235,9 +295,14 @@ export default function FullMockTestPage() {
           ))}
         </div>
 
-        <Button onClick={goNext} disabled={!allCurrentAnswered} data-testid="next-button">
-          {isLastItem ? 'ส่งข้อสอบ' : 'ข้อถัดไป →'}
-        </Button>
+        <div className="flex items-center gap-3">
+          <Button onClick={goNext} disabled={!allCurrentAnswered} data-testid="next-button" className="flex-1 justify-center">
+            {isLastItem ? 'ส่งข้อสอบ' : 'ข้อถัดไป →'}
+          </Button>
+          <button onClick={skipItem} className="text-xs text-stone-400 hover:text-stone-600 transition shrink-0">
+            ข้ามข้อนี้ →
+          </button>
+        </div>
       </Card>
     </div>
   )
