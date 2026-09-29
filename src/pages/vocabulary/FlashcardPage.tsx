@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Heart,
+  Lightbulb,
   Plane,
   RotateCcw,
   Target,
@@ -182,6 +183,16 @@ export default function FlashcardPage() {
                   <Volume2 size={16} />
                 </button>
               </div>
+
+              {word.mnemonicTh && (
+                <div className="rounded-xl bg-amber-50 border border-amber-200 px-4 py-3 flex items-start gap-2.5">
+                  <Lightbulb size={16} className="text-amber-500 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-xs font-semibold text-amber-700 mb-1">เคล็ดลับจำคำนี้</p>
+                    <p className="text-sm text-amber-800">{word.mnemonicTh}</p>
+                  </div>
+                </div>
+              )}
 
               {word.synonym && (
                 <details className="group">

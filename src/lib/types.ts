@@ -2,6 +2,7 @@ export interface VocabWord {
   id: string
   term: string
   pronunciationTh: string
+  mnemonicTh: string
   pos: string
   meaningTh: string
   synonym?: string
