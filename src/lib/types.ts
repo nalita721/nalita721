@@ -1,6 +1,7 @@
 export interface VocabWord {
   id: string
   term: string
+  pronunciationTh: string
   pos: string
   meaningTh: string
   synonym?: string

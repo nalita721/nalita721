@@ -165,6 +165,7 @@ export default function FlashcardPage() {
               <div className="flex flex-col items-center text-center gap-2">
                 <span className="rounded-full bg-brand-50 text-brand-700 text-xs font-semibold px-3 py-1 uppercase tracking-wide">{word.pos}</span>
                 <h2 className="text-3xl font-bold text-stone-800">{word.term}</h2>
+                <p className="text-sm text-brand-500 font-medium">อ่านว่า “{word.pronunciationTh}”</p>
                 <button onClick={() => speak(word.term)} type="button" className="flex items-center gap-1.5 text-sm text-stone-400 hover:text-brand-600 transition">
                   <Volume2 size={16} /> ฟังเสียง
                 </button>
