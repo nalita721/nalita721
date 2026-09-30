@@ -214,9 +214,8 @@ export default function FlashcardPage() {
                 <button
                   type="button"
                   onClick={() => startRecall(1)}
-                  className="group relative flex flex-col items-center gap-1.5 rounded-2xl border-2 border-rose-200 bg-rose-50 px-2 py-3.5 text-center transition hover:-translate-y-0.5 hover:shadow-md hover:border-rose-300 active:scale-95 active:translate-y-0"
+                  className="group flex flex-col items-center gap-1.5 rounded-2xl border-2 border-rose-200 bg-rose-50 px-2 py-3.5 text-center transition hover:-translate-y-0.5 hover:shadow-md hover:border-rose-300 active:scale-95 active:translate-y-0"
                 >
-                  <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-white/80 text-[9px] font-semibold text-rose-400 flex items-center justify-center">1</span>
                   <span className="w-9 h-9 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center transition group-hover:scale-110">
                     <X size={16} />
                   </span>
@@ -227,9 +226,8 @@ export default function FlashcardPage() {
                 <button
                   type="button"
                   onClick={() => startRecall(3)}
-                  className="group relative flex flex-col items-center gap-1.5 rounded-2xl border-2 border-amber-200 bg-amber-50 px-2 py-3.5 text-center transition hover:-translate-y-0.5 hover:shadow-md hover:border-amber-300 active:scale-95 active:translate-y-0"
+                  className="group flex flex-col items-center gap-1.5 rounded-2xl border-2 border-amber-200 bg-amber-50 px-2 py-3.5 text-center transition hover:-translate-y-0.5 hover:shadow-md hover:border-amber-300 active:scale-95 active:translate-y-0"
                 >
-                  <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-white/80 text-[9px] font-semibold text-amber-500 flex items-center justify-center">2</span>
                   <span className="w-9 h-9 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center transition group-hover:scale-110">
                     <RotateCcw size={16} />
                   </span>
@@ -240,9 +238,8 @@ export default function FlashcardPage() {
                 <button
                   type="button"
                   onClick={() => startRecall(5)}
-                  className="group relative flex flex-col items-center gap-1.5 rounded-2xl border-2 border-emerald-200 bg-emerald-50 px-2 py-3.5 text-center transition hover:-translate-y-0.5 hover:shadow-md hover:border-emerald-300 active:scale-95 active:translate-y-0"
+                  className="group flex flex-col items-center gap-1.5 rounded-2xl border-2 border-emerald-200 bg-emerald-50 px-2 py-3.5 text-center transition hover:-translate-y-0.5 hover:shadow-md hover:border-emerald-300 active:scale-95 active:translate-y-0"
                 >
-                  <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-white/80 text-[9px] font-semibold text-emerald-500 flex items-center justify-center">3</span>
                   <span className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center transition group-hover:scale-110">
                     <Check size={16} />
                   </span>
