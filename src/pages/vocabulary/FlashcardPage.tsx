@@ -210,25 +210,45 @@ export default function FlashcardPage() {
                 </details>
               )}
 
-              <div className="grid grid-cols-3 gap-2 mt-1">
-                <div className="flex flex-col items-center gap-1">
-                  <Button variant="danger" className="w-full justify-center" onClick={() => startRecall(1)}>
-                    <X size={14} /> จำไม่ได้
-                  </Button>
-                  <span className="text-[10px] text-stone-300">1</span>
-                </div>
-                <div className="flex flex-col items-center gap-1">
-                  <Button variant="secondary" className="w-full justify-center" onClick={() => startRecall(3)}>
-                    <RotateCcw size={14} /> ทบทวนอีกครั้ง
-                  </Button>
-                  <span className="text-[10px] text-stone-300">2</span>
-                </div>
-                <div className="flex flex-col items-center gap-1">
-                  <Button variant="success" className="w-full justify-center" onClick={() => startRecall(5)}>
-                    <Check size={14} /> จำได้
-                  </Button>
-                  <span className="text-[10px] text-stone-300">3</span>
-                </div>
+              <div className="grid grid-cols-3 gap-2.5 mt-1">
+                <button
+                  type="button"
+                  onClick={() => startRecall(1)}
+                  className="group relative flex flex-col items-center gap-1.5 rounded-2xl border-2 border-rose-200 bg-rose-50 px-2 py-3.5 text-center transition hover:-translate-y-0.5 hover:shadow-md hover:border-rose-300 active:scale-95 active:translate-y-0"
+                >
+                  <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-white/80 text-[9px] font-semibold text-rose-400 flex items-center justify-center">1</span>
+                  <span className="w-9 h-9 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center transition group-hover:scale-110">
+                    <X size={16} />
+                  </span>
+                  <span className="text-sm font-semibold text-rose-700">จำไม่ได้เลย</span>
+                  <span className="text-[10px] text-rose-400 leading-tight">นึกไม่ออก ขอดูคำตอบ</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => startRecall(3)}
+                  className="group relative flex flex-col items-center gap-1.5 rounded-2xl border-2 border-amber-200 bg-amber-50 px-2 py-3.5 text-center transition hover:-translate-y-0.5 hover:shadow-md hover:border-amber-300 active:scale-95 active:translate-y-0"
+                >
+                  <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-white/80 text-[9px] font-semibold text-amber-500 flex items-center justify-center">2</span>
+                  <span className="w-9 h-9 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center transition group-hover:scale-110">
+                    <RotateCcw size={16} />
+                  </span>
+                  <span className="text-sm font-semibold text-amber-700">จำได้ลางๆ</span>
+                  <span className="text-[10px] text-amber-500 leading-tight">ไม่มั่นใจ อยากเจอไวๆ</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => startRecall(5)}
+                  className="group relative flex flex-col items-center gap-1.5 rounded-2xl border-2 border-emerald-200 bg-emerald-50 px-2 py-3.5 text-center transition hover:-translate-y-0.5 hover:shadow-md hover:border-emerald-300 active:scale-95 active:translate-y-0"
+                >
+                  <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-white/80 text-[9px] font-semibold text-emerald-500 flex items-center justify-center">3</span>
+                  <span className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center transition group-hover:scale-110">
+                    <Check size={16} />
+                  </span>
+                  <span className="text-sm font-semibold text-emerald-700">จำได้แม่นยำ</span>
+                  <span className="text-[10px] text-emerald-500 leading-tight">มั่นใจเต็มที่</span>
+                </button>
               </div>
             </Card>
 
