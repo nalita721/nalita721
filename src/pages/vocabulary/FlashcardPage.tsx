@@ -62,9 +62,13 @@ export default function FlashcardPage() {
     setRecallOpen(true)
   }
 
+  function normalizeForCompare(text: string) {
+    return text.trim().toLowerCase().replace(/[-\s]+/g, ' ')
+  }
+
   function checkRecall() {
     if (!word || !recallInput.trim()) return
-    const correct = recallInput.trim().toLowerCase() === word.term.toLowerCase()
+    const correct = normalizeForCompare(recallInput) === normalizeForCompare(word.term)
     setRecallCorrect(correct)
     setRecallChecked(true)
     if (correct) playCorrectSound()
