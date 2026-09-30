@@ -71,9 +71,16 @@ export default function FlashcardPage() {
     else playIncorrectSound()
   }
 
+  function revealAnswer() {
+    setRecallChecked(true)
+    setRecallCorrect(false)
+  }
+
   function handleAnswer() {
     if (!word || pendingQuality === null) return
-    reviewWord(word.id, pendingQuality)
+    // Claimed "จำได้" but typed it wrong: don't let the SRS trust a false claim — treat it like a shaky recall instead.
+    const effectiveQuality = pendingQuality === 5 && recallChecked && !recallCorrect ? 3 : pendingQuality
+    reviewWord(word.id, effectiveQuality)
     touchStreak()
     setReviewedCount((c) => c + 1)
     setRecallOpen(false)
@@ -262,11 +269,46 @@ export default function FlashcardPage() {
         )}
       </div>
 
-      {!done && recallOpen && word && (
+      {!done && recallOpen && word && pendingQuality === 1 && (
         <Modal>
           <Card className="space-y-4">
             <div>
-              <p className="font-semibold text-stone-800">✍️ เขียนทบทวนคำศัพท์</p>
+              <p className="font-semibold text-stone-800">📖 ไม่เป็นไร ดูคำตอบแล้วจำใหม่กันอีกครั้ง</p>
+              <p className="text-xs text-stone-500 mt-1">การเห็นคำตอบทันทีช่วยให้จำแบบไม่ผิดเพี้ยน ดีกว่าเดาสุ่ม</p>
+            </div>
+            <div className="rounded-xl bg-sand-50 border border-sand-200 px-4 py-3 space-y-1.5">
+              <p className="text-2xl font-bold text-stone-800">{word.term}</p>
+              <p className="text-sm text-brand-500 font-medium">อ่านว่า "{word.pronunciationTh}"</p>
+              <p className="text-sm text-stone-600">{word.meaningTh}</p>
+              {word.mnemonicTh && (
+                <p className="text-xs text-amber-700 flex items-start gap-1.5 pt-1">
+                  <Lightbulb size={13} className="text-amber-500 shrink-0 mt-0.5" /> {word.mnemonicTh}
+                </p>
+              )}
+            </div>
+            <div>
+              <p className="text-xs text-stone-500 mb-1.5">พิมพ์คำนี้ตามที่เห็นสักครั้งเพื่อฝึกจำ (ไม่บังคับ)</p>
+              <input
+                autoFocus
+                value={recallInput}
+                onChange={(e) => setRecallInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleAnswer()}
+                placeholder={word.term}
+                className="w-full rounded-xl border border-sand-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500"
+              />
+            </div>
+            <Button onClick={handleAnswer} className="w-full justify-center">เข้าใจแล้ว ไปคำถัดไป →</Button>
+          </Card>
+        </Modal>
+      )}
+
+      {!done && recallOpen && word && pendingQuality !== 1 && (
+        <Modal>
+          <Card className="space-y-4">
+            <div>
+              <p className="font-semibold text-stone-800">
+                {pendingQuality === 5 ? '✅ พิสูจน์ว่าจำได้จริง! พิมพ์คำศัพท์' : '🤔 ลองพิมพ์ทบทวนอีกครั้ง'}
+              </p>
               <p className="text-xs text-stone-500 mt-1">พิมพ์คำศัพท์ภาษาอังกฤษของคำที่เพิ่งเรียนก่อนไปคำถัดไป</p>
             </div>
             <p className="text-sm text-stone-600">ความหมาย: <span className="font-medium text-stone-800">{word.meaningTh}</span></p>
@@ -281,11 +323,18 @@ export default function FlashcardPage() {
             />
             {recallChecked && (
               <p className={`text-sm ${recallCorrect ? 'text-emerald-600' : 'text-rose-600'}`}>
-                {recallCorrect ? '✅ ถูกต้อง! เขียนได้แม่นยำ' : `❌ คำตอบที่ถูกต้องคือ "${word.term}"`}
+                {recallCorrect
+                  ? '✅ ถูกต้อง! เขียนได้แม่นยำ'
+                  : `❌ คำตอบที่ถูกต้องคือ "${word.term}"${pendingQuality === 5 ? ' — ครั้งหน้าจะเจอคำนี้เร็วขึ้นเพื่อทบทวน' : ''}`}
               </p>
             )}
             {!recallChecked ? (
-              <Button onClick={checkRecall} disabled={!recallInput.trim()} className="w-full justify-center">ตรวจคำตอบ</Button>
+              <div className="space-y-2">
+                <Button onClick={checkRecall} disabled={!recallInput.trim()} className="w-full justify-center">ตรวจคำตอบ</Button>
+                <button onClick={revealAnswer} type="button" className="w-full text-center text-xs text-stone-400 hover:text-brand-600 transition">
+                  ไม่แน่ใจ? ดูเฉลยเลย
+                </button>
+              </div>
             ) : (
               <Button onClick={handleAnswer} className="w-full justify-center">ถัดไป →</Button>
             )}
