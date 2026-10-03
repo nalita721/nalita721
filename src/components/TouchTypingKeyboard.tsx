@@ -42,51 +42,48 @@ export function Keyboard({ activeKey }: { activeKey: string }) {
 
 // Drawn canonically as a left hand (thumb on the inner/right side); the right hand
 // is the same drawing mirrored horizontally, so finger geometry only needs to live here once.
+// Styled as a bold flat icon (closely-packed fingers, hooked thumb) rather than an
+// anatomical illustration, matching the reference the user asked for.
 const FINGER_SHAPE = [
-  { key: 'pinky', x: 32, length: 40, rotate: -14 },
-  { key: 'ring', x: 56, length: 54, rotate: -5 },
-  { key: 'middle', x: 80, length: 60, rotate: 4 },
-  { key: 'index', x: 104, length: 50, rotate: 13 },
+  { key: 'pinky', x: 38, length: 46, rotate: -6 },
+  { key: 'ring', x: 58, length: 58, rotate: -2 },
+  { key: 'middle', x: 78, length: 62, rotate: 2 },
+  { key: 'index', x: 98, length: 54, rotate: 6 },
 ] as const
 
-const BASE_Y = 64
+const BASE_Y = 66
 
 function FingerShape({ x, length, rotate, active }: { x: number; length: number; rotate: number; active: boolean }) {
-  const width = 19
+  const width = 20
   const y = BASE_Y - length
   return (
-    <g transform={`rotate(${rotate} ${x} ${BASE_Y})`} className="transition-transform">
-      <rect
-        x={x - width / 2}
-        y={y}
-        width={width}
-        height={length}
-        rx={width / 2}
-        className={`transition-colors duration-150 ${active ? 'fill-rose-400 stroke-rose-500' : 'fill-amber-100 stroke-amber-300'}`}
-        strokeWidth="1.5"
-      />
-      {/* fingernail */}
-      <rect x={x - width / 2 + 4} y={y + 6} width={width - 8} height={length * 0.3} rx={(width - 8) / 2} className={active ? 'fill-rose-300' : 'fill-amber-50'} opacity="0.8" />
-    </g>
+    <rect
+      transform={`rotate(${rotate} ${x} ${BASE_Y})`}
+      x={x - width / 2}
+      y={y}
+      width={width}
+      height={length}
+      rx={width / 2}
+      className={`transition-colors duration-150 ${active ? 'fill-rose-500' : 'fill-amber-300'}`}
+    />
   )
 }
 
 function Hand({ activeFinger, activeThumb, mirror }: { activeFinger: FingerId | null; activeThumb: boolean; mirror?: boolean }) {
   const prefix = mirror ? 'R' : 'L'
   return (
-    <svg viewBox="0 0 140 128" className="w-20 h-[4.6rem]">
+    <svg viewBox="0 0 140 130" className="w-20 h-[4.6rem]">
       <g transform={mirror ? 'scale(-1,1) translate(-140,0)' : undefined}>
-        {/* palm */}
+        {/* palm: bold rounded block, drawn first so fingers/thumb lay cleanly on top of its base */}
         <path
-          d="M17,70 C15,96 24,118 47,124 L95,124 C116,118 125,96 123,70 C122,58 111,52 99,52 L41,52 C29,52 18,58 17,70 Z"
-          className="fill-amber-100 stroke-amber-300"
-          strokeWidth="1.5"
+          d="M14,68 C14,94 22,116 44,123 L96,123 C118,116 126,94 126,68 C126,56 115,50 103,50 L37,50 C25,50 14,56 14,68 Z"
+          className="fill-amber-300"
         />
-        {/* thumb (inner side) */}
-        <g transform="rotate(42 108 78)">
-          <rect x="98" y="72" width="26" height="16" rx="8" className={`transition-colors duration-150 ${activeThumb ? 'fill-rose-400 stroke-rose-500' : 'fill-amber-100 stroke-amber-300'}`} strokeWidth="1.5" />
-          <rect x="102" y="76" width="12" height="7" rx="3.5" className={activeThumb ? 'fill-rose-300' : 'fill-amber-50'} opacity="0.8" />
-        </g>
+        {/* thumb: bold hooked shape */}
+        <path
+          d="M98,56 C118,51 136,63 134,82 C132,98 115,108 98,102 C89,99 86,89 91,80 C94,75 96,66 98,56 Z"
+          className={`transition-colors duration-150 ${activeThumb ? 'fill-rose-500' : 'fill-amber-300'}`}
+        />
         {/* fingers */}
         {FINGER_SHAPE.map((f) => (
           <FingerShape key={f.key} x={f.x} length={f.length} rotate={f.rotate} active={activeFinger === `${prefix}-${f.key}`} />
