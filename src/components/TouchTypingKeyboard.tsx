@@ -40,52 +40,58 @@ export function Keyboard({ activeKey }: { activeKey: string }) {
   )
 }
 
-const LEFT_FINGERS: { id: FingerId; height: number }[] = [
-  { id: 'L-pinky', height: 34 },
-  { id: 'L-ring', height: 44 },
-  { id: 'L-middle', height: 50 },
-  { id: 'L-index', height: 42 },
-]
-const RIGHT_FINGERS: { id: FingerId; height: number }[] = [
-  { id: 'R-index', height: 42 },
-  { id: 'R-middle', height: 50 },
-  { id: 'R-ring', height: 44 },
-  { id: 'R-pinky', height: 34 },
-]
+// Drawn canonically as a left hand (thumb on the inner/right side); the right hand
+// is the same drawing mirrored horizontally, so finger geometry only needs to live here once.
+const FINGER_SHAPE = [
+  { key: 'pinky', x: 32, length: 40, rotate: -14 },
+  { key: 'ring', x: 56, length: 54, rotate: -5 },
+  { key: 'middle', x: 80, length: 60, rotate: 4 },
+  { key: 'index', x: 104, length: 50, rotate: 13 },
+] as const
 
-function Hand({ fingers, activeFinger, activeThumb, flip }: { fingers: typeof LEFT_FINGERS; activeFinger: FingerId | null; activeThumb: boolean; flip?: boolean }) {
+const BASE_Y = 64
+
+function FingerShape({ x, length, rotate, active }: { x: number; length: number; rotate: number; active: boolean }) {
+  const width = 19
+  const y = BASE_Y - length
   return (
-    <svg viewBox="0 0 120 90" className="w-20 h-16">
-      {/* palm */}
-      <rect x="10" y="50" width="100" height="34" rx="16" className="fill-amber-100 stroke-amber-300" strokeWidth="1.5" />
-      {/* thumb */}
+    <g transform={`rotate(${rotate} ${x} ${BASE_Y})`} className="transition-transform">
       <rect
-        x={flip ? '78' : '12'}
-        y="58"
-        width="20"
-        height="13"
-        rx="6.5"
-        className={`stroke-amber-300 transition-colors ${activeThumb ? 'fill-rose-400' : 'fill-amber-50'}`}
+        x={x - width / 2}
+        y={y}
+        width={width}
+        height={length}
+        rx={width / 2}
+        className={`transition-colors duration-150 ${active ? 'fill-rose-400 stroke-rose-500' : 'fill-amber-100 stroke-amber-300'}`}
         strokeWidth="1.5"
-        transform={flip ? 'rotate(25 88 64)' : 'rotate(-25 22 64)'}
       />
-      {/* fingers */}
-      {fingers.map((f, i) => {
-        const x = 18 + i * 22
-        const isActive = f.id === activeFinger
-        return (
-          <rect
-            key={f.id}
-            x={x}
-            y={55 - f.height}
-            width="16"
-            height={f.height}
-            rx="8"
-            className={`stroke-amber-300 transition-colors ${isActive ? 'fill-rose-400' : 'fill-amber-50'}`}
-            strokeWidth="1.5"
-          />
-        )
-      })}
+      {/* fingernail */}
+      <rect x={x - width / 2 + 4} y={y + 6} width={width - 8} height={length * 0.3} rx={(width - 8) / 2} className={active ? 'fill-rose-300' : 'fill-amber-50'} opacity="0.8" />
+    </g>
+  )
+}
+
+function Hand({ activeFinger, activeThumb, mirror }: { activeFinger: FingerId | null; activeThumb: boolean; mirror?: boolean }) {
+  const prefix = mirror ? 'R' : 'L'
+  return (
+    <svg viewBox="0 0 140 128" className="w-20 h-[4.6rem]">
+      <g transform={mirror ? 'scale(-1,1) translate(-140,0)' : undefined}>
+        {/* palm */}
+        <path
+          d="M17,70 C15,96 24,118 47,124 L95,124 C116,118 125,96 123,70 C122,58 111,52 99,52 L41,52 C29,52 18,58 17,70 Z"
+          className="fill-amber-100 stroke-amber-300"
+          strokeWidth="1.5"
+        />
+        {/* thumb (inner side) */}
+        <g transform="rotate(42 108 78)">
+          <rect x="98" y="72" width="26" height="16" rx="8" className={`transition-colors duration-150 ${activeThumb ? 'fill-rose-400 stroke-rose-500' : 'fill-amber-100 stroke-amber-300'}`} strokeWidth="1.5" />
+          <rect x="102" y="76" width="12" height="7" rx="3.5" className={activeThumb ? 'fill-rose-300' : 'fill-amber-50'} opacity="0.8" />
+        </g>
+        {/* fingers */}
+        {FINGER_SHAPE.map((f) => (
+          <FingerShape key={f.key} x={f.x} length={f.length} rotate={f.rotate} active={activeFinger === `${prefix}-${f.key}`} />
+        ))}
+      </g>
     </svg>
   )
 }
@@ -94,9 +100,9 @@ export function HandsDiagram({ activeKey }: { activeKey: string }) {
   const finger = fingerForChar(activeKey || ' ')
   const isThumb = finger === 'thumb'
   return (
-    <div className="flex items-end justify-center gap-6">
-      <Hand fingers={LEFT_FINGERS} activeFinger={finger} activeThumb={isThumb} />
-      <Hand fingers={RIGHT_FINGERS} activeFinger={finger} activeThumb={isThumb} flip />
+    <div className="flex items-end justify-center gap-4">
+      <Hand activeFinger={finger} activeThumb={isThumb} />
+      <Hand activeFinger={finger} activeThumb={isThumb} mirror />
     </div>
   )
 }
