@@ -42,55 +42,51 @@ export function Keyboard({ activeKey }: { activeKey: string }) {
 
 // Drawn canonically as a left hand (thumb on the inner/right side); the right hand
 // is the same drawing mirrored horizontally, so finger geometry only needs to live here once.
-// Styled after the 🤚 "raised back of hand" emoji: straight, closely-packed fingers,
-// a short rounded thumb, and a simple two-tone palm for a bit of depth.
 const FINGER_SHAPE = [
-  { key: 'pinky', x: 40, length: 44, rotate: -3 },
-  { key: 'ring', x: 59, length: 54, rotate: -1 },
-  { key: 'middle', x: 78, length: 58, rotate: 1 },
-  { key: 'index', x: 97, length: 52, rotate: 3 },
+  { key: 'pinky', x: 32, length: 40, rotate: -14 },
+  { key: 'ring', x: 56, length: 54, rotate: -5 },
+  { key: 'middle', x: 80, length: 60, rotate: 4 },
+  { key: 'index', x: 104, length: 50, rotate: 13 },
 ] as const
 
-const BASE_Y = 66
+const BASE_Y = 64
 
 function FingerShape({ x, length, rotate, active }: { x: number; length: number; rotate: number; active: boolean }) {
-  const width = 21
+  const width = 19
   const y = BASE_Y - length
   return (
-    <rect
-      transform={`rotate(${rotate} ${x} ${BASE_Y})`}
-      x={x - width / 2}
-      y={y}
-      width={width}
-      height={length}
-      rx={width / 2}
-      className={`transition-colors duration-150 ${active ? 'fill-rose-500' : 'fill-amber-300'}`}
-    />
+    <g transform={`rotate(${rotate} ${x} ${BASE_Y})`} className="transition-transform">
+      <rect
+        x={x - width / 2}
+        y={y}
+        width={width}
+        height={length}
+        rx={width / 2}
+        className={`transition-colors duration-150 ${active ? 'fill-rose-400 stroke-rose-500' : 'fill-amber-100 stroke-amber-300'}`}
+        strokeWidth="1.5"
+      />
+      {/* fingernail */}
+      <rect x={x - width / 2 + 4} y={y + 6} width={width - 8} height={length * 0.3} rx={(width - 8) / 2} className={active ? 'fill-rose-300' : 'fill-amber-50'} opacity="0.8" />
+    </g>
   )
 }
 
 function Hand({ activeFinger, activeThumb, mirror }: { activeFinger: FingerId | null; activeThumb: boolean; mirror?: boolean }) {
   const prefix = mirror ? 'R' : 'L'
   return (
-    <svg viewBox="0 0 140 130" className="w-20 h-[4.6rem]">
+    <svg viewBox="0 0 140 128" className="w-20 h-[4.6rem]">
       <g transform={mirror ? 'scale(-1,1) translate(-140,0)' : undefined}>
-        {/* palm: rounded oval block, drawn first so fingers/thumb lay cleanly on top of its base */}
+        {/* palm */}
         <path
-          d="M16,66 C16,92 24,116 48,124 L92,124 C116,116 124,92 124,66 C124,54 113,48 100,48 L40,48 C27,48 16,54 16,66 Z"
-          className="fill-amber-300"
+          d="M17,70 C15,96 24,118 47,124 L95,124 C116,118 125,96 123,70 C122,58 111,52 99,52 L41,52 C29,52 18,58 17,70 Z"
+          className="fill-amber-100 stroke-amber-300"
+          strokeWidth="1.5"
         />
-        {/* subtle center crease for a little emoji-style dimension */}
-        <path d="M70,52 C66,75 66,100 70,122" className="stroke-amber-400" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.5" />
-        {/* thumb: short rounded shape, low on the inner side */}
-        <rect
-          x="92"
-          y="76"
-          width="34"
-          height="22"
-          rx="11"
-          transform="rotate(48 92 87)"
-          className={`transition-colors duration-150 ${activeThumb ? 'fill-rose-500' : 'fill-amber-300'}`}
-        />
+        {/* thumb (inner side) */}
+        <g transform="rotate(42 108 78)">
+          <rect x="98" y="72" width="26" height="16" rx="8" className={`transition-colors duration-150 ${activeThumb ? 'fill-rose-400 stroke-rose-500' : 'fill-amber-100 stroke-amber-300'}`} strokeWidth="1.5" />
+          <rect x="102" y="76" width="12" height="7" rx="3.5" className={activeThumb ? 'fill-rose-300' : 'fill-amber-50'} opacity="0.8" />
+        </g>
         {/* fingers */}
         {FINGER_SHAPE.map((f) => (
           <FingerShape key={f.key} x={f.x} length={f.length} rotate={f.rotate} active={activeFinger === `${prefix}-${f.key}`} />
