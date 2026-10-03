@@ -42,19 +42,19 @@ export function Keyboard({ activeKey }: { activeKey: string }) {
 
 // Drawn canonically as a left hand (thumb on the inner/right side); the right hand
 // is the same drawing mirrored horizontally, so finger geometry only needs to live here once.
-// Styled as a bold flat icon (closely-packed fingers, hooked thumb) rather than an
-// anatomical illustration, matching the reference the user asked for.
+// Styled after the 🤚 "raised back of hand" emoji: straight, closely-packed fingers,
+// a short rounded thumb, and a simple two-tone palm for a bit of depth.
 const FINGER_SHAPE = [
-  { key: 'pinky', x: 38, length: 46, rotate: -6 },
-  { key: 'ring', x: 58, length: 58, rotate: -2 },
-  { key: 'middle', x: 78, length: 62, rotate: 2 },
-  { key: 'index', x: 98, length: 54, rotate: 6 },
+  { key: 'pinky', x: 40, length: 44, rotate: -3 },
+  { key: 'ring', x: 59, length: 54, rotate: -1 },
+  { key: 'middle', x: 78, length: 58, rotate: 1 },
+  { key: 'index', x: 97, length: 52, rotate: 3 },
 ] as const
 
 const BASE_Y = 66
 
 function FingerShape({ x, length, rotate, active }: { x: number; length: number; rotate: number; active: boolean }) {
-  const width = 20
+  const width = 21
   const y = BASE_Y - length
   return (
     <rect
@@ -74,14 +74,21 @@ function Hand({ activeFinger, activeThumb, mirror }: { activeFinger: FingerId | 
   return (
     <svg viewBox="0 0 140 130" className="w-20 h-[4.6rem]">
       <g transform={mirror ? 'scale(-1,1) translate(-140,0)' : undefined}>
-        {/* palm: bold rounded block, drawn first so fingers/thumb lay cleanly on top of its base */}
+        {/* palm: rounded oval block, drawn first so fingers/thumb lay cleanly on top of its base */}
         <path
-          d="M14,68 C14,94 22,116 44,123 L96,123 C118,116 126,94 126,68 C126,56 115,50 103,50 L37,50 C25,50 14,56 14,68 Z"
+          d="M16,66 C16,92 24,116 48,124 L92,124 C116,116 124,92 124,66 C124,54 113,48 100,48 L40,48 C27,48 16,54 16,66 Z"
           className="fill-amber-300"
         />
-        {/* thumb: bold hooked shape */}
-        <path
-          d="M98,56 C118,51 136,63 134,82 C132,98 115,108 98,102 C89,99 86,89 91,80 C94,75 96,66 98,56 Z"
+        {/* subtle center crease for a little emoji-style dimension */}
+        <path d="M70,52 C66,75 66,100 70,122" className="stroke-amber-400" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.5" />
+        {/* thumb: short rounded shape, low on the inner side */}
+        <rect
+          x="92"
+          y="76"
+          width="34"
+          height="22"
+          rx="11"
+          transform="rotate(48 92 87)"
           className={`transition-colors duration-150 ${activeThumb ? 'fill-rose-500' : 'fill-amber-300'}`}
         />
         {/* fingers */}
