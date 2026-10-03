@@ -8,6 +8,7 @@ const GAMES = [
   { path: 'flashcards', icon: '🗂️', title: 'Flashcard SRS', desc: 'ทบทวนคำศัพท์ตามระบบ Spaced Repetition จำได้จริงในระยะยาว' },
   { path: 'matching', icon: '🧩', title: 'Matching Game', desc: 'จับคู่คำศัพท์กับความหมาย แข่งกับเวลา' },
   { path: 'typing', icon: '⌨️', title: 'Typing Challenge', desc: 'พิมพ์คำศัพท์จากความหมายที่กำหนดให้' },
+  { path: 'touch-typing', icon: '🖐️', title: 'พิมพ์สัมผัส', desc: 'ฝึกพิมพ์แบบสัมผัส ดูนิ้ว-แป้นพิมพ์ที่ถูกต้องไปพร้อมกับจำคำศัพท์' },
   { path: 'wordrush', icon: '⚡', title: 'Word Rush', desc: 'ตอบให้เร็วและแม่นที่สุดก่อนเวลาหมด' },
   { path: 'quiz', icon: '📝', title: 'แบบทดสอบท้ายบท', desc: 'ทดสอบความเข้าใจแบบเลือกตอบสไตล์ TOEIC' },
 ]
