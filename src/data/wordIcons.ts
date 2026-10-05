@@ -379,6 +379,48 @@ export const WORD_ICONS: Record<string, WordIconKey> = {
   'hs-38': 'badge',
   'hs-39': 'badge',
   'hs-40': 'star',
+
+  // logistics
+  'log-1': 'building',
+  'log-2': 'document',
+  'log-3': 'cart',
+  'log-4': 'cart',
+  'log-5': 'handshake',
+  'log-6': 'people',
+  'log-7': 'gear',
+  'log-8': 'gear',
+  'log-9': 'mapPin',
+  'log-10': 'document',
+  'log-11': 'handshake',
+  'log-12': 'document',
+  'log-13': 'cart',
+  'log-14': 'building',
+  'log-15': 'clock',
+  'log-16': 'clock',
+  'log-17': 'cart',
+  'log-18': 'cart',
+  'log-19': 'cart',
+  'log-20': 'mapPin',
+  'log-21': 'mapPin',
+  'log-22': 'magnifier',
+  'log-23': 'suitcase',
+  'log-24': 'money',
+  'log-25': 'badge',
+  'log-26': 'money',
+  'log-27': 'money',
+  'log-28': 'suitcase',
+  'log-29': 'cart',
+  'log-30': 'mapPin',
+  'log-31': 'suitcase',
+  'log-32': 'mapPin',
+  'log-33': 'cart',
+  'log-34': 'clock',
+  'log-35': 'scale',
+  'log-36': 'scale',
+  'log-37': 'magnifier',
+  'log-38': 'document',
+  'log-39': 'magnifier',
+  'log-40': 'clock',
 }
 
 const CHAPTER_FALLBACK_ICON: Record<string, WordIconKey> = {
@@ -391,6 +433,7 @@ const CHAPTER_FALLBACK_ICON: Record<string, WordIconKey> = {
   communication: 'megaphone',
   technology: 'gear',
   'health-safety': 'badge',
+  logistics: 'building',
 }
 
 export function getWordIcon(wordId: string): WordIconKey {
@@ -407,6 +450,7 @@ export function getWordIcon(wordId: string): WordIconKey {
     com: 'communication',
     it: 'technology',
     hs: 'health-safety',
+    log: 'logistics',
   }
   return CHAPTER_FALLBACK_ICON[prefixToChapter[chapterId] ?? ''] ?? 'document'
 }
