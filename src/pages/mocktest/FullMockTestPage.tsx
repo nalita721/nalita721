@@ -265,7 +265,6 @@ export default function FullMockTestPage() {
               <div className="grid gap-2">
                 {q.choices.map((choice, i) => {
                   const isSelected = answers[q.id] === i
-                  const hideText = audioOnly && answers[q.id] === undefined
                   return (
                     <div key={i} className="flex items-center gap-2">
                       {audioOnly && (
@@ -285,7 +284,7 @@ export default function FullMockTestPage() {
                           isSelected ? 'bg-brand-600 border-brand-600 text-white' : 'bg-white border-sand-200 hover:border-brand-400'
                         }`}
                       >
-                        {String.fromCharCode(65 + i)}. {hideText ? '••• (ฟังเสียงก่อนเลือก)' : choice}
+                        {String.fromCharCode(65 + i)}. {choice}
                       </button>
                     </div>
                   )
