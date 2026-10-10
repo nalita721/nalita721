@@ -17,6 +17,7 @@ export const iqTestVocab: VocabWord[] = [
   { id: 'iq-13', term: 'recently', pronunciationTh: 'รี-เซินท์-ลี', mnemonicTh: `recent (เมื่อเร็วๆ นี้) + ly = ในลักษณะที่เพิ่งเกิดขึ้นไม่นาน`, pos: 'adv.', meaningTh: 'เมื่อเร็วๆ นี้', exampleEn: 'I recently started a new job.', exampleTh: 'ฉันเพิ่งเริ่มงานใหม่เมื่อเร็วๆ นี้' },
   { id: 'iq-14', term: 'offer', pronunciationTh: 'ออฟ-เฟอร์', mnemonicTh: `of + fer (นำมา, จาก ferre) = นำเสนอให้`, pos: 'v.', meaningTh: 'เสนอให้', exampleEn: 'He offered me another glass of wine.', exampleTh: 'เขาเสนอไวน์ให้ฉันอีกแก้ว' },
   { id: 'iq-15', term: 'glass', pronunciationTh: 'กลาส', mnemonicTh: `จำทับศัพท์ "แก้ว" ที่ใช้เรียกทั้งวัสดุแก้วและแก้วน้ำดื่ม`, pos: 'n.', meaningTh: 'แก้ว(น้ำ)', exampleEn: 'Could I have another glass of water?', exampleTh: 'ขอน้ำอีกแก้วได้ไหม' },
+  { id: 'iq-16', term: 'sherry', pronunciationTh: 'เชอร์-รี่', mnemonicTh: `จำทับศัพท์ "เชอร์รี่" แต่คำนี้คือชื่อเหล้าองุ่นชนิดหนึ่ง ไม่ใช่ผลเชอร์รี่`, pos: 'n.', meaningTh: 'เหล้าเชอร์รี่ (ไวน์องุ่นชนิดหนึ่ง)', exampleEn: 'The host offered his guests a glass of sherry before dinner.', exampleTh: 'เจ้าภาพเสนอเหล้าเชอร์รี่ให้แขกก่อนอาหารเย็น' },
 ]
 
 export interface IQTestQuestion {
@@ -68,7 +69,7 @@ export const iqTestQuestions: IQTestQuestion[] = [
     contextLabel: '⚠️ ป้ายคำเตือน (CAUTION)',
     context: 'CAUTION\n\nIf this material contacts your skin, wash immediately with soap and water. In case of eye contact, wash thoroughly with water and get immediate medical attention.\n\nKEEP OUT OF REACH OF CHILDREN',
     question: 'The substance must be ____.',
-    choices: ['powder', 'gas', 'liquid', 'solid'],
+    choices: ['power', 'gas', 'liquid', 'solid'],
     answerIndex: 2,
   },
   {
