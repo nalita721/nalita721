@@ -16,6 +16,7 @@ import MatchingGamePage from './pages/vocabulary/MatchingGamePage'
 import TypingChallengePage from './pages/vocabulary/TypingChallengePage'
 import TouchTypingPage from './pages/vocabulary/TouchTypingPage'
 import WordRushPage from './pages/vocabulary/WordRushPage'
+import WordScramblePage from './pages/vocabulary/WordScramblePage'
 import ChapterQuizPage from './pages/vocabulary/ChapterQuizPage'
 import GrammarTopicListPage from './pages/grammar/GrammarTopicListPage'
 import GrammarLessonPage from './pages/grammar/GrammarLessonPage'
@@ -80,6 +81,7 @@ export default function App() {
           <Route path="/vocabulary/:chapterId/typing" element={<GatedVocabChapter><TypingChallengePage /></GatedVocabChapter>} />
           <Route path="/vocabulary/:chapterId/touch-typing" element={<GatedVocabChapter><TouchTypingPage /></GatedVocabChapter>} />
           <Route path="/vocabulary/:chapterId/wordrush" element={<GatedVocabChapter><WordRushPage /></GatedVocabChapter>} />
+          <Route path="/vocabulary/:chapterId/word-scramble" element={<GatedVocabChapter><WordScramblePage /></GatedVocabChapter>} />
           <Route path="/vocabulary/:chapterId/quiz" element={<GatedVocabChapter><ChapterQuizPage /></GatedVocabChapter>} />
 
           <Route path="/grammar" element={<GrammarTopicListPage />} />
@@ -103,6 +105,7 @@ export default function App() {
           <Route path="/games" element={<RequireAuth><GamesHubPage /></RequireAuth>} />
           <Route path="/games/flashcards" element={<RequireAuth><FlashcardPage /></RequireAuth>} />
           <Route path="/games/word-rush" element={<RequireAuth><WordRushPage /></RequireAuth>} />
+          <Route path="/games/word-scramble" element={<RequireAuth><WordScramblePage /></RequireAuth>} />
           <Route path="/games/matching" element={<RequireAuth><MatchingGamePage /></RequireAuth>} />
           <Route path="/games/typing" element={<RequireAuth><TypingChallengePage /></RequireAuth>} />
           <Route path="/games/touch-typing" element={<RequireAuth><TouchTypingPage /></RequireAuth>} />

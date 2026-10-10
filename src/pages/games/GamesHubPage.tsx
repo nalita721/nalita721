@@ -5,6 +5,7 @@ const GAMES = [
   { path: '/games/flashcards', icon: '🃏', title: 'Flashcard SRS', desc: 'พลิกบัตรคำศัพท์ทบทวนความจำ สุ่มจากคำศัพท์ทั้งหมดทุกบท ตามระบบ Spaced Repetition' },
   { path: '/games/word-rush', icon: '⚡', title: 'Word Rush', desc: 'ทบทวนคำศัพท์ทุกบทแบบจับเวลา 60 วินาที ตอบให้เร็วและแม่นที่สุด' },
   { path: '/games/matching', icon: '🧩', title: 'Matching Game', desc: 'จับคู่คำศัพท์กับความหมาย สุ่มจากคำศัพท์ทั้งหมดทุกบท' },
+  { path: '/games/word-scramble', icon: '🔤', title: 'Word Scramble', desc: 'เรียงตัวอักษรที่สลับกันให้เป็นคำศัพท์ที่ถูกต้อง สุ่มจากคำศัพท์ทั้งหมดทุกบท' },
   { path: '/games/typing', icon: '⌨️', title: 'Typing Challenge', desc: 'พิมพ์คำศัพท์จากความหมาย สุ่มจากคำศัพท์ทั้งหมดทุกบท' },
   { path: '/games/touch-typing', icon: '🖐️', title: 'พิมพ์สัมผัส', desc: 'ฝึกพิมพ์คำศัพท์แบบสัมผัส ดูนิ้ว-แป้นพิมพ์ที่ถูกต้องไปพร้อมกับจำคำศัพท์' },
   { path: '/games/grammar-blitz', icon: '🧠', title: 'Grammar Blitz', desc: 'ตอบคำถามไวยากรณ์แบบสุ่มจากทุกหัวข้อ แข่งกับเวลา 60 วินาที' },
