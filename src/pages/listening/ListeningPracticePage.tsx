@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { listeningByPart } from '../../data/listening'
+import { listeningGroupsByPart } from '../../data/listening'
 import { Button, Card, ProgressBar } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
 import { speak, type Accent } from '../../lib/tts'
@@ -9,48 +9,94 @@ import { playCorrectSound, playIncorrectSound, playCompleteSound } from '../../l
 import { PASS_THRESHOLD } from '../../data/learningPath'
 
 const ACCENTS: Accent[] = ['US', 'UK', 'AU', 'CA']
+type Mode = 'practice' | 'exam'
 
 export default function ListeningPracticePage() {
   const { part } = useParams()
   const partNum = Number(part) as 1 | 2 | 3 | 4
-  const items = listeningByPart(partNum)
+  const groups = listeningGroupsByPart(partNum)
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
   const passStep = useProgressStore((s) => s.passStep)
 
+  const [mode, setMode] = useState<Mode>('practice')
   const [accent, setAccent] = useState<Accent>('US')
-  const [index, setIndex] = useState(0)
-  const [selected, setSelected] = useState<number | null>(null)
+  const [groupIndex, setGroupIndex] = useState(0)
+  const [answers, setAnswers] = useState<Record<string, number>>({})
   const [score, setScore] = useState(0)
   const [revealed, setRevealed] = useState(false)
+  const [hasPlayed, setHasPlayed] = useState(false)
+  const [isSpeaking, setIsSpeaking] = useState(false)
 
-  if (![1, 2, 3, 4].includes(partNum) || items.length === 0) return <Navigate to="/listening" replace />
+  if (![1, 2, 3, 4].includes(partNum) || groups.length === 0) return <Navigate to="/listening" replace />
 
-  const item = items[index]
-  const done = index >= items.length
+  const group = groups[groupIndex]
+  const done = groupIndex >= groups.length
   const audioOnly = partNum <= 2
+  const totalQuestions = groups.reduce((sum, g) => sum + g.questions.length, 0)
+  const questionsBeforeCurrent = groups.slice(0, groupIndex).reduce((sum, g) => sum + g.questions.length, 0)
+  const allCurrentAnswered = group ? group.questions.every((q) => answers[q.id] !== undefined) : false
 
-  function handleSelect(i: number) {
-    if (selected !== null) return
-    setSelected(i)
-    const correct = i === item.answerIndex
+  async function playGroupAudio() {
+    if (!group || isSpeaking) return
+    setIsSpeaking(true)
+    try {
+      if (partNum === 1) {
+        const choices = group.questions[0].choices
+        for (let i = 0; i < choices.length; i++) {
+          await speak(`${String.fromCharCode(65 + i)}. ${choices[i]}`, accent, 0.85)
+        }
+      } else if (partNum === 2) {
+        await speak(group.audioScript ?? '', accent, 0.9)
+        const choices = group.questions[0].choices
+        for (let i = 0; i < choices.length; i++) {
+          await speak(`${String.fromCharCode(65 + i)}. ${choices[i]}`, accent, 0.85)
+        }
+      } else {
+        await speak(group.audioScript ?? '', accent, 0.9)
+      }
+    } finally {
+      setHasPlayed(true)
+      setIsSpeaking(false)
+    }
+  }
+
+  function handleSelect(questionId: string, choiceIndex: number) {
+    if (answers[questionId] !== undefined) return
+    const question = group.questions.find((q) => q.id === questionId)!
+    const correct = choiceIndex === question.answerIndex
+    setAnswers((prev) => ({ ...prev, [questionId]: choiceIndex }))
     recordAnswer('listening', correct)
-    if (correct) {
-      setScore((s) => s + 1)
-      playCorrectSound()
-    } else {
-      playIncorrectSound()
+    if (correct) setScore((s) => s + 1)
+    if (mode === 'practice') {
+      if (correct) playCorrectSound()
+      else playIncorrectSound()
     }
   }
 
   function next() {
-    setSelected(null)
+    setAnswers({})
     setRevealed(false)
-    const isLast = index + 1 >= items.length
-    setIndex((i) => i + 1)
+    setHasPlayed(false)
+    const isLast = groupIndex + 1 >= groups.length
+    setGroupIndex((i) => i + 1)
     if (isLast) {
       playCompleteSound()
-      if (score / items.length >= PASS_THRESHOLD) passStep('listening', String(partNum))
+      if (totalQuestions > 0 && score / totalQuestions >= PASS_THRESHOLD) passStep('listening', String(partNum))
     }
+  }
+
+  if (done) {
+    return (
+      <div className="space-y-6 max-w-2xl mx-auto">
+        <Card className="text-center py-12">
+          <p className="text-2xl">🎧</p>
+          <p className="text-lg font-semibold text-stone-800 mt-2">คะแนน {score}/{totalQuestions}</p>
+          <Link to="/listening">
+            <Button className="mt-4">กลับไปเลือก Part อื่น</Button>
+          </Link>
+        </Card>
+      </div>
+    )
   }
 
   return (
@@ -60,95 +106,151 @@ export default function ListeningPracticePage() {
           <Link to="/listening" className="text-sm text-brand-600 hover:underline">← กลับ</Link>
           <h1 className="text-xl font-bold text-stone-800 mt-2">Listening Part {partNum}</h1>
         </div>
-        <div className="flex gap-1">
-          {ACCENTS.map((a) => (
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex rounded-full border border-sand-200 bg-white overflow-hidden text-xs">
             <button
-              key={a}
-              onClick={() => setAccent(a)}
-              className={`text-xs px-2.5 py-1 rounded-full border ${accent === a ? 'bg-brand-600 text-white border-brand-600' : 'bg-white border-sand-200 text-stone-500'}`}
+              onClick={() => setMode('practice')}
+              className={`px-3 py-1.5 font-medium transition ${mode === 'practice' ? 'bg-brand-600 text-white' : 'text-stone-500'}`}
             >
-              {a}
+              โหมดฝึก
             </button>
-          ))}
+            <button
+              onClick={() => setMode('exam')}
+              className={`px-3 py-1.5 font-medium transition ${mode === 'exam' ? 'bg-brand-600 text-white' : 'text-stone-500'}`}
+            >
+              โหมดจำลองสอบ
+            </button>
+          </div>
+          <div className="flex gap-1">
+            {ACCENTS.map((a) => (
+              <button
+                key={a}
+                onClick={() => setAccent(a)}
+                className={`text-xs px-2.5 py-1 rounded-full border ${accent === a ? 'bg-brand-600 text-white border-brand-600' : 'bg-white border-sand-200 text-stone-500'}`}
+              >
+                {a}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      <ProgressBar value={index} max={items.length} />
+      <ProgressBar value={questionsBeforeCurrent} max={totalQuestions} />
 
-      {done ? (
-        <Card className="text-center py-12">
-          <p className="text-2xl">🎧</p>
-          <p className="text-lg font-semibold text-stone-800 mt-2">คะแนน {score}/{items.length}</p>
-          <Link to="/listening">
-            <Button className="mt-4">กลับไปเลือก Part อื่น</Button>
-          </Link>
-        </Card>
-      ) : (
-        <Card className="space-y-4">
-          <p className="text-xs uppercase tracking-wide text-stone-400">ข้อที่ {index + 1}/{items.length}</p>
+      <Card className="space-y-4">
+        <p className="text-xs uppercase tracking-wide text-stone-400">
+          ข้อที่ {questionsBeforeCurrent + 1}
+          {group.questions.length > 1 ? `-${questionsBeforeCurrent + group.questions.length}` : ''} / {totalQuestions}
+        </p>
 
-          {item.imageId && <SceneIllustration id={item.imageId} />}
-          {item.imageDescription && (
-            <p className="text-center text-xs text-stone-500">{item.imageDescription}</p>
-          )}
+        {group.imageId && <SceneIllustration id={group.imageId} />}
 
-          {!audioOnly && (
-            <Button variant="secondary" onClick={() => speak(item.script, accent, 0.8)}>
-              ▶️ ฟัง{partNum === 3 ? 'บทสนทนา' : 'ประกาศ'}
-            </Button>
-          )}
+        <Button
+          variant="secondary"
+          onClick={playGroupAudio}
+          disabled={isSpeaking || (mode === 'exam' && hasPlayed)}
+        >
+          {isSpeaking
+            ? '🔊 กำลังเล่น...'
+            : mode === 'exam' && hasPlayed
+              ? '🔇 ฟังได้ครั้งเดียวในโหมดจำลองสอบ'
+              : partNum <= 2
+                ? '▶️ ฟังเสียง'
+                : `▶️ ฟัง${partNum === 3 ? 'บทสนทนา' : 'ประกาศ'}`}
+        </Button>
 
-          <p className="text-stone-800 font-medium">{item.question}</p>
-
-          <div className="grid gap-2">
-            {item.choices.map((choice, i) => (
-              <div key={i} className="flex items-center gap-2">
-                {audioOnly && (
-                  <button
-                    type="button"
-                    onClick={() => speak(choice, accent, 0.8)}
-                    className="shrink-0 rounded-lg border border-sand-200 px-2 py-2 text-sm hover:bg-sand-50"
-                    aria-label={`ฟังตัวเลือก ${String.fromCharCode(65 + i)}`}
-                  >
-                    🔊
-                  </button>
-                )}
-                <button
-                  onClick={() => handleSelect(i)}
-                  disabled={selected !== null}
-                  className={`flex-1 rounded-xl border px-4 py-3 text-left text-sm transition ${
-                    selected === null
-                      ? 'bg-white border-sand-200 hover:border-brand-400'
-                      : i === item.answerIndex
-                      ? 'bg-emerald-50 border-emerald-400 text-emerald-700'
-                      : i === selected
+        {audioOnly ? (
+          <div className={`grid gap-3 ${group.questions[0].choices.length === 3 ? 'grid-cols-3' : 'grid-cols-4'}`}>
+            {group.questions[0].choices.map((_, i) => {
+              const qId = group.questions[0].id
+              const selected = answers[qId]
+              const isSelected = selected === i
+              const isCorrect = i === group.questions[0].answerIndex
+              let cls = 'bg-white border-sand-200 hover:border-brand-400 text-stone-700'
+              if (selected !== undefined) {
+                if (mode === 'practice') {
+                  cls = isCorrect
+                    ? 'bg-emerald-50 border-emerald-400 text-emerald-700'
+                    : isSelected
                       ? 'bg-rose-50 border-rose-400 text-rose-700'
                       : 'bg-white border-sand-200 opacity-60'
-                  }`}
+                } else {
+                  cls = isSelected ? 'bg-brand-600 border-brand-600 text-white' : 'bg-white border-sand-200 opacity-60'
+                }
+              }
+              return (
+                <button
+                  key={i}
+                  onClick={() => handleSelect(qId, i)}
+                  disabled={selected !== undefined}
+                  className={`aspect-square rounded-2xl border text-xl font-bold transition ${cls}`}
                 >
-                  {String.fromCharCode(65 + i)}. {audioOnly && selected === null ? '••• (ฟังเสียงก่อนเลือก)' : choice}
+                  {String.fromCharCode(65 + i)}
                 </button>
+              )
+            })}
+          </div>
+        ) : (
+          <div className="space-y-5">
+            {group.questions.map((q) => (
+              <div key={q.id}>
+                <p className="text-sm font-semibold text-stone-800 mb-2">{q.question}</p>
+                <div className="grid gap-2">
+                  {q.choices.map((choice, i) => {
+                    const selected = answers[q.id]
+                    const isSelected = selected === i
+                    const isCorrect = i === q.answerIndex
+                    let cls = 'bg-white border-sand-200 hover:border-brand-400'
+                    if (selected !== undefined) {
+                      if (mode === 'practice') {
+                        cls = isCorrect
+                          ? 'bg-emerald-50 border-emerald-400 text-emerald-700'
+                          : isSelected
+                            ? 'bg-rose-50 border-rose-400 text-rose-700'
+                            : 'bg-white border-sand-200 opacity-60'
+                      } else {
+                        cls = isSelected ? 'bg-brand-600 border-brand-600 text-white' : 'bg-white border-sand-200 opacity-60'
+                      }
+                    }
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => handleSelect(q.id, i)}
+                        disabled={selected !== undefined}
+                        className={`rounded-xl border px-4 py-3 text-left text-sm transition ${cls}`}
+                      >
+                        {String.fromCharCode(65 + i)}. {choice}
+                      </button>
+                    )
+                  })}
+                </div>
               </div>
             ))}
           </div>
+        )}
 
-          {selected !== null && (
-            <div className="space-y-2">
+        {allCurrentAnswered && (
+          <div className="space-y-2">
+            {mode === 'practice' && (
               <button onClick={() => setRevealed((r) => !r)} className="text-sm text-brand-600 hover:underline" type="button">
-                {revealed ? 'ซ่อน Transcript' : 'แสดง Transcript'}
+                {revealed ? 'ซ่อนสคริปต์' : 'แสดงสคริปต์'}
               </button>
-              {revealed && (
-                <pre className="whitespace-pre-wrap rounded-xl bg-sand-50 border border-sand-200 px-4 py-3 text-sm text-stone-600 font-sans">
-                  {item.transcript}
-                </pre>
-              )}
-              <div>
-                <Button onClick={next}>ข้อถัดไป →</Button>
-              </div>
+            )}
+            {mode === 'practice' && revealed && (
+              <pre className="whitespace-pre-wrap rounded-xl bg-sand-50 border border-sand-200 px-4 py-3 text-sm text-stone-600 font-sans">
+                {audioOnly
+                  ? group.questions[0].choices
+                      .map((c, i) => `${String.fromCharCode(65 + i)}. ${c}${i === group.questions[0].answerIndex ? '  ✓ เฉลย' : ''}`)
+                      .join('\n')
+                  : group.transcript}
+              </pre>
+            )}
+            <div>
+              <Button onClick={next}>{groupIndex + 1 >= groups.length ? 'ดูผลคะแนน' : 'ข้อถัดไป →'}</Button>
             </div>
-          )}
-        </Card>
-      )}
+          </div>
+        )}
+      </Card>
     </div>
   )
 }

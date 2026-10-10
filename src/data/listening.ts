@@ -1,5 +1,5 @@
 import { listeningExamItems } from './fullMockExam'
-import type { ListeningItem, ListeningPartNumber } from '../lib/types'
+import type { ExamItem, ListeningItem, ListeningPartNumber } from '../lib/types'
 
 /**
  * Practice-mode listening bank, derived from the full mock exam's listening
@@ -22,4 +22,15 @@ export const listeningItems: ListeningItem[] = listeningExamItems.flatMap((item)
 
 export function listeningByPart(part: 1 | 2 | 3 | 4) {
   return listeningItems.filter((item) => item.part === part)
+}
+
+/**
+ * Grouped listening bank for the Listening Practice page: Part 3/4 keep
+ * their real TOEIC shape (one shared audio script, 3 questions together)
+ * instead of being flattened into separate items like `listeningItems`.
+ * `listeningItems`/`listeningByPart` stay untouched since Mini Mock Test
+ * and the Level Test already depend on their flat, one-question shape.
+ */
+export function listeningGroupsByPart(part: 1 | 2 | 3 | 4): ExamItem[] {
+  return listeningExamItems.filter((item) => item.part === part)
 }

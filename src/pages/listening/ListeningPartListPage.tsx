@@ -26,7 +26,8 @@ export default function ListeningPartListPage() {
       <div>
         <h1 className="text-2xl font-bold text-stone-800">Listening Practice</h1>
         <p className="text-stone-500 mt-1">
-          ฝึกฟังทั้ง 4 Part ด้วยเสียงสังเคราะห์ในเบราว์เซอร์ (รองรับสำเนียง US/UK/AU/CA) — ลองฟรีได้ที่ Part 1
+          ฝึกฟังทั้ง 4 Part ในรูปแบบเดียวกับข้อสอบจริง ด้วยเสียงสังเคราะห์ในเบราว์เซอร์ (รองรับสำเนียง US/UK/AU/CA)
+          เลือกโหมดฝึก (ดูสคริปต์หลังตอบได้) หรือโหมดจำลองสอบ (ไม่มีเฉลยจนจบ) — ลองฟรีได้ที่ Part 1
         </p>
         {!isTtsSupported() && (
           <p className="mt-2 text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
