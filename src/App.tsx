@@ -30,6 +30,7 @@ import MockTestHubPage from './pages/mocktest/MockTestHubPage'
 import IQTestHubPage from './pages/iqtest/IQTestHubPage'
 import IQTestVocabPage from './pages/iqtest/IQTestVocabPage'
 import IQTestQuizPage from './pages/iqtest/IQTestQuizPage'
+import IQTestWordScramblePage from './pages/iqtest/IQTestWordScramblePage'
 import MockTestPage from './pages/mocktest/MockTestPage'
 import FullMockTestPage from './pages/mocktest/FullMockTestPage'
 import GamesHubPage from './pages/games/GamesHubPage'
@@ -99,6 +100,7 @@ export default function App() {
           <Route path="/iq-test" element={<RequireAuth><IQTestHubPage /></RequireAuth>} />
           <Route path="/iq-test/vocab" element={<RequireAuth><IQTestVocabPage /></RequireAuth>} />
           <Route path="/iq-test/quiz" element={<RequireAuth><IQTestQuizPage /></RequireAuth>} />
+          <Route path="/iq-test/word-scramble" element={<RequireAuth><IQTestWordScramblePage /></RequireAuth>} />
           <Route path="/mock-test/mini" element={<RequireAuth><MockTestPage /></RequireAuth>} />
           <Route path="/mock-test/full/:setId" element={<RequireAuth><FullMockTestPage /></RequireAuth>} />
 
