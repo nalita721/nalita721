@@ -26,6 +26,9 @@ import ListeningPracticePage from './pages/listening/ListeningPracticePage'
 import ReadingListPage from './pages/reading/ReadingListPage'
 import ReadingPracticePage from './pages/reading/ReadingPracticePage'
 import MockTestHubPage from './pages/mocktest/MockTestHubPage'
+import IQTestHubPage from './pages/iqtest/IQTestHubPage'
+import IQTestVocabPage from './pages/iqtest/IQTestVocabPage'
+import IQTestQuizPage from './pages/iqtest/IQTestQuizPage'
 import MockTestPage from './pages/mocktest/MockTestPage'
 import FullMockTestPage from './pages/mocktest/FullMockTestPage'
 import GamesHubPage from './pages/games/GamesHubPage'
@@ -91,6 +94,9 @@ export default function App() {
           <Route path="/reading/:passageId" element={<GatedReadingPassage><ReadingPracticePage /></GatedReadingPassage>} />
 
           <Route path="/mock-test" element={<MockTestHubPage />} />
+          <Route path="/iq-test" element={<RequireAuth><IQTestHubPage /></RequireAuth>} />
+          <Route path="/iq-test/vocab" element={<RequireAuth><IQTestVocabPage /></RequireAuth>} />
+          <Route path="/iq-test/quiz" element={<RequireAuth><IQTestQuizPage /></RequireAuth>} />
           <Route path="/mock-test/mini" element={<RequireAuth><MockTestPage /></RequireAuth>} />
           <Route path="/mock-test/full/:setId" element={<RequireAuth><FullMockTestPage /></RequireAuth>} />
 
