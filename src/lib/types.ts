@@ -105,6 +105,13 @@ export interface SrsCardState {
 
 export type QuizQuality = 0 | 1 | 2 | 3 | 4 | 5
 
+export interface GameStageResult {
+  bestScore: number
+  passed: boolean
+  attempts: number
+  lastPlayedAt: string
+}
+
 export type StatPart =
   | 'vocabulary'
   | 'grammar'

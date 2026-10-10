@@ -2,7 +2,9 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { newCard, reviewCard } from '../lib/srs'
 import { LEARNING_PATH, pathStepKey, stepIndexOfContent, type PathStepType } from '../data/learningPath'
+import { GAME_PATH_PASS_THRESHOLD } from '../data/vocabularyGamePath'
 import type {
+  GameStageResult,
   LevelTestResult,
   MockTestResult,
   PartStat,
@@ -34,6 +36,7 @@ export interface ProgressSnapshot {
   dailyMissionDate: string | null
   dailyWordsReviewed: number
   dailyQuestionsAnswered: number
+  wordPathStageResults: Record<string, GameStageResult>
 }
 
 interface ProgressState extends ProgressSnapshot {
@@ -45,6 +48,7 @@ interface ProgressState extends ProgressSnapshot {
   addMockResult: (result: MockTestResult) => void
   setLevelTestResult: (result: LevelTestResult) => void
   passStep: (type: PathStepType, id: string) => void
+  completeStage: (stageKey: string, scoreFraction: number, bonusXp: number) => void
   hydrate: (snapshot: ProgressSnapshot) => void
   resetProgress: () => void
 }
@@ -72,6 +76,7 @@ export const useProgressStore = create<ProgressState>()(
       dailyMissionDate: null,
       dailyWordsReviewed: 0,
       dailyQuestionsAnswered: 0,
+      wordPathStageResults: {},
 
       addXp: (amount) => set((s) => ({ xp: s.xp + amount })),
 
@@ -132,6 +137,27 @@ export const useProgressStore = create<ProgressState>()(
           return { pathPassedSteps, pathUnlockedIndex }
         }),
 
+      completeStage: (stageKeyArg, scoreFraction, bonusXp) =>
+        set((s) => {
+          const prev = s.wordPathStageResults[stageKeyArg]
+          const alreadyPassed = prev?.passed ?? false
+          const passed = alreadyPassed || scoreFraction >= GAME_PATH_PASS_THRESHOLD
+          const newlyPassed = !alreadyPassed && passed
+          const bestScore = Math.max(prev?.bestScore ?? 0, scoreFraction)
+          return {
+            wordPathStageResults: {
+              ...s.wordPathStageResults,
+              [stageKeyArg]: {
+                bestScore,
+                passed,
+                attempts: (prev?.attempts ?? 0) + 1,
+                lastPlayedAt: new Date().toISOString(),
+              },
+            },
+            xp: s.xp + (newlyPassed ? bonusXp : 0),
+          }
+        }),
+
       hydrate: (snapshot) => set(snapshot),
 
       resetProgress: () =>
@@ -148,6 +174,7 @@ export const useProgressStore = create<ProgressState>()(
           dailyMissionDate: null,
           dailyWordsReviewed: 0,
           dailyQuestionsAnswered: 0,
+          wordPathStageResults: {},
         }),
     }),
     { name: 'toeic-vocab-progress' },

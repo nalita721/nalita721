@@ -3,6 +3,7 @@ import { CheckCircle2, Circle } from 'lucide-react'
 import { vocabChapters } from '../../data/vocabulary'
 import { Card, ProgressBar } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
+import { getWordSets, isStagePassed, STAGE_DEFS } from '../../data/vocabularyGamePath'
 
 const GAMES = [
   { path: 'flashcards', icon: '🗂️', title: 'Flashcard SRS', desc: 'ทบทวนคำศัพท์ตามระบบ Spaced Repetition จำได้จริงในระยะยาว' },
@@ -17,9 +18,16 @@ export default function ChapterHubPage() {
   const { chapterId } = useParams()
   const chapter = vocabChapters.find((c) => c.id === chapterId)
   const srsMap = useProgressStore((s) => s.srsMap)
+  const stageResults = useProgressStore((s) => s.wordPathStageResults)
   if (!chapter) return <Navigate to="/vocabulary" replace />
 
   const learnedCount = chapter.words.filter((w) => (srsMap[w.id]?.repetitions ?? 0) > 0).length
+  const sets = getWordSets(chapter)
+  const totalStages = sets.length * STAGE_DEFS.length
+  const passedStages = sets.reduce(
+    (sum, _set, setIndex) => sum + STAGE_DEFS.filter((d) => isStagePassed(stageResults, chapter.id, setIndex, d.stage)).length,
+    0,
+  )
 
   return (
     <div className="space-y-6">
@@ -28,6 +36,28 @@ export default function ChapterHubPage() {
         <h1 className="text-2xl font-bold text-stone-800 mt-2">{chapter.titleTh}</h1>
         <p className="text-stone-500 mt-1">{chapter.description} • {chapter.words.length} คำศัพท์</p>
       </div>
+
+      <Link to={`/vocabulary/${chapter.id}/path`}>
+        <Card className="bg-gradient-to-r from-brand-600 to-brand-700 text-white hover:shadow-lg hover:-translate-y-0.5 transition cursor-pointer">
+          <div className="flex items-center justify-between gap-4 flex-wrap">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">🗺️</span>
+                <h2 className="font-bold text-lg">เส้นทางเกมคำศัพท์</h2>
+                <span className="rounded-full bg-white/20 text-xs font-semibold px-2 py-0.5">ใหม่</span>
+              </div>
+              <p className="text-sm text-white/80 mt-1">เรียนคำศัพท์ทีละ 10 คำ ผ่าน 5 ด่าน ปลดล็อกทีละขั้น พร้อมสะสม XP</p>
+            </div>
+            <div className="w-full sm:w-48">
+              <div className="flex justify-between text-xs text-white/80 mb-1">
+                <span>ความคืบหน้า</span>
+                <span>{passedStages}/{totalStages} ด่าน</span>
+              </div>
+              <ProgressBar value={passedStages} max={totalStages} colorClass="bg-white" />
+            </div>
+          </div>
+        </Card>
+      </Link>
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2 grid gap-4 sm:grid-cols-2 content-start">

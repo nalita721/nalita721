@@ -17,6 +17,12 @@ import TouchTypingPage from './pages/vocabulary/TouchTypingPage'
 import WordRushPage from './pages/vocabulary/WordRushPage'
 import WordScramblePage from './pages/vocabulary/WordScramblePage'
 import ChapterQuizPage from './pages/vocabulary/ChapterQuizPage'
+import VocabGamePathPage from './pages/vocabulary/path/VocabGamePathPage'
+import LearnStagePage from './pages/vocabulary/path/LearnStagePage'
+import MatchingStagePage from './pages/vocabulary/path/MatchingStagePage'
+import SpellingStagePage from './pages/vocabulary/path/SpellingStagePage'
+import RecallStagePage from './pages/vocabulary/path/RecallStagePage'
+import ToeicStagePage from './pages/vocabulary/path/ToeicStagePage'
 import GrammarTopicListPage from './pages/grammar/GrammarTopicListPage'
 import GrammarLessonPage from './pages/grammar/GrammarLessonPage'
 import GrammarWritingPage from './pages/grammar/GrammarWritingPage'
@@ -82,6 +88,13 @@ export default function App() {
           <Route path="/vocabulary/:chapterId/wordrush" element={<GatedVocabChapter><WordRushPage /></GatedVocabChapter>} />
           <Route path="/vocabulary/:chapterId/word-scramble" element={<GatedVocabChapter><WordScramblePage /></GatedVocabChapter>} />
           <Route path="/vocabulary/:chapterId/quiz" element={<GatedVocabChapter><ChapterQuizPage /></GatedVocabChapter>} />
+
+          <Route path="/vocabulary/:chapterId/path" element={<GatedVocabChapter><VocabGamePathPage /></GatedVocabChapter>} />
+          <Route path="/vocabulary/:chapterId/path/:setIndex/learn" element={<GatedVocabChapter><LearnStagePage /></GatedVocabChapter>} />
+          <Route path="/vocabulary/:chapterId/path/:setIndex/matching" element={<GatedVocabChapter><MatchingStagePage /></GatedVocabChapter>} />
+          <Route path="/vocabulary/:chapterId/path/:setIndex/spelling" element={<GatedVocabChapter><SpellingStagePage /></GatedVocabChapter>} />
+          <Route path="/vocabulary/:chapterId/path/:setIndex/recall" element={<GatedVocabChapter><RecallStagePage /></GatedVocabChapter>} />
+          <Route path="/vocabulary/:chapterId/path/:setIndex/toeic" element={<GatedVocabChapter><ToeicStagePage /></GatedVocabChapter>} />
 
           <Route path="/grammar" element={<GrammarTopicListPage />} />
           <Route path="/grammar/:topicId" element={<GatedGrammarTopic><GrammarLessonPage /></GatedGrammarTopic>} />

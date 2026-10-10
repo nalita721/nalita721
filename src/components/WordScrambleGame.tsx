@@ -30,7 +30,7 @@ interface WordScrambleGameProps {
   words: VocabWord[]
   title: string
   backTo: string
-  onAnswer?: (correct: boolean) => void
+  onAnswer?: (correct: boolean, word: VocabWord) => void
   onComplete?: (score: number, total: number) => void
 }
 
@@ -65,7 +65,7 @@ export function WordScrambleGame({ words, title, backTo, onAnswer, onComplete }:
       const guess = nextAnswer.map((t) => t.char).join('')
       const correct = guess.toLowerCase() === word.term.toLowerCase()
       setFeedback(correct ? 'correct' : 'wrong')
-      onAnswer?.(correct && !hinted)
+      onAnswer?.(correct && !hinted, word)
       if (correct) {
         setScore((s) => s + (hinted ? 0.5 : 1))
         playCorrectSound()
