@@ -13,7 +13,6 @@ import ChapterListPage from './pages/vocabulary/ChapterListPage'
 import ChapterHubPage from './pages/vocabulary/ChapterHubPage'
 import FlashcardPage from './pages/vocabulary/FlashcardPage'
 import MatchingGamePage from './pages/vocabulary/MatchingGamePage'
-import TypingChallengePage from './pages/vocabulary/TypingChallengePage'
 import TouchTypingPage from './pages/vocabulary/TouchTypingPage'
 import WordRushPage from './pages/vocabulary/WordRushPage'
 import WordScramblePage from './pages/vocabulary/WordScramblePage'
@@ -79,7 +78,6 @@ export default function App() {
           <Route path="/vocabulary/:chapterId" element={<GatedVocabChapter><ChapterHubPage /></GatedVocabChapter>} />
           <Route path="/vocabulary/:chapterId/flashcards" element={<GatedVocabChapter><FlashcardPage /></GatedVocabChapter>} />
           <Route path="/vocabulary/:chapterId/matching" element={<GatedVocabChapter><MatchingGamePage /></GatedVocabChapter>} />
-          <Route path="/vocabulary/:chapterId/typing" element={<GatedVocabChapter><TypingChallengePage /></GatedVocabChapter>} />
           <Route path="/vocabulary/:chapterId/touch-typing" element={<GatedVocabChapter><TouchTypingPage /></GatedVocabChapter>} />
           <Route path="/vocabulary/:chapterId/wordrush" element={<GatedVocabChapter><WordRushPage /></GatedVocabChapter>} />
           <Route path="/vocabulary/:chapterId/word-scramble" element={<GatedVocabChapter><WordScramblePage /></GatedVocabChapter>} />
@@ -109,7 +107,6 @@ export default function App() {
           <Route path="/games/word-rush" element={<RequireAuth><WordRushPage /></RequireAuth>} />
           <Route path="/games/word-scramble" element={<RequireAuth><WordScramblePage /></RequireAuth>} />
           <Route path="/games/matching" element={<RequireAuth><MatchingGamePage /></RequireAuth>} />
-          <Route path="/games/typing" element={<RequireAuth><TypingChallengePage /></RequireAuth>} />
           <Route path="/games/touch-typing" element={<RequireAuth><TouchTypingPage /></RequireAuth>} />
           <Route path="/games/grammar-blitz" element={<RequireAuth><GrammarBlitzPage /></RequireAuth>} />
 
