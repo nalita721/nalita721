@@ -7,7 +7,7 @@ export default {
         sans: ['Plus Jakarta Sans', 'Noto Sans Thai', 'Segoe UI', 'system-ui', '-apple-system', 'sans-serif'],
       },
       colors: {
-        // TOEIC Vocab Master brand system — "TOEIC Blue" primary accent
+        // LinguaMaster brand system — "TOEIC Blue" primary accent
         brand: {
           50: '#e7f3fb',
           100: '#d3e8f6',

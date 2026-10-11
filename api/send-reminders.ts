@@ -42,10 +42,10 @@ export default async function handler(req: any, res: any) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: process.env.RESEND_FROM_EMAIL ?? 'TOEIC Vocab Master <onboarding@resend.dev>',
+        from: process.env.RESEND_FROM_EMAIL ?? 'LinguaMaster <onboarding@resend.dev>',
         to: [email],
-        subject: '⏰ ถึงเวลาฝึก TOEIC แล้ว!',
-        html: `<p>สวัสดีครับ 👋</p><p>นี่คือการแจ้งเตือนให้กลับมาฝึกคำศัพท์ ไวยากรณ์ หรือทำ Mock Test ประจำวันนี้ ฝึกอย่างสม่ำเสมอคือกุญแจสำคัญของคะแนน TOEIC ที่ดีขึ้นครับ 🎯</p><p><a href="${SITE_URL}">เปิด TOEIC Vocab Master</a></p><p style="color:#898781;font-size:12px">หากไม่ต้องการรับอีเมลนี้อีก สามารถยกเลิกการแจ้งเตือนได้ที่หน้าตั้งค่าในเว็บไซต์</p>`,
+        subject: '⏰ ถึงเวลาฝึกภาษาแล้ว!',
+        html: `<p>สวัสดีครับ 👋</p><p>นี่คือการแจ้งเตือนให้กลับมาฝึกคำศัพท์ ไวยากรณ์ หรือทำ Mock Test ประจำวันนี้ ฝึกอย่างสม่ำเสมอคือกุญแจสำคัญของความก้าวหน้าที่ดีขึ้นครับ 🎯</p><p><a href="${SITE_URL}">เปิด LinguaMaster</a></p><p style="color:#898781;font-size:12px">หากไม่ต้องการรับอีเมลนี้อีก สามารถยกเลิกการแจ้งเตือนได้ที่หน้าตั้งค่าในเว็บไซต์</p>`,
       }),
     })
 

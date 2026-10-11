@@ -34,10 +34,10 @@ export default async function handler(req: any, res: any) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: process.env.RESEND_FROM_EMAIL ?? 'TOEIC Vocab Master <onboarding@resend.dev>',
+      from: process.env.RESEND_FROM_EMAIL ?? 'LinguaMaster <onboarding@resend.dev>',
       to: [normalizedEmail],
-      subject: '🔑 ลิงก์เข้าสู่ระบบ TOEIC Vocab Master',
-      html: `<p>สวัสดีครับ 👋</p><p>คลิกลิงก์ด้านล่างเพื่อเข้าสู่ระบบ TOEIC Vocab Master (ลิงก์มีอายุ 15 นาที และใช้ได้ครั้งเดียว)</p><p><a href="${link}">เข้าสู่ระบบ</a></p><p style="color:#898781;font-size:12px">หากคุณไม่ได้ขอลิงก์นี้ สามารถเพิกเฉยต่ออีเมลฉบับนี้ได้ ไม่มีผลใดๆ ต่อบัญชีของคุณ</p>`,
+      subject: '🔑 ลิงก์เข้าสู่ระบบ LinguaMaster',
+      html: `<p>สวัสดีครับ 👋</p><p>คลิกลิงก์ด้านล่างเพื่อเข้าสู่ระบบ LinguaMaster (ลิงก์มีอายุ 15 นาที และใช้ได้ครั้งเดียว)</p><p><a href="${link}">เข้าสู่ระบบ</a></p><p style="color:#898781;font-size:12px">หากคุณไม่ได้ขอลิงก์นี้ สามารถเพิกเฉยต่ออีเมลฉบับนี้ได้ ไม่มีผลใดๆ ต่อบัญชีของคุณ</p>`,
     }),
   })
 

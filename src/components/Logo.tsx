@@ -35,7 +35,7 @@ export function Logo({ withWordmark = true, size = 32 }: { withWordmark?: boolea
       <LogoMark size={size} />
       {withWordmark && (
         <span className="font-bold leading-tight">
-          Vocab<br />Master
+          Lingua<br />Master
         </span>
       )}
     </span>
