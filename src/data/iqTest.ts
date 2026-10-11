@@ -1,4 +1,10 @@
 import type { VocabWord } from '../lib/types'
+import type { WordIconKey } from '../components/WordIcon'
+
+/** A learner-added IQ Test vocabulary word, stored in their own progress data (not part of the verified exam set). */
+export interface CustomIqWord extends VocabWord {
+  iconKey: WordIconKey
+}
 
 /** Vocabulary that appears (with Thai glosses) in the uploaded IQ test document. */
 export const iqTestVocab: VocabWord[] = [

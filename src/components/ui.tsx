@@ -72,10 +72,10 @@ export function Badge({ children, className = '' }: PropsWithChildren<{ classNam
   )
 }
 
-export function Modal({ children }: PropsWithChildren) {
+export function Modal({ children, size = 'sm' }: PropsWithChildren<{ size?: 'sm' | 'lg' }>) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/50 backdrop-blur-sm px-4">
-      <div className="w-full max-w-sm">{children}</div>
+      <div className={`w-full ${size === 'lg' ? 'max-w-lg' : 'max-w-sm'}`}>{children}</div>
     </div>
   )
 }

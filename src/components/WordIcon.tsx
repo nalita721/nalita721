@@ -27,6 +27,10 @@ export type WordIconKey =
   | 'cart'
   | 'megaphone'
   | 'magnifier'
+  | 'cup'
+  | 'warning'
+  | 'medical'
+  | 'package'
 
 const GEAR_TEETH_ANGLES = [0, 60, 120, 180, 240, 300]
 
@@ -234,7 +238,36 @@ const ICONS: Record<WordIconKey, ReactNode> = {
       <path d="M15.5 15.5L21 21" />
     </IconSvg>
   ),
+  cup: (
+    <IconSvg>
+      <path d="M6 3h10v9a5 5 0 0 1-5 5h0a5 5 0 0 1-5-5V3z" />
+      <path d="M16 6h2a2.5 2.5 0 0 1 0 5h-2" />
+      <path d="M5 21h12" />
+    </IconSvg>
+  ),
+  warning: (
+    <IconSvg>
+      <path d="M12 3L2 20h20L12 3z" />
+      <path d="M12 10v4" />
+      <circle cx="12" cy="17" r="0.6" fill="currentColor" stroke="none" />
+    </IconSvg>
+  ),
+  medical: (
+    <IconSvg>
+      <rect x="3.5" y="3.5" width="17" height="17" rx="3" />
+      <path d="M12 8v8M8 12h8" />
+    </IconSvg>
+  ),
+  package: (
+    <IconSvg>
+      <path d="M3.5 7.5L12 3l8.5 4.5V17L12 21.5 3.5 17V7.5z" />
+      <path d="M3.5 7.5L12 12l8.5-4.5" />
+      <path d="M12 12v9.5" />
+    </IconSvg>
+  ),
 }
+
+export const WORD_ICON_KEYS = Object.keys(ICONS) as WordIconKey[]
 
 export function WordIcon({ iconKey, className = '' }: { iconKey: WordIconKey; className?: string }) {
   return (

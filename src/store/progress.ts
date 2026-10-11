@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware'
 import { newCard, reviewCard } from '../lib/srs'
 import { LEARNING_PATH, pathStepKey, stepIndexOfContent, type PathStepType } from '../data/learningPath'
 import { GAME_PATH_PASS_THRESHOLD } from '../data/vocabularyGamePath'
+import type { CustomIqWord } from '../data/iqTest'
 import type {
   GameStageResult,
   LevelTestResult,
@@ -37,6 +38,7 @@ export interface ProgressSnapshot {
   dailyWordsReviewed: number
   dailyQuestionsAnswered: number
   wordPathStageResults: Record<string, GameStageResult>
+  customIqWords: CustomIqWord[]
 }
 
 interface ProgressState extends ProgressSnapshot {
@@ -49,6 +51,8 @@ interface ProgressState extends ProgressSnapshot {
   setLevelTestResult: (result: LevelTestResult) => void
   passStep: (type: PathStepType, id: string) => void
   completeStage: (stageKey: string, scoreFraction: number, bonusXp: number) => void
+  addCustomIqWord: (word: CustomIqWord) => void
+  removeCustomIqWord: (id: string) => void
   hydrate: (snapshot: ProgressSnapshot) => void
   resetProgress: () => void
 }
@@ -77,6 +81,7 @@ export const useProgressStore = create<ProgressState>()(
       dailyWordsReviewed: 0,
       dailyQuestionsAnswered: 0,
       wordPathStageResults: {},
+      customIqWords: [],
 
       addXp: (amount) => set((s) => ({ xp: s.xp + amount })),
 
@@ -158,6 +163,10 @@ export const useProgressStore = create<ProgressState>()(
           }
         }),
 
+      addCustomIqWord: (word) => set((s) => ({ customIqWords: [...s.customIqWords, word] })),
+
+      removeCustomIqWord: (id) => set((s) => ({ customIqWords: s.customIqWords.filter((w) => w.id !== id) })),
+
       hydrate: (snapshot) => set(snapshot),
 
       resetProgress: () =>
@@ -175,6 +184,7 @@ export const useProgressStore = create<ProgressState>()(
           dailyWordsReviewed: 0,
           dailyQuestionsAnswered: 0,
           wordPathStageResults: {},
+          customIqWords: [],
         }),
     }),
     { name: 'toeic-vocab-progress' },

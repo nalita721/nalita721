@@ -19,6 +19,7 @@ function snapshotOf(): ProgressSnapshot {
     dailyWordsReviewed,
     dailyQuestionsAnswered,
     wordPathStageResults,
+    customIqWords,
   } = useProgressStore.getState()
   return {
     xp,
@@ -34,6 +35,7 @@ function snapshotOf(): ProgressSnapshot {
     dailyWordsReviewed,
     dailyQuestionsAnswered,
     wordPathStageResults,
+    customIqWords,
   }
 }
 
