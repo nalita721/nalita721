@@ -18,6 +18,12 @@ export const iqTestVocab: VocabWord[] = [
   { id: 'iq-14', term: 'offer', pronunciationTh: 'ออฟ-เฟอร์', mnemonicTh: `of + fer (นำมา, จาก ferre) = นำเสนอให้`, pos: 'v.', meaningTh: 'เสนอให้', exampleEn: 'He offered me another glass of wine.', exampleTh: 'เขาเสนอไวน์ให้ฉันอีกแก้ว' },
   { id: 'iq-15', term: 'glass', pronunciationTh: 'กลาส', mnemonicTh: `จำทับศัพท์ "แก้ว" ที่ใช้เรียกทั้งวัสดุแก้วและแก้วน้ำดื่ม`, pos: 'n.', meaningTh: 'แก้ว(น้ำ)', exampleEn: 'Could I have another glass of water?', exampleTh: 'ขอน้ำอีกแก้วได้ไหม' },
   { id: 'iq-16', term: 'sherry', pronunciationTh: 'เชอร์-รี่', mnemonicTh: `จำทับศัพท์ "เชอร์รี่" แต่คำนี้คือชื่อเหล้าองุ่นชนิดหนึ่ง ไม่ใช่ผลเชอร์รี่`, pos: 'n.', meaningTh: 'เหล้าเชอร์รี่ (ไวน์องุ่นชนิดหนึ่ง)', exampleEn: 'The host offered his guests a glass of sherry before dinner.', exampleTh: 'เจ้าภาพเสนอเหล้าเชอร์รี่ให้แขกก่อนอาหารเย็น' },
+  { id: 'iq-17', term: 'reach', pronunciationTh: 'รีช', mnemonicTh: `ทับศัพท์สั้นๆ "รีช" แปลว่าเอื้อมถึง/ไปถึง`, pos: 'v.', meaningTh: 'เอื้อมถึง/ไปถึง', exampleEn: 'Keep this where children cannot reach it.', exampleTh: 'เก็บสิ่งนี้ไว้ในที่ที่เด็กเอื้อมไม่ถึง' },
+  { id: 'iq-18', term: 'happy', pronunciationTh: 'แฮพ-พี', mnemonicTh: `happy (มีความสุข) ใกล้เคียงกับ happiness (ความสุข) ที่คนไทยคุ้นเคย`, pos: 'adj.', meaningTh: 'มีความสุข', exampleEn: 'Many happy returns of the day!', exampleTh: 'ขอให้มีความสุขในวันเกิดและวันข้างหน้าทุกปี' },
+  { id: 'iq-19', term: 'accept', pronunciationTh: 'แอค-เซพท์', mnemonicTh: `ac + cept (รับ, จาก capere) = รับเอาไว้`, pos: 'v.', meaningTh: 'ยอมรับ/รับไว้', exampleEn: 'Please accept my best wishes on this special occasion.', exampleTh: 'ขอรับคำอวยพรของฉันในโอกาสพิเศษนี้ด้วย' },
+  { id: 'iq-20', term: 'best', pronunciationTh: 'เบสท์', mnemonicTh: `เป็นขั้นสุดของ good/well → ดีที่สุด`, pos: 'adj.', meaningTh: 'ดีที่สุด', exampleEn: 'This is the best solution we could find.', exampleTh: 'นี่คือทางออกที่ดีที่สุดที่เราหาได้' },
+  { id: 'iq-21', term: 'season', pronunciationTh: 'ซี-เซิ่น', mnemonicTh: `ทับศัพท์ "ซีซั่น" ที่คนไทยใช้เรียกฤดูกาลหรือฤดูกาลละคร/กีฬา`, pos: 'n.', meaningTh: 'ฤดูกาล', exampleEn: 'Winter is my favorite season of the year.', exampleTh: 'ฤดูหนาวเป็นฤดูกาลโปรดของฉัน' },
+  { id: 'iq-22', term: 'meet', pronunciationTh: 'มีท', mnemonicTh: `ทับศัพท์สั้นๆ "มีท" แปลว่าพบเจอ`, pos: 'v.', meaningTh: 'พบ/เจอ', exampleEn: 'I will meet my client at the office tomorrow.', exampleTh: 'ฉันจะไปพบลูกค้าที่ออฟฟิศพรุ่งนี้' },
 ]
 
 export interface IQTestQuestion {
