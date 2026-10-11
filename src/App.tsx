@@ -40,6 +40,16 @@ import MockTestPage from './pages/mocktest/MockTestPage'
 import FullMockTestPage from './pages/mocktest/FullMockTestPage'
 import GamesHubPage from './pages/games/GamesHubPage'
 import GrammarBlitzPage from './pages/games/GrammarBlitzPage'
+import ChineseHubPage from './pages/chinese/ChineseHubPage'
+import ChineseVocabHubPage from './pages/chinese/ChineseVocabHubPage'
+import ChineseFlashcardPage from './pages/chinese/ChineseFlashcardPage'
+import ChineseQuizPage from './pages/chinese/ChineseQuizPage'
+import ChineseGrammarPage from './pages/chinese/ChineseGrammarPage'
+import JapaneseHubPage from './pages/japanese/JapaneseHubPage'
+import JapaneseVocabHubPage from './pages/japanese/JapaneseVocabHubPage'
+import JapaneseFlashcardPage from './pages/japanese/JapaneseFlashcardPage'
+import JapaneseQuizPage from './pages/japanese/JapaneseQuizPage'
+import JapaneseGrammarPage from './pages/japanese/JapaneseGrammarPage'
 import SettingsPage from './pages/SettingsPage'
 import AchievementsPage from './pages/AchievementsPage'
 import SpeakingPage from './pages/SpeakingPage'
@@ -122,6 +132,18 @@ export default function App() {
           <Route path="/games/matching" element={<RequireAuth><MatchingGamePage /></RequireAuth>} />
           <Route path="/games/touch-typing" element={<RequireAuth><TouchTypingPage /></RequireAuth>} />
           <Route path="/games/grammar-blitz" element={<RequireAuth><GrammarBlitzPage /></RequireAuth>} />
+
+          <Route path="/chinese" element={<RequireAuth><ChineseHubPage /></RequireAuth>} />
+          <Route path="/chinese/vocabulary" element={<RequireAuth><ChineseVocabHubPage /></RequireAuth>} />
+          <Route path="/chinese/vocabulary/flashcards" element={<RequireAuth><ChineseFlashcardPage /></RequireAuth>} />
+          <Route path="/chinese/vocabulary/quiz" element={<RequireAuth><ChineseQuizPage /></RequireAuth>} />
+          <Route path="/chinese/grammar" element={<RequireAuth><ChineseGrammarPage /></RequireAuth>} />
+
+          <Route path="/japanese" element={<RequireAuth><JapaneseHubPage /></RequireAuth>} />
+          <Route path="/japanese/vocabulary" element={<RequireAuth><JapaneseVocabHubPage /></RequireAuth>} />
+          <Route path="/japanese/vocabulary/flashcards" element={<RequireAuth><JapaneseFlashcardPage /></RequireAuth>} />
+          <Route path="/japanese/vocabulary/quiz" element={<RequireAuth><JapaneseQuizPage /></RequireAuth>} />
+          <Route path="/japanese/grammar" element={<RequireAuth><JapaneseGrammarPage /></RequireAuth>} />
 
           <Route path="/speaking" element={<RequireAuth><SpeakingPage /></RequireAuth>} />
 

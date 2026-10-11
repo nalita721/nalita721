@@ -42,6 +42,18 @@ const LINKS: SidebarLink[] = [
   { to: '/friends', label: 'เพื่อน', icon: Users },
 ]
 
+interface LanguageLink {
+  to: string
+  label: string
+  flag: string
+}
+
+const LANGUAGE_LINKS: LanguageLink[] = [
+  { to: '/vocabulary', label: 'English (TOEIC)', flag: '🇬🇧' },
+  { to: '/chinese', label: '中文 (HSK)', flag: '🇨🇳' },
+  { to: '/japanese', label: '日本語 (JLPT)', flag: '🇯🇵' },
+]
+
 interface SidebarProps {
   open: boolean
   onClose: () => void
@@ -78,7 +90,28 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
           </button>
         </div>
 
-        <nav className="flex-1 overflow-y-auto px-3 space-y-1">
+        <div className="px-3 pb-3">
+          <p className="px-3 text-[10px] font-semibold uppercase tracking-wider text-sand-400 mb-1.5">เลือกภาษาที่เรียน</p>
+          <div className="grid grid-cols-3 gap-1.5">
+            {LANGUAGE_LINKS.map((lang) => (
+              <NavLink
+                key={lang.to}
+                to={lang.to}
+                onClick={onClose}
+                className={({ isActive }) =>
+                  `flex flex-col items-center gap-1 rounded-xl py-2 text-[11px] font-medium transition ${
+                    isActive ? 'bg-white/15 text-white' : 'text-sand-300 hover:bg-white/5 hover:text-white'
+                  }`
+                }
+              >
+                <span className="text-lg leading-none">{lang.flag}</span>
+                <span className="leading-tight text-center">{lang.label}</span>
+              </NavLink>
+            ))}
+          </div>
+        </div>
+
+        <nav className="flex-1 overflow-y-auto px-3 space-y-1 border-t border-white/10 pt-3">
           {links.map((link) => {
             const Icon = link.icon
             return (

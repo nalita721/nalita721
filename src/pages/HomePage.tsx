@@ -3,13 +3,37 @@ import { Check, Flame, Star } from 'lucide-react'
 import { Button } from '../components/ui'
 import { Logo, LogoMark } from '../components/Logo'
 
-const CHECKLIST = ['คำศัพท์ครบทุกระดับ (Vocabulary)', 'ฝึกข้อสอบ TOEIC จริง (TOEIC Practice)', 'ฝึกฟังและพูด (Listening & Speaking)', 'ติดตามความก้าวหน้า (Track Your Progress)']
+const CHECKLIST = ['เรียนได้ 3 ภาษา: อังกฤษ จีน ญี่ปุ่น', 'เรียนเพื่อการสื่อสารจริง ไม่ใช่แค่ท่องจำ', 'ฝึกข้อสอบจริง TOEIC / HSK / JLPT', 'ติดตามความก้าวหน้า (Track Your Progress)']
 
 const STATS = [
-  { value: '280+', label: 'คำศัพท์' },
-  { value: '3', label: 'ชุด Full Mock Test' },
-  { value: '7', label: 'Part ข้อสอบ TOEIC' },
+  { value: '3', label: 'ภาษาให้เลือกเรียน' },
+  { value: '280+', label: 'คำศัพท์ภาษาอังกฤษ' },
+  { value: '3', label: 'ชุด Full Mock Test (TOEIC)' },
   { value: 'A1–C1', label: 'ครอบคลุมทุกระดับ CEFR' },
+]
+
+const LANGUAGE_TRACKS = [
+  {
+    flag: '🇬🇧',
+    title: 'English — TOEIC',
+    description: 'คำศัพท์ 280+ คำ ไวยากรณ์ A1-C1 ฟัง-อ่านสไตล์ TOEIC และ Full Mock Test 3 ชุด',
+    to: '/vocabulary',
+    gradient: 'from-brand-500 to-brand-700',
+  },
+  {
+    flag: '🇨🇳',
+    title: '中文 — HSK',
+    description: 'คำศัพท์พื้นฐาน HSK 1 พร้อมพินอิน เคล็ดลับจำ และไวยากรณ์ประโยคพื้นฐาน',
+    to: '/chinese',
+    gradient: 'from-rose-500 to-rose-700',
+  },
+  {
+    flag: '🇯🇵',
+    title: '日本語 — JLPT',
+    description: 'คำศัพท์พื้นฐาน JLPT N5 พร้อมโรมาจิ เคล็ดลับจำ และคำช่วยพื้นฐาน は/が/を',
+    to: '/japanese',
+    gradient: 'from-indigo-500 to-indigo-700',
+  },
 ]
 
 const FEATURES = [
@@ -117,10 +141,10 @@ export default function HomePage() {
         <section className="grid gap-10 py-14 sm:py-20 lg:grid-cols-2 lg:items-center">
           <div className="space-y-6 text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-stone-800">
-              Better English<br />A Brighter You
+              เรียนภาษาเพื่อการสื่อสาร<br />สอบได้จริง
             </h1>
             <p className="text-stone-500 sm:text-lg max-w-md mx-auto lg:mx-0">
-              เรียนคำศัพท์ ฝึกข้อสอบ พัฒนาทักษะครบ จบในที่เดียว — พิชิตคะแนน TOEIC ในแบบที่คุณเรียนสนุกและจดจำได้จริง
+              แพลตฟอร์มเรียนภาษาอังกฤษ จีน และญี่ปุ่น ที่ออกแบบให้ใช้สื่อสารได้จริงในชีวิตประจำวัน พร้อมฝึกข้อสอบมาตรฐาน TOEIC / HSK / JLPT
             </p>
             <ul className="space-y-2 inline-block text-left">
               {CHECKLIST.map((item) => (
@@ -151,6 +175,27 @@ export default function HomePage() {
               <p className="mt-1 text-xs text-stone-500 sm:text-sm">{stat.label}</p>
             </div>
           ))}
+        </section>
+
+        <section className="space-y-8 pb-16">
+          <div className="text-center space-y-2">
+            <h2 className="text-2xl font-bold text-stone-800 sm:text-3xl">เลือกภาษาที่อยากเรียน</h2>
+            <p className="text-stone-500">เริ่มเรียนภาษาไหนก่อนก็ได้ สลับเปลี่ยนได้ตลอดเวลาในเมนูด้านข้าง</p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {LANGUAGE_TRACKS.map((lang) => (
+              <Link key={lang.to} to={lang.to} className="group block">
+                <div className="h-full rounded-2xl border border-sand-200 bg-white p-5 shadow-sm transition group-hover:-translate-y-0.5 group-hover:shadow-md">
+                  <span className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${lang.gradient} text-2xl`}>
+                    {lang.flag}
+                  </span>
+                  <h3 className="mt-3 font-semibold text-stone-800">{lang.title}</h3>
+                  <p className="mt-1 text-sm text-stone-500">{lang.description}</p>
+                  <span className="mt-3 inline-block text-sm font-medium text-brand-600 group-hover:underline">เริ่มเรียน →</span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </section>
 
         <section className="pb-16 text-center">
@@ -196,7 +241,7 @@ export default function HomePage() {
 
         <section className="rounded-3xl bg-sand-900 px-6 py-14 text-center text-white sm:py-16 mb-16">
           <div className="mx-auto max-w-xl space-y-4">
-            <h2 className="text-2xl font-bold sm:text-3xl">พร้อมเริ่มต้นเส้นทางสู่คะแนน TOEIC ที่ดีขึ้นหรือยัง?</h2>
+            <h2 className="text-2xl font-bold sm:text-3xl">พร้อมเริ่มต้นเส้นทางสู่การสื่อสารภาษาใหม่หรือยัง?</h2>
             <p className="text-white/70">สมัครฟรี ไม่มีค่าใช้จ่าย เริ่มฝึกได้ทันที</p>
             <Link to="/login" className="inline-block pt-2">
               <Button className="bg-white !text-sand-900 hover:bg-sand-100 px-6 py-3 text-base shadow-lg">
