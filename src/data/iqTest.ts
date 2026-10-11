@@ -65,6 +65,17 @@ export const iqTestVocab: VocabWord[] = [
   { id: 'iq-61', term: 'solid', pronunciationTh: 'ซอล-ลิด', mnemonicTh: `จาก solidus (แข็งแรง, ภาษาละติน) = สถานะที่คงรูปแข็งตัว`, pos: 'adj.', meaningTh: 'เป็นของแข็ง', exampleEn: 'Ice is simply water in a solid state.', exampleTh: 'น้ำแข็งคือน้ำที่อยู่ในสถานะของแข็ง' },
   { id: 'iq-62', term: 'kind', pronunciationTh: 'ไคนด์', mnemonicTh: `ทับศัพท์สั้นๆ "ไคนด์" แปลว่าใจดี/กรุณา`, pos: 'adj.', meaningTh: 'ใจดี/กรุณา', exampleEn: "That's very kind of you, but I won't have any more, thank you.", exampleTh: 'คุณใจดีมาก แต่ฉันขอไม่รับเพิ่มแล้ว ขอบคุณ' },
   { id: 'iq-63', term: 'cream', pronunciationTh: 'ครีม', mnemonicTh: `ทับศัพท์สั้นๆ "ครีม" ที่คนไทยคุ้นเคยอยู่แล้ว`, pos: 'n.', meaningTh: 'ครีม/วิปครีม', exampleEn: 'I like my coffee without cream.', exampleTh: 'ฉันชอบกาแฟแบบไม่ใส่ครีม' },
+  { id: 'iq-64', term: 'suffocation', pronunciationTh: 'ซัฟ-โฟ-เค-ชั่น', mnemonicTh: `suffocate (ทำให้หายใจไม่ออก) + ion = ภาวะหายใจไม่ออก`, pos: 'n.', meaningTh: 'ภาวะขาดอากาศหายใจ', exampleEn: 'Keep plastic bags away from children to avoid danger of suffocation.', exampleTh: 'เก็บถุงพลาสติกให้พ้นมือเด็กเพื่อป้องกันอันตรายจากการขาดอากาศหายใจ' },
+  { id: 'iq-65', term: 'purpose', pronunciationTh: 'เพอร์-เพิส', mnemonicTh: `pur (ไปข้างหน้า) + pose (วาง, จาก ponere) = สิ่งที่วางไว้เป็นเป้าหมายข้างหน้า`, pos: 'n.', meaningTh: 'วัตถุประสงค์', exampleEn: 'What is the purpose of this notice?', exampleTh: 'จุดประสงค์ของประกาศนี้คืออะไร' },
+  { id: 'iq-66', term: 'expect', pronunciationTh: 'เอ็กซ์-เพคท์', mnemonicTh: `ex (ออกไป) + pect (มอง, จาก specere) = มองออกไปล่วงหน้าว่าจะเกิดอะไร`, pos: 'v.', meaningTh: 'คาดหวัง/คาดว่า', exampleEn: 'Where would you expect to see this notice?', exampleTh: 'คุณคาดว่าจะเห็นประกาศนี้ที่ไหน' },
+  { id: 'iq-67', term: 'likely', pronunciationTh: 'ไลค์-ลี', mnemonicTh: `like (เหมือน) + ly = มีท่าทีเหมือนจะเป็นไปได้`, pos: 'adj.', meaningTh: 'มีแนวโน้ม/น่าจะเป็นไปได้', exampleEn: 'Who would be likely to place this advertisement?', exampleTh: 'ใครน่าจะเป็นคนลงโฆษณานี้' },
+  { id: 'iq-68', term: 'place', pronunciationTh: 'เพลส', mnemonicTh: `ทับศัพท์สั้นๆ "เพลส" ในที่นี้ใช้เป็นกริยาแปลว่าลง/วาง (เช่น ลงโฆษณา)`, pos: 'v.', meaningTh: 'ลง/วาง(โฆษณา)', exampleEn: 'The company decided to place an advertisement in the newspaper.', exampleTh: 'บริษัทตัดสินใจลงโฆษณาในหนังสือพิมพ์' },
+  { id: 'iq-69', term: 'attention', pronunciationTh: 'อะ-เทน-ชั่น', mnemonicTh: `attend (ดูแล/เข้าร่วม) + ion = การให้ความสนใจดูแล`, pos: 'n.', meaningTh: 'ความสนใจ/การดูแล', exampleEn: 'If this chemical touches your eyes, get immediate medical attention.', exampleTh: 'ถ้าสารเคมีนี้โดนตา ให้รีบไปพบแพทย์ทันที' },
+  { id: 'iq-70', term: 'medical', pronunciationTh: 'เมด-ดิ-เคิล', mnemonicTh: `medic (หมอ) + al = เกี่ยวกับการแพทย์`, pos: 'adj.', meaningTh: 'ทางการแพทย์', exampleEn: 'He needed medical attention after the accident.', exampleTh: 'เขาต้องได้รับการดูแลทางการแพทย์หลังเกิดอุบัติเหตุ' },
+  { id: 'iq-71', term: 'easily', pronunciationTh: 'อี-ซิ-ลี', mnemonicTh: `easy (ง่าย) + ly = อย่างง่ายดาย`, pos: 'adv.', meaningTh: 'อย่างง่ายดาย', exampleEn: 'Children should not be able to open this container easily.', exampleTh: 'เด็กไม่ควรเปิดภาชนะนี้ได้อย่างง่ายดาย' },
+  { id: 'iq-72', term: 'boss', pronunciationTh: 'บอส', mnemonicTh: `ทับศัพท์ "บอส" ที่คนไทยใช้เรียกหัวหน้างานอยู่แล้ว`, pos: 'n.', meaningTh: 'หัวหน้า/เจ้านาย', exampleEn: 'Your boss has just introduced you to his new Thai boss.', exampleTh: 'หัวหน้าของคุณเพิ่งแนะนำให้คุณรู้จักกับหัวหน้าคนไทยคนใหม่ของเขา' },
+  { id: 'iq-73', term: 'trip', pronunciationTh: 'ทริป', mnemonicTh: `ทับศัพท์สั้นๆ "ทริป" ที่คนไทยใช้เรียกการเดินทางอยู่แล้ว`, pos: 'n.', meaningTh: 'การเดินทาง', exampleEn: 'You are on a business trip with your boss to Bangkok.', exampleTh: 'คุณกำลังเดินทางไปทำธุรกิจกับหัวหน้าที่กรุงเทพฯ' },
+  { id: 'iq-74', term: 'birthday', pronunciationTh: 'เบิร์ธ-เดย์', mnemonicTh: `birth (การเกิด) + day (วัน) = วันเกิด`, pos: 'n.', meaningTh: 'วันเกิด', exampleEn: "It's your aunt's birthday, and you are very fond of her.", exampleTh: 'วันนี้เป็นวันเกิดของป้าคุณ และคุณก็รักป้ามาก' },
 ]
 
 export interface IQTestQuestion {
@@ -92,7 +103,7 @@ export const iqTestQuestions: IQTestQuestion[] = [
     contextLabel: '📋 ป้ายประกาศ',
     context: 'Plastic bags can be dangerous\nto avoid danger of suffocation\nKeep this bag away from babies and children',
     question: 'Where would you expect to see this notice?',
-    choices: ['on a carton', 'on a tube of paste', 'on a plastic bag', 'on a tin container'],
+    choices: ['on a carton', 'on a tube paste', 'on a plastic bag', 'on a tin container'],
     answerIndex: 2,
   },
   {
