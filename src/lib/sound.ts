@@ -65,3 +65,17 @@ export function playCompleteSound() {
   playTone(ctx, 783.99, now + 0.22, 0.12) // G5
   playTone(ctx, 1046.5, now + 0.33, 0.25) // C6
 }
+
+/** Light tap for navigating into an available stage/card. */
+export function playClickSound() {
+  const ctx = getAudioContext()
+  if (!ctx) return
+  playTone(ctx, 880, ctx.currentTime, 0.07, 0.1)
+}
+
+/** Soft low thud for tapping a stage that's still locked. */
+export function playLockedSound() {
+  const ctx = getAudioContext()
+  if (!ctx) return
+  playTone(ctx, 160, ctx.currentTime, 0.14, 0.1, 'square')
+}

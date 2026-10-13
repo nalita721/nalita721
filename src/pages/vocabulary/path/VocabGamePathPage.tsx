@@ -3,6 +3,7 @@ import { Lock } from 'lucide-react'
 import { vocabChapters } from '../../../data/vocabulary'
 import { Card } from '../../../components/ui'
 import { useProgressStore } from '../../../store/progress'
+import { playClickSound, playLockedSound } from '../../../lib/sound'
 import {
   getWordSets,
   isSetUnlocked,
@@ -82,11 +83,17 @@ export default function VocabGamePathPage() {
                   )
 
                   return stageUnlocked ? (
-                    <Link key={def.stage} to={`/vocabulary/${chapter.id}/path/${setIndex}/${def.key}`}>
+                    <Link
+                      key={def.stage}
+                      to={`/vocabulary/${chapter.id}/path/${setIndex}/${def.key}`}
+                      onClick={() => playClickSound()}
+                    >
                       {body}
                     </Link>
                   ) : (
-                    <div key={def.stage}>{body}</div>
+                    <div key={def.stage} onClick={() => playLockedSound()} className="cursor-not-allowed">
+                      {body}
+                    </div>
                   )
                 })}
               </div>
