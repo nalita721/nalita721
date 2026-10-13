@@ -6,11 +6,6 @@ import { useProgressStore } from '../../store/progress'
 import { getWordSets, isStagePassed, STAGE_DEFS } from '../../data/vocabularyGamePath'
 
 const GAMES = [
-  { path: 'flashcards', icon: '🗂️', title: 'Flashcard SRS', desc: 'ทบทวนคำศัพท์ตามระบบ Spaced Repetition จำได้จริงในระยะยาว' },
-  { path: 'matching', icon: '🧩', title: 'Matching Game', desc: 'จับคู่คำศัพท์กับความหมาย แข่งกับเวลา' },
-  { path: 'touch-typing', icon: '🖐️', title: 'พิมพ์สัมผัส', desc: 'ฝึกพิมพ์แบบสัมผัส ดูนิ้ว-แป้นพิมพ์ที่ถูกต้องไปพร้อมกับจำคำศัพท์' },
-  { path: 'wordrush', icon: '⚡', title: 'Word Rush', desc: 'ตอบให้เร็วและแม่นที่สุดก่อนเวลาหมด' },
-  { path: 'word-scramble', icon: '🔤', title: 'Word Scramble', desc: 'เรียงตัวอักษรที่สลับกันให้เป็นคำศัพท์ที่ถูกต้อง' },
   { path: 'quiz', icon: '📝', title: 'แบบทดสอบท้ายบท', desc: 'ทดสอบความเข้าใจแบบเลือกตอบสไตล์ TOEIC' },
 ]
 
@@ -60,7 +55,7 @@ export default function ChapterHubPage() {
       </Link>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2 grid gap-4 sm:grid-cols-2 content-start">
+        <div className="lg:col-span-2 grid gap-4 content-start">
           {GAMES.map((g) => (
             <Link key={g.path} to={`/vocabulary/${chapter.id}/${g.path}`}>
               <Card className="h-full hover:shadow-md hover:-translate-y-0.5 transition cursor-pointer">
