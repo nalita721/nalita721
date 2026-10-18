@@ -1,6 +1,7 @@
 import * as set1 from './fullMockExam'
 import * as set2 from './fullMockExamSet2'
 import * as set3 from './fullMockExamSet3'
+import * as set4 from './fullMockExamSet4'
 import type { ExamItem } from '../lib/types'
 
 export interface ExamSet {
@@ -40,6 +41,15 @@ export const EXAM_SETS: ExamSet[] = [
     listeningCount: set3.FULL_EXAM_LISTENING_COUNT,
     readingCount: set3.FULL_EXAM_READING_COUNT,
     durationSec: set3.FULL_EXAM_DURATION_SEC,
+  },
+  {
+    id: 'set4',
+    label: 'ชุดที่ 4',
+    fullExamItems: set4.fullExamItems,
+    totalCount: set4.FULL_EXAM_TOTAL_COUNT,
+    listeningCount: set4.FULL_EXAM_LISTENING_COUNT,
+    readingCount: set4.FULL_EXAM_READING_COUNT,
+    durationSec: set4.FULL_EXAM_DURATION_SEC,
   },
 ]
 
