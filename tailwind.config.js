@@ -72,6 +72,15 @@ export default {
         },
       },
       keyframes: {
+        bob: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-6px)' },
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(0deg)' },
+          '25%': { transform: 'rotate(-6deg)' },
+          '75%': { transform: 'rotate(6deg)' },
+        },
         fadeIn: {
           '0%': { opacity: '0', transform: 'translateY(-4px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
@@ -79,6 +88,8 @@ export default {
       },
       animation: {
         fadeIn: 'fadeIn 0.15s ease-out',
+        bob: 'bob 2.4s ease-in-out infinite',
+        wiggle: 'wiggle 0.9s ease-in-out infinite',
       },
     },
   },

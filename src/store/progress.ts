@@ -39,6 +39,7 @@ export interface ProgressSnapshot {
   dailyQuestionsAnswered: number
   wordPathStageResults: Record<string, GameStageResult>
   customIqWords: CustomIqWord[]
+  claimedChests: string[]
 }
 
 interface ProgressState extends ProgressSnapshot {
@@ -53,6 +54,7 @@ interface ProgressState extends ProgressSnapshot {
   completeStage: (stageKey: string, scoreFraction: number, bonusXp: number) => void
   addCustomIqWord: (word: CustomIqWord) => void
   removeCustomIqWord: (id: string) => void
+  claimChest: (key: string, xp: number) => void
   hydrate: (snapshot: ProgressSnapshot) => void
   resetProgress: () => void
 }
@@ -82,6 +84,7 @@ export const useProgressStore = create<ProgressState>()(
       dailyQuestionsAnswered: 0,
       wordPathStageResults: {},
       customIqWords: [],
+      claimedChests: [],
 
       addXp: (amount) => set((s) => ({ xp: s.xp + amount })),
 
@@ -167,8 +170,16 @@ export const useProgressStore = create<ProgressState>()(
 
       removeCustomIqWord: (id) => set((s) => ({ customIqWords: s.customIqWords.filter((w) => w.id !== id) })),
 
+      claimChest: (key, xp) =>
+        set((s) => (s.claimedChests.includes(key) ? s : { claimedChests: [...s.claimedChests, key], xp: s.xp + xp })),
+
       hydrate: (snapshot) =>
-        set({ ...snapshot, pathUnlockedIndex: reconcileUnlockedIndex(snapshot.pathUnlockedIndex, snapshot.pathPassedSteps) }),
+        set({
+          ...snapshot,
+          // snapshots saved before chests existed don't carry the field
+          claimedChests: snapshot.claimedChests ?? [],
+          pathUnlockedIndex: reconcileUnlockedIndex(snapshot.pathUnlockedIndex, snapshot.pathPassedSteps),
+        }),
 
       resetProgress: () =>
         set({
@@ -186,6 +197,7 @@ export const useProgressStore = create<ProgressState>()(
           dailyQuestionsAnswered: 0,
           wordPathStageResults: {},
           customIqWords: [],
+          claimedChests: [],
         }),
     }),
     {
