@@ -21,6 +21,7 @@ function snapshotOf(): ProgressSnapshot {
     wordPathStageResults,
     customIqWords,
     claimedChests,
+    langBest,
   } = useProgressStore.getState()
   return {
     xp,
@@ -38,6 +39,7 @@ function snapshotOf(): ProgressSnapshot {
     wordPathStageResults,
     customIqWords,
     claimedChests,
+    langBest,
   }
 }
 

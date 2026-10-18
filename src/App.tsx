@@ -41,18 +41,15 @@ import MockTestPage from './pages/mocktest/MockTestPage'
 import FullMockTestPage from './pages/mocktest/FullMockTestPage'
 import GamesHubPage from './pages/games/GamesHubPage'
 import GrammarBlitzPage from './pages/games/GrammarBlitzPage'
-import ChineseHubPage from './pages/chinese/ChineseHubPage'
-import ChineseVocabHubPage from './pages/chinese/ChineseVocabHubPage'
-import ChineseFlashcardPage from './pages/chinese/ChineseFlashcardPage'
-import ChineseQuizPage from './pages/chinese/ChineseQuizPage'
-import ChineseGrammarPage from './pages/chinese/ChineseGrammarPage'
-import JapaneseHubPage from './pages/japanese/JapaneseHubPage'
-import JapaneseVocabHubPage from './pages/japanese/JapaneseVocabHubPage'
-import JapaneseFlashcardPage from './pages/japanese/JapaneseFlashcardPage'
-import JapaneseQuizPage from './pages/japanese/JapaneseQuizPage'
-import JapaneseGrammarPage from './pages/japanese/JapaneseGrammarPage'
 import SettingsPage from './pages/SettingsPage'
 import AchievementsPage from './pages/AchievementsPage'
+import LangHubPage from './pages/lang/LangHubPage'
+import LangLevelPage from './pages/lang/LangLevelPage'
+import LangVocabPage from './pages/lang/LangVocabPage'
+import LangGrammarPage from './pages/lang/LangGrammarPage'
+import LangMockPage from './pages/lang/LangMockPage'
+import KanaPage from './pages/lang/KanaPage'
+import KanjiPage from './pages/lang/KanjiPage'
 import SpeakingPage from './pages/SpeakingPage'
 import LevelTestPage from './pages/LevelTestPage'
 import LoginPage from './pages/LoginPage'
@@ -131,17 +128,19 @@ export default function App() {
           <Route path="/games/touch-typing" element={<RequireAuth><TouchTypingPage /></RequireAuth>} />
           <Route path="/games/grammar-blitz" element={<RequireAuth><GrammarBlitzPage /></RequireAuth>} />
 
-          <Route path="/chinese" element={<RequireAuth><ChineseHubPage /></RequireAuth>} />
-          <Route path="/chinese/vocabulary" element={<RequireAuth><ChineseVocabHubPage /></RequireAuth>} />
-          <Route path="/chinese/vocabulary/flashcards" element={<RequireAuth><ChineseFlashcardPage /></RequireAuth>} />
-          <Route path="/chinese/vocabulary/quiz" element={<RequireAuth><ChineseQuizPage /></RequireAuth>} />
-          <Route path="/chinese/grammar" element={<RequireAuth><ChineseGrammarPage /></RequireAuth>} />
+          <Route path="/chinese" element={<RequireAuth><LangHubPage lang="zh" /></RequireAuth>} />
+          <Route path="/chinese/:level" element={<RequireAuth><LangLevelPage lang="zh" /></RequireAuth>} />
+          <Route path="/chinese/:level/vocab/:chapterId" element={<RequireAuth><LangVocabPage lang="zh" /></RequireAuth>} />
+          <Route path="/chinese/:level/grammar/:topicId" element={<RequireAuth><LangGrammarPage lang="zh" /></RequireAuth>} />
+          <Route path="/chinese/:level/mock" element={<RequireAuth><LangMockPage lang="zh" /></RequireAuth>} />
 
-          <Route path="/japanese" element={<RequireAuth><JapaneseHubPage /></RequireAuth>} />
-          <Route path="/japanese/vocabulary" element={<RequireAuth><JapaneseVocabHubPage /></RequireAuth>} />
-          <Route path="/japanese/vocabulary/flashcards" element={<RequireAuth><JapaneseFlashcardPage /></RequireAuth>} />
-          <Route path="/japanese/vocabulary/quiz" element={<RequireAuth><JapaneseQuizPage /></RequireAuth>} />
-          <Route path="/japanese/grammar" element={<RequireAuth><JapaneseGrammarPage /></RequireAuth>} />
+          <Route path="/japanese/kana" element={<RequireAuth><KanaPage /></RequireAuth>} />
+          <Route path="/japanese/n5/kanji" element={<RequireAuth><KanjiPage /></RequireAuth>} />
+          <Route path="/japanese" element={<RequireAuth><LangHubPage lang="ja" /></RequireAuth>} />
+          <Route path="/japanese/:level" element={<RequireAuth><LangLevelPage lang="ja" /></RequireAuth>} />
+          <Route path="/japanese/:level/vocab/:chapterId" element={<RequireAuth><LangVocabPage lang="ja" /></RequireAuth>} />
+          <Route path="/japanese/:level/grammar/:topicId" element={<RequireAuth><LangGrammarPage lang="ja" /></RequireAuth>} />
+          <Route path="/japanese/:level/mock" element={<RequireAuth><LangMockPage lang="ja" /></RequireAuth>} />
 
           <Route path="/speaking" element={<RequireAuth><SpeakingPage /></RequireAuth>} />
 

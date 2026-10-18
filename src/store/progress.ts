@@ -40,6 +40,8 @@ export interface ProgressSnapshot {
   wordPathStageResults: Record<string, GameStageResult>
   customIqWords: CustomIqWord[]
   claimedChests: string[]
+  /** Best score ratio (0–1) per Chinese/Japanese quiz, lesson or mock, keyed like 'zh:hsk1:mock' */
+  langBest: Record<string, number>
 }
 
 interface ProgressState extends ProgressSnapshot {
@@ -55,6 +57,7 @@ interface ProgressState extends ProgressSnapshot {
   addCustomIqWord: (word: CustomIqWord) => void
   removeCustomIqWord: (id: string) => void
   claimChest: (key: string, xp: number) => void
+  recordLangBest: (key: string, ratio: number) => void
   hydrate: (snapshot: ProgressSnapshot) => void
   resetProgress: () => void
 }
@@ -85,6 +88,7 @@ export const useProgressStore = create<ProgressState>()(
       wordPathStageResults: {},
       customIqWords: [],
       claimedChests: [],
+      langBest: {},
 
       addXp: (amount) => set((s) => ({ xp: s.xp + amount })),
 
@@ -173,11 +177,15 @@ export const useProgressStore = create<ProgressState>()(
       claimChest: (key, xp) =>
         set((s) => (s.claimedChests.includes(key) ? s : { claimedChests: [...s.claimedChests, key], xp: s.xp + xp })),
 
+      recordLangBest: (key, ratio) =>
+        set((s) => (ratio <= (s.langBest[key] ?? -1) ? s : { langBest: { ...s.langBest, [key]: ratio } })),
+
       hydrate: (snapshot) =>
         set({
           ...snapshot,
-          // snapshots saved before chests existed don't carry the field
+          // snapshots saved before these fields existed don't carry them
           claimedChests: snapshot.claimedChests ?? [],
+          langBest: snapshot.langBest ?? {},
           pathUnlockedIndex: reconcileUnlockedIndex(snapshot.pathUnlockedIndex, snapshot.pathPassedSteps),
         }),
 
@@ -198,6 +206,7 @@ export const useProgressStore = create<ProgressState>()(
           wordPathStageResults: {},
           customIqWords: [],
           claimedChests: [],
+          langBest: {},
         }),
     }),
     {
