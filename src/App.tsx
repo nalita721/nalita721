@@ -50,6 +50,7 @@ import LangGrammarPage from './pages/lang/LangGrammarPage'
 import LangMockPage from './pages/lang/LangMockPage'
 import KanaPage from './pages/lang/KanaPage'
 import KanjiPage from './pages/lang/KanjiPage'
+import PinyinPage from './pages/lang/PinyinPage'
 import SpeakingPage from './pages/SpeakingPage'
 import LevelTestPage from './pages/LevelTestPage'
 import LoginPage from './pages/LoginPage'
@@ -128,6 +129,7 @@ export default function App() {
           <Route path="/games/touch-typing" element={<RequireAuth><TouchTypingPage /></RequireAuth>} />
           <Route path="/games/grammar-blitz" element={<RequireAuth><GrammarBlitzPage /></RequireAuth>} />
 
+          <Route path="/chinese/pinyin" element={<RequireAuth><PinyinPage /></RequireAuth>} />
           <Route path="/chinese" element={<RequireAuth><LangHubPage lang="zh" /></RequireAuth>} />
           <Route path="/chinese/:level" element={<RequireAuth><LangLevelPage lang="zh" /></RequireAuth>} />
           <Route path="/chinese/:level/vocab/:chapterId" element={<RequireAuth><LangVocabPage lang="zh" /></RequireAuth>} />

@@ -148,3 +148,84 @@ export interface Kanji {
   strokes: number
   examples: { word: string; reading: string; meaningTh: string }[]
 }
+
+/** One pinyin sound (initial or final) with a character that carries it, used for audio. */
+export interface PinyinSound {
+  pinyin: string
+  /** Closest Thai sound, e.g. "ป (ไม่พ่นลม)" */
+  thai: string
+  /** Character whose reading demonstrates the sound; TTS reads the character, not the pinyin */
+  hanzi: string
+  /** Full pinyin of that character, with tone mark */
+  example: string
+  noteTh?: string
+}
+
+export interface PinyinGroup {
+  titleTh: string
+  sounds: PinyinSound[]
+}
+
+export interface ToneInfo {
+  tone: 1 | 2 | 3 | 4 | 5
+  nameTh: string
+  mark: string
+  /** Pitch contour on the 1–5 scale, e.g. [5, 5] or [2, 1, 4] */
+  contour: number[]
+  thaiCompare: string
+  hanzi: string
+  example: string
+  meaningTh: string
+}
+
+export interface ToneRule {
+  titleTh: string
+  explanation: string
+  examples: { hanzi: string; written: string; spoken: string; meaningTh: string }[]
+}
+
+/** A heard character for listening drills: TTS reads `hanzi`, learner picks the tone or the pinyin. */
+export interface PinyinDrillItem {
+  hanzi: string
+  pinyin: string
+  tone: 1 | 2 | 3 | 4 | 5
+  /** Similar-sounding pinyin used as wrong choices */
+  confusables: string[]
+  meaningTh: string
+}
+
+export interface StrokeInfo {
+  stroke: string
+  nameZh: string
+  nameTh: string
+  descriptionTh: string
+  exampleHanzi: string
+}
+
+export interface StrokeOrderRule {
+  ruleTh: string
+  exampleHanzi: string
+  explanation: string
+}
+
+export interface Radical {
+  radical: string
+  pinyin: string
+  meaningTh: string
+  /** Variant form used as a component, e.g. 氵 for 水 */
+  variant?: string
+  examples: { hanzi: string; pinyin: string; meaningTh: string }[]
+}
+
+export interface ChineseFoundations {
+  introTh: string
+  initials: PinyinGroup[]
+  finals: PinyinGroup[]
+  tones: ToneInfo[]
+  toneRules: ToneRule[]
+  drill: PinyinDrillItem[]
+  strokes: StrokeInfo[]
+  strokeOrder: StrokeOrderRule[]
+  radicals: Radical[]
+  tipsTh: string[]
+}
