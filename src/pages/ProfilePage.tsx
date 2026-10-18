@@ -1,16 +1,10 @@
 import { Link } from 'react-router-dom'
-import { Award, BookOpen, Route as RouteIcon, Settings, Star } from 'lucide-react'
+import { Star } from 'lucide-react'
 import { Button, Card, ProgressBar } from '../components/ui'
 import { useAuthStore } from '../store/auth'
 import { useProgressStore } from '../store/progress'
 import { levelProgressForXp } from '../data/levelTitles'
 
-const QUICK_LINKS = [
-  { to: '/study-plan', label: 'แผนการเรียน', icon: RouteIcon },
-  { to: '/vocabulary', label: 'รายการคำศัพท์', icon: BookOpen },
-  { to: '/achievements', label: 'เหรียญรางวัล', icon: Award },
-  { to: '/settings', label: 'ตั้งค่า', icon: Settings },
-] as const
 
 export default function ProfilePage() {
   const email = useAuthStore((s) => s.email)
@@ -59,25 +53,6 @@ export default function ProfilePage() {
           </>
         )}
         <p className="text-xs text-stone-300 mt-1">{progressPercent}%</p>
-      </Card>
-
-      <Card>
-        <h2 className="font-semibold text-stone-800 mb-3">ทางลัด</h2>
-        <div className="grid grid-cols-2 gap-3">
-          {QUICK_LINKS.map((link) => {
-            const Icon = link.icon
-            return (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="flex items-center gap-2.5 rounded-xl border border-sand-100 px-4 py-3 hover:shadow-sm hover:border-brand-300 transition"
-              >
-                <Icon size={18} className="text-brand-600 shrink-0" />
-                <span className="text-sm font-medium text-stone-700">{link.label}</span>
-              </Link>
-            )
-          })}
-        </div>
       </Card>
 
       <Link to="/settings">

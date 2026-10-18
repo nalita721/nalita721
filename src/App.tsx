@@ -95,11 +95,6 @@ export default function App() {
 
           <Route path="/vocabulary" element={<ChapterListPage />} />
           <Route path="/vocabulary/:chapterId" element={<GatedVocabChapter><ChapterHubPage /></GatedVocabChapter>} />
-          <Route path="/vocabulary/:chapterId/flashcards" element={<GatedVocabChapter><FlashcardPage /></GatedVocabChapter>} />
-          <Route path="/vocabulary/:chapterId/matching" element={<GatedVocabChapter><MatchingGamePage /></GatedVocabChapter>} />
-          <Route path="/vocabulary/:chapterId/touch-typing" element={<GatedVocabChapter><TouchTypingPage /></GatedVocabChapter>} />
-          <Route path="/vocabulary/:chapterId/wordrush" element={<GatedVocabChapter><WordRushPage /></GatedVocabChapter>} />
-          <Route path="/vocabulary/:chapterId/word-scramble" element={<GatedVocabChapter><WordScramblePage /></GatedVocabChapter>} />
           <Route path="/vocabulary/:chapterId/quiz" element={<GatedVocabChapter><ChapterQuizPage /></GatedVocabChapter>} />
 
           <Route path="/vocabulary/:chapterId/path" element={<GatedVocabChapter><VocabGamePathPage /></GatedVocabChapter>} />
