@@ -34,10 +34,10 @@ const LINKS: SidebarLink[] = [
   { to: '/grammar', label: 'ไวยากรณ์', icon: PenLine },
   { to: '/listening', label: 'ฟัง', icon: Headphones },
   { to: '/reading', label: 'อ่าน', icon: FileText },
-  { to: '/games', label: 'เกม', icon: Gamepad2 },
-  { to: '/speaking', label: 'พูด', icon: Mic },
   { to: '/mock-test', label: 'Mock Test', icon: Trophy },
+  { to: '/games', label: 'เกม', icon: Gamepad2 },
   { to: '/iq-test', label: 'IQ Test', icon: Brain },
+  { to: '/speaking', label: 'พูด', icon: Mic },
   { to: '/achievements', label: 'เหรียญรางวัล', icon: Award },
   { to: '/friends', label: 'เพื่อน', icon: Users },
 ]
