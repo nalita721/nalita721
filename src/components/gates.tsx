@@ -91,3 +91,16 @@ export function GatedReadingPassage({ children }: { children: ReactNode }) {
   const step = currentPathStep(effectiveIndex)
   return <LockedPathStep currentTo={step.to} currentLabel={step.labelTh} />
 }
+
+export function GatedCheckpoint({ children }: { children: ReactNode }) {
+  const { level } = useParams()
+  const status = useAuthStore((s) => s.status)
+  const effectiveIndex = useEffectivePathIndex()
+
+  if (status === 'loading') return <CheckingAccess />
+  if (status !== 'authenticated') return <LockedFeature />
+
+  if (isStepUnlocked('checkpoint', level, effectiveIndex)) return <>{children}</>
+  const step = currentPathStep(effectiveIndex)
+  return <LockedPathStep currentTo={step.to} currentLabel={step.labelTh} />
+}

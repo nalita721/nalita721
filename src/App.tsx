@@ -8,6 +8,7 @@ import DashboardPage from './pages/DashboardPage'
 import HomePage from './pages/HomePage'
 import ProgressPage from './pages/ProgressPage'
 import StudyPlanPage from './pages/StudyPlanPage'
+import CheckpointTestPage from './pages/CheckpointTestPage'
 import ProfilePage from './pages/ProfilePage'
 import ChapterListPage from './pages/vocabulary/ChapterListPage'
 import ChapterHubPage from './pages/vocabulary/ChapterHubPage'
@@ -58,6 +59,7 @@ import LoginPage from './pages/LoginPage'
 import FriendsPage from './pages/FriendsPage'
 import DuelPage from './pages/DuelPage'
 import {
+  GatedCheckpoint,
   GatedGrammarTopic,
   GatedListeningPart,
   GatedReadingPassage,
@@ -88,6 +90,7 @@ export default function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/progress" element={<RequireAuth><ProgressPage /></RequireAuth>} />
           <Route path="/study-plan" element={<RequireAuth><StudyPlanPage /></RequireAuth>} />
+          <Route path="/study-plan/checkpoint/:level" element={<GatedCheckpoint><CheckpointTestPage /></GatedCheckpoint>} />
           <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
 
           <Route path="/vocabulary" element={<ChapterListPage />} />

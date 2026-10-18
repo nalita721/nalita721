@@ -4,7 +4,7 @@ import { readingPassages } from './reading'
 import { CEFR_LEVELS } from './cefr'
 import type { CefrCode } from '../lib/types'
 
-export type PathStepType = 'vocabulary' | 'grammar' | 'listening' | 'reading'
+export type PathStepType = 'vocabulary' | 'grammar' | 'listening' | 'reading' | 'checkpoint'
 
 export interface PathStep {
   type: PathStepType
@@ -19,6 +19,7 @@ const TYPE_LABEL: Record<PathStepType, string> = {
   grammar: 'ไวยากรณ์',
   listening: 'ฝึกฟัง',
   reading: 'ฝึกอ่าน',
+  checkpoint: 'ฝึกสอบ TOEIC',
 }
 
 export const TYPE_ICON: Record<PathStepType, string> = {
@@ -26,6 +27,7 @@ export const TYPE_ICON: Record<PathStepType, string> = {
   grammar: '✍️',
   listening: '🎧',
   reading: '📝',
+  checkpoint: '🏆',
 }
 
 function chapterStep(id: string): PathStep {
@@ -50,6 +52,17 @@ function readingStep(id: string, cefrLevel: CefrCode): PathStep {
   return { type: 'reading', id, cefrLevel, labelTh: `${TYPE_LABEL.reading}: ${passage.title}`, to: `/reading/${id}` }
 }
 
+/** End-of-unit TOEIC-style test; passing it is required to continue to the next unit. */
+function checkpointStep(cefrLevel: CefrCode): PathStep {
+  return {
+    type: 'checkpoint',
+    id: cefrLevel,
+    cefrLevel,
+    labelTh: `${TYPE_LABEL.checkpoint} ท้ายหน่วย ${cefrLevel}`,
+    to: `/study-plan/checkpoint/${cefrLevel}`,
+  }
+}
+
 /**
  * The default step-by-step curriculum, ordered A1 -> C1. After the level
  * test, learners start at the first step matching their tested level
@@ -63,6 +76,7 @@ export const LEARNING_PATH: PathStep[] = [
   chapterStep('travel'),
   listeningStep(1, 'A2', 'Part 1: Photographs'),
   listeningStep(2, 'A2', 'Part 2: Question-Response'),
+  checkpointStep('A2'),
   topicStep('word-form'),
   topicStep('tense'),
   topicStep('conjunction'),
@@ -73,6 +87,7 @@ export const LEARNING_PATH: PathStep[] = [
   listeningStep(3, 'B1', 'Part 3: Conversations'),
   readingStep('r6-1', 'B1'),
   readingStep('r6-2', 'B1'),
+  checkpointStep('B1'),
   topicStep('relative-clause'),
   chapterStep('finance'),
   chapterStep('marketing'),
@@ -82,11 +97,30 @@ export const LEARNING_PATH: PathStep[] = [
   listeningStep(4, 'B2', 'Part 4: Talks'),
   readingStep('r7-1', 'B2'),
   readingStep('r7-2', 'B2'),
+  checkpointStep('B2'),
   topicStep('inversion'),
   topicStep('mixed-conditionals'),
   topicStep('cleft-sentences'),
   chapterStep('advanced-business'),
+  checkpointStep('C1'),
 ]
+
+export interface PathUnit {
+  cefrLevel: CefrCode
+  steps: { step: PathStep; index: number }[]
+}
+
+/** The path split into units, one per checkpoint; A1 has a single step so it joins the A2 unit. */
+export const PATH_UNITS: PathUnit[] = LEARNING_PATH.reduce<PathUnit[]>((units, step, index) => {
+  let unit = units[units.length - 1]
+  if (!unit || unit.steps[unit.steps.length - 1].step.type === 'checkpoint') {
+    unit = { cefrLevel: step.cefrLevel, steps: [] }
+    units.push(unit)
+  }
+  unit.steps.push({ step, index })
+  if (step.type === 'checkpoint') unit.cefrLevel = step.cefrLevel
+  return units
+}, [])
 
 export const PASS_THRESHOLD = 0.7
 
