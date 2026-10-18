@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import {
   Award,
   BookOpen,
@@ -49,7 +49,7 @@ interface LanguageLink {
 }
 
 const LANGUAGE_LINKS: LanguageLink[] = [
-  { to: '/vocabulary', label: 'English (TOEIC)', flag: '🇬🇧' },
+  { to: '/english', label: 'English (TOEIC)', flag: '🇬🇧' },
   { to: '/chinese', label: '中文 (HSK)', flag: '🇨🇳' },
   { to: '/japanese', label: '日本語 (JLPT)', flag: '🇯🇵' },
 ]
@@ -61,6 +61,9 @@ interface SidebarProps {
 
 export default function Sidebar({ open, onClose }: SidebarProps) {
   const authStatus = useAuthStore((s) => s.status)
+  const { pathname } = useLocation()
+  // every page outside the Chinese/Japanese tracks belongs to the English (TOEIC) track
+  const inOtherLanguage = pathname.startsWith('/chinese') || pathname.startsWith('/japanese')
   const homeLink: SidebarLink = authStatus === 'authenticated'
     ? { to: '/dashboard', label: 'แดชบอร์ด', icon: Home, end: true }
     : { to: '/', label: 'หน้าแรก', icon: Home, end: true }
@@ -100,7 +103,9 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
                 onClick={onClose}
                 className={({ isActive }) =>
                   `flex flex-col items-center gap-1 rounded-xl py-2 text-[11px] font-medium transition ${
-                    isActive ? 'bg-white/15 text-white' : 'text-sand-300 hover:bg-white/5 hover:text-white'
+                    isActive || (lang.to === '/english' && !inOtherLanguage)
+                      ? 'bg-white/15 text-white'
+                      : 'text-sand-300 hover:bg-white/5 hover:text-white'
                   }`
                 }
               >
