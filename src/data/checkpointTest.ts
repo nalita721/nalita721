@@ -11,6 +11,22 @@ const GRAMMAR_AND_VOCAB_COUNT = 8
 const READING_COUNT = 3
 export const CHECKPOINT_LENGTH = LISTENING_COUNT + GRAMMAR_AND_VOCAB_COUNT + READING_COUNT
 
+/**
+ * Real TOEIC pacing: Reading is 75 min for 100 questions (45 s each). Listening
+ * is paced by the audio; learners here replay it themselves, so allow a little
+ * more than the ~27 s per question of the real recording.
+ */
+const LISTENING_SEC_PER_QUESTION = 35
+const READING_SEC_PER_QUESTION = 45
+
+export function checkpointDurationSec(questions: MockQuestion[]): number {
+  const raw = questions.reduce(
+    (sum, q) => sum + (q.section === 'listening' ? LISTENING_SEC_PER_QUESTION : READING_SEC_PER_QUESTION),
+    0,
+  )
+  return Math.ceil(raw / 60) * 60
+}
+
 /** Units without listening steps of their own (C1) still get TOEIC listening practice. */
 const FALLBACK_LISTENING_PARTS: (1 | 2 | 3 | 4)[] = [3, 4]
 
