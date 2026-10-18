@@ -69,12 +69,16 @@ export const LEARNING_PATH: PathStep[] = [
   chapterStep('office-hr'),
   chapterStep('meetings'),
   chapterStep('communication'),
+  chapterStep('health-safety'),
   listeningStep(3, 'B1', 'Part 3: Conversations'),
   readingStep('r6-1', 'B1'),
   readingStep('r6-2', 'B1'),
   topicStep('relative-clause'),
   chapterStep('finance'),
   chapterStep('marketing'),
+  chapterStep('technology'),
+  chapterStep('logistics'),
+  chapterStep('real-estate'),
   listeningStep(4, 'B2', 'Part 4: Talks'),
   readingStep('r7-1', 'B2'),
   readingStep('r7-2', 'B2'),
@@ -110,6 +114,19 @@ export function startIndexForLevel(cefr: CefrCode | undefined): number {
 /** The furthest index a learner can access: the higher of what they've earned by passing steps, and their level-test placement. */
 export function getEffectivePathIndex(pathUnlockedIndex: number, levelCefr: CefrCode | undefined): number {
   return Math.max(pathUnlockedIndex, startIndexForLevel(levelCefr))
+}
+
+/**
+ * Unlock progress is stored as an index into LEARNING_PATH, so inserting new
+ * steps can shift a saved index backwards. Passed steps are stored by key, so
+ * re-derive the floor from them to never re-lock something already earned.
+ */
+export function reconcileUnlockedIndex(pathUnlockedIndex: number, pathPassedSteps: string[]): number {
+  let index = pathUnlockedIndex
+  LEARNING_PATH.forEach((step, i) => {
+    if (pathPassedSteps.includes(pathStepKey(step.type, step.id))) index = Math.max(index, i + 1)
+  })
+  return Math.min(index, LEARNING_PATH.length)
 }
 
 export function isStepUnlocked(type: PathStepType, id: string | undefined, effectiveIndex: number): boolean {

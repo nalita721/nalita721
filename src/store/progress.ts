@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { newCard, reviewCard } from '../lib/srs'
-import { LEARNING_PATH, pathStepKey, stepIndexOfContent, type PathStepType } from '../data/learningPath'
+import { LEARNING_PATH, pathStepKey, reconcileUnlockedIndex, stepIndexOfContent, type PathStepType } from '../data/learningPath'
 import { GAME_PATH_PASS_THRESHOLD } from '../data/vocabularyGamePath'
 import type { CustomIqWord } from '../data/iqTest'
 import type {
@@ -167,7 +167,8 @@ export const useProgressStore = create<ProgressState>()(
 
       removeCustomIqWord: (id) => set((s) => ({ customIqWords: s.customIqWords.filter((w) => w.id !== id) })),
 
-      hydrate: (snapshot) => set(snapshot),
+      hydrate: (snapshot) =>
+        set({ ...snapshot, pathUnlockedIndex: reconcileUnlockedIndex(snapshot.pathUnlockedIndex, snapshot.pathPassedSteps) }),
 
       resetProgress: () =>
         set({
@@ -187,6 +188,12 @@ export const useProgressStore = create<ProgressState>()(
           customIqWords: [],
         }),
     }),
-    { name: 'toeic-vocab-progress' },
+    {
+      name: 'toeic-vocab-progress',
+      merge: (persisted, current) => {
+        const merged = { ...current, ...(persisted as Partial<ProgressState>) }
+        return { ...merged, pathUnlockedIndex: reconcileUnlockedIndex(merged.pathUnlockedIndex, merged.pathPassedSteps) }
+      },
+    },
   ),
 )

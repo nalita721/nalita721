@@ -1,4 +1,4 @@
-export const FREE_VOCAB_CHAPTER_ID = 'office-hr'
+export const FREE_VOCAB_CHAPTER_ID = 'travel'
 export const FREE_GRAMMAR_TOPIC_ID = 'basic-sentence'
 export const FREE_LISTENING_PART = 1
 export const FREE_READING_PASSAGE_ID = 'r6-1'
