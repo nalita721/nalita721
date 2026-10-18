@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
 import TopBar from './components/TopBar'
 import { useAuthStore } from './store/auth'
 import { useProgressSync } from './lib/useProgressSync'
 import DashboardPage from './pages/DashboardPage'
 import HomePage from './pages/HomePage'
-import ProgressPage from './pages/ProgressPage'
 import StudyPlanPage from './pages/StudyPlanPage'
 import CheckpointTestPage from './pages/CheckpointTestPage'
 import ProfilePage from './pages/ProfilePage'
@@ -87,7 +86,7 @@ export default function App() {
         <main className="max-w-6xl mx-auto px-4 py-8">
         <Routes>
           <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/progress" element={<RequireAuth><ProgressPage /></RequireAuth>} />
+          <Route path="/progress" element={<Navigate to="/dashboard#progress" replace />} />
           <Route path="/study-plan" element={<RequireAuth><StudyPlanPage /></RequireAuth>} />
           <Route path="/study-plan/checkpoint/:level" element={<GatedCheckpoint><CheckpointTestPage /></GatedCheckpoint>} />
           <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />

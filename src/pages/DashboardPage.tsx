@@ -1,9 +1,10 @@
-import type { ReactNode } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, type ReactNode } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { Check, ChevronRight, Flame, Route as RouteIcon, Star, Target, Trophy } from 'lucide-react'
 import { allWords } from '../data/vocabulary'
 import { Card, ProgressBar } from '../components/ui'
 import { PathMascot } from '../components/PathArt'
+import { ProgressOverview } from '../components/ProgressOverview'
 import { useProgressStore } from '../store/progress'
 import { useAuthStore } from '../store/auth'
 import { isDue } from '../lib/srs'
@@ -72,6 +73,11 @@ function WeekStreak({ streak }: { streak: number }) {
 }
 
 export default function DashboardPage() {
+  const { hash } = useLocation()
+  // the old /progress page now lives here as a section; follow #progress links to it
+  useEffect(() => {
+    if (hash) document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth' })
+  }, [hash])
   const email = useAuthStore((s) => s.email)
   const authStatus = useAuthStore((s) => s.status)
   const xp = useProgressStore((s) => s.xp)
@@ -197,7 +203,7 @@ export default function DashboardPage() {
             tone="bg-sky-100 text-sky-600"
             value={currentScore}
             label={`คะแนนโดยประมาณ • ${scoreToCefr(currentScore).code}`}
-            to="/progress"
+            to="/dashboard#progress"
           />
         ) : (
           <StatTile icon={<Target size={20} />} tone="bg-sky-100 text-sky-600" value="วัดระดับ" label="ใช้เวลา 25 นาที" to="/level-test" />
@@ -313,9 +319,7 @@ export default function DashboardPage() {
         </div>
       </Card>
 
-      <Link to="/progress" className="block text-center text-sm font-semibold text-brand-600 hover:text-brand-700">
-        ดูสถิติทักษะและคะแนน Mock Test ทั้งหมดที่หน้าความก้าวหน้า →
-      </Link>
+      <ProgressOverview />
     </div>
   )
 }

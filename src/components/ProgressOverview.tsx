@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
-import { AlertTriangle, TrendingUp } from 'lucide-react'
-import { Badge, Button, Card } from '../components/ui'
-import { GoalRing } from '../components/GoalRing'
+import { AlertTriangle } from 'lucide-react'
+import { Badge, Button, Card } from './ui'
+import { GoalRing } from './GoalRing'
 import { useProgressStore } from '../store/progress'
-import { SkillAccuracyChart } from '../components/charts/SkillAccuracyChart'
-import { MockScoreTrendChart } from '../components/charts/MockScoreTrendChart'
+import { SkillAccuracyChart } from './charts/SkillAccuracyChart'
+import { MockScoreTrendChart } from './charts/MockScoreTrendChart'
 import type { StatPart } from '../lib/types'
 
 const GOAL_SCORE = 800
@@ -25,7 +25,8 @@ const PART_LINK: Record<StatPart, string> = {
   mock: '/mock-test',
 }
 
-export default function ProgressPage() {
+/** Goal, skill accuracy, weak points and Mock Test trend — shown as a section of the dashboard. */
+export function ProgressOverview() {
   const partStats = useProgressStore((s) => s.partStats)
   const mockResults = useProgressStore((s) => s.mockResults)
   const levelTestResult = useProgressStore((s) => s.levelTestResult)
@@ -48,15 +49,8 @@ export default function ProgressPage() {
     .slice(0, 3)
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-bold text-stone-800 flex items-center gap-2">
-          <TrendingUp size={24} className="text-brand-600" />
-          ความก้าวหน้าของคุณ
-        </h1>
-        <p className="text-stone-500 mt-1">ภาพรวมทักษะและคะแนนที่พัฒนาไปตลอดการฝึกฝน</p>
-      </div>
-
+    <section id="progress" className="scroll-mt-20 space-y-6">
+      <h2 className="text-lg font-bold text-stone-800">📈 ความก้าวหน้าของคุณ</h2>
       <GoalRing percent={goalPercent} currentScore={currentScore} />
 
       <Card>
@@ -103,6 +97,6 @@ export default function ProgressPage() {
           <Button variant="secondary">{lastMock ? 'ทำ Mock Test อีกครั้ง' : 'เริ่ม Mock Test'}</Button>
         </Link>
       </Card>
-    </div>
+    </section>
   )
 }
