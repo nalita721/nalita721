@@ -166,6 +166,8 @@ export interface ExamSubQuestion {
   question: string
   choices: string[]
   answerIndex: number
+  /** Thai explanation of the answer and the trap in the wrong choices */
+  explanationTh?: string
 }
 
 /**
@@ -185,4 +187,36 @@ export interface ExamItem {
   passageTexts?: string[]
   transcript?: string
   questions: ExamSubQuestion[]
+}
+
+/** A strategy point taught before practicing a listening part. */
+export interface ListeningTip {
+  label: string
+  explanation: string
+  /** Short rule shown as a chip */
+  pattern: string
+  /** Sample audio line that shows the strategy */
+  exampleEn: string
+  exampleTh: string
+  /** Substring of exampleEn to highlight */
+  highlight: string
+  check: {
+    /** Spoken prompt for the check (read aloud, hidden until answered) */
+    audio: string
+    question: string
+    choices: string[]
+    answerIndex: number
+    explanation: string
+  }
+}
+
+export interface ListeningLesson {
+  part: ListeningPartNumber
+  emoji: string
+  titleTh: string
+  /** What happens in this part of the real test */
+  formatTh: string
+  introTh: string
+  tips: ListeningTip[]
+  tipTh: string
 }
