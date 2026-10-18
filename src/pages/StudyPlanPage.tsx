@@ -59,6 +59,17 @@ const UNIT_MASCOTS: MascotProp[][] = [
 
 const CHEST_XP = 20
 
+const dot = 'inline-flex w-5 h-5 shrink-0 items-center justify-center rounded-full text-white'
+
+const LEGEND = [
+  { label: 'ผ่านแล้ว', swatch: <span className={`${dot} bg-amber-400`}><Check size={12} strokeWidth={3} /></span> },
+  { label: 'ด่านปัจจุบัน', swatch: <span className={`${dot} bg-sky-500 ring-4 ring-sky-200`} /> },
+  { label: 'ปลดล็อกแล้ว ยังไม่ผ่าน', swatch: <span className={`${dot} bg-sky-500`} /> },
+  { label: 'ยังล็อก', swatch: <span className={`${dot} bg-stone-200 text-stone-400`}><Lock size={11} strokeWidth={3} /></span> },
+  { label: 'ฝึกสอบท้ายหน่วย', swatch: <span className={`${dot} bg-sky-500`}><Trophy size={11} strokeWidth={3} /></span> },
+  { label: 'หีบสมบัติ +20 XP', swatch: <TreasureChest state="ready" size={22} /> },
+]
+
 /** Horizontal offsets (px) that make the nodes wind left and right like a trail. */
 const ZIGZAG = [0, 44, 72, 44, 0, -44, -72, -44]
 
@@ -130,6 +141,15 @@ export default function StudyPlanPage() {
         <ProgressBar value={passedCount} max={LEARNING_PATH.length} />
         {pathDone && <p className="text-sm font-medium text-emerald-700 mt-3">🎉 คุณเรียนครบทุกด่านในเส้นทางแล้ว!</p>}
       </Card>
+
+      <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-stone-600" aria-label="คำอธิบายสัญลักษณ์">
+        {LEGEND.map(({ swatch, label }) => (
+          <span key={label} className="flex items-center gap-1.5">
+            {swatch}
+            {label}
+          </span>
+        ))}
+      </div>
 
       {PATH_UNITS.map((unit, unitIdx) => {
         const theme = UNIT_THEME[unitIdx % UNIT_THEME.length]
