@@ -150,6 +150,7 @@ export const JAPANESE_TRACK: LangTrack = {
         { sectionTh: 'การฟัง (聴解)', detailTh: 'ฟังเพื่อทำงาน, ฟังใจความ, การพูดตามสถานการณ์, ตอบสนองทันที', minutes: 30, questions: 24 },
       ],
       passTh: 'เต็ม 180 คะแนน ผ่านที่ 80 คะแนน และต้องได้ขั้นต่ำ 38/120 ในส่วนความรู้ภาษา+การอ่าน และ 19/60 ในการฟัง',
+      load: () => import('./ja-n5').then((m) => m.default),
     },
   ],
 }
