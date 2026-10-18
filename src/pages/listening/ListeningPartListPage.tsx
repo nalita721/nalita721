@@ -1,70 +1,69 @@
-import { Link } from 'react-router-dom'
 import { listeningByPart } from '../../data/listening'
-import { Card } from '../../components/ui'
+import { listeningLessonFor } from '../../data/listeningLessons'
 import { isTtsSupported } from '../../lib/tts'
-import { useAuthStore } from '../../store/auth'
 import { useProgressStore } from '../../store/progress'
 import { isListeningPartFree } from '../../lib/access'
-import { getEffectivePathIndex, isStepUnlocked, pathStepKey, stepIndexOfContent } from '../../data/learningPath'
+import { pathStepKey } from '../../data/learningPath'
+import { LevelSection, SkillHero, SkillRow } from '../../components/SkillPage'
+import { groupOnPath, useStepStatus } from '../../lib/useStepStatus'
 
 const PARTS = [
-  { part: 1 as const, title: 'Part 1: Photographs', desc: 'ฟังประโยคบรรยายภาพ 4 ตัวเลือก แล้วเลือกข้อที่ตรงกับภาพ' },
-  { part: 2 as const, title: 'Part 2: Question-Response', desc: 'ฟังคำถามแล้วเลือกคำตอบที่เหมาะสมที่สุดจาก 3 ตัวเลือก' },
-  { part: 3 as const, title: 'Part 3: Conversations', desc: 'ฟังบทสนทนาสั้นๆ แล้วตอบคำถามเกี่ยวกับเนื้อหา' },
-  { part: 4 as const, title: 'Part 4: Talks', desc: 'ฟังประกาศ/สุนทรพจน์สั้นๆ แล้วตอบคำถาม' },
+  { part: 1 as const, emoji: '🖼️', title: 'Part 1: Photographs', desc: 'ฟังประโยคบรรยายภาพ 4 ตัวเลือก แล้วเลือกข้อที่ตรงกับภาพ' },
+  { part: 2 as const, emoji: '💬', title: 'Part 2: Question-Response', desc: 'ฟังคำถามแล้วเลือกคำตอบที่เหมาะสมที่สุดจาก 3 ตัวเลือก' },
+  { part: 3 as const, emoji: '👥', title: 'Part 3: Conversations', desc: 'ฟังบทสนทนาสั้นๆ แล้วตอบคำถามเกี่ยวกับเนื้อหา' },
+  { part: 4 as const, emoji: '📢', title: 'Part 4: Talks', desc: 'ฟังประกาศ/บทพูดสั้นๆ แล้วตอบคำถาม' },
 ]
 
+const groups = groupOnPath('listening', PARTS, (p) => String(p.part))
+
 export default function ListeningPartListPage() {
-  const authStatus = useAuthStore((s) => s.status)
-  const pathUnlockedIndex = useProgressStore((s) => s.pathUnlockedIndex)
+  const stats = useProgressStore((s) => s.partStats.listening)
   const pathPassedSteps = useProgressStore((s) => s.pathPassedSteps)
-  const levelCefr = useProgressStore((s) => s.levelTestResult?.cefr)
-  const effectiveIndex = getEffectivePathIndex(pathUnlockedIndex, levelCefr)
+  const { statusOf, lockedLabel } = useStepStatus()
+  const passed = PARTS.filter((p) => pathPassedSteps.includes(pathStepKey('listening', String(p.part)))).length
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-stone-800">Listening Practice</h1>
-        <p className="text-stone-500 mt-1">
-          ฝึกฟังทั้ง 4 Part ในรูปแบบเดียวกับข้อสอบจริง ด้วยเสียงสังเคราะห์ในเบราว์เซอร์ (รองรับสำเนียง US/UK/AU/CA)
-          เลือกโหมดฝึก (ดูสคริปต์หลังตอบได้) หรือโหมดจำลองสอบ (ไม่มีเฉลยจนจบ) — ลองฟรีได้ที่ Part 1
-        </p>
-        {!isTtsSupported() && (
-          <p className="mt-2 text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
-            เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง (Web Speech API) — บทฝึกยังใช้งานได้แต่จะไม่มีเสียง
-          </p>
-        )}
-      </div>
+    <div className="mx-auto max-w-3xl space-y-6 pb-10">
+      <SkillHero
+        emoji="🎧"
+        eyebrow="TOEIC Part 1–4"
+        title="การฟัง"
+        description="แต่ละ Part เริ่มด้วยบทเรียนเทคนิค แล้วฝึกในรูปแบบเดียวกับข้อสอบจริง มีคำอธิบายทุกข้อ เลือกสำเนียง US/UK/AU/CA และโหมดจำลองสอบได้ (ลองฟรีได้ที่ Part 1)"
+        gradient="from-teal-500 to-cyan-700"
+        stats={[
+          { value: `${PARTS.reduce((s, p) => s + listeningByPart(p.part).length, 0)}`, label: 'ข้อฝึก' },
+          { value: `${passed}/${PARTS.length}`, label: 'Part ที่ผ่าน' },
+          ...(stats.total > 0 ? [{ value: `${Math.round((stats.correct / stats.total) * 100)}%`, label: 'ความแม่นยำสะสม' }] : []),
+        ]}
+      />
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        {PARTS.map((p) => {
-          const partId = String(p.part)
-          const locked =
-            authStatus === 'authenticated'
-              ? !isStepUnlocked('listening', partId, effectiveIndex)
-              : !isListeningPartFree(partId)
-          const isCurrent = authStatus === 'authenticated' && stepIndexOfContent('listening', partId) === effectiveIndex
-          const isPassed = pathPassedSteps.includes(pathStepKey('listening', partId))
-          return (
-            <Link key={p.part} to={`/listening/${p.part}`}>
-              <Card
-                className={`h-full hover:shadow-md hover:-translate-y-0.5 transition cursor-pointer ${isCurrent ? 'ring-2 ring-brand-400' : ''}`}
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <h2 className="font-semibold text-stone-800">{p.title}</h2>
-                  <div className="flex items-center gap-1 shrink-0">
-                    {isPassed && <span title="ผ่านแล้ว">✅</span>}
-                    {isCurrent && <span title="ขั้นตอนปัจจุบัน">🎯</span>}
-                    {locked && <span title={authStatus === 'authenticated' ? 'ยังไม่ถึงคิว' : 'สำหรับสมาชิก'}>🔒</span>}
-                  </div>
-                </div>
-                <p className="text-sm text-stone-500 mt-1">{p.desc}</p>
-                <p className="text-xs text-stone-400 mt-3">{listeningByPart(p.part).length} ข้อฝึกหัด</p>
-              </Card>
-            </Link>
-          )
-        })}
-      </div>
+      {!isTtsSupported() && (
+        <p className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700">
+          เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง (Web Speech API) — บทฝึกยังใช้งานได้แต่จะไม่มีเสียง
+        </p>
+      )}
+
+      {groups.map(({ level, items }) => (
+        <LevelSection key={level} level={level} count={items.length}>
+          {items.map((p) => (
+            <SkillRow
+              key={p.part}
+              to={`/listening/${p.part}`}
+              icon={p.emoji}
+              level={level}
+              title={p.title}
+              subtitle={p.desc}
+              meta={
+                <>
+                  <span>เทคนิค {listeningLessonFor(p.part)?.tips.length ?? 0} ข้อ</span>·<span>{listeningByPart(p.part).length} ข้อฝึก</span>
+                </>
+              }
+              status={statusOf('listening', String(p.part), isListeningPartFree(String(p.part)))}
+              lockedLabel={lockedLabel}
+            />
+          ))}
+        </LevelSection>
+      ))}
     </div>
   )
 }
