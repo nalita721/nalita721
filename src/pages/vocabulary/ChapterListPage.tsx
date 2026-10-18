@@ -5,6 +5,8 @@ import {
   Building2,
   CheckCircle2,
   ChevronRight,
+  Factory,
+  Headset,
   Home,
   LayoutGrid,
   List,
@@ -33,6 +35,8 @@ const CHAPTER_ICON: Record<string, LucideIcon> = {
   marketing: Megaphone,
   'advanced-business': Building,
   communication: MessageSquare,
+  'customer-service': Headset,
+  manufacturing: Factory,
 }
 
 const CHAPTER_NUMBER: Record<string, number> = Object.fromEntries(vocabChapters.map((c, i) => [c.id, i + 1]))
