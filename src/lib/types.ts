@@ -28,11 +28,26 @@ export interface GrammarQuestion {
   explanation: string
 }
 
+export interface GrammarQuickCheck {
+  /** Sentence with the gap written as ____ */
+  sentence: string
+  choices: string[]
+  answerIndex: number
+  /** Thai explanation shown after answering */
+  explanation: string
+}
+
 export interface GrammarKeyPoint {
   label: string
   explanation: string
   exampleEn: string
   exampleTh: string
+  /** Short formula shown as a chip, e.g. "at + เวลาที่ชัดเจน" */
+  pattern?: string
+  /** Word or phrase inside exampleEn to highlight */
+  highlight?: string
+  /** One-question check shown right after the key point */
+  check?: GrammarQuickCheck
 }
 
 export interface GrammarLesson {
