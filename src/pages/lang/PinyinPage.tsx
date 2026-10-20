@@ -7,6 +7,7 @@ import { speakLang } from '../../lib/tts'
 import { useProgressStore } from '../../store/progress'
 import { playCompleteSound, playCorrectSound, playIncorrectSound } from '../../lib/sound'
 import type { PinyinDrillItem, PinyinGroup, ToneInfo } from '../../lib/langTypes'
+import { VoiceCheck } from '../../components/VoiceCheck'
 
 type Tab = 'pinyin' | 'tones' | 'drill' | 'hanzi'
 const TABS: { id: Tab; label: string }[] = [
@@ -93,6 +94,20 @@ function Drill({ onFinish }: { onFinish: (ratio: number) => void }) {
   const [index, setIndex] = useState(0)
   const [picked, setPicked] = useState<string | null>(null)
   const [score, setScore] = useState(0)
+  const [playing, setPlaying] = useState(false)
+  const [plays, setPlays] = useState(0)
+
+  // Audio is started from click handlers (not effects) because iOS Safari only
+  // allows speech that begins inside a user gesture.
+  async function play(hanzi: string, rate = 0.7) {
+    setPlaying(true)
+    setPlays((n) => n + 1)
+    try {
+      await speakLang(hanzi, 'zh-CN', rate)
+    } finally {
+      setPlaying(false)
+    }
+  }
 
   function reset(m = mode) {
     setMode(m)
@@ -100,6 +115,7 @@ function Drill({ onFinish }: { onFinish: (ratio: number) => void }) {
     setIndex(0)
     setScore(0)
     setPicked(null)
+    setPlays(0)
   }
 
   const modeSwitch = (
@@ -134,10 +150,26 @@ function Drill({ onFinish }: { onFinish: (ratio: number) => void }) {
 
   const { it, choices } = items[index]
   const correct = mode === 'tone' ? String(it.tone) : it.pinyin
+  const tones = zhFoundations.tones
+
+  function next() {
+    const last = index + 1 >= items.length
+    setPicked(null)
+    setPlays(0)
+    setIndex((i) => i + 1)
+    if (last) {
+      playCompleteSound()
+      onFinish(score / items.length)
+    } else {
+      // tapping "next" is a user gesture, so the next sound can start right away
+      play(items[index + 1].it.hanzi)
+    }
+  }
 
   return (
     <div className="space-y-4">
       {modeSwitch}
+      <VoiceCheck lang="zh-CN" />
       <div className="flex justify-between text-xs text-stone-500">
         <span>
           ข้อ {index + 1}/{items.length}
@@ -145,24 +177,45 @@ function Drill({ onFinish }: { onFinish: (ratio: number) => void }) {
         <span>ถูก {score}</span>
       </div>
       <ProgressBar value={index} max={items.length} />
-      <Card className="space-y-4 text-center">
-        <button
-          type="button"
-          onClick={() => say(it.hanzi)}
-          className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-rose-100 text-rose-600 transition hover:bg-rose-200 active:scale-95"
-          aria-label="ฟังเสียง"
-        >
-          <Volume2 size={40} />
-        </button>
-        <p className="text-sm text-stone-500">{mode === 'tone' ? 'เสียงนี้เป็นวรรณยุกต์ที่เท่าไร' : 'เสียงนี้เขียนพินอินว่าอะไร'}</p>
-        {picked && (
-          <p className="animate-fadeIn">
-            <span className="text-4xl text-stone-800">{it.hanzi}</span>{' '}
-            <span className="text-lg font-semibold text-rose-600">{it.pinyin}</span>{' '}
-            <span className="text-sm text-stone-500">{it.meaningTh}</span>
+
+      <Card className="space-y-5 text-center">
+        <div className="flex flex-col items-center gap-3 pt-2">
+          <button
+            type="button"
+            onClick={() => play(it.hanzi)}
+            disabled={playing}
+            className={`relative flex h-28 w-28 items-center justify-center rounded-full text-white shadow-[0_6px_0] shadow-rose-800 transition active:translate-y-1 active:shadow-none ${
+              playing ? 'bg-rose-400' : 'bg-rose-600 hover:bg-rose-500'
+            }`}
+            aria-label="ฟังเสียง"
+          >
+            {playing && <span className="absolute inset-0 animate-ping rounded-full bg-rose-400 opacity-60" />}
+            <Volume2 size={48} className="relative" />
+          </button>
+          <p className="text-sm font-semibold text-stone-600">
+            {playing ? 'กำลังเล่นเสียง…' : plays === 0 ? 'แตะปุ่มเพื่อฟังเสียง' : mode === 'tone' ? 'เสียงนี้เป็นวรรณยุกต์ที่เท่าไร' : 'เสียงนี้เขียนพินอินว่าอะไร'}
           </p>
-        )}
-        <div className={`grid gap-2 ${mode === 'tone' ? 'grid-cols-4' : 'grid-cols-2'}`}>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              disabled={playing}
+              onClick={() => play(it.hanzi)}
+              className="rounded-full border border-sand-200 px-3 py-1.5 text-xs font-semibold text-stone-600 hover:border-rose-400 disabled:opacity-40"
+            >
+              🔁 ฟังอีกครั้ง
+            </button>
+            <button
+              type="button"
+              disabled={playing}
+              onClick={() => play(it.hanzi, 0.45)}
+              className="rounded-full border border-sand-200 px-3 py-1.5 text-xs font-semibold text-stone-600 hover:border-rose-400 disabled:opacity-40"
+            >
+              🐢 ฟังช้าๆ
+            </button>
+          </div>
+        </div>
+
+        <div className={`grid gap-2 ${mode === 'tone' ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2'}`}>
           {choices.map((c) => {
             const style = !picked
               ? 'border-sand-200 bg-white hover:border-rose-400'
@@ -171,11 +224,12 @@ function Drill({ onFinish }: { onFinish: (ratio: number) => void }) {
                 : c === picked
                   ? 'border-rose-400 bg-rose-50 text-rose-800'
                   : 'border-sand-200 bg-white opacity-50'
+            const tone = mode === 'tone' ? tones[Number(c) - 1] : null
             return (
               <button
                 key={c}
                 type="button"
-                disabled={!!picked}
+                disabled={!!picked || plays === 0}
                 onClick={() => {
                   setPicked(c)
                   if (c === correct) {
@@ -183,28 +237,45 @@ function Drill({ onFinish }: { onFinish: (ratio: number) => void }) {
                     playCorrectSound()
                   } else playIncorrectSound()
                 }}
-                className={`rounded-xl border-2 py-3 text-lg font-bold transition ${style}`}
+                className={`flex flex-col items-center rounded-xl border-2 px-2 py-2.5 font-bold transition disabled:cursor-not-allowed ${style} ${
+                  plays === 0 ? 'opacity-50' : ''
+                }`}
               >
-                {mode === 'tone' ? `เสียง ${c}` : c}
+                {tone ? (
+                  <>
+                    <ToneContour tone={tone} />
+                    <span className="text-sm" style={{ color: TONE_COLOR[tone.tone] }}>
+                      เสียง {c} {tone.mark}
+                    </span>
+                  </>
+                ) : (
+                  <span className="py-1 text-xl">{c}</span>
+                )}
               </button>
             )
           })}
         </div>
+
         {picked && (
-          <Button
-            className="w-full py-3"
-            onClick={() => {
-              const last = index + 1 >= items.length
-              setPicked(null)
-              setIndex((i) => i + 1)
-              if (last) {
-                playCompleteSound()
-                onFinish(score / items.length)
-              }
-            }}
-          >
-            {index + 1 >= items.length ? 'ดูผล' : 'ข้อถัดไป →'}
-          </Button>
+          <div className="space-y-3 animate-fadeIn">
+            <button
+              type="button"
+              onClick={() => play(it.hanzi)}
+              className="mx-auto flex items-center gap-3 rounded-2xl bg-sand-50 px-5 py-3 hover:bg-rose-50"
+            >
+              <span className="text-4xl text-stone-800">{it.hanzi}</span>
+              <span className="text-left">
+                <span className="block text-lg font-semibold" style={{ color: TONE_COLOR[it.tone] }}>
+                  {it.pinyin} · เสียง {it.tone}
+                </span>
+                <span className="block text-sm text-stone-500">{it.meaningTh}</span>
+              </span>
+              <Volume2 size={18} className="text-stone-400" />
+            </button>
+            <Button className="w-full py-3" onClick={next}>
+              {index + 1 >= items.length ? 'ดูผล' : 'ข้อถัดไป →'}
+            </Button>
+          </div>
         )}
       </Card>
     </div>
