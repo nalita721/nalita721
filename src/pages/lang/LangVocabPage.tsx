@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, Eye, EyeOff, Lightbulb, Volume2 } from 'lucide-react'
 import { Button, Card, ProgressBar } from '../../components/ui'
 import { speakLang } from '../../lib/tts'
@@ -7,6 +7,7 @@ import { useProgressStore } from '../../store/progress'
 import { playCompleteSound, playCorrectSound, playIncorrectSound } from '../../lib/sound'
 import type { LangCode, LangWord } from '../../lib/langTypes'
 import { bestKey, useLangLevel } from './useLangLevel'
+import { LANG_TEST_PASS } from '../../data/langLessons'
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5)
@@ -213,7 +214,9 @@ export default function LangVocabPage({ lang }: { lang: LangCode }) {
   const { chapterId } = useParams()
   const { track, meta, content, loading } = useLangLevel(lang)
   const recordLangBest = useProgressStore((s) => s.recordLangBest)
-  const [mode, setMode] = useState<'cards' | 'quiz'>('cards')
+  const countDailyLesson = useProgressStore((s) => s.countDailyLesson)
+  const [searchParams] = useSearchParams()
+  const [mode, setMode] = useState<'cards' | 'quiz'>(searchParams.get('mode') === 'quiz' ? 'quiz' : 'cards')
 
   if (!meta) return <Navigate to={track.path} replace />
   if (loading || !content) return <p className="py-10 text-center text-stone-400">กำลังโหลดเนื้อหา…</p>
@@ -251,7 +254,10 @@ export default function LangVocabPage({ lang }: { lang: LangCode }) {
         <Quiz
           words={chapter.words}
           tts={track.ttsLang}
-          onFinish={(ratio) => recordLangBest(bestKey(lang, meta.slug, `v:${chapter.id}`), ratio)}
+          onFinish={(ratio) => {
+            recordLangBest(bestKey(lang, meta.slug, `v:${chapter.id}`), ratio)
+            if (ratio >= LANG_TEST_PASS) countDailyLesson()
+          }}
         />
       )}
     </div>

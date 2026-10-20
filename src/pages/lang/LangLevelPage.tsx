@@ -1,5 +1,8 @@
 import { Link, Navigate } from 'react-router-dom'
 import { Check, ChevronRight, Clock } from 'lucide-react'
+import { LessonBubbles } from '../../components/LessonBubbles'
+import { lessonStatuses, nextLessonIndex, type LessonNode } from '../../lib/miniLesson'
+import { LANG_TEST_PASS, langGrammarLessons, langVocabLessons } from '../../data/langLessons'
 import { Card } from '../../components/ui'
 import { useProgressStore } from '../../store/progress'
 import type { LangCode } from '../../lib/langTypes'
@@ -23,6 +26,7 @@ function BestBadge({ ratio }: { ratio: number | undefined }) {
 export default function LangLevelPage({ lang }: { lang: LangCode }) {
   const { track, meta, content, loading } = useLangLevel(lang)
   const langBest = useProgressStore((s) => s.langBest)
+  const passedLessons = useProgressStore((s) => s.passedLessons)
 
   if (!meta) return <Navigate to={track.path} replace />
 
@@ -30,6 +34,20 @@ export default function LangLevelPage({ lang }: { lang: LangCode }) {
   const totalQuestions = meta.format.reduce((s, f) => s + f.questions, 0)
   const totalMinutes = meta.format.reduce((s, f) => s + f.minutes, 0)
   const wordCount = content?.chapters.reduce((s, c) => s + c.words.length, 0) ?? 0
+
+  // Each chapter/topic is split into short lessons; its test counts as passed at LANG_TEST_PASS.
+  const plan = (nodes: LessonNode[], best: number | undefined) => {
+    const statuses = lessonStatuses(nodes, passedLessons, (best ?? 0) >= LANG_TEST_PASS, true)
+    return { nodes, statuses }
+  }
+  const vocabPlans = content?.chapters.map((c) => plan(langVocabLessons(base, lang, meta.slug, c), langBest[bestKey(lang, meta.slug, `v:${c.id}`)])) ?? []
+  const grammarPlans = content?.grammar.map((g) => plan(langGrammarLessons(base, lang, meta.slug, g), langBest[bestKey(lang, meta.slug, `g:${g.id}`)])) ?? []
+  // continue a chapter already started, otherwise start the first unfinished one
+  const allPlans = [...vocabPlans, ...grammarPlans]
+  const unfinished = allPlans.filter((p) => p.statuses.some((st) => st !== 'passed'))
+  const startedFirst = unfinished.find((p) => p.statuses.some((st) => st === 'passed'))
+  const resumePlan = startedFirst ?? unfinished[0]
+  const resumeNode = resumePlan?.nodes[nextLessonIndex(resumePlan.statuses)]
 
   return (
     <div className="mx-auto max-w-3xl space-y-6 pb-10">
@@ -84,6 +102,23 @@ export default function LangLevelPage({ lang }: { lang: LangCode }) {
 
       {content && (
         <>
+          {resumeNode && (
+            <Link
+              to={resumeNode.to}
+              className="flex items-center gap-3 rounded-2xl bg-brand-600 px-5 py-4 text-white shadow-[0_5px_0] shadow-brand-800 transition active:translate-y-1 active:shadow-none"
+            >
+              <span className="text-2xl">▶</span>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs font-semibold opacity-80">{startedFirst ? 'เรียนต่อจากที่ค้างไว้' : 'เริ่มเรียน'}</p>
+                <p className="truncate font-bold">
+                  {resumeNode.kind === 'test' ? '📝 ' : ''}
+                  {resumeNode.titleTh} · ≈ {resumeNode.minutes} นาที
+                </p>
+              </div>
+              <ChevronRight className="shrink-0" />
+            </Link>
+          )}
+
           <section className="space-y-3">
             <div className="flex items-baseline justify-between">
               <h2 className="font-bold text-stone-800">📚 คำศัพท์ ({wordCount} คำ)</h2>
@@ -94,17 +129,18 @@ export default function LangLevelPage({ lang }: { lang: LangCode }) {
               )}
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
-              {content.chapters.map((c) => (
-                <Link key={c.id} to={`${base}/vocab/${c.id}`}>
-                  <Card className="flex h-full items-center gap-3 transition hover:-translate-y-0.5 hover:shadow-md">
+              {content.chapters.map((c, i) => (
+                <Card key={c.id} className="space-y-3">
+                  <Link to={`${base}/vocab/${c.id}`} className="flex items-center gap-3">
                     <span className="text-2xl">{c.emoji}</span>
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-semibold text-stone-800">{c.titleTh}</p>
-                      <p className="text-xs text-stone-500">{c.words.length} คำ</p>
+                      <p className="text-xs text-stone-500">{c.words.length} คำ · Flashcard ทั้งบท →</p>
                     </div>
                     <BestBadge ratio={langBest[bestKey(lang, meta.slug, `v:${c.id}`)]} />
-                  </Card>
-                </Link>
+                  </Link>
+                  <LessonBubbles nodes={vocabPlans[i].nodes} statuses={vocabPlans[i].statuses} />
+                </Card>
               ))}
             </div>
           </section>
@@ -113,8 +149,8 @@ export default function LangLevelPage({ lang }: { lang: LangCode }) {
             <h2 className="font-bold text-stone-800">✍️ ไวยากรณ์ ({content.grammar.length} หัวข้อ)</h2>
             <div className="space-y-2">
               {content.grammar.map((g, i) => (
-                <Link key={g.id} to={`${base}/grammar/${g.id}`}>
-                  <Card className="flex items-center gap-3 transition hover:shadow-md">
+                <Card key={g.id} className="space-y-3">
+                  <Link to={`${base}/grammar/${g.id}`} className="flex items-center gap-3">
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sand-100 text-xs font-bold text-stone-500">
                       {i + 1}
                     </span>
@@ -124,9 +160,9 @@ export default function LangLevelPage({ lang }: { lang: LangCode }) {
                       <p className="truncate text-xs text-stone-500">{g.description}</p>
                     </div>
                     <BestBadge ratio={langBest[bestKey(lang, meta.slug, `g:${g.id}`)]} />
-                    <ChevronRight className="shrink-0 text-stone-300" size={18} />
-                  </Card>
-                </Link>
+                  </Link>
+                  <LessonBubbles nodes={grammarPlans[i].nodes} statuses={grammarPlans[i].statuses} />
+                </Card>
               ))}
             </div>
           </section>

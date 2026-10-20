@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useAuthStore } from '../store/auth'
 import { useProgressStore } from '../store/progress'
 import { CheckingAccess, LockedFeature, LockedPathStep } from './LockedFeature'
-import { currentPathStep, getEffectivePathIndex, isStepUnlocked } from '../data/learningPath'
+import { currentPathStep, getEffectivePathIndex, isStepUnlocked, type PathStepType } from '../data/learningPath'
 import {
   isGrammarTopicFree,
   isListeningPartFree,
@@ -101,6 +101,30 @@ export function GatedCheckpoint({ children }: { children: ReactNode }) {
   if (status !== 'authenticated') return <LockedFeature />
 
   if (isStepUnlocked('checkpoint', level, effectiveIndex)) return <>{children}</>
+  const step = currentPathStep(effectiveIndex)
+  return <LockedPathStep currentTo={step.to} currentLabel={step.labelTh} />
+}
+
+const FREE_CHECK: Record<string, (id: string | undefined) => boolean> = {
+  vocabulary: isVocabChapterFree,
+  grammar: isGrammarTopicFree,
+  listening: isListeningPartFree,
+}
+
+/** A bite-sized lesson inherits the lock of the path step it belongs to. */
+export function GatedPathLesson({ children }: { children: ReactNode }) {
+  const { type, id } = useParams()
+  const status = useAuthStore((s) => s.status)
+  const effectiveIndex = useEffectivePathIndex()
+
+  if (status === 'loading') return <CheckingAccess />
+
+  if (status !== 'authenticated') {
+    if (FREE_CHECK[type ?? '']?.(id)) return <>{children}</>
+    return <LockedFeature title="บทเรียนนี้สำหรับสมาชิก" description="สมัครสมาชิกฟรีเพื่อปลดล็อกบทเรียนทั้งหมด" />
+  }
+
+  if (isStepUnlocked(type as PathStepType, id, effectiveIndex)) return <>{children}</>
   const step = currentPathStep(effectiveIndex)
   return <LockedPathStep currentTo={step.to} currentLabel={step.labelTh} />
 }

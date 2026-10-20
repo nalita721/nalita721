@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom'
 import { Check, ChevronLeft, Volume2, X } from 'lucide-react'
 import { Button, Card } from '../../components/ui'
 import { speakLang } from '../../lib/tts'
@@ -7,6 +7,7 @@ import { useProgressStore } from '../../store/progress'
 import { playClickSound, playCompleteSound, playCorrectSound, playIncorrectSound } from '../../lib/sound'
 import type { LangCode, LangQuickCheck } from '../../lib/langTypes'
 import { bestKey, useLangLevel } from './useLangLevel'
+import { LANG_TEST_PASS } from '../../data/langLessons'
 
 function Highlighted({ text, highlight }: { text: string; highlight: string }) {
   const at = text.indexOf(highlight)
@@ -67,7 +68,10 @@ export default function LangGrammarPage({ lang }: { lang: LangCode }) {
   const { topicId } = useParams()
   const { track, meta, content, loading } = useLangLevel(lang)
   const recordLangBest = useProgressStore((s) => s.recordLangBest)
-  const [step, setStep] = useState(0)
+  const countDailyLesson = useProgressStore((s) => s.countDailyLesson)
+  // ?quiz=1 comes from the level page's test node: the lessons were already taken bite by bite
+  const [searchParams] = useSearchParams()
+  const [stepState, setStep] = useState<number | null>(null)
   const [checkAnswers, setCheckAnswers] = useState<Record<number, number>>({})
   const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({})
 
@@ -83,6 +87,7 @@ export default function LangGrammarPage({ lang }: { lang: LangCode }) {
   const summaryStep = kps.length + 1
   const firstQuestion = summaryStep + 1
   const resultStep = firstQuestion + qs.length
+  const step = stepState ?? (searchParams.get('quiz') ? firstQuestion : 0)
   const kp = step >= 1 && step <= kps.length ? kps[step - 1] : null
   const qIndex = step >= firstQuestion && step < resultStep ? step - firstQuestion : -1
   const needsAnswer = (kp && checkAnswers[step - 1] === undefined) || (qIndex >= 0 && quizAnswers[qIndex] === undefined)
@@ -92,7 +97,9 @@ export default function LangGrammarPage({ lang }: { lang: LangCode }) {
     playClickSound()
     if (to === resultStep) {
       playCompleteSound()
-      recordLangBest(bestKey(lang, meta!.slug, `g:${topic!.id}`), qs.length ? score / qs.length : 1)
+      const ratio = qs.length ? score / qs.length : 1
+      recordLangBest(bestKey(lang, meta!.slug, `g:${topic!.id}`), ratio)
+      if (ratio >= LANG_TEST_PASS) countDailyLesson()
     }
     setStep(to)
     window.scrollTo({ top: 0, behavior: 'smooth' })

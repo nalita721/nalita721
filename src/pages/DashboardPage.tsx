@@ -19,6 +19,8 @@ import {
   getEffectivePathIndex,
   pathStepKey,
 } from '../data/learningPath'
+import { currentLessonEntry, pathLessonEntries } from '../data/pathLessons'
+import { DAILY_GOAL_OPTIONS } from '../lib/miniLesson'
 
 const THAI_DAY_ABBR = ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส']
 
@@ -90,6 +92,11 @@ export default function DashboardPage() {
   const dailyMissionDate = useProgressStore((s) => s.dailyMissionDate)
   const dailyWordsReviewed = useProgressStore((s) => s.dailyWordsReviewed)
   const dailyQuestionsAnswered = useProgressStore((s) => s.dailyQuestionsAnswered)
+  const passedLessons = useProgressStore((s) => s.passedLessons)
+  const dailyGoal = useProgressStore((s) => s.dailyGoal)
+  const dailyLessons = useProgressStore((s) => s.dailyLessons)
+  const dailyLessonsDate = useProgressStore((s) => s.dailyLessonsDate)
+  const setDailyGoal = useProgressStore((s) => s.setDailyGoal)
 
   const isMember = authStatus === 'authenticated'
   const displayName = email ? email.split('@')[0] : null
@@ -99,7 +106,9 @@ export default function DashboardPage() {
 
   const effectivePathIndex = getEffectivePathIndex(pathUnlockedIndex, levelTestResult?.cefr)
   const pathDone = effectivePathIndex >= LEARNING_PATH.length
-  const activeStep = currentPathStep(effectivePathIndex)
+  const lessonEntries = pathLessonEntries(pathPassedSteps, passedLessons, effectivePathIndex)
+  const currentLesson = currentLessonEntry(lessonEntries, effectivePathIndex)
+  const activeStep = currentLesson?.step ?? currentPathStep(effectivePathIndex)
   const passedCount = LEARNING_PATH.filter((s) => pathPassedSteps.includes(pathStepKey(s.type, s.id))).length
 
   const activeIndex = Math.min(effectivePathIndex, LEARNING_PATH.length - 1)
@@ -121,7 +130,9 @@ export default function DashboardPage() {
   const wordsToday = isMissionToday ? dailyWordsReviewed : 0
   const questionsToday = isMissionToday ? dailyQuestionsAnswered : 0
   const mockToday = mockResults.filter((r) => r.date.slice(0, 10) === todayKey()).length
+  const lessonsToday = dailyLessonsDate === todayKey() ? dailyLessons : 0
   const missions = [
+    { emoji: '🧩', label: 'เรียนด่านย่อย', current: lessonsToday, target: dailyGoal, unit: 'ด่าน' },
     { emoji: '📚', label: 'ทบทวนคำศัพท์', current: wordsToday, target: 20, unit: 'คำ' },
     { emoji: '✍️', label: 'ตอบคำถามฝึกฝน', current: questionsToday, target: 10, unit: 'ข้อ' },
     { emoji: '🏆', label: 'ทำ Mock Test', current: mockToday, target: 1, unit: 'ครั้ง' },
@@ -156,6 +167,11 @@ export default function DashboardPage() {
                 <h1 className="mt-0.5 text-xl font-extrabold sm:text-2xl">
                   {TYPE_ICON[activeStep.type]} {activeStep.labelTh}
                 </h1>
+                {currentLesson && currentLesson.count > 1 && (
+                  <p className="mt-1 text-sm font-semibold opacity-90">
+                    ด่านย่อย {currentLesson.n + 1}/{currentLesson.count}: {currentLesson.node.titleTh} · ⏱ ≈ {currentLesson.node.minutes} นาที
+                  </p>
+                )}
                 <div className="mt-3 max-w-sm">
                   <div className="mb-1 flex justify-between text-xs opacity-90">
                     <span>ความคืบหน้าหน่วยนี้</span>
@@ -176,7 +192,7 @@ export default function DashboardPage() {
             )}
             <div className="mt-4 flex flex-wrap gap-2">
               <Link
-                to={pathDone ? '/mock-test' : isMember ? activeStep.to : '/vocabulary/travel'}
+                to={pathDone ? '/mock-test' : isMember ? (currentLesson?.node.to ?? activeStep.to) : '/vocabulary/travel'}
                 className="rounded-2xl bg-white px-6 py-3 text-sm font-extrabold shadow-[0_5px_0] shadow-black/20 transition active:translate-y-1 active:shadow-none"
                 style={{ color: theme.hex }}
               >
@@ -238,6 +254,22 @@ export default function DashboardPage() {
             <span className="rounded-full bg-sand-100 px-2.5 py-0.5 text-xs font-semibold text-stone-600">
               สำเร็จ {missionsDone}/{missions.length}
             </span>
+          </div>
+          <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-stone-500">
+            <span>เป้าหมายรายวัน:</span>
+            {DAILY_GOAL_OPTIONS.map((g) => (
+              <button
+                key={g}
+                type="button"
+                onClick={() => setDailyGoal(g)}
+                className={`rounded-full border-2 px-3 py-1 font-bold transition ${
+                  dailyGoal === g ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-sand-200 text-stone-500 hover:border-emerald-300'
+                }`}
+              >
+                {g} ด่าน/วัน
+              </button>
+            ))}
+            <span className="text-stone-400">≈ {dailyGoal * 4} นาที</span>
           </div>
           <div className="space-y-4">
             {missions.map((m) => {

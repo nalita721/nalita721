@@ -51,6 +51,8 @@ import KanaPage from './pages/lang/KanaPage'
 import KanjiPage from './pages/lang/KanjiPage'
 import PinyinPage from './pages/lang/PinyinPage'
 import EnglishHubPage from './pages/EnglishHubPage'
+import PathLessonPage from './pages/lesson/PathLessonPage'
+import LangLessonPage from './pages/lesson/LangLessonPage'
 import SpeakingPage from './pages/SpeakingPage'
 import LevelTestPage from './pages/LevelTestPage'
 import LoginPage from './pages/LoginPage'
@@ -60,6 +62,7 @@ import {
   GatedCheckpoint,
   GatedGrammarTopic,
   GatedListeningPart,
+  GatedPathLesson,
   GatedReadingPassage,
   GatedVocabChapter,
   RequireAuth,
@@ -88,6 +91,7 @@ export default function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/progress" element={<Navigate to="/dashboard#progress" replace />} />
           <Route path="/study-plan" element={<RequireAuth><StudyPlanPage /></RequireAuth>} />
+          <Route path="/lesson/:type/:id/:n" element={<GatedPathLesson><PathLessonPage /></GatedPathLesson>} />
           <Route path="/study-plan/checkpoint/:level" element={<GatedCheckpoint><CheckpointTestPage /></GatedCheckpoint>} />
           <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
 
@@ -135,6 +139,7 @@ export default function App() {
           <Route path="/chinese/:level" element={<RequireAuth><LangLevelPage lang="zh" /></RequireAuth>} />
           <Route path="/chinese/:level/vocab/:chapterId" element={<RequireAuth><LangVocabPage lang="zh" /></RequireAuth>} />
           <Route path="/chinese/:level/grammar/:topicId" element={<RequireAuth><LangGrammarPage lang="zh" /></RequireAuth>} />
+          <Route path="/chinese/:level/lesson/:kind/:itemId/:n" element={<RequireAuth><LangLessonPage lang="zh" /></RequireAuth>} />
           <Route path="/chinese/:level/mock" element={<RequireAuth><LangMockPage lang="zh" /></RequireAuth>} />
 
           <Route path="/japanese/kana" element={<RequireAuth><KanaPage /></RequireAuth>} />
@@ -143,6 +148,7 @@ export default function App() {
           <Route path="/japanese/:level" element={<RequireAuth><LangLevelPage lang="ja" /></RequireAuth>} />
           <Route path="/japanese/:level/vocab/:chapterId" element={<RequireAuth><LangVocabPage lang="ja" /></RequireAuth>} />
           <Route path="/japanese/:level/grammar/:topicId" element={<RequireAuth><LangGrammarPage lang="ja" /></RequireAuth>} />
+          <Route path="/japanese/:level/lesson/:kind/:itemId/:n" element={<RequireAuth><LangLessonPage lang="ja" /></RequireAuth>} />
           <Route path="/japanese/:level/mock" element={<RequireAuth><LangMockPage lang="ja" /></RequireAuth>} />
 
           <Route path="/speaking" element={<RequireAuth><SpeakingPage /></RequireAuth>} />

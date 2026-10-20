@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom'
 import { Check, ChevronLeft, Volume2, X } from 'lucide-react'
 import { listeningGroupsByPart } from '../../data/listening'
 import { listeningLessonFor } from '../../data/listeningLessons'
@@ -9,6 +9,7 @@ import { speak, type Accent } from '../../lib/tts'
 import { SceneIllustration } from '../../components/SceneIllustration'
 import { playClickSound, playCompleteSound, playCorrectSound, playIncorrectSound } from '../../lib/sound'
 import { PASS_THRESHOLD } from '../../data/learningPath'
+import { findStep, lessonKey, listeningPracticeSets } from '../../data/pathLessons'
 import type { ExamItem, ListeningTip } from '../../lib/types'
 
 const ACCENTS: Accent[] = ['US', 'UK', 'AU', 'CA']
@@ -145,12 +146,18 @@ function TipStep({
 export default function ListeningPracticePage() {
   const { part } = useParams()
   const partNum = Number(part) as 1 | 2 | 3 | 4
-  const groups = listeningGroupsByPart(partNum)
+  const [searchParams] = useSearchParams()
+  // ?set=k is one short practice set from the learning path; without it the whole part is practised
+  const practiceSets = [1, 2, 3, 4].includes(partNum) ? listeningPracticeSets(partNum) : []
+  const setParam = searchParams.get('set')
+  const setIndex = setParam !== null && practiceSets[Number(setParam)] ? Number(setParam) : null
+  const groups = setIndex !== null ? practiceSets[setIndex] : listeningGroupsByPart(partNum)
   const lesson = listeningLessonFor(partNum)
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
   const passStep = useProgressStore((s) => s.passStep)
+  const completeLesson = useProgressStore((s) => s.completeLesson)
 
-  const [phase, setPhase] = useState<Phase>(lesson ? 'lesson' : 'practice')
+  const [phase, setPhase] = useState<Phase>(lesson && setIndex === null ? 'lesson' : 'practice')
   const [lessonStep, setLessonStep] = useState(0)
   const [tipAnswers, setTipAnswers] = useState<Record<number, number>>({})
   const [mode, setMode] = useState<Mode>('practice')
@@ -237,7 +244,14 @@ export default function ListeningPracticePage() {
       return
     }
     playCompleteSound()
-    if (passed) passStep('listening', String(partNum))
+    if (passed) {
+      const step = findStep('listening', String(partNum))
+      if (setIndex !== null && step) {
+        completeLesson(lessonKey(step, `p${setIndex}`))
+        const done = useProgressStore.getState().passedLessons
+        if (practiceSets.every((_, k) => done.includes(lessonKey(step, `p${k}`)))) passStep('listening', String(partNum))
+      } else passStep('listening', String(partNum))
+    }
     setPhase('summary')
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -406,13 +420,17 @@ export default function ListeningPracticePage() {
       <div className="mx-auto max-w-2xl space-y-4 pb-10">
         <Card className="space-y-2 py-8 text-center">
           <p className="text-4xl">{passed ? '🎉' : '🎧'}</p>
-          <h1 className="text-xl font-extrabold text-stone-800">{passed ? `ผ่าน Part ${partNum} แล้ว!` : 'ยังไม่ผ่าน ลองอีกครั้งนะ'}</h1>
+          <h1 className="text-xl font-extrabold text-stone-800">
+            {!passed ? 'ยังไม่ผ่าน ลองอีกครั้งนะ' : setIndex !== null ? `ผ่านชุดที่ ${setIndex + 1} ของ Part ${partNum} แล้ว!` : `ผ่าน Part ${partNum} แล้ว!`}
+          </h1>
           <p className="text-3xl font-bold text-brand-600">
             {score} / {totalQuestions}
           </p>
           <p className="text-sm text-stone-500">
             {passed
-              ? 'ด่านถัดไปในแผนการเรียนปลดล็อกแล้ว'
+              ? setIndex !== null && setIndex + 1 < practiceSets.length
+                ? `ชุดที่ ${setIndex + 2} ปลดล็อกแล้ว`
+                : 'ด่านถัดไปในแผนการเรียนปลดล็อกแล้ว'
               : `ต้องได้อย่างน้อย ${Math.ceil(totalQuestions * PASS_THRESHOLD)} ข้อ — ทบทวนเทคนิคแล้วลองใหม่`}
           </p>
           <div className="flex flex-wrap justify-center gap-3 pt-3">
@@ -431,8 +449,13 @@ export default function ListeningPracticePage() {
                 ทบทวนเทคนิค
               </Button>
             )}
-            <Link to={passed ? '/study-plan' : '/listening'}>
-              <Button variant="secondary">{passed ? 'ไปแผนการเรียน' : 'เลือก Part อื่น'}</Button>
+            {passed && setIndex !== null && setIndex + 1 < practiceSets.length && (
+              <Link to={`/listening/${partNum}?set=${setIndex + 1}`} onClick={startPractice}>
+                <Button>ชุดถัดไป →</Button>
+              </Link>
+            )}
+            <Link to={passed || setIndex !== null ? '/study-plan' : '/listening'}>
+              <Button variant="secondary">{passed || setIndex !== null ? 'ไปแผนการเรียน' : 'เลือก Part อื่น'}</Button>
             </Link>
           </div>
         </Card>

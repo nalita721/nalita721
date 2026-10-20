@@ -19,6 +19,8 @@ import { zhFoundations } from '../src/data/langs/zh-foundations'
 import { kanaTables } from '../src/data/langs/ja-kana'
 import { n5Kanji } from '../src/data/langs/ja-n5-kanji'
 import type { LangLevelContent } from '../src/lib/langTypes'
+import { listeningPracticeSets, stepLessons, TOTAL_PATH_LESSONS } from '../src/data/pathLessons'
+import { listeningGroupsByPart } from '../src/data/listening'
 
 const errors: string[] = []
 const warnings: string[] = []
@@ -79,6 +81,18 @@ for (const set of EXAM_SETS) {
 
 for (const step of LEARNING_PATH) if (!step.to) errors.push(`learning path ${step.type}:${step.id}: no route`)
 
+// bite-sized lessons: every step splits into short lessons and they cover all its content
+for (const step of LEARNING_PATH) {
+  const nodes = stepLessons(step)
+  if (nodes.length === 0) errors.push(`lessons ${step.type}:${step.id}: none`)
+  unique(`lessons ${step.type}:${step.id} keys`, nodes.map((n) => n.key))
+  for (const n of nodes) if (n.minutes > 15) warnings.push(`lessons ${n.key}: ${n.minutes} minutes is long`)
+}
+for (const part of [1, 2, 3, 4] as const) {
+  const inSets = listeningPracticeSets(part).flat().length
+  if (inSets !== listeningGroupsByPart(part).length) errors.push(`listening part ${part}: practice sets miss some questions`)
+}
+
 // ---------- Chinese / Japanese ----------
 function checkLevel(tag: string, l: LangLevelContent) {
   const words = l.chapters.flatMap((c) => c.words)
@@ -127,6 +141,7 @@ async function main() {
   }
   unique('N5 kanji', n5Kanji.map((k) => k.kanji))
 
+  console.log(`path: ${LEARNING_PATH.length} steps · ${TOTAL_PATH_LESSONS} lessons`)
   console.log(`EN: ${enWords.length} words, ${grammarTopics.length} grammar topics, ${readingPassages.length} passages, ${EXAM_SETS.length} mock sets`)
   console.log(counts.join(' · '))
   console.log(`warnings: ${warnings.length}`)
