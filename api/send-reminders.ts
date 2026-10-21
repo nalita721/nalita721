@@ -1,4 +1,5 @@
 import { kv } from './_redis.js'
+import { runBackup } from './_backup.js'
 
 const RESEND_API_URL = 'https://api.resend.com/emails'
 const SITE_URL = process.env.SITE_URL ?? 'https://toeic-nu.vercel.app'
@@ -11,6 +12,7 @@ interface Subscriber {
 
 /**
  * Triggered daily by two Vercel Cron entries (one per slot, see vercel.json).
+ * The morning run also emails the daily data backup (see _backup.ts).
  * Vercel automatically sends `Authorization: Bearer $CRON_SECRET` on cron
  * invocations when the CRON_SECRET env var is set — we verify it here so
  * this endpoint can't be used to spam subscribers if the URL leaks.
@@ -55,5 +57,15 @@ export default async function handler(req: any, res: any) {
     }
   }
 
-  res.status(200).json({ ok: true, slot, checked: emails.length, sent })
+  // The daily backup rides on the morning cron so the project stays within its cron job allowance.
+  let backup: Awaited<ReturnType<typeof runBackup>> | undefined
+  if (slot === 'morning') {
+    try {
+      backup = await runBackup()
+    } catch (e) {
+      backup = { ok: false, reason: String(e) }
+    }
+  }
+
+  res.status(200).json({ ok: true, slot, checked: emails.length, sent, backup })
 }

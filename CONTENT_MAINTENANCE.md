@@ -22,9 +22,21 @@ log. People can edit the backlog and rotation; the session appends to the log.
 6. `npm run validate:content`, `npx tsc -b`, `npm run lint` on changed files,
    `npm run build`. Only commit when all pass.
 7. Append a log entry below (date, area, what was checked, every fix with id,
-   the improvement made). Commit everything in one commit and push.
-8. If nothing needed fixing, still log the check. Never push a change that
-   is uncertain; note it in the log as "needs human review" instead.
+   the improvement made).
+8. **Changes go through a pull request, never straight to the live branch.**
+   Start from the latest `claude/toeic-vocabulary-web-gf8mya`, create the
+   branch `content/YYYY-MM-DD`, commit everything in one commit, push that
+   branch and open a pull request into `claude/toeic-vocabulary-web-gf8mya`
+   titled `Content check YYYY-MM-DD · Day N · <area>`. The description lists,
+   in Thai, every fix (id, what was wrong, what it is now), the improvement,
+   and anything marked "needs human review". Never merge it yourself: the
+   site owner reviews and merges, and Vercel posts a preview link on the PR.
+9. If nothing needed fixing, still log the check (in a PR as above). Never
+   push a change that is uncertain; note it in the log as "needs human
+   review" instead.
+10. If an earlier content PR is still open, base today's branch on the live
+   branch anyway (PRs stay independent); if both touch the log, the later one
+   is merged after resolving the log lines.
 
 ## Rotation (14 days)
 
