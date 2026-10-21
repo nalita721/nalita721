@@ -31,13 +31,11 @@ Learners only need to log in again afterwards.
 
 ## Releases and rollback
 
-The live site deploys from `claude/toeic-vocabulary-web-gf8mya`. Every
-feature release is tagged `vYYYY.MM.DD` (a `-2`, `-3` suffix for a second
-release the same day) with a short message saying what shipped:
-```
-git tag -a v2026.10.21 -m "Mini-lessons, daily goal, backups"
-git push origin v2026.10.21
-```
+The live site deploys from `claude/toeic-vocabulary-web-gf8mya`. Every push
+to it (a feature release or a merged content PR) is tagged automatically by
+the GitHub Action `.github/workflows/tag-release.yml` as `vYYYY.MM.DD`
+(Bangkok date; `-2`, `-3` for later releases the same day), with the commit
+title as the tag message. Tags are listed on GitHub under Tags/Releases.
 **To roll back:** in Vercel → Deployments, pick the deployment of the last
 good tag and "Promote to Production" (instant, no code change). To also roll
 the code back, `git revert` the bad commits on the live branch (never force-push).

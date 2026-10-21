@@ -1,0 +1,29 @@
+# Tags every deploy of the live branch as vYYYY.MM.DD (then -2, -3 … the same
+# day) so any release can be found and rolled back. See OPERATIONS.md.
+name: Tag release
+
+on:
+  push:
+    branches: [claude/toeic-vocabulary-web-gf8mya]
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create tag
+        run: |
+          if [ -n "$(git tag --points-at HEAD 'v*')" ]; then echo "already tagged"; exit 0; fi
+          base="v$(TZ=Asia/Bangkok date +%Y.%m.%d)"
+          tag="$base"; n=1
+          while git rev-parse -q --verify "refs/tags/$tag" >/dev/null; do n=$((n+1)); tag="$base-$n"; done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$tag" -m "$(git log -1 --format=%s)"
+          git push origin "$tag"
+          echo "tagged $tag"
