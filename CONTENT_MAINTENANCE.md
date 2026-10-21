@@ -71,3 +71,10 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-10-22 · Day 3 · English listening lessons + Mock set 1 listening
+
+- Checked: all 4 listening strategy lessons (`src/data/listeningLessons.ts`: tips, examples, 19 quick checks) and Mock set 1 listening (`src/data/fullMockExam.ts`: Part 1 L1-1–L1-6, Part 2 L2-1–L2-25, Part 3 L3-1–L3-13, Part 4 L4-1–L4-10; answer keys, Thai explanations, scripts/transcripts).
+- Fix `L2-5-q`: distractor "It's in the warehouse." was a defensible indirect answer to "When is the shipment expected to arrive?" (it means the shipment has already arrived), so the question had two answers. Replaced with "To the main warehouse." (answers Where) and updated the Thai explanation.
+- Improvement `L2-9-q`: the explanation now also says why "In conference room B" is wrong (answers Where).
+- Needs human review: the quick checks for Part 2 tips 1, 2 and 4 have 4 choices while real Part 2 has 3; left as is.

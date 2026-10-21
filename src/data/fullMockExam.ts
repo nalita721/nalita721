@@ -174,9 +174,9 @@ const part2Data: { script: string; choices: string[]; answerIndex: number; expla
   },
   {
     script: 'When is the shipment expected to arrive?',
-    choices: ['By truck.', 'Sometime next Tuesday.', 'It\'s in the warehouse.'],
+    choices: ['By truck.', 'Sometime next Tuesday.', 'To the main warehouse.'],
     answerIndex: 1,
-    explanationTh: '"When" ถามเวลา → "Sometime next Tuesday" ส่วน "By truck" ตอบ How (ส่งด้วยอะไร) และ "It\'s in the warehouse" ตอบ Where อีกทั้งขัดกับ "expected to arrive" (ยังไม่มาถึง)',
+    explanationTh: '"When" ถามเวลา → "Sometime next Tuesday" ส่วน "By truck" ตอบ How (ส่งด้วยอะไร) และ "To the main warehouse" ตอบ Where (ส่งไปที่ไหน) แม้จะมีคำที่เกี่ยวกับการขนส่งก็ตาม',
   },
   {
     script: 'Didn\'t you already send the invoice?',
@@ -200,7 +200,7 @@ const part2Data: { script: string; choices: string[]; answerIndex: number; expla
     script: 'Why was the meeting postponed?',
     choices: ['The director is traveling.', 'In conference room B.', 'For about an hour.'],
     answerIndex: 0,
-    explanationTh: '"Why" ถามเหตุผล → "The director is traveling" (ผู้อำนวยการเดินทางอยู่) เป็นเหตุผลแม้ไม่มีคำว่า because ส่วน "For about an hour" ตอบ How long',
+    explanationTh: '"Why" ถามเหตุผล → "The director is traveling" (ผู้อำนวยการเดินทางอยู่) เป็นเหตุผลแม้ไม่มีคำว่า because ส่วน "In conference room B" ตอบ Where และ "For about an hour" ตอบ How long',
   },
   {
     script: 'How much does the annual membership cost?',
