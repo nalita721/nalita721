@@ -7,7 +7,7 @@ import { useProgressStore } from '../../store/progress'
 import { speak, type Accent } from '../../lib/tts'
 import { toScoreBand } from '../../lib/scoreBand'
 import { playCompleteSound } from '../../lib/sound'
-import type { ExamPart } from '../../lib/types'
+import type { ExamItem, ExamPart } from '../../lib/types'
 import { SceneIllustration } from '../../components/SceneIllustration'
 
 const ACCENTS: Accent[] = ['US', 'UK', 'AU', 'CA']
@@ -20,6 +20,18 @@ const PART_LABELS: Record<ExamPart, string> = {
   5: 'Part 5: Incomplete Sentences',
   6: 'Part 6: Text Completion',
   7: 'Part 7: Reading Comprehension',
+}
+
+const letter = (i: number) => String.fromCharCode(65 + i)
+
+/**
+ * What the real test reads aloud for an item. Parts 1 and 2 print no choices, so the
+ * choices are part of the audio: Part 1 reads all four, Part 2 reads the question then three.
+ */
+function examAudio(item: ExamItem): string | undefined {
+  if (item.part !== 1 && item.part !== 2) return item.audioScript
+  const choices = item.questions[0].choices.map((c, i) => `${letter(i)}. ${c}`).join(' ')
+  return item.part === 1 ? choices : `${item.audioScript} ... ${choices}`
 }
 
 function formatTime(sec: number) {
@@ -161,6 +173,15 @@ export default function FullMockTestPage() {
             {items.map((it, itemIdx) => (
               <Card key={itemIdx}>
                 <p className="text-xs font-semibold text-brand-600 mb-2">{PART_LABELS[it.part]}</p>
+                {it.imageId && (
+                  <div className="mb-2 max-w-sm">
+                    <SceneIllustration id={it.imageId} />
+                  </div>
+                )}
+                {it.imageDescription && <p className="text-xs text-stone-500 mb-2">{it.imageDescription}</p>}
+                {it.part === 2 && it.audioScript && (
+                  <p className="text-sm text-stone-700 mb-2">🎧 {it.audioScript}</p>
+                )}
                 <div className="space-y-4">
                   {it.questions.map((q) => {
                     const userAnswer = finalAnswers[q.id]
@@ -182,7 +203,7 @@ export default function FullMockTestPage() {
                                       : 'text-stone-500'
                                 }`}
                               >
-                                {String.fromCharCode(65 + ci)}. {choice}
+                                {letter(ci)}. {choice}
                                 {isCorrect && ' ✓'}
                                 {isUserWrong && ' (คำตอบของคุณ)'}
                               </p>
@@ -202,7 +223,9 @@ export default function FullMockTestPage() {
     )
   }
 
+  // Parts 1 and 2 print no choices in the real test: show only the letters until the review.
   const audioOnly = item.part === 1 || item.part === 2
+  const itemAudio = examAudio(item)
 
   return (
     <div className="space-y-6 max-w-3xl mx-auto">
@@ -215,7 +238,7 @@ export default function FullMockTestPage() {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          {item.audioScript && (
+          {itemAudio && (
             <div className="flex gap-1">
               {ACCENTS.map((a) => (
                 <button
@@ -236,12 +259,8 @@ export default function FullMockTestPage() {
 
       <Card className="space-y-5">
         {item.imageId && <SceneIllustration id={item.imageId} />}
-        {item.imageDescription && (
-          <p className="text-center text-xs text-stone-500">{item.imageDescription}</p>
-        )}
-
-        {item.audioScript && (
-          <Button variant="secondary" onClick={() => speak(item.audioScript!, accent, 0.8)}>
+        {itemAudio && (
+          <Button variant="secondary" onClick={() => speak(itemAudio, accent, 0.8)}>
             ▶️ ฟังเสียง{item.part >= 3 ? (item.part === 3 ? 'บทสนทนา' : 'ประกาศ') : ''}
           </Button>
         )}
@@ -262,7 +281,7 @@ export default function FullMockTestPage() {
           {item.questions.map((q) => (
             <div key={q.id}>
               <p className="text-sm font-semibold text-stone-800 mb-2">{q.question}</p>
-              <div className="grid gap-2">
+              <div className={audioOnly ? 'grid grid-cols-2 sm:grid-cols-4 gap-2' : 'grid gap-2'}>
                 {q.choices.map((choice, i) => {
                   const isSelected = answers[q.id] === i
                   return (
@@ -272,7 +291,7 @@ export default function FullMockTestPage() {
                           type="button"
                           onClick={() => speak(choice, accent, 0.8)}
                           className="shrink-0 rounded-lg border border-sand-200 px-2 py-2 text-sm hover:bg-sand-50"
-                          aria-label={`ฟังตัวเลือก ${String.fromCharCode(65 + i)}`}
+                          aria-label={`ฟังตัวเลือก ${letter(i)}`}
                         >
                           🔊
                         </button>
@@ -280,11 +299,11 @@ export default function FullMockTestPage() {
                       <button
                         onClick={() => selectAnswer(q.id, i)}
                         data-testid="answer-choice"
-                        className={`flex-1 rounded-xl border px-4 py-2.5 text-left text-sm transition ${
+                        className={`flex-1 rounded-xl border px-4 py-2.5 text-sm transition ${audioOnly ? 'text-center font-semibold' : 'text-left'} ${
                           isSelected ? 'bg-brand-600 border-brand-600 text-white' : 'bg-white border-sand-200 hover:border-brand-400'
                         }`}
                       >
-                        {String.fromCharCode(65 + i)}. {choice}
+                        {audioOnly ? `(${letter(i)})` : `${letter(i)}. ${choice}`}
                       </button>
                     </div>
                   )

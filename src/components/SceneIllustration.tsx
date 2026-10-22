@@ -106,7 +106,7 @@ function OfficeWall({ blurFilterId }: { blurFilterId: string }) {
 
 const SCENES: Record<string, JSX.Element> = {
   handshake: (
-    <svg viewBox="0 0 320 160" className="w-full h-40">
+    <svg viewBox="0 0 320 160" className="w-full h-auto max-h-96">
       <PhotoDefs filterId="grain-handshake" vignetteId="vig-handshake" />
       <OfficeWall blurFilterId="grain-handshake-blur" />
       <rect x="24" y="24" width="46" height="60" rx="4" fill="#FFFFFF" opacity="0.4" filter="url(#grain-handshake-blur)" />
@@ -118,7 +118,7 @@ const SCENES: Record<string, JSX.Element> = {
     </svg>
   ),
   typing: (
-    <svg viewBox="0 0 320 160" className="w-full h-40">
+    <svg viewBox="0 0 320 160" className="w-full h-auto max-h-96">
       <PhotoDefs filterId="grain-typing" vignetteId="vig-typing" />
       <OfficeWall blurFilterId="grain-typing-blur" />
       <rect x="255" y="20" width="40" height="55" rx="4" fill="#FFFFFF" opacity="0.35" filter="url(#grain-typing-blur)" />
@@ -131,7 +131,7 @@ const SCENES: Record<string, JSX.Element> = {
     </svg>
   ),
   truck: (
-    <svg viewBox="0 0 320 160" className="w-full h-40">
+    <svg viewBox="0 0 320 160" className="w-full h-auto max-h-96">
       <PhotoDefs filterId="grain-truck" vignetteId="vig-truck" />
       <linearGradient id="sky-truck" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stopColor="#DDE6ED" />
@@ -153,7 +153,7 @@ const SCENES: Record<string, JSX.Element> = {
     </svg>
   ),
   chef: (
-    <svg viewBox="0 0 320 160" className="w-full h-40">
+    <svg viewBox="0 0 320 160" className="w-full h-auto max-h-96">
       <PhotoDefs filterId="grain-chef" vignetteId="vig-chef" />
       <OfficeWall blurFilterId="grain-chef-blur" />
       <rect x="86" y="88" width="148" height="16" rx="4" fill={METAL} filter="url(#grain-chef-blur)" />
@@ -170,7 +170,7 @@ const SCENES: Record<string, JSX.Element> = {
     </svg>
   ),
   bus: (
-    <svg viewBox="0 0 320 160" className="w-full h-40">
+    <svg viewBox="0 0 320 160" className="w-full h-auto max-h-96">
       <PhotoDefs filterId="grain-bus" vignetteId="vig-bus" />
       <linearGradient id="sky-bus" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stopColor="#DEE7EE" />
@@ -193,7 +193,7 @@ const SCENES: Record<string, JSX.Element> = {
     </svg>
   ),
   printer: (
-    <svg viewBox="0 0 320 160" className="w-full h-40">
+    <svg viewBox="0 0 320 160" className="w-full h-auto max-h-96">
       <PhotoDefs filterId="grain-printer" vignetteId="vig-printer" />
       <OfficeWall blurFilterId="grain-printer-blur" />
       <rect x="256" y="24" width="40" height="55" rx="4" fill="#FFFFFF" opacity="0.35" filter="url(#grain-printer-blur)" />
