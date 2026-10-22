@@ -1,5 +1,8 @@
-// Flat-style scene illustrations standing in for TOEIC Part 1 photographs.
-// Kept as inline SVG (no network dependency, no stock/AI images) so they render instantly and
+import { scenePhotos } from '../data/scenePhotos'
+
+// TOEIC Part 1 pictures: a real photograph when src/data/scenePhotos.ts has one for the id,
+// otherwise one of the flat-style scene illustrations below.
+// The illustrations are inline SVG (no network dependency) so they render instantly and
 // consistently. A grain + vignette overlay and a muted, slightly desaturated palette push it as
 // close to "photograph" as an illustration can get without actually being one.
 
@@ -208,6 +211,24 @@ const SCENES: Record<string, JSX.Element> = {
 }
 
 export function SceneIllustration({ id }: { id?: string }) {
+  const photo = id ? scenePhotos[id] : undefined
+  if (photo) {
+    return (
+      <figure>
+        <img
+          src={photo.src}
+          alt={photo.alt}
+          className="w-full rounded-xl border border-sand-200 object-cover aspect-[3/2]"
+          loading="lazy"
+        />
+        <figcaption className="mt-1 text-right text-[10px] text-stone-400">
+          <a href={photo.sourceUrl} target="_blank" rel="noreferrer" className="hover:underline">
+            ภาพ: {photo.author} · {photo.license}
+          </a>
+        </figcaption>
+      </figure>
+    )
+  }
   const scene = id ? SCENES[id] : undefined
   if (!scene) return null
   return <div className="rounded-xl overflow-hidden border border-sand-200">{scene}</div>
