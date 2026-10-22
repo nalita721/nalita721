@@ -10,8 +10,8 @@ const part1: ExamItem[] = [
     id: 'S4-L1-1',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: ชายและหญิงยืนหันหน้าเข้าหากันและจับมือทักทายกันในสำนักงาน',
-    imageId: 'handshake',
+    imageDescription: '🖼️ ภาพ: ชายใส่สูทและหญิงสาวยืนจับมือกันกลางแจ้ง',
+    imageId: 'handshake-outdoors',
     questions: [
       {
         id: 'S4-L1-1-q',
@@ -31,8 +31,8 @@ const part1: ExamItem[] = [
     id: 'S4-L1-2',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: พนักงานหญิงนั่งทำงานกับคอมพิวเตอร์แล็ปท็อปที่วางอยู่บนโต๊ะไม้',
-    imageId: 'typing',
+    imageDescription: '🖼️ ภาพ: ผู้หญิงนั่งใช้แล็ปท็อปที่โต๊ะไม้',
+    imageId: 'laptop-wooden-table',
     questions: [
       {
         id: 'S4-L1-2-q',
@@ -52,8 +52,8 @@ const part1: ExamItem[] = [
     id: 'S4-L1-3',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: คนงานกำลังยกกล่องกระดาษขึ้นสูง โดยมีรถบรรทุกจอดอยู่ข้าง ๆ',
-    imageId: 'truck',
+    imageDescription: '🖼️ ภาพ: คนงานยกกล่องขึ้นเหนือศีรษะ โดยมีรถบรรทุกส่งของจอดอยู่ข้างๆ',
+    imageId: 'box-delivery-truck',
     questions: [
       {
         id: 'S4-L1-3-q',
@@ -94,8 +94,8 @@ const part1: ExamItem[] = [
     id: 'S4-L1-5',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: ชายคนหนึ่งยืนอยู่ข้างรถโดยสารที่จอดนิ่งอยู่ริมถนน',
-    imageId: 'bus',
+    imageDescription: '🖼️ ภาพ: ชายคนหนึ่งยืนพิงอยู่ข้างรถบัสที่จอดอยู่',
+    imageId: 'driver-beside-bus',
     questions: [
       {
         id: 'S4-L1-5-q',
