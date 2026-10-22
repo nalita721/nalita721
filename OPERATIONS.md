@@ -16,7 +16,7 @@ With Resend's test sender (`onboarding@resend.dev`) mail can only go to the
 Resend account's own address.
 
 **Run a backup now:**
-`curl -H "Authorization: Bearer $CRON_SECRET" https://toeic-nu.vercel.app/api/backup`
+`curl -H "Authorization: Bearer $CRON_SECRET" "https://toeic-nu.vercel.app/api/send-reminders?task=backup"`
 (needs `CRON_SECRET` set in Vercel).
 
 **Restore:** download the `.json.gz` from the backup email, set
