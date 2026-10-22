@@ -71,3 +71,17 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-10-23 · Day 4 · English reading passages + Mock set 1 reading
+
+- Checked: all 10 reading lessons (`src/data/reading.ts`: r6-1, r6-2, r7-1 – r7-8) and Mock set 1 reading (`src/data/fullMockExam.ts`: Part 5 R5-1 – R5-30, Part 6 R6-1 – R6-4, Part 7 R7-S1 – S10, R7-D1 – D2, R7-T1 – T3); answer keys checked against every passage.
+- Fix `R5-12-q`: "included" was also correct ("The new employee handbook included several…"); replaced with "inclusion".
+- Fix `R5-20-q`: "inspired" was also defensible ("an inspired and informative speech"); replaced with "inspires".
+- Fix `R5-27-q`: "demonstrated" was also correct; replaced with "demonstration".
+- Fix `R6-2-q3`: "will" was also correct ("Members will also enjoy…"); replaced with "have".
+- Fix `R6-2-q4`: "and" was also correct ("Sign up … and receive…"); replaced with "for".
+- Fix `R6-4-q4`: "concerns" was also correct ("any concerns this may cause"); replaced with "concernedly".
+- Fix `R7-S6-q2`: choice "A investor offer" → "An investor offer".
+- Fix `R7-D1-q5`: the key "Contact them within 24 hours" misread the passage ("let us know if you still don't see it within 24 hours"); the question now asks what to do if the email has not arrived within 24 hours, answer "Let the support team know".
+- Improvement `r7-1-2`: replaced the nonsense distractor "October 245" (taken from the phone extension) with "October 1".
+- Needs human review: `R6-1-q1` "launching" ("will be launching starting next Monday") is borderline acceptable next to the key "launched"; `R5-7-q` "approve" has no time marker to rule out the present tense. Left as is.
