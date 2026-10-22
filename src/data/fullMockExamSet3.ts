@@ -116,14 +116,14 @@ const part1: ExamItem[] = [
     id: 'S3-L1-6',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: ช่างเทคนิคไอทีกำลังตรวจสอบเครื่องพิมพ์ที่หยุดทำงานในสำนักงาน',
-    imageId: 'printer',
+    imageDescription: '🖼️ ภาพ: กระดาษที่พิมพ์แล้ววางอยู่ในถาดรับกระดาษของเครื่องถ่ายเอกสารที่เปิดฝาไว้ ไม่มีคนอยู่ในภาพ',
+    imageId: 'copier-tray',
     questions: [
       {
         id: 'S3-L1-6-q',
         question: 'เลือกประโยคที่บรรยายภาพนี้ได้ถูกต้องที่สุด',
         choices: [
-          'An IT technician is inspecting a broken printer in the office.',
+          'Some papers are lying in the tray of a copy machine.',
           'A technician is installing new office chairs.',
           'Workers are moving a printer to another floor.',
           'An employee is photocopying documents quickly.',
@@ -131,7 +131,7 @@ const part1: ExamItem[] = [
         answerIndex: 0,
       },
     ],
-    transcript: 'An IT technician is inspecting a broken printer in the office.',
+    transcript: 'Some papers are lying in the tray of a copy machine.',
   },
 ]
 

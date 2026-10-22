@@ -116,14 +116,14 @@ const part1: ExamItem[] = [
     id: 'S2-L1-6',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: พนักงานหญิงกำลังหยิบเอกสารที่พิมพ์เสร็จออกจากเครื่องพิมพ์',
-    imageId: 'printer',
+    imageDescription: '🖼️ ภาพ: เครื่องถ่ายเอกสารขนาดใหญ่ตั้งอยู่ในสำนักงาน ไม่มีคนอยู่ในภาพ',
+    imageId: 'copier-office',
     questions: [
       {
         id: 'S2-L1-6-q',
         question: 'เลือกประโยคที่บรรยายภาพนี้ได้ถูกต้องที่สุด',
         choices: [
-          'An employee is collecting printed documents from a printer.',
+          'A copy machine has been placed in an office.',
           'An employee is replacing the ink cartridge.',
           'An employee is unplugging the printer.',
           'An employee is carrying a printer to another room.',
@@ -131,7 +131,7 @@ const part1: ExamItem[] = [
         answerIndex: 0,
       },
     ],
-    transcript: 'An employee is collecting printed documents from a printer.',
+    transcript: 'A copy machine has been placed in an office.',
   },
 ]
 

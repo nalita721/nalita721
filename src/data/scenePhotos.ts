@@ -154,4 +154,32 @@ export const scenePhotos: Record<string, ScenePhoto> = {
     license: 'Public domain',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Denali_transit_bus_driver_Gary_at_the_Teklanika_Rest_Stop_on_Aug._29,_2019._Buses_in_Denali_are_operated_by_a_concessionaire._(52440df3-ed7c-49d3-ad77-e04bda19fbd8).JPG',
   },
+  'copier-office': {
+    src: '/photos/part1/copier-office.jpg',
+    alt: 'A large copy machine standing in an office',
+    author: 'Baron Maddock',
+    license: 'CC BY 4.0',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Canon_ImageRUNNER_Advance_C7570i_photocopier.jpg',
+  },
+  'copier-tray': {
+    src: '/photos/part1/copier-tray.jpg',
+    alt: 'Printed papers lying in the open output tray of a copy machine',
+    author: 'Dennis Sylvester Hurd',
+    license: 'CC0',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:The_Closest_Photocopier_(3594209596).jpg',
+  },
+  'copier-table': {
+    src: '/photos/part1/copier-table.jpg',
+    alt: 'A copy machine next to a table and some boxes',
+    author: 'Baron Maddock',
+    license: 'CC BY 4.0',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Konica_Minolta_Bizhub_C454e_photocopier.jpg',
+  },
+  'pots-stove': {
+    src: '/photos/part1/pots-stove.jpg',
+    alt: 'Two large pots on an old stove in a restaurant',
+    author: 'Gnangcomapp',
+    license: 'CC BY-SA 4.0',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Alfred%27s_k_gn_221.jpg',
+  },
 }
