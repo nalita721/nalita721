@@ -1,5 +1,8 @@
-// Flat-style scene illustrations standing in for TOEIC Part 1 photographs.
-// Kept as inline SVG (no network dependency, no stock/AI images) so they render instantly and
+import { scenePhotos } from '../data/scenePhotos'
+
+// TOEIC Part 1 pictures: a real photograph when src/data/scenePhotos.ts has one for the id,
+// otherwise one of the flat-style scene illustrations below.
+// The illustrations are inline SVG (no network dependency) so they render instantly and
 // consistently. A grain + vignette overlay and a muted, slightly desaturated palette push it as
 // close to "photograph" as an illustration can get without actually being one.
 
@@ -106,7 +109,7 @@ function OfficeWall({ blurFilterId }: { blurFilterId: string }) {
 
 const SCENES: Record<string, JSX.Element> = {
   handshake: (
-    <svg viewBox="0 0 320 160" className="w-full h-40">
+    <svg viewBox="0 0 320 160" className="w-full h-auto max-h-96">
       <PhotoDefs filterId="grain-handshake" vignetteId="vig-handshake" />
       <OfficeWall blurFilterId="grain-handshake-blur" />
       <rect x="24" y="24" width="46" height="60" rx="4" fill="#FFFFFF" opacity="0.4" filter="url(#grain-handshake-blur)" />
@@ -118,7 +121,7 @@ const SCENES: Record<string, JSX.Element> = {
     </svg>
   ),
   typing: (
-    <svg viewBox="0 0 320 160" className="w-full h-40">
+    <svg viewBox="0 0 320 160" className="w-full h-auto max-h-96">
       <PhotoDefs filterId="grain-typing" vignetteId="vig-typing" />
       <OfficeWall blurFilterId="grain-typing-blur" />
       <rect x="255" y="20" width="40" height="55" rx="4" fill="#FFFFFF" opacity="0.35" filter="url(#grain-typing-blur)" />
@@ -131,7 +134,7 @@ const SCENES: Record<string, JSX.Element> = {
     </svg>
   ),
   truck: (
-    <svg viewBox="0 0 320 160" className="w-full h-40">
+    <svg viewBox="0 0 320 160" className="w-full h-auto max-h-96">
       <PhotoDefs filterId="grain-truck" vignetteId="vig-truck" />
       <linearGradient id="sky-truck" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stopColor="#DDE6ED" />
@@ -153,7 +156,7 @@ const SCENES: Record<string, JSX.Element> = {
     </svg>
   ),
   chef: (
-    <svg viewBox="0 0 320 160" className="w-full h-40">
+    <svg viewBox="0 0 320 160" className="w-full h-auto max-h-96">
       <PhotoDefs filterId="grain-chef" vignetteId="vig-chef" />
       <OfficeWall blurFilterId="grain-chef-blur" />
       <rect x="86" y="88" width="148" height="16" rx="4" fill={METAL} filter="url(#grain-chef-blur)" />
@@ -170,7 +173,7 @@ const SCENES: Record<string, JSX.Element> = {
     </svg>
   ),
   bus: (
-    <svg viewBox="0 0 320 160" className="w-full h-40">
+    <svg viewBox="0 0 320 160" className="w-full h-auto max-h-96">
       <PhotoDefs filterId="grain-bus" vignetteId="vig-bus" />
       <linearGradient id="sky-bus" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stopColor="#DEE7EE" />
@@ -193,7 +196,7 @@ const SCENES: Record<string, JSX.Element> = {
     </svg>
   ),
   printer: (
-    <svg viewBox="0 0 320 160" className="w-full h-40">
+    <svg viewBox="0 0 320 160" className="w-full h-auto max-h-96">
       <PhotoDefs filterId="grain-printer" vignetteId="vig-printer" />
       <OfficeWall blurFilterId="grain-printer-blur" />
       <rect x="256" y="24" width="40" height="55" rx="4" fill="#FFFFFF" opacity="0.35" filter="url(#grain-printer-blur)" />
@@ -208,6 +211,24 @@ const SCENES: Record<string, JSX.Element> = {
 }
 
 export function SceneIllustration({ id }: { id?: string }) {
+  const photo = id ? scenePhotos[id] : undefined
+  if (photo) {
+    return (
+      <figure>
+        <img
+          src={photo.src}
+          alt={photo.alt}
+          className="w-full rounded-xl border border-sand-200 object-cover aspect-[3/2]"
+          loading="lazy"
+        />
+        <figcaption className="mt-1 text-right text-[10px] text-stone-400">
+          <a href={photo.sourceUrl} target="_blank" rel="noreferrer" className="hover:underline">
+            ภาพ: {photo.author} · {photo.license}
+          </a>
+        </figcaption>
+      </figure>
+    )
+  }
   const scene = id ? SCENES[id] : undefined
   if (!scene) return null
   return <div className="rounded-xl overflow-hidden border border-sand-200">{scene}</div>

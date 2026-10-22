@@ -10,8 +10,8 @@ const part1: ExamItem[] = [
     id: 'S4-L1-1',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: ชายและหญิงยืนหันหน้าเข้าหากันและจับมือทักทายกันในสำนักงาน',
-    imageId: 'handshake',
+    imageDescription: '🖼️ ภาพ: ชายใส่สูทและหญิงสาวยืนจับมือกันกลางแจ้ง',
+    imageId: 'handshake-outdoors',
     questions: [
       {
         id: 'S4-L1-1-q',
@@ -31,8 +31,8 @@ const part1: ExamItem[] = [
     id: 'S4-L1-2',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: พนักงานหญิงนั่งทำงานกับคอมพิวเตอร์แล็ปท็อปที่วางอยู่บนโต๊ะไม้',
-    imageId: 'typing',
+    imageDescription: '🖼️ ภาพ: ผู้หญิงนั่งใช้แล็ปท็อปที่โต๊ะไม้',
+    imageId: 'laptop-wooden-table',
     questions: [
       {
         id: 'S4-L1-2-q',
@@ -52,8 +52,8 @@ const part1: ExamItem[] = [
     id: 'S4-L1-3',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: คนงานกำลังยกกล่องกระดาษขึ้นสูง โดยมีรถบรรทุกจอดอยู่ข้าง ๆ',
-    imageId: 'truck',
+    imageDescription: '🖼️ ภาพ: คนงานยกกล่องขึ้นเหนือศีรษะ โดยมีรถบรรทุกส่งของจอดอยู่ข้างๆ',
+    imageId: 'box-delivery-truck',
     questions: [
       {
         id: 'S4-L1-3-q',
@@ -73,29 +73,29 @@ const part1: ExamItem[] = [
     id: 'S4-L1-4',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: เชฟยืนอยู่หลังเตา มีไอน้ำลอยขึ้นมาจากหม้อที่ตั้งอยู่บนเตา',
-    imageId: 'chef',
+    imageDescription: '🖼️ ภาพ: หม้อใบใหญ่สองใบวางอยู่บนเตาเก่าในร้านอาหาร ไม่มีคนอยู่ในภาพ',
+    imageId: 'pots-stove',
     questions: [
       {
         id: 'S4-L1-4-q',
         question: 'เลือกประโยคที่บรรยายภาพนี้ได้ถูกต้องที่สุด',
         choices: [
           'A cook is washing dishes in a sink.',
-          'Steam is rising from pots on a stove.',
+          'Some large pots have been placed on a stove.',
           'Food is being served to some diners.',
           'Some pots are hanging on the wall.',
         ],
         answerIndex: 1,
       },
     ],
-    transcript: 'Steam is rising from pots on a stove.',
+    transcript: 'Some large pots have been placed on a stove.',
   },
   {
     id: 'S4-L1-5',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: ชายคนหนึ่งยืนอยู่ข้างรถโดยสารที่จอดนิ่งอยู่ริมถนน',
-    imageId: 'bus',
+    imageDescription: '🖼️ ภาพ: ชายคนหนึ่งยืนพิงอยู่ข้างรถบัสที่จอดอยู่',
+    imageId: 'driver-beside-bus',
     questions: [
       {
         id: 'S4-L1-5-q',
@@ -115,8 +115,8 @@ const part1: ExamItem[] = [
     id: 'S4-L1-6',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: พนักงานชายยกแขนเอื้อมไปที่เครื่องถ่ายเอกสารในสำนักงาน',
-    imageId: 'printer',
+    imageDescription: '🖼️ ภาพ: เครื่องถ่ายเอกสารตั้งอยู่ข้างโต๊ะ มีกล่องวางอยู่ใกล้ๆ ไม่มีคนอยู่ในภาพ',
+    imageId: 'copier-table',
     questions: [
       {
         id: 'S4-L1-6-q',
@@ -125,12 +125,12 @@ const part1: ExamItem[] = [
           'A man is carrying a printer up the stairs.',
           'A man is sitting at a reception desk.',
           'Paper is being loaded into a delivery van.',
-          'A man is reaching toward a copy machine.',
+          'A copy machine is next to a table.',
         ],
         answerIndex: 3,
       },
     ],
-    transcript: 'A man is reaching toward a copy machine.',
+    transcript: 'A copy machine is next to a table.',
   },
 ]
 

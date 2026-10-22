@@ -16,6 +16,10 @@ interface Subscriber {
  * Vercel automatically sends `Authorization: Bearer $CRON_SECRET` on cron
  * invocations when the CRON_SECRET env var is set — we verify it here so
  * this endpoint can't be used to spam subscribers if the URL leaks.
+ *
+ * `?task=backup` runs only the backup, on demand. It always requires CRON_SECRET,
+ * since the backup contains every learner's data. (It lives here rather than in its
+ * own /api/backup file because the Hobby plan allows at most 12 functions.)
  */
 export default async function handler(req: any, res: any) {
   if (process.env.CRON_SECRET) {
@@ -24,6 +28,16 @@ export default async function handler(req: any, res: any) {
       res.status(401).json({ error: 'unauthorized' })
       return
     }
+  }
+
+  if (req.query?.task === 'backup') {
+    if (!process.env.CRON_SECRET) {
+      res.status(401).json({ error: 'unauthorized' })
+      return
+    }
+    const result = await runBackup()
+    res.status(result.ok ? 200 : 500).json(result)
+    return
   }
 
   const slot = req.query?.slot === 'evening' ? 'evening' : 'morning'

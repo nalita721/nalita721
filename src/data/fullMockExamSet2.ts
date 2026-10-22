@@ -1,4 +1,5 @@
 import type { ExamItem } from '../lib/types'
+import { balanceAnswers } from '../lib/balanceAnswers'
 
 // ============================================================
 // SET 2 — brand-new full TOEIC-structure mock exam, standalone from fullMockExam.ts (Set 1)
@@ -10,14 +11,14 @@ const part1: ExamItem[] = [
     id: 'S2-L1-1',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: ตัวแทนบริษัทสองรายกำลังจับมือกันหน้าบูธงานแสดงสินค้า',
-    imageId: 'handshake',
+    imageDescription: '🖼️ ภาพ: ผู้ชายและผู้หญิงจับมือกันเหนือโต๊ะทำงานที่มีสมุดวางอยู่',
+    imageId: 'handshake-desk',
     questions: [
       {
         id: 'S2-L1-1-q',
         question: 'เลือกประโยคที่บรรยายภาพนี้ได้ถูกต้องที่สุด',
         choices: [
-          'Two representatives are shaking hands at a trade show booth.',
+          'Two people are shaking hands over a desk.',
           'A woman is signing a contract alone.',
           'Visitors are walking past an empty booth.',
           'A man is packing up display materials.',
@@ -25,41 +26,41 @@ const part1: ExamItem[] = [
         answerIndex: 0,
       },
     ],
-    transcript: 'Two representatives are shaking hands at a trade show booth.',
+    transcript: 'Two people are shaking hands over a desk.',
   },
   {
     id: 'S2-L1-2',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: ชายคนหนึ่งกำลังพิมพ์รายงานอยู่ที่โต๊ะทำงานในเวลากลางคืน',
-    imageId: 'typing',
+    imageDescription: '🖼️ ภาพ: ผู้หญิงนั่งพิมพ์งานบนแล็ปท็อปในห้องนั่งเล่น',
+    imageId: 'typing-sofa',
     questions: [
       {
         id: 'S2-L1-2-q',
         question: 'เลือกประโยคที่บรรยายภาพนี้ได้ถูกต้องที่สุด',
         choices: [
-          'A man is typing a report at his desk at night.',
-          'A man is turning off his computer.',
-          'A man is talking on the phone while standing.',
-          'A man is organizing files in a cabinet.',
+          'A woman is typing on a laptop.',
+          'A woman is turning off her computer.',
+          'A woman is talking on the phone while standing.',
+          'A woman is organizing files in a cabinet.',
         ],
         answerIndex: 0,
       },
     ],
-    transcript: 'A man is typing a report at his desk late at night.',
+    transcript: 'A woman is typing on a laptop.',
   },
   {
     id: 'S2-L1-3',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: คนงานกำลังยกกล่องสินค้าขึ้นรถบรรทุกที่ท่าขนส่ง',
-    imageId: 'truck',
+    imageDescription: '🖼️ ภาพ: ผู้ชายหลายคนช่วยกันยกกล่องใบใหญ่ขึ้นรถบรรทุก',
+    imageId: 'lifting-box',
     questions: [
       {
         id: 'S2-L1-3-q',
         question: 'เลือกประโยคที่บรรยายภาพนี้ได้ถูกต้องที่สุด',
         choices: [
-          'Workers are loading boxes onto a truck at a loading dock.',
+          'Some men are loading a large box onto a truck.',
           'A truck is parked empty near the entrance.',
           'A worker is signing a delivery form indoors.',
           'Boxes are being stacked inside a warehouse shelf.',
@@ -67,20 +68,20 @@ const part1: ExamItem[] = [
         answerIndex: 0,
       },
     ],
-    transcript: 'Workers are loading boxes onto a truck at the loading dock.',
+    transcript: 'Some men are loading a large box onto a truck.',
   },
   {
     id: 'S2-L1-4',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: เชฟกำลังจัดจานอาหารอย่างพิถีพิถันในครัว',
-    imageId: 'chef',
+    imageDescription: '🖼️ ภาพ: เชฟกำลังเช็ดขอบจานอาหารที่จัดเสร็จแล้วบนโต๊ะสเตนเลสในครัว',
+    imageId: 'plating-food',
     questions: [
       {
         id: 'S2-L1-4-q',
         question: 'เลือกประโยคที่บรรยายภาพนี้ได้ถูกต้องที่สุด',
         choices: [
-          'A chef is carefully plating a dish in the kitchen.',
+          'A chef is preparing plates of food in a kitchen.',
           'A chef is taking an order from a customer.',
           'A chef is washing vegetables in a sink.',
           'A chef is sweeping the kitchen floor.',
@@ -88,20 +89,20 @@ const part1: ExamItem[] = [
         answerIndex: 0,
       },
     ],
-    transcript: 'A chef is carefully plating a dish in the kitchen.',
+    transcript: 'A chef is preparing plates of food in a kitchen.',
   },
   {
     id: 'S2-L1-5',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: ผู้โดยสารกำลังจ่ายค่าโดยสารขณะขึ้นรถบัส',
-    imageId: 'bus',
+    imageDescription: '🖼️ ภาพ: ผู้โดยสารจำนวนมากกำลังเบียดกันขึ้นรถบัส',
+    imageId: 'crowded-bus',
     questions: [
       {
         id: 'S2-L1-5-q',
         question: 'เลือกประโยคที่บรรยายภาพนี้ได้ถูกต้องที่สุด',
         choices: [
-          'A passenger is paying the fare while boarding a bus.',
+          'Passengers are getting on a bus.',
           'A bus driver is checking the engine outside.',
           'Passengers are exiting the bus at a stop.',
           'A passenger is reading a map on a bench.',
@@ -109,20 +110,20 @@ const part1: ExamItem[] = [
         answerIndex: 0,
       },
     ],
-    transcript: 'A passenger is paying the fare while boarding a bus.',
+    transcript: 'Passengers are getting on a bus.',
   },
   {
     id: 'S2-L1-6',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: พนักงานหญิงกำลังหยิบเอกสารที่พิมพ์เสร็จออกจากเครื่องพิมพ์',
-    imageId: 'printer',
+    imageDescription: '🖼️ ภาพ: เครื่องถ่ายเอกสารขนาดใหญ่ตั้งอยู่ในสำนักงาน ไม่มีคนอยู่ในภาพ',
+    imageId: 'copier-office',
     questions: [
       {
         id: 'S2-L1-6-q',
         question: 'เลือกประโยคที่บรรยายภาพนี้ได้ถูกต้องที่สุด',
         choices: [
-          'An employee is collecting printed documents from a printer.',
+          'A copy machine has been placed in an office.',
           'An employee is replacing the ink cartridge.',
           'An employee is unplugging the printer.',
           'An employee is carrying a printer to another room.',
@@ -130,7 +131,7 @@ const part1: ExamItem[] = [
         answerIndex: 0,
       },
     ],
-    transcript: 'An employee is collecting printed documents from a printer.',
+    transcript: 'A copy machine has been placed in an office.',
   },
 ]
 
@@ -468,7 +469,8 @@ const part4: ExamItem[] = part4Data.map((t, i) => ({
   })),
 }))
 
-export const listeningExamItems: ExamItem[] = [...part1, ...part2, ...part3, ...part4]
+// Answer slots are rebalanced at export (see balanceAnswers); explanations never name a letter.
+export const listeningExamItems: ExamItem[] = balanceAnswers([...part1, ...part2, ...part3, ...part4], 'set2-listening')
 
 // ============================================================
 // READING SECTION — 100 questions (Part 5: 30, Part 6: 16, Part 7: 54)
@@ -862,7 +864,7 @@ const part7: ExamItem[] = [
   })),
 ]
 
-export const readingExamItems: ExamItem[] = [...part5, ...part6, ...part7]
+export const readingExamItems: ExamItem[] = balanceAnswers([...part5, ...part6, ...part7], 'set2-reading')
 
 export const fullExamItems: ExamItem[] = [...listeningExamItems, ...readingExamItems]
 
