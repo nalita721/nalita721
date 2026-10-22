@@ -11,8 +11,8 @@ const part1: ExamItem[] = [
     id: 'L1-1',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: เพื่อนร่วมงานสองคนกำลังจับมือกันในล็อบบี้ของสำนักงาน',
-    imageId: 'handshake',
+    imageDescription: '🖼️ ภาพ: ผู้ชายและผู้หญิงจับมือกันข้ามโต๊ะในร้านกาแฟ',
+    imageId: 'handshake-cafe',
     questions: [
       {
         id: 'L1-1-q',
@@ -20,45 +20,45 @@ const part1: ExamItem[] = [
         choices: [
           'A receptionist is answering the phone.',
           'The employees are leaving the building.',
-          'Two coworkers are shaking hands in the lobby.',
+          'Two people are shaking hands across a table.',
           'A man is reading a newspaper alone.',
         ],
         answerIndex: 2,
         explanationTh:
-          'ภาพคือคนสองคน "shaking hands" (จับมือกัน) "in the lobby" ตรงทุกส่วน ส่วน "leaving the building" ไม่มีใครกำลังเดินออกในภาพ และ "a man ... alone" ขัดกับภาพที่มีสองคน',
+          'ภาพคือคนสองคน "shaking hands" (จับมือกัน) "across a table" (ข้ามโต๊ะ) ตรงทุกส่วน ส่วน "leaving the building" ไม่มีใครกำลังเดินออกในภาพ และ "a man ... reading a newspaper alone" ขัดกับภาพที่มีสองคนและไม่มีหนังสือพิมพ์',
       },
     ],
-    transcript: 'Two coworkers are shaking hands in the lobby.',
+    transcript: 'Two people are shaking hands across a table.',
   },
   {
     id: 'L1-2',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: ผู้หญิงกำลังพิมพ์งานบนแล็ปท็อปที่โต๊ะทำงานใกล้หน้าต่าง',
-    imageId: 'typing',
+    imageDescription: '🖼️ ภาพ: ผู้หญิงกำลังพิมพ์งานบนแล็ปท็อปที่โต๊ะทำงาน มีแก้วกาแฟวางอยู่ข้างๆ',
+    imageId: 'typing-desk',
     questions: [
       {
         id: 'L1-2-q',
         question: P1_QUESTION,
         choices: [
-          'A woman is typing on a laptop near a window.',
+          'A woman is typing on a laptop at a desk.',
           'A woman is watering a plant on her desk.',
           'A woman is talking on the phone outside.',
           'A woman is filing paper documents in a cabinet.',
         ],
         answerIndex: 0,
         explanationTh:
-          'ได้ยิน "typing on a laptop near a window" ตรงกับภาพ ตัวเลือกอื่นขึ้นต้น "A woman is..." เหมือนกันแต่กริยาผิด (watering, talking, filing) — กับดักคลาสสิก "คนถูก แต่การกระทำผิด"',
+          'ได้ยิน "typing on a laptop at a desk" ตรงกับภาพ ตัวเลือกอื่นขึ้นต้น "A woman is..." เหมือนกันแต่กริยาผิด (watering, talking, filing) — กับดักคลาสสิก "คนถูก แต่การกระทำผิด"',
       },
     ],
-    transcript: 'A woman is typing on a laptop near a window.',
+    transcript: 'A woman is typing on a laptop at a desk.',
   },
   {
     id: 'L1-3',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: พนักงานกำลังขนกล่องลงจากรถบรรทุกขนส่งสินค้า',
-    imageId: 'truck',
+    imageDescription: '🖼️ ภาพ: ผู้ชายสองคนกำลังขนกล่องลงจากท้ายรถบรรทุก',
+    imageId: 'unloading-truck',
     questions: [
       {
         id: 'L1-3-q',
@@ -67,67 +67,67 @@ const part1: ExamItem[] = [
           'A truck is being washed in a parking lot.',
           'Boxes are stacked inside an empty office.',
           'A driver is sleeping inside the truck.',
-          'Workers are unloading boxes from a delivery truck.',
+          'Workers are unloading boxes from a truck.',
         ],
         answerIndex: 3,
         explanationTh:
-          '"unloading boxes from a delivery truck" = ขนกล่องลงจากรถส่งของ ตรงกับภาพ ระวัง "A truck is being washed" ที่มีคำว่า truck เหมือนกันแต่การกระทำ (ล้างรถ) ไม่ปรากฏในภาพ',
+          '"unloading boxes from a truck" = ขนกล่องลงจากรถบรรทุก ตรงกับภาพ ระวัง "A truck is being washed" ที่มีคำว่า truck เหมือนกันแต่การกระทำ (ล้างรถ) ไม่ปรากฏในภาพ',
       },
     ],
-    transcript: 'Workers are unloading boxes from a delivery truck.',
+    transcript: 'Workers are unloading boxes from a truck.',
   },
   {
     id: 'L1-4',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: เชฟกำลังเตรียมอาหารอยู่ในครัวของร้านอาหาร',
-    imageId: 'chef',
+    imageDescription: '🖼️ ภาพ: เชฟหลายคนกำลังทำอาหารบนเตาไฟในครัวของร้านอาหาร',
+    imageId: 'chefs-kitchen',
     questions: [
       {
         id: 'L1-4-q',
         question: P1_QUESTION,
         choices: [
           'A chef is washing dishes in a sink.',
-          'A chef is preparing food in a restaurant kitchen.',
+          'Some chefs are cooking in a restaurant kitchen.',
           'Customers are ordering food at a counter.',
           'A waiter is cleaning a table.',
         ],
         answerIndex: 1,
         explanationTh:
-          '"preparing food in a restaurant kitchen" ตรงกับภาพเชฟกำลังเตรียมอาหาร ตัวลวงคือ "A chef is washing dishes" — มีเชฟและอยู่ในครัวเหมือนกัน แต่ washing dishes ไม่ใช่สิ่งที่เห็นในภาพ',
+          '"cooking in a restaurant kitchen" ตรงกับภาพเชฟหลายคนกำลังทำอาหารบนเตา ตัวลวงคือ "A chef is washing dishes" — มีเชฟและอยู่ในครัวเหมือนกัน แต่ไม่มีใครล้างจานในภาพ',
       },
     ],
-    transcript: 'A chef is preparing food in a restaurant kitchen.',
+    transcript: 'Some chefs are cooking in a restaurant kitchen.',
   },
   {
     id: 'L1-5',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: ผู้โดยสารกำลังขึ้นรถบัสที่สถานีขนส่ง',
-    imageId: 'bus',
+    imageDescription: '🖼️ ภาพ: ผู้โดยสารกำลังขึ้นรถบัสที่ป้ายรถเมล์ริมถนน',
+    imageId: 'boarding-bus',
     questions: [
       {
         id: 'L1-5-q',
         question: P1_QUESTION,
         choices: [
           'A bus is parked in a repair garage.',
-          'Passengers are boarding a bus at a station.',
+          'Passengers are boarding a bus at a bus stop.',
           'A driver is fueling the bus.',
           'Passengers are sitting on a bench reading.',
         ],
         answerIndex: 1,
         explanationTh:
-          '"boarding a bus" = กำลังขึ้นรถบัส ตรงกับภาพที่สถานีขนส่ง ส่วน "Passengers are sitting on a bench" ประธานถูกแต่การกระทำผิด และ "parked in a repair garage" ผิดสถานที่',
+          '"boarding a bus" = กำลังขึ้นรถบัส ตรงกับภาพที่ป้ายรถเมล์ ส่วน "Passengers are sitting on a bench" ประธานถูกแต่การกระทำผิด และ "parked in a repair garage" ผิดสถานที่',
       },
     ],
-    transcript: 'Passengers are boarding a bus at a station.',
+    transcript: 'Passengers are boarding a bus at a bus stop.',
   },
   {
     id: 'L1-6',
     part: 1,
     section: 'listening',
-    imageDescription: '🖼️ ภาพ: ช่างเทคนิคกำลังซ่อมเครื่องพิมพ์ในสำนักงาน',
-    imageId: 'printer',
+    imageDescription: '🖼️ ภาพ: ผู้ชายกำลังซ่อมเครื่องพิมพ์ที่เปิดฝาออกบนโต๊ะ',
+    imageId: 'printer-repair',
     questions: [
       {
         id: 'L1-6-q',
@@ -136,14 +136,14 @@ const part1: ExamItem[] = [
           'A technician is delivering a new printer.',
           'A technician is installing new office furniture.',
           'Employees are unplugging their computers.',
-          'A technician is repairing a printer in an office.',
+          'A man is repairing a printer.',
         ],
         answerIndex: 3,
         explanationTh:
-          '"repairing a printer" = กำลังซ่อมเครื่องพิมพ์ ตรงกับภาพ ระวัง "delivering a new printer" ที่มีทั้ง technician และ printer แต่การกระทำคือ "ส่งของ" ไม่ใช่ "ซ่อม"',
+          '"repairing a printer" = กำลังซ่อมเครื่องพิมพ์ ตรงกับภาพ ระวัง "delivering a new printer" ที่มีคำว่า printer เหมือนกัน แต่การกระทำคือ "ส่งของ" ไม่ใช่ "ซ่อม"',
       },
     ],
-    transcript: 'A technician is repairing a printer in an office.',
+    transcript: 'A man is repairing a printer.',
   },
 ]
 
