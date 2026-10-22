@@ -1,4 +1,5 @@
 import type { ExamItem } from '../lib/types'
+import { balanceAnswers } from '../lib/balanceAnswers'
 
 // ============================================================
 // SET 2 — brand-new full TOEIC-structure mock exam, standalone from fullMockExam.ts (Set 1)
@@ -468,7 +469,8 @@ const part4: ExamItem[] = part4Data.map((t, i) => ({
   })),
 }))
 
-export const listeningExamItems: ExamItem[] = [...part1, ...part2, ...part3, ...part4]
+// Answer slots are rebalanced at export (see balanceAnswers); explanations never name a letter.
+export const listeningExamItems: ExamItem[] = balanceAnswers([...part1, ...part2, ...part3, ...part4], 'set2-listening')
 
 // ============================================================
 // READING SECTION — 100 questions (Part 5: 30, Part 6: 16, Part 7: 54)
@@ -862,7 +864,7 @@ const part7: ExamItem[] = [
   })),
 ]
 
-export const readingExamItems: ExamItem[] = [...part5, ...part6, ...part7]
+export const readingExamItems: ExamItem[] = balanceAnswers([...part5, ...part6, ...part7], 'set2-reading')
 
 export const fullExamItems: ExamItem[] = [...listeningExamItems, ...readingExamItems]
 
