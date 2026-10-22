@@ -65,7 +65,7 @@ Anna Weber`,
       {
         id: 'r7-1-2',
         question: 'By when must employees book their appointment?',
-        choices: ['October 7', 'October 14', 'October 18', 'October 245'],
+        choices: ['October 7', 'October 14', 'October 18', 'October 1'],
         answerIndex: 0,
       },
       {
