@@ -71,3 +71,26 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-10-24 · Day 5 · Mock sets 2 and 3
+
+- Checked: Mock sets 2 and 3, Parts 2–7 (`src/data/fullMockExamSet2.ts`, `src/data/fullMockExamSet3.ts`): every answer key against its script or passage, and item counts (100 + 100 per set). Part 1 skipped: it is being rewritten with photographs in PR #2. Neither set has Thai explanations yet (see backlog).
+- Fix `S2-R5-12-q`: "included" was also correct; → "inclusion".
+- Fix `S2-R5-20-q`: "inspired" was also defensible ("an inspired speech"); → "inspires".
+- Fix `S2-R5-27-q`: "demonstrated" was also correct; → "demonstration".
+- Fix `S2-R6-2-q3`: "will" was also correct ("Students will also access…"); → "have".
+- Fix `S2-R6-2-q4`: "and" was also correct ("Register … and save 20%"); → "for".
+- Fix `S2-R6-3-q1`: "schedule" was also correct ("a schedule overlap"); → "schedulable".
+- Fix `S2-R6-4-q4`: "concerns" was also correct ("any concerns"); → "concernedly".
+- Fix `S2-L2-14-q`: distractor "The results were mixed." was a valid indirect answer (it implies the results are compiled); → "The survey had ten questions."
+- Fix `S2-L2-17-q`: distractor "It's out of paper." was a valid correction to the tag question; → "It's a color printer."
+- Fix `S2-L3-7-q3`: "What is NOT included in the rent?" also fit Parking and Security, which the talk never mentions; question now "What is billed separately from the rent?" (key Utilities).
+- Fix `S2-R7-D1-q5`: the key "Contact them within 24 hours" misread the passage; question now asks what to do if the email has not arrived within 24 hours, answer "Let the support team know".
+- Fix `S3-R5-7-q`: "approve" was also possible with plural "shareholders" and no time marker; → "approves".
+- Fix `S3-R5-12-q`: "contained" was also correct; → "containment".
+- Fix `S3-R5-27-q`: "demonstrated" was also correct; → "demonstration".
+- Fix `S3-R5-17-q`: "check at the security office" is not natural English and "in" was also readable; sentence now "check in __ the security office", choices at / of / about / toward.
+- Fix `S3-R6-2-q2`: "will" was also correct; → "have".
+- Fix `S3-R6-2-q4`: "and" was also correct ("Visit our website and create…"); → "for".
+- Improvement `S3-R5-3-q`: replaced the unrelated distractor "effected" with "more efficient".
+- Needs human review: answer positions in sets 2 and 3 are heavily skewed (every Part 2 key is A; most Part 3/4/7 keys are B) — PR #2 rebalances them at export. `S3-R6-3-q3` "for the drill" is marginally readable; `S3-L2-19-q` "The rate increased." is close to an indirect reply; `S2-R5-30-q` "very reliable" after "Of the three vendors" is grammatical but the superlative is clearly intended. Mock set 1 `R6-3-q1` has the same "schedule"/"scheduling" double answer as `S2-R6-3-q1` (outside today's area). Left as is.
