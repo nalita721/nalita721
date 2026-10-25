@@ -71,3 +71,10 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-10-26 · Day 7 · Chinese pinyin foundations
+
+- Checked: `src/data/langs/zh-foundations.ts` — all initials and finals (pinyin, Thai approximations, demo characters), the 5 tones (contours, Thai comparisons), the 5 tone-change rules and every example, all 40 listening-drill items (pinyin, tone number, confusables), the 8 basic strokes, 7 stroke-order rules and 24 radicals with their example characters.
+- Fix: radical 贝 listed 买 (mǎi) as an example, but the simplified 买 has no 贝 component (only the traditional 買 does); replaced with 购 (gòu, ซื้อ).
+- Improvement: the neutral-tone rule said dictionaries write these syllables without a tone mark, while its examples show the struck-through citation tones (mā mā → māma); the explanation now says the struck-through form is each character's own tone and gives the dictionary spelling (māma, xièxie).
+- Needs human review: none.

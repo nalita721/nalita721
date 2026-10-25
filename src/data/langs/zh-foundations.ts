@@ -280,7 +280,7 @@ export const zhFoundations: ChineseFoundations = {
       titleTh: 'เสียงเบาในคำซ้ำและคำช่วย',
       explanation:
         'พยางค์ที่สองของคำซ้ำ (เช่น คำเรียกญาติ) และคำช่วยอย่าง 的 了 吗 呢 อ่านเป็นเสียงเบา สั้นและไม่ลงน้ำหนัก ' +
-        'ในพจนานุกรมพยางค์เหล่านี้จะไม่มีเครื่องหมายวรรณยุกต์',
+        'เสียงที่ขีดฆ่าไว้คือเสียงเดิมของแต่ละตัว เมื่อเป็นคำแล้วพยางค์ที่สองจะอ่านเบา และพจนานุกรมเขียนโดยไม่มีเครื่องหมายวรรณยุกต์ เช่น māma, xièxie',
       examples: [
         { hanzi: '妈妈', written: 'mā mā', spoken: 'māma', meaningTh: 'แม่' },
         { hanzi: '谢谢', written: 'xiè xiè', spoken: 'xièxie', meaningTh: 'ขอบคุณ' },
@@ -539,7 +539,7 @@ export const zhFoundations: ChineseFoundations = {
       radical: '贝', pinyin: 'bèi', meaningTh: 'เปลือกหอย (เงินตราสมัยโบราณ — เกี่ยวกับเงิน การค้า)',
       examples: [
         { hanzi: '贵', pinyin: 'guì', meaningTh: 'แพง' },
-        { hanzi: '买', pinyin: 'mǎi', meaningTh: 'ซื้อ' },
+        { hanzi: '购', pinyin: 'gòu', meaningTh: 'ซื้อ (购物 ซื้อของ)' },
         { hanzi: '货', pinyin: 'huò', meaningTh: 'สินค้า' },
       ],
     },
