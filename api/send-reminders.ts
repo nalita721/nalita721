@@ -26,6 +26,18 @@ export default async function handler(req: any, res: any) {
     }
   }
 
+  // ?slot=backup runs only the data backup, on demand. It lives in this function
+  // because the Hobby plan allows at most 12 serverless functions per deployment.
+  if (req.query?.slot === 'backup') {
+    if (!process.env.CRON_SECRET) {
+      res.status(401).json({ error: 'CRON_SECRET is not set' })
+      return
+    }
+    const result = await runBackup()
+    res.status(result.ok ? 200 : 500).json(result)
+    return
+  }
+
   const slot = req.query?.slot === 'evening' ? 'evening' : 'morning'
   const todayKey = new Date().toISOString().slice(0, 10)
 

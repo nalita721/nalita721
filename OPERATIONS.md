@@ -16,7 +16,7 @@ With Resend's test sender (`onboarding@resend.dev`) mail can only go to the
 Resend account's own address.
 
 **Run a backup now:**
-`curl -H "Authorization: Bearer $CRON_SECRET" https://toeic-nu.vercel.app/api/backup`
+`curl -H "Authorization: Bearer $CRON_SECRET" "https://toeic-nu.vercel.app/api/send-reminders?slot=backup"`
 (needs `CRON_SECRET` set in Vercel).
 
 **Restore:** download the `.json.gz` from the backup email, set
@@ -28,6 +28,11 @@ npm run backup:restore -- linguamaster-backup-YYYY-MM-DD.json.gz --write  # rest
 ```
 Keys in the backup overwrite current ones; other keys are left alone.
 Learners only need to log in again afterwards.
+
+**Serverless function limit:** the Vercel Hobby plan accepts at most 12
+functions per deployment (each non-underscore file in `api/`); a 13th makes
+every deploy fail. Shared code goes in `api/_*.ts` files, which don't count.
+`npm run validate:content` checks this.
 
 ## Releases and rollback
 

@@ -18,6 +18,8 @@ import { LANG_TRACKS } from '../src/data/langs'
 import { zhFoundations } from '../src/data/langs/zh-foundations'
 import { kanaTables } from '../src/data/langs/ja-kana'
 import { n5Kanji } from '../src/data/langs/ja-n5-kanji'
+import { readdirSync } from 'node:fs'
+import { join } from 'node:path'
 import type { LangLevelContent } from '../src/lib/langTypes'
 import { listeningPracticeSets, stepLessons, TOTAL_PATH_LESSONS } from '../src/data/pathLessons'
 import { listeningGroupsByPart } from '../src/data/listening'
@@ -121,6 +123,16 @@ function checkLevel(tag: string, l: LangLevelContent) {
   unique(`${tag} mock ids`, mockIds)
   return words.length
 }
+
+// Vercel Hobby deploys fail with more than 12 serverless functions (non-underscore files in api/)
+function countApiFunctions(dir: string): number {
+  return readdirSync(dir, { withFileTypes: true }).reduce(
+    (n, e) => n + (e.isDirectory() ? countApiFunctions(join(dir, e.name)) : /\.ts$/.test(e.name) && !e.name.startsWith('_') ? 1 : 0),
+    0,
+  )
+}
+const apiFunctions = countApiFunctions(join(process.cwd(), 'api'))
+if (apiFunctions > 12) errors.push(`api/: ${apiFunctions} serverless functions, Vercel Hobby allows 12`)
 
 async function main() {
   const counts: string[] = []
