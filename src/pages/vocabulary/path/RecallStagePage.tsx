@@ -5,11 +5,11 @@ import { useProgressStore } from '../../../store/progress'
 import { playCorrectSound, playIncorrectSound, playCompleteSound } from '../../../lib/sound'
 import {
   resolveGameSetContext,
-  isStageUnlocked,
   stageKey,
   STAGE_BONUS_XP,
   pickDistractors,
 } from '../../../data/vocabularyGamePath'
+import { useSetLearned } from './useSetLearned'
 import type { VocabWord } from '../../../lib/types'
 
 function shuffle<T>(arr: T[]): T[] {
@@ -23,7 +23,7 @@ interface RecallQuestion {
 
 export default function RecallStagePage() {
   const { chapterId, setIndex: setIndexParam } = useParams()
-  const results = useProgressStore((s) => s.wordPathStageResults)
+  const learned = useSetLearned(chapterId, Number(setIndexParam))
   const completeStage = useProgressStore((s) => s.completeStage)
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
   const reviewWord = useProgressStore((s) => s.reviewWord)
@@ -45,9 +45,9 @@ export default function RecallStagePage() {
 
   if (!ctx) return <Navigate to="/vocabulary" replace />
   const { chapter, setIndex: si } = ctx
-  const pathTo = `/vocabulary/${chapter.id}/path`
+  const pathTo = `/vocabulary/${chapter.id}`
 
-  if (!isStageUnlocked(results, chapter.id, si, 4)) return <Navigate to={pathTo} replace />
+  if (!learned) return <Navigate to={pathTo} replace />
 
   const q = questions[index]
   const done = index >= questions.length

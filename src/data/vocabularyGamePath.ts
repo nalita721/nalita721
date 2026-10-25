@@ -1,4 +1,5 @@
 import { vocabChapters } from './vocabulary'
+import { pathStepKey } from './learningPath'
 import type { GameStageResult, VocabChapter, VocabWord } from '../lib/types'
 
 export const WORDS_PER_SET = 10
@@ -36,31 +37,32 @@ export function stageKey(chapterId: string, setIndex: number, stage: GameStage):
   return `${chapterId}:${setIndex}:${stage}`
 }
 
-export function isStagePassed(
+/** Optional practice games for a word set; they open once the set's lesson is learned. */
+export const PRACTICE_GAMES = [
+  { stage: 2 as GameStage, key: 'matching', labelTh: 'จับคู่คำ', icon: '🧩' },
+  { stage: 3 as GameStage, key: 'spelling', labelTh: 'สะกดคำ', icon: '🔤' },
+  { stage: 4 as GameStage, key: 'recall', labelTh: 'ทวนความจำ', icon: '🧠' },
+  { stage: 5 as GameStage, key: 'toeic', labelTh: 'โจทย์ TOEIC', icon: '🏆' },
+]
+
+/**
+ * A set counts as learned once its bite-sized lesson is passed, the whole
+ * chapter is passed, or (for progress saved before lessons existed) its old
+ * "Learn 10 Words" stage was passed.
+ */
+export function isSetLearned(
+  passedLessons: string[],
   results: Record<string, GameStageResult>,
+  pathPassedSteps: string[],
   chapterId: string,
   setIndex: number,
-  stage: GameStage,
 ): boolean {
-  return results[stageKey(chapterId, setIndex, stage)]?.passed ?? false
-}
-
-/** Stage 1 of set 0 is always open; every other stage needs the previous one (or previous set's stage 5) passed. */
-export function isStageUnlocked(
-  results: Record<string, GameStageResult>,
-  chapterId: string,
-  setIndex: number,
-  stage: GameStage,
-): boolean {
-  if (stage === 1) {
-    if (setIndex === 0) return true
-    return isStagePassed(results, chapterId, setIndex - 1, 5)
-  }
-  return isStagePassed(results, chapterId, setIndex, (stage - 1) as GameStage)
-}
-
-export function isSetUnlocked(results: Record<string, GameStageResult>, chapterId: string, setIndex: number): boolean {
-  return isStageUnlocked(results, chapterId, setIndex, 1)
+  const step = pathStepKey('vocabulary', chapterId)
+  return (
+    passedLessons.includes(`${step}#${setIndex}`) ||
+    pathPassedSteps.includes(step) ||
+    (results[stageKey(chapterId, setIndex, 1)]?.passed ?? false)
+  )
 }
 
 export function resolveGameSetContext(chapterId: string | undefined, setIndexParam: string | undefined) {

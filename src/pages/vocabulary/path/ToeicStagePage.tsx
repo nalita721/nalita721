@@ -5,12 +5,12 @@ import { useProgressStore } from '../../../store/progress'
 import { playCorrectSound, playIncorrectSound, playCompleteSound } from '../../../lib/sound'
 import {
   resolveGameSetContext,
-  isStageUnlocked,
   stageKey,
   STAGE_BONUS_XP,
   pickDistractors,
   blankOutTerm,
 } from '../../../data/vocabularyGamePath'
+import { useSetLearned } from './useSetLearned'
 import type { VocabWord } from '../../../lib/types'
 
 function shuffle<T>(arr: T[]): T[] {
@@ -25,7 +25,7 @@ interface ToeicQuestion {
 
 export default function ToeicStagePage() {
   const { chapterId, setIndex: setIndexParam } = useParams()
-  const results = useProgressStore((s) => s.wordPathStageResults)
+  const learned = useSetLearned(chapterId, Number(setIndexParam))
   const completeStage = useProgressStore((s) => s.completeStage)
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
   const reviewWord = useProgressStore((s) => s.reviewWord)
@@ -51,9 +51,9 @@ export default function ToeicStagePage() {
 
   if (!ctx) return <Navigate to="/vocabulary" replace />
   const { chapter, setIndex: si } = ctx
-  const pathTo = `/vocabulary/${chapter.id}/path`
+  const pathTo = `/vocabulary/${chapter.id}`
 
-  if (!isStageUnlocked(results, chapter.id, si, 5)) return <Navigate to={pathTo} replace />
+  if (!learned) return <Navigate to={pathTo} replace />
 
   if (questions.length === 0) {
     return (

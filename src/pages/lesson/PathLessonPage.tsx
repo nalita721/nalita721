@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Navigate, useParams } from 'react-router-dom'
+import { Navigate, useLocation, useParams } from 'react-router-dom'
 import { vocabChapters } from '../../data/vocabulary'
 import { grammarTopics } from '../../data/grammar'
 import { listeningLessonFor } from '../../data/listeningLessons'
@@ -66,6 +66,8 @@ function lessonContent(step: PathStep, n: number): { cards: LessonCard[]; quiz?:
 /** One bite-sized lesson of an English learning-path step: /lesson/:type/:id/:n */
 export default function PathLessonPage() {
   const { type, id, n } = useParams()
+  // set by pages that open a lesson outside the study plan, e.g. a vocabulary chapter
+  const exitTo = (useLocation().state as { from?: string } | null)?.from ?? '/study-plan'
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
   const reviewWord = useProgressStore((s) => s.reviewWord)
   const step = findStep(type, id)
@@ -91,7 +93,7 @@ export default function PathLessonPage() {
       tts="en-US"
       cards={content.cards}
       quiz={content.quiz}
-      exitTo="/study-plan"
+      exitTo={exitTo}
       next={following && { to: following.to, label: index + 1 < nodes.length ? following.titleTh : 'ด่านถัดไป' }}
       onCheck={(correct) => recordAnswer(part, correct)}
       onQuizAnswer={(wordId, correct) => {

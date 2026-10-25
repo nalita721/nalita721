@@ -1,11 +1,12 @@
 import { Navigate, useParams } from 'react-router-dom'
 import { useProgressStore } from '../../../store/progress'
 import { WordScrambleGame } from '../../../components/WordScrambleGame'
-import { resolveGameSetContext, isStageUnlocked, stageKey, STAGE_BONUS_XP } from '../../../data/vocabularyGamePath'
+import { resolveGameSetContext, stageKey, STAGE_BONUS_XP } from '../../../data/vocabularyGamePath'
+import { useSetLearned } from './useSetLearned'
 
 export default function SpellingStagePage() {
   const { chapterId, setIndex: setIndexParam } = useParams()
-  const results = useProgressStore((s) => s.wordPathStageResults)
+  const learned = useSetLearned(chapterId, Number(setIndexParam))
   const completeStage = useProgressStore((s) => s.completeStage)
   const recordAnswer = useProgressStore((s) => s.recordAnswer)
   const reviewWord = useProgressStore((s) => s.reviewWord)
@@ -13,9 +14,9 @@ export default function SpellingStagePage() {
   const ctx = resolveGameSetContext(chapterId, setIndexParam)
   if (!ctx) return <Navigate to="/vocabulary" replace />
   const { chapter, setIndex, words } = ctx
-  const pathTo = `/vocabulary/${chapter.id}/path`
+  const pathTo = `/vocabulary/${chapter.id}`
 
-  if (!isStageUnlocked(results, chapter.id, setIndex, 3)) return <Navigate to={pathTo} replace />
+  if (!learned) return <Navigate to={pathTo} replace />
 
   return (
     <WordScrambleGame

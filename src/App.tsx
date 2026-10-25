@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
 import TopBar from './components/TopBar'
 import { useAuthStore } from './store/auth'
@@ -17,8 +17,6 @@ import TouchTypingPage from './pages/vocabulary/TouchTypingPage'
 import WordRushPage from './pages/vocabulary/WordRushPage'
 import WordScramblePage from './pages/vocabulary/WordScramblePage'
 import ChapterQuizPage from './pages/vocabulary/ChapterQuizPage'
-import VocabGamePathPage from './pages/vocabulary/path/VocabGamePathPage'
-import LearnStagePage from './pages/vocabulary/path/LearnStagePage'
 import MatchingStagePage from './pages/vocabulary/path/MatchingStagePage'
 import SpellingStagePage from './pages/vocabulary/path/SpellingStagePage'
 import RecallStagePage from './pages/vocabulary/path/RecallStagePage'
@@ -68,6 +66,12 @@ import {
   RequireAuth,
 } from './components/gates'
 
+/** The old per-chapter game path now lives on the chapter page; its Learn stage is the chapter's lesson. */
+function OldVocabPathRedirect() {
+  const { chapterId, setIndex } = useParams()
+  return <Navigate to={setIndex !== undefined ? `/lesson/vocabulary/${chapterId}/${setIndex}` : `/vocabulary/${chapterId}`} replace />
+}
+
 export default function App() {
   const checkSession = useAuthStore((s) => s.checkSession)
   const location = useLocation()
@@ -99,8 +103,8 @@ export default function App() {
           <Route path="/vocabulary/:chapterId" element={<GatedVocabChapter><ChapterHubPage /></GatedVocabChapter>} />
           <Route path="/vocabulary/:chapterId/quiz" element={<GatedVocabChapter><ChapterQuizPage /></GatedVocabChapter>} />
 
-          <Route path="/vocabulary/:chapterId/path" element={<GatedVocabChapter><VocabGamePathPage /></GatedVocabChapter>} />
-          <Route path="/vocabulary/:chapterId/path/:setIndex/learn" element={<GatedVocabChapter><LearnStagePage /></GatedVocabChapter>} />
+          <Route path="/vocabulary/:chapterId/path" element={<OldVocabPathRedirect />} />
+          <Route path="/vocabulary/:chapterId/path/:setIndex/learn" element={<OldVocabPathRedirect />} />
           <Route path="/vocabulary/:chapterId/path/:setIndex/matching" element={<GatedVocabChapter><MatchingStagePage /></GatedVocabChapter>} />
           <Route path="/vocabulary/:chapterId/path/:setIndex/spelling" element={<GatedVocabChapter><SpellingStagePage /></GatedVocabChapter>} />
           <Route path="/vocabulary/:chapterId/path/:setIndex/recall" element={<GatedVocabChapter><RecallStagePage /></GatedVocabChapter>} />
