@@ -71,3 +71,11 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-10-27 · Day 8 · HSK 1
+
+- Checked: `src/data/langs/zh-hsk1.ts` — all 150 words (pinyin and tones of word and example, syllable-by-syllable match, Thai meaning and translation, part of speech, mnemonics and component claims), all 7 grammar topics with every key point, example, check and 56 practice questions, and the full 40-item mock (keys, true/false direction, picture descriptions, explanations, pinyin, item count and pass mark).
+- Fix `hsk1-g2-q8`: distractor "你去哪儿吗？" is acceptable spoken Mandarin ("Are you going somewhere?", 哪儿 as "somewhere"), giving two defensible answers; replaced with "你几岁吗？".
+- Fix `h1-41` 几: the mnemonic said 几 is *always* followed by a measure word, contradicted by the file's own 今天几月几号？; it now says it is usually followed by one, except dates and times (几月 几号 几点).
+- Improvement `h1-137` 很: the mnemonic said 很 always goes before adjectives while its example is 很喜欢; it now says adjective sentences usually take 很 and that it also goes before feeling verbs.
+- Needs human review: `hsk1-g5-q2` and the 有 check in `hsk1-g5` use 是 as a distractor although 桌子上是三本书 / 杯子里是水 are grammatical (the Thai "มี" points to 有, so low risk). `h1-13` 喂 is wèi per the syllabus but usually wéi on the phone. `h1-1` 我 mnemonic (手 + 戈) is a folk etymology. Left as is.
