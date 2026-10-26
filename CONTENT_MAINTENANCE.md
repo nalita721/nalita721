@@ -59,7 +59,7 @@ log. People can edit the backlog and rotation; the session appends to the log.
 
 ## Backlog (Sundays, top first)
 
-- [ ] HSK 4 vocabulary part 1 (300 of 600 new words) as `src/data/langs/zh-hsk4-vocab.ts`
+- [ ] HSK 4 vocabulary part 1 (300 of 600 new words) as `src/data/langs/zh-hsk4-vocab.ts` — in progress: h4-1 … h4-100 done (chapters 1–4), 200 to go
 - [ ] HSK 4 vocabulary part 2 (remaining 300 words)
 - [ ] HSK 4 grammar topics + mock exam, then enable `load` for HSK 4 in `src/data/langs/index.ts`
 - [ ] Explanations (`explanationTh`) for Mock set 2 listening questions
@@ -71,3 +71,9 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-10-25 · Day 6 · Mock set 4 (Sunday: backlog)
+
+- Checked: Mock set 4, Parts 2–7 (`src/data/fullMockExamSet4.ts`): every answer key against its script or passage, all arithmetic and dates in Part 7, the NOT question, and item counts (100 + 100). Part 1 skipped: it is being rewritten with photographs in PR #2. No errors found; this set has none of the double-answer patterns found in sets 1–3. It has no Thai explanations yet.
+- Backlog (Sunday): started HSK 4 vocabulary part 1 — new file `src/data/langs/zh-hsk4-vocab.ts` with the first 100 words (h4-1 … h4-100) in 4 themed chapters (jobs and character; work; travel and traffic; home and shopping), each with pinyin, part of speech, Thai meaning, mnemonic, example sentence, its pinyin and Thai. All 100 were checked against the HSK 1–3 lists in this repo (行李箱 and 起飞 were already in HSK 3 and were swapped out). Example sentences use HSK 1–4 words. Not shown in the app yet: HSK 4 is enabled by a later backlog item.
+- Needs human review: a native speaker spot-check of the 100 example sentences and mnemonics. `S4-R7-D2-q4` "She currently works at Harbor Point Logistics" is ruled out only by "my former colleague" — subtle but defensible. Left as is.
