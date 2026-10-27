@@ -12,7 +12,7 @@
     "backup:restore": "npx -y tsx scripts/restore-backup.mts"
   },
   "dependencies": {
-    "@fontsource/noto-sans-thai": "^5.3.0",
+    "@fontsource/ibm-plex-sans-thai-looped": "^5.3.0",
     "@fontsource/plus-jakarta-sans": "^5.3.0",
     "@upstash/redis": "^1.38.4",
     "lucide-react": "^1.47.0",

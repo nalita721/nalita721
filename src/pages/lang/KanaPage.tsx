@@ -23,7 +23,7 @@ function Grid({ rows, cols }: { rows: KanaRow[]; cols: number }) {
     <div className="space-y-1.5">
       {rows.map((row) => (
         <div key={row.label} className="grid items-center gap-1.5" style={{ gridTemplateColumns: `4.5rem repeat(${cols}, minmax(0, 1fr))` }}>
-          <span className="truncate text-[11px] text-stone-400">{row.label}</span>
+          <span className="truncate text-xs text-stone-400">{row.label}</span>
           {row.chars.map((c, i) =>
             c ? (
               <button
@@ -33,7 +33,7 @@ function Grid({ rows, cols }: { rows: KanaRow[]; cols: number }) {
                 className="flex flex-col items-center rounded-xl border border-sand-200 bg-white py-1.5 transition hover:border-pink-400 hover:bg-pink-50 active:scale-95"
               >
                 <span className="text-2xl font-medium text-stone-800">{c.kana}</span>
-                <span className="text-[11px] text-stone-400">{c.romaji}</span>
+                <span className="text-xs text-stone-400">{c.romaji}</span>
               </button>
             ) : (
               <span key={i} />

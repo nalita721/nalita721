@@ -72,7 +72,7 @@ export function MockScoreTrendChart({ results }: { results: MockTestResult[] }) 
               stroke={t === 0 ? BASELINE : GRIDLINE}
               strokeWidth={1}
             />
-            <text x={PAD_LEFT - 6} y={scaleY(t) + 3} textAnchor="end" fontSize="9" fill={TEXT_MUTED}>
+            <text x={PAD_LEFT - 6} y={scaleY(t) + 3} textAnchor="end" fontSize="11" fill={TEXT_MUTED}>
               {t}
             </text>
           </g>

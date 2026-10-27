@@ -57,7 +57,7 @@ function WeekStreak({ streak }: { streak: number }) {
         const isToday = i === 6
         return (
           <div key={i} className="flex flex-col items-center gap-1.5">
-            <span className={`text-[10px] ${isToday ? 'font-bold text-stone-700' : 'text-stone-400'}`}>
+            <span className={`text-[12px] ${isToday ? 'font-bold text-stone-700' : 'text-stone-400'}`}>
               {THAI_DAY_ABBR[d.getDay()]}
             </span>
             <span
@@ -336,7 +336,7 @@ export default function DashboardPage() {
                     {i === 0 ? 'A1–A2' : u.cefrLevel}
                   </span>
                   {complete && <Check size={16} className="text-emerald-600" strokeWidth={3} />}
-                  {current && <span className="text-[10px] font-bold" style={{ color: t.hex }}>กำลังเรียน</span>}
+                  {current && <span className="text-[12px] font-bold" style={{ color: t.hex }}>กำลังเรียน</span>}
                 </div>
                 <p className="mt-2 text-sm font-bold text-stone-800">หน่วยที่ {i + 1}</p>
                 <p className="mb-2 text-xs text-stone-500">

@@ -30,7 +30,7 @@ export function PageHero({ lines, note, icon: Icon, gradient = 'from-amber-100 v
       </div>
       <div className="relative hidden xl:flex flex-col items-center justify-center bg-white rounded-2xl shadow-md border border-sand-200 px-4 py-3 text-center gap-1 shrink-0 w-28">
         <Icon size={22} className="text-brand-600" />
-        <p className="text-[11px] font-serif italic text-stone-500 leading-tight">{note}</p>
+        <p className="text-xs font-serif italic text-stone-500 leading-tight">{note}</p>
       </div>
     </div>
   )

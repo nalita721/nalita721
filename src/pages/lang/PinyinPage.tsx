@@ -343,7 +343,7 @@ export default function PinyinPage() {
               >
                 <span className="block text-2xl text-stone-800">{t.hanzi}</span>
                 <span className="block text-xs text-rose-600">{t.example}</span>
-                <span className="block text-[11px] text-stone-400">{t.meaningTh}</span>
+                <span className="block text-xs text-stone-400">{t.meaningTh}</span>
               </button>
             </Card>
           ))}
@@ -436,7 +436,7 @@ export default function PinyinPage() {
                         title={e.meaningTh}
                       >
                         <span className="text-lg text-stone-800">{e.hanzi}</span>{' '}
-                        <span className="text-[11px] text-stone-500">
+                        <span className="text-xs text-stone-500">
                           {e.pinyin} {e.meaningTh}
                         </span>
                       </button>
