@@ -158,7 +158,7 @@ export default function FlashcardPage() {
               <span className="w-11 h-11 rounded-full bg-white border border-sand-200 shadow-sm flex items-center justify-center text-stone-500 hover:border-brand-400 transition">
                 <ChevronLeft size={20} />
               </span>
-              <span className="text-[10px] text-stone-400 text-center leading-tight">คำก่อนหน้า<br />(prev)</span>
+              <span className="text-[12px] text-stone-400 text-center leading-tight">คำก่อนหน้า<br />(prev)</span>
             </button>
 
             <Card className="flex-1 flex flex-col gap-4">
@@ -224,7 +224,7 @@ export default function FlashcardPage() {
                     <X size={16} />
                   </span>
                   <span className="text-sm font-semibold text-rose-700">จำไม่ได้เลย</span>
-                  <span className="text-[10px] text-rose-400 leading-tight">นึกไม่ออก ขอดูคำตอบ</span>
+                  <span className="text-[12px] text-rose-400 leading-tight">นึกไม่ออก ขอดูคำตอบ</span>
                 </button>
 
                 <button
@@ -236,7 +236,7 @@ export default function FlashcardPage() {
                     <RotateCcw size={16} />
                   </span>
                   <span className="text-sm font-semibold text-amber-700">จำได้ลางๆ</span>
-                  <span className="text-[10px] text-amber-500 leading-tight">ไม่มั่นใจ อยากเจอไวๆ</span>
+                  <span className="text-[12px] text-amber-500 leading-tight">ไม่มั่นใจ อยากเจอไวๆ</span>
                 </button>
 
                 <button
@@ -248,7 +248,7 @@ export default function FlashcardPage() {
                     <Check size={16} />
                   </span>
                   <span className="text-sm font-semibold text-emerald-700">จำได้แม่นยำ</span>
-                  <span className="text-[10px] text-emerald-500 leading-tight">มั่นใจเต็มที่</span>
+                  <span className="text-[12px] text-emerald-500 leading-tight">มั่นใจเต็มที่</span>
                 </button>
               </div>
             </Card>
@@ -262,7 +262,7 @@ export default function FlashcardPage() {
               <span className="w-11 h-11 rounded-full bg-white border border-sand-200 shadow-sm flex items-center justify-center text-stone-500 hover:border-brand-400 transition">
                 <ChevronRight size={20} />
               </span>
-              <span className="text-[10px] text-stone-400 text-center leading-tight">คำถัดไป<br />(next)</span>
+              <span className="text-[12px] text-stone-400 text-center leading-tight">คำถัดไป<br />(next)</span>
             </button>
           </div>
         )}
@@ -273,18 +273,18 @@ export default function FlashcardPage() {
               <p className="text-xs font-semibold text-stone-700 flex items-center justify-center gap-1.5">
                 <Target size={14} className="text-brand-600" /> เป้าหมายของคุณ
               </p>
-              <p className="text-[11px] text-stone-400 mt-1">ฝึกให้ครบ {queue.length} คำ แล้วคุณจะเก่งขึ้นอีกขั้น!</p>
+              <p className="text-xs text-stone-400 mt-1">ฝึกให้ครบ {queue.length} คำ แล้วคุณจะเก่งขึ้นอีกขั้น!</p>
             </div>
             <div>
               <p className="text-xs font-semibold text-stone-700 mb-1.5">ความคืบหน้า {title}</p>
               <ProgressBar value={reviewedCount} max={queue.length} />
-              <p className="text-[11px] text-stone-400 mt-1">{reviewedCount} / {queue.length}</p>
+              <p className="text-xs text-stone-400 mt-1">{reviewedCount} / {queue.length}</p>
             </div>
             <div>
               <p className="text-xs font-semibold text-stone-700 flex items-center justify-center gap-1.5">
                 <BarChart3 size={14} className="text-emerald-600" /> สถิติวันนี้
               </p>
-              <p className="text-[11px] text-stone-400 mt-1">คุณทบทวนแล้ว {dailyWordsReviewed} คำ เก่งมาก! 🎉</p>
+              <p className="text-xs text-stone-400 mt-1">คุณทบทวนแล้ว {dailyWordsReviewed} คำ เก่งมาก! 🎉</p>
             </div>
           </Card>
         )}

@@ -271,7 +271,7 @@ export default function SpeakingPage() {
                   ))}
                 </ul>
               )}
-              <p className="text-[11px] text-stone-400 pt-1">
+              <p className="text-xs text-stone-400 pt-1">
                 *เป็นการวิเคราะห์เบื้องต้นจากคำศัพท์เทียบกับตัวอย่างคำตอบเท่านั้น ไม่ได้ตรวจการออกเสียงหรือให้คะแนนความถูกต้อง
               </p>
             </div>

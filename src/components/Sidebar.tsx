@@ -92,7 +92,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         </div>
 
         <div className="px-3 pb-3">
-          <p className="px-3 text-[10px] font-semibold uppercase tracking-wider text-sand-400 mb-1.5">เลือกภาษาที่เรียน</p>
+          <p className="px-3 text-[12px] font-semibold uppercase tracking-wider text-sand-400 mb-1.5">เลือกภาษาที่เรียน</p>
           <div className="grid grid-cols-3 gap-1.5">
             {LANGUAGE_LINKS.map((lang) => (
               <NavLink
@@ -100,7 +100,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
                 to={lang.to}
                 onClick={onClose}
                 className={({ isActive }) =>
-                  `flex flex-col items-center gap-1 rounded-xl py-2 text-[11px] font-medium transition ${
+                  `flex flex-col items-center gap-1 rounded-xl py-2 text-xs font-medium transition ${
                     isActive || (lang.to === '/english' && !inOtherLanguage)
                       ? 'bg-white/15 text-white'
                       : 'text-sand-300 hover:bg-white/5 hover:text-white'

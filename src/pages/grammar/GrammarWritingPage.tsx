@@ -109,7 +109,7 @@ export default function GrammarWritingPage() {
                       </ul>
                     </>
                   )}
-                  <p className="text-[11px] text-stone-400 pt-1">
+                  <p className="text-xs text-stone-400 pt-1">
                     *เป็นการตรวจสอบเบื้องต้นจากรูปแบบประโยคเท่านั้น ไม่ครอบคลุมทุกกรณี ลองเทียบกับตัวอย่างประโยคเพื่อความมั่นใจ
                   </p>
                 </div>

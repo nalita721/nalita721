@@ -65,7 +65,7 @@ export default function LangHubPage({ lang }: { lang: LangCode }) {
                     ready ? `bg-gradient-to-br ${accent}` : 'bg-stone-300'
                   }`}
                 >
-                  <span className="text-[10px] font-semibold opacity-80">{track.examName}</span>
+                  <span className="text-[12px] font-semibold opacity-80">{track.examName}</span>
                   <span className="text-lg font-extrabold leading-none">{level.code.replace(/^HSK /, '')}</span>
                 </span>
                 <div className="min-w-0 flex-1">

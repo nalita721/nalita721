@@ -45,7 +45,7 @@ export function SkillAccuracyChart({ data }: { data: SkillAccuracyDatum[] }) {
                 ถูก {d.correct}/{d.total} ข้อ
               </div>
             )}
-            <p style={{ color: TEXT_MUTED }} className="text-[11px] mt-0.5">
+            <p style={{ color: TEXT_MUTED }} className="text-xs mt-0.5">
               {d.total} ข้อที่ทำแล้ว
             </p>
           </div>

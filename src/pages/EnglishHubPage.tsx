@@ -112,7 +112,7 @@ export default function EnglishHubPage() {
                     className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-2xl text-white"
                     style={{ backgroundColor: theme.hex }}
                   >
-                    <span className="text-[10px] font-semibold opacity-80">CEFR</span>
+                    <span className="text-[12px] font-semibold opacity-80">CEFR</span>
                     <span className="text-base font-extrabold leading-none">{i === 0 ? 'A1–A2' : unit.cefrLevel}</span>
                   </span>
                   <div className="min-w-0 flex-1">
