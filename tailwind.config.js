@@ -4,7 +4,20 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Noto Sans Thai', 'Segoe UI', 'system-ui', '-apple-system', 'sans-serif'],
+        // Looped Thai letters (มีหัว) read like a textbook and tire the eye less than loopless ones in long text
+        sans: ['Plus Jakarta Sans', 'IBM Plex Sans Thai Looped', 'Segoe UI', 'system-ui', '-apple-system', 'sans-serif'],
+      },
+      // One step larger than Tailwind's defaults, with taller lines: Thai stacks vowels and tone marks
+      // above and below the letters, so it needs more room between lines than English
+      fontSize: {
+        xs: ['0.8125rem', { lineHeight: '1.25rem' }],
+        sm: ['0.9375rem', { lineHeight: '1.5rem' }],
+        base: ['1.0625rem', { lineHeight: '1.875rem' }],
+        lg: ['1.1875rem', { lineHeight: '1.875rem' }],
+        xl: ['1.3125rem', { lineHeight: '2rem' }],
+      },
+      lineHeight: {
+        relaxed: '1.75',
       },
       colors: {
         // LinguaMaster brand system — "TOEIC Blue" primary accent
