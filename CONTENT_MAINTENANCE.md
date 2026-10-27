@@ -71,3 +71,17 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-10-28 · Day 9 · HSK 2
+
+- Checked: `src/data/langs/zh-hsk2.ts` — all 150 words (pinyin of word and example syllable by syllable, Thai, part of speech, mnemonics; no duplicates or HSK 1 overlap), all 8 grammar topics with every key point, example, check and practice question, and the full 60-item mock (keys, true/false direction, picture and response matching, explanations, counts, pass mark).
+- Fix `hsk2-m-r25`: reply B "是，是我妻子送我的。" to "是新买的吗？" said "yes, bought" and then "a gift"; → "不是，是我妻子送我的。" (key unchanged).
+- Fix `hsk2-g3-q4`: distractor "没" is a normal spoken short form of 没有 in comparisons (我没你高), so it was also correct; → "从".
+- Fix `hsk2-g6` 或者 check: "我们星期六___星期天去都可以" also accepts 还是 ("A 还是 B 都可以"); sentence now "你可以星期六___星期天来。" where only 或者 fits.
+- Fix `hsk2-g4-q5`: distractor "歌唱" is itself a verb, so 她歌唱得很好 was also grammatical; → "唱着".
+- Fix `hsk2-g8-q4`: distractor "给" ("let", 不给我出去玩) is common in speech; → "离".
+- Fix `hsk2-g2` V1着V2 example: Thai "เธอยิ้มแล้วพูดว่า" (smiled, then said) contradicted the point (both at once); → "เธอยิ้มพร้อมกับพูดว่า".
+- Fix `h2-67` 次: mnemonic "一次 สองครั้ง 两次" read as if 一次 meant twice; → "一次 หนึ่งครั้ง, 两次 สองครั้ง".
+- Fix `h2-91` 走: mnemonic said the lower part is 足; it is a foot shape from 止; corrected.
+- Improvement `hsk2-g1` 没 key point: "never use 不 for past events" was too broad (他以前不喝酒); now says that to deny that an event happened you use 没, not 不.
+- Needs human review: 欢迎 (huānyíng, HSK 2.0) is missing from the HSK 1–3 lists. `hsk2-g8-q7` and the 让 check still use 给 as a distractor (weak in speech); `hsk2-g3-q7` 比我老两岁 is heard casually; `hsk2-m-l34` uses 才 (HSK 3); `hsk2-m-r11` passage is first person but the statement says 他. Left as is.
