@@ -71,3 +71,16 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-10-29 · Day 10 · HSK 3
+
+- Checked: `src/data/langs/zh-hsk3-vocab.ts` (all 300 words: pinyin of word and example syllable by syllable, Thai, part of speech, mnemonics and component claims; no duplicates) and `src/data/langs/zh-hsk3.ts` (all 10 grammar topics with every key point, example, check and practice question; the full 80-item mock: keys, true/false direction, explanations, numbers and times, counts, pass mark).
+- Fix `hsk3-m-l39`: "你应该早点儿休息，这样对身体不好" can be heard as "resting early is bad for you"; clauses swapped to "这样对身体不好，你应该早点儿休息".
+- Fix `hsk3-m-l31`: 按时 is an HSK 4 word; "别忘了按时还" → "别忘了还" (key and explanation unchanged).
+- Fix `hsk3-g10-q3`: distractor "说来" is a standard variant (对我说来), so two answers were correct; → "说话".
+- Fix `hsk3-g7` 越…越 key point: pattern "越 + V/Adj + 越 + Adj" contradicted its own examples 越看越喜欢 / 越听越喜欢; → "越 + V/Adj + 越 + Adj/V".
+- Fix `hsk3-g2-q7`: distractor "发现" (那个问题已经被发现了) was also grammatical and natural; → "参加", explanation updated.
+- Fix `h3-225` 满意: mnemonic "= เต็มใจ = พอใจ" equated satisfied with willing (เต็มใจ is the file's meaning for 愿意); → "ใจเต็มอิ่ม = พอใจ".
+- Fix `h3-287` 多么: example "这个熊猫" used 个 for an animal while h3-290 teaches 只; → "这只熊猫" (pinyin updated).
+- Improvement `hsk3-g1` 把 key point: "the verb must always take a complement" did not list reduplicated verbs / 一下, which its own `hsk3-g1-q8` uses (看看); added.
+- Needs human review: the HSK 3 word list may differ from the official HSK 2.0 list (笔记本, 欢迎, 回答, 葡萄, 普通话 are absent; 留学 and 以为 may be HSK 4) — worth checking against an official list. `h3-258` 一般 is tagged adj. but used as an adverb; `hsk3-g5` "不能听懂 ชาวจีนไม่พูดกัน" is slightly absolute; `hsk3-g3-q6` 打完电话 and `hsk3-g10` 除了 distractors are grammatical but ruled out by the Thai; `h3-62` 香蕉 mnemonic "กล้วยหอม" names one variety; `h3-115` 东 mnemonic is a folk etymology. Left as is.

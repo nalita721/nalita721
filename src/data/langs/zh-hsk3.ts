@@ -30,7 +30,7 @@ const content: LangLevelContent = {
         },
         {
           label: 'กริยาห้ามอยู่โดดๆ',
-          explanation: 'หลังกริยาต้องมีส่วนเติมเสมอ เช่น 了 ผลลัพธ์ (完/干净/好) ทิศทาง หรือสถานที่ — พูดว่า 我把衣服洗。 เฉยๆ ไม่ได้',
+          explanation: 'หลังกริยาต้องมีส่วนเติมเสมอ เช่น 了 ผลลัพธ์ (完/干净/好) ทิศทาง สถานที่ หรือกริยาซ้ำ/一下 (看看, 看一下) — พูดว่า 我把衣服洗。 เฉยๆ ไม่ได้',
           pattern: '把 + O + V + 完/好/干净/了…',
           example: '我把衣服洗干净了。',
           exampleReading: 'Wǒ bǎ yīfu xǐ gānjìng le.',
@@ -282,9 +282,9 @@ const content: LangLevelContent = {
         {
           id: 'hsk3-g2-q7',
           sentence: '那个问题已经被___了。(ปัญหานั้นได้รับการแก้ไขแล้ว)',
-          choices: ['解决', '决定', '发现', '检查'],
+          choices: ['解决', '决定', '参加', '检查'],
           answerIndex: 0,
-          explanation: '解决 (jiějué) = แก้ไขปัญหา ส่วน 决定 = ตัดสินใจ 发现 = ค้นพบ 检查 = ตรวจ',
+          explanation: '解决 (jiějué) = แก้ไขปัญหา ส่วน 决定 = ตัดสินใจ 参加 = เข้าร่วม 检查 = ตรวจ',
         },
         {
           id: 'hsk3-g2-q8',
@@ -967,7 +967,7 @@ const content: LangLevelContent = {
         {
           label: '越 A 越 B',
           explanation: 'ยิ่ง A ยิ่ง B — B เปลี่ยนไปตาม A',
-          pattern: 'S + 越 + V/Adj + 越 + Adj',
+          pattern: 'S + 越 + V/Adj + 越 + Adj/V',
           example: '雨越下越大。',
           exampleReading: 'Yǔ yuè xià yuè dà.',
           exampleTh: 'ฝนยิ่งตกยิ่งหนัก',
@@ -1482,7 +1482,7 @@ const content: LangLevelContent = {
         {
           id: 'hsk3-g10-q3',
           sentence: '对我___，这个工作很有意思。(สำหรับฉันแล้ว งานนี้น่าสนใจมาก)',
-          choices: ['说来', '来说', '来看', '看来说'],
+          choices: ['说话', '来说', '来看', '看来说'],
           answerIndex: 1,
           explanation: 'โครงสร้างที่ถูกคือ 对…来说',
         },
@@ -1787,7 +1787,7 @@ const content: LangLevelContent = {
           // ── Part 4: longer dialogue + question (3 choices)
           {
             id: 'hsk3-m-l31',
-            audio: '女：你好，我想借这本书。男：好的，请给我你的学生证。女：给你。可以借多长时间？男：两个星期，别忘了按时还。问：他们最可能在哪儿？',
+            audio: '女：你好，我想借这本书。男：好的，请给我你的学生证。女：给你。可以借多长时间？男：两个星期，别忘了还。问：他们最可能在哪儿？',
             prompt: 'ส่วนที่ 4 · เลือกคำตอบที่ถูกต้อง',
             choices: ['图书馆', '书店', '教室'],
             answerIndex: 0,
@@ -1851,7 +1851,7 @@ const content: LangLevelContent = {
           },
           {
             id: 'hsk3-m-l39',
-            audio: '女：你的眼睛怎么红了？男：昨天晚上看电脑看到两点，没睡好。女：你应该早点儿休息，这样对身体不好。男：我知道了，今天一定早点儿睡。问：女的让男的做什么？',
+            audio: '女：你的眼睛怎么红了？男：昨天晚上看电脑看到两点，没睡好。女：这样对身体不好，你应该早点儿休息。男：我知道了，今天一定早点儿睡。问：女的让男的做什么？',
             prompt: 'ส่วนที่ 4 · เลือกคำตอบที่ถูกต้อง',
             choices: ['早点儿睡觉', '多看电脑', '去看医生'],
             answerIndex: 0,
