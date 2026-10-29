@@ -71,3 +71,10 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-10-30 · Day 11 · Japanese kana + N5 kanji
+
+- Checked: `src/data/langs/ja-kana.ts` (all hiragana and katakana: 46 basic, voiced, combined sounds, romaji and every tip) and `src/data/langs/ja-n5-kanji.ts` (all 109 kanji: stroke counts, on/kun readings and okurigana, Thai meanings, every example word's reading including irregular ones like ふつか, ことし, きょう, へた, いっしゅうかん).
+- Fix: kanji 下 listed the kun reading くだ-さい (the request form); the dictionary reading is くだ-さる.
+- Improvement: added 一日 (ついたち, the 1st of the month) to 一, so the day-of-month readings run 1st–10th alongside 二日 … 十日.
+- Needs human review: 6 entries (曜 力 田 待 持 帰) are N4 on the common 103-kanji N5 list (the file has 109; 曜 is often taught at N5). 小 has the example 小川 (おがわ) but お is not listed in its kun readings; 十 omits the now-common ジュッ (十分 じゅっぷん). Left as is.
