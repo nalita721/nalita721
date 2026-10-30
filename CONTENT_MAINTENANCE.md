@@ -71,3 +71,15 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-10-31 · Day 12 · N5 vocabulary
+
+- Checked: `src/data/langs/ja-n5-vocab-a.ts` (371 words) and `src/data/langs/ja-n5-vocab-b.ts` (350 words) — kana readings of every word and example (irregular day/month readings, sound changes, small っ/ゃ, long vowels, particles), romaji, kanji, Thai meanings and translations, part of speech and verb groups, mnemonics, examples containing their word, duplicate ids and words within and across both files.
+- Fix `n5a-95` 四十: mnemonic said 四 before 十 is *always* よん; しじゅう also exists; now "mainly よん".
+- Fix `n5b-79` ストーブ: meaning "เตาผิง" (fireplace, 暖炉) was wrong; → "เครื่องทำความร้อน, ฮีตเตอร์".
+- Fix `n5b-107` 国: mnemonic said the box surrounds land; it surrounds 玉; corrected.
+- Fix `n5b-174` ページ: example reading じゅうぺーじ → じゅっぺーじ (十ページ).
+- Fix `n5b-288` 消す: mnemonic had a Thai letter ม in place of katakana ム (消しゴム).
+- Fix `n5b-222` 脱ぐ: mnemonic said it is used for everything you wear; glasses/neckties take 外す; corrected.
+- Improvement `n5a-324` 立つ: Thai "ครูยืนอยู่ข้างหน้า" (is standing) described a state; → "ครูไปยืนข้างหน้า" (the action 立つ describes).
+- Needs human review: words often listed at N4 (自分, 店員, ご主人, 会社員, おかげさまで, 空港, 信号, 新幹線, 冷蔵庫, パソコン, 授業, サンドイッチ, 黒板, 意味, 野球) — useful extras, kept. File B writes katakana as hiragana in exampleReading (こーひー) while file A keeps katakana; same word value used twice for 十 (じゅう/とお) and 時 (じ/とき). `n5a-200` 今日は月がきれい is translated "คืนนี้". `n5b-324` 知る: example あの人の名前を知る人はいません is written-style; speech uses 知っている人, but the validator requires the example to contain 知る, so a new example is needed. Left as is.
