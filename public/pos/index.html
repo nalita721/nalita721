@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f766e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="POS ร้านค้า" />
+  <title>POS ร้านค้า — ขายหน้าร้านบนมือถือ</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">🛒</span>
+      <div>
+        <div class="shop-name" id="shopNameTop">ร้านของฉัน</div>
+        <div class="sub" id="clock"></div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span class="pill" id="todayPill">วันนี้ ฿0</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== ขาย ===== -->
+    <section class="view active" id="view-sell">
+      <div class="sell-layout">
+        <div class="catalog">
+          <div class="search-row">
+            <input type="search" id="searchInput" placeholder="ค้นหาสินค้า / สแกนบาร์โค้ด" autocomplete="off" />
+            <button class="icon-btn" id="scanBtn" title="สแกนบาร์โค้ดด้วยกล้อง">📷</button>
+          </div>
+          <div class="chips" id="categoryChips"></div>
+          <div class="grid" id="productGrid"></div>
+          <div class="empty" id="productEmpty" hidden>ยังไม่มีสินค้า — ไปที่แท็บ “สินค้า” เพื่อเพิ่ม</div>
+        </div>
+
+        <aside class="cart" id="cartPanel">
+          <div class="cart-head">
+            <h2>ตะกร้า <span class="count" id="cartCount">0</span></h2>
+            <button class="link danger" id="clearCartBtn">ล้าง</button>
+            <button class="link only-mobile" id="closeCartBtn">ปิด ✕</button>
+          </div>
+          <ul class="cart-list" id="cartList"></ul>
+          <div class="cart-empty" id="cartEmpty">แตะสินค้าเพื่อเพิ่มลงตะกร้า</div>
+          <div class="cart-foot">
+            <div class="row"><span>ยอดรวม</span><span id="subtotalTxt">฿0.00</span></div>
+            <div class="row clickable" id="discountRow"><span>ส่วนลด <small class="muted">(แตะเพื่อแก้)</small></span><span id="discountTxt">-฿0.00</span></div>
+            <div class="row" id="vatRow"><span id="vatLabel">VAT 7%</span><span id="vatTxt">฿0.00</span></div>
+            <div class="row total"><span>สุทธิ</span><span id="totalTxt">฿0.00</span></div>
+            <div class="btn-row">
+              <button class="btn ghost" id="holdBtn">พักบิล</button>
+              <button class="btn ghost" id="recallBtn">เรียกบิล <span class="badge" id="heldCount">0</span></button>
+            </div>
+            <button class="btn primary big" id="payBtn" disabled>ชำระเงิน</button>
+          </div>
+        </aside>
+      </div>
+
+      <button class="cart-fab only-mobile" id="cartFab">
+        <span>🧺 <b id="fabCount">0</b> รายการ</span>
+        <b id="fabTotal">฿0.00</b>
+      </button>
+    </section>
+
+    <!-- ===== บิล ===== -->
+    <section class="view" id="view-bills">
+      <div class="page-head">
+        <h2>ประวัติการขาย</h2>
+        <input type="date" id="billDate" />
+      </div>
+      <div class="summary-cards" id="billSummary"></div>
+      <ul class="bill-list" id="billList"></ul>
+      <div class="empty" id="billEmpty" hidden>ไม่มีบิลในวันที่เลือก</div>
+    </section>
+
+    <!-- ===== สินค้า ===== -->
+    <section class="view" id="view-products">
+      <div class="page-head">
+        <h2>สินค้า &amp; สต๊อก</h2>
+        <button class="btn primary" id="addProductBtn">+ เพิ่มสินค้า</button>
+      </div>
+      <div class="search-row">
+        <input type="search" id="prodSearch" placeholder="ค้นหาสินค้า" />
+        <select id="stockFilter">
+          <option value="all">ทั้งหมด</option>
+          <option value="low">ใกล้หมด</option>
+          <option value="out">หมดสต๊อก</option>
+        </select>
+      </div>
+      <ul class="prod-list" id="prodList"></ul>
+    </section>
+
+    <!-- ===== รายงาน ===== -->
+    <section class="view" id="view-reports">
+      <div class="page-head">
+        <h2>รายงานยอดขาย</h2>
+        <select id="reportRange">
+          <option value="today">วันนี้</option>
+          <option value="7">7 วันล่าสุด</option>
+          <option value="30">30 วันล่าสุด</option>
+          <option value="month">เดือนนี้</option>
+        </select>
+      </div>
+      <div class="summary-cards" id="reportCards"></div>
+      <div class="card">
+        <h3>ยอดขายรายวัน</h3>
+        <div class="bars" id="dailyBars"></div>
+      </div>
+      <div class="card">
+        <h3>สินค้าขายดี</h3>
+        <ol class="rank" id="topProducts"></ol>
+      </div>
+      <div class="card">
+        <h3>ช่องทางชำระเงิน</h3>
+        <div id="payBreakdown"></div>
+      </div>
+      <button class="btn ghost full" id="exportCsvBtn">⬇️ ส่งออกยอดขาย (CSV)</button>
+    </section>
+
+    <!-- ===== ตั้งค่า ===== -->
+    <section class="view" id="view-settings">
+      <div class="page-head"><h2>ตั้งค่าร้าน</h2></div>
+      <form class="card form" id="settingsForm">
+        <label>ชื่อร้าน<input name="shopName" required /></label>
+        <label>ที่อยู่ / เบอร์โทร<textarea name="address" rows="2"></textarea></label>
+        <label>เลขประจำตัวผู้เสียภาษี<input name="taxId" inputmode="numeric" /></label>
+        <label>พร้อมเพย์ (เบอร์โทร หรือ เลขบัตร ปชช./นิติบุคคล)
+          <input name="promptpay" inputmode="numeric" placeholder="เช่น 0812345678" />
+        </label>
+        <div class="two">
+          <label>ภาษีมูลค่าเพิ่ม
+            <select name="vatMode">
+              <option value="none">ไม่คิด VAT</option>
+              <option value="include">รวมในราคาแล้ว</option>
+              <option value="exclude">บวกเพิ่มจากราคา</option>
+            </select>
+          </label>
+          <label>อัตรา VAT (%)<input name="vatRate" type="number" step="0.01" min="0" /></label>
+        </div>
+        <label>เตือนสต๊อกเมื่อเหลือไม่เกิน<input name="lowStock" type="number" min="0" /></label>
+        <label>ข้อความท้ายใบเสร็จ<input name="footer" /></label>
+        <button class="btn primary" type="submit">บันทึก</button>
+      </form>
+
+      <div class="card">
+        <h3>หมวดหมู่สินค้า</h3>
+        <div class="chips wrap" id="catManage"></div>
+        <div class="search-row">
+          <input id="newCatInput" placeholder="ชื่อหมวดใหม่" />
+          <button class="btn" id="addCatBtn">เพิ่ม</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>ข้อมูล</h3>
+        <p class="muted">ข้อมูลทั้งหมดเก็บอยู่ในเครื่องนี้ (ใช้งานได้แม้ไม่มีอินเทอร์เน็ต) ควรสำรองข้อมูลเป็นประจำ</p>
+        <div class="btn-col">
+          <button class="btn ghost" id="backupBtn">💾 สำรองข้อมูล (ไฟล์ JSON)</button>
+          <label class="btn ghost file-btn">📂 กู้คืนจากไฟล์<input type="file" id="restoreInput" accept="application/json" hidden /></label>
+          <button class="btn ghost" id="demoBtn">✨ ใส่สินค้าตัวอย่าง</button>
+          <button class="btn danger-ghost" id="resetBtn">🗑️ ล้างข้อมูลทั้งหมด</button>
+        </div>
+      </div>
+      <p class="muted center small">เคล็ดลับ: เปิดในเบราว์เซอร์มือถือ แล้วเลือก “เพิ่มไปยังหน้าจอโฮม” เพื่อใช้งานเหมือนแอป</p>
+    </section>
+  </main>
+
+  <nav class="tabbar">
+    <button class="tab active" data-view="sell"><span>🧾</span>ขาย</button>
+    <button class="tab" data-view="bills"><span>📋</span>บิล</button>
+    <button class="tab" data-view="products"><span>📦</span>สินค้า</button>
+    <button class="tab" data-view="reports"><span>📊</span>รายงาน</button>
+    <button class="tab" data-view="settings"><span>⚙️</span>ตั้งค่า</button>
+  </nav>
+
+  <!-- ===== Modal ===== -->
+  <div class="modal" id="modal" hidden>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-head">
+        <h3 id="modalTitle"></h3>
+        <button class="icon-btn" id="modalClose" aria-label="ปิด">✕</button>
+      </div>
+      <div class="sheet-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+  <div id="printArea"></div>
+
+  <script src="vendor/qrcode.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

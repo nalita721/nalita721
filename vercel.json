@@ -1,9 +1,29 @@
 {
+  "redirects": [
+    {
+      "source": "/pos",
+      "destination": "/pos/",
+      "permanent": false
+    }
+  ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/pos/",
+      "destination": "/pos/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ],
   "crons": [
-    { "path": "/api/send-reminders?slot=morning", "schedule": "0 1 * * *" },
-    { "path": "/api/send-reminders?slot=evening", "schedule": "0 12 * * *" }
+    {
+      "path": "/api/send-reminders?slot=morning",
+      "schedule": "0 1 * * *"
+    },
+    {
+      "path": "/api/send-reminders?slot=evening",
+      "schedule": "0 12 * * *"
+    }
   ]
 }
