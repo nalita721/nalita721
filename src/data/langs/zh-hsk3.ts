@@ -854,7 +854,7 @@ const content: LangLevelContent = {
           pattern: 'A 比 B + 更/还 + Adj',
           example: '坐地铁比坐公共汽车更快。',
           exampleReading: 'Zuò dìtiě bǐ zuò gōnggòng qìchē gèng kuài.',
-          exampleTh: 'นั่งรถไฟใต้ดินเร็วกว่านั่งรถเมล์',
+          exampleTh: 'นั่งรถไฟใต้ดินเร็วกว่านั่งรถเมล์อีก',
           highlight: '更快',
           check: {
             sentence: '他的个子很高，他弟弟比他___高。(เขาตัวสูง น้องชายของเขาสูงกว่าเขาอีก)',
@@ -1495,7 +1495,7 @@ const content: LangLevelContent = {
         },
         {
           id: 'hsk3-g10-q5',
-          sentence: '我想找几本___中国历史的书。(ฉันอยากหาหนังสือเกี่ยวกับประวัติศาสตร์จีนสักหลายเล่ม)',
+          sentence: '我想找几本___中国历史的书。(ฉันอยากหาหนังสือเกี่ยวกับประวัติศาสตร์จีนสักสองสามเล่ม)',
           choices: ['为了', '对', '跟', '关于'],
           answerIndex: 3,
           explanation: 'บอกหัวข้อของหนังสือ ใช้ 关于',
