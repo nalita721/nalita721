@@ -71,3 +71,14 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-14 · Day 12 · N5 vocabulary
+
+- Checked: `src/data/langs/ja-n5-vocab-a.ts` (371 words) and `src/data/langs/ja-n5-vocab-b.ts` (350 words) — kana readings of every word and example (irregular readings, sound changes, small っ/ゃ, long vowels, particles), romaji, Thai meanings and translations, part of speech and verb groups, mnemonics, duplicates within and across both files (none beyond the known 十/時). Items already in the open 2026-10-31 content PR were not repeated.
+- Fix `n5a-283` 太い: meaning "อ้วน หนา (เส้น)" put "fat" first, but a fat person is 太っている, not 太い; → "หนา ใหญ่ (เส้น ลำต้น แขนขา)".
+- Fix `n5b-177` カタカナ: mnemonic glossed かた as "hard/angular"; it is 片 (fragment — the letters come from pieces of kanji); corrected.
+- Fix `n5b-176` ひらがな: mnemonic glossed ひら as "smooth/curved"; it is 平 (plain/ordinary); corrected.
+- Fix `n5b-283` 開ける: mnemonic stated "~ける = someone does it" as a rule, which is false in general (焼ける, 抜ける are intransitive); → states the pattern (ใคร) が (สิ่งของ) を 開ける for this word.
+- Fix `n5b-71` いす: mnemonic transliterated す as "สึ" (the files use สุ for す, ทสึ for つ); → "อิสุ".
+- Improvement `n5a-10` いただきます: Thai example "ขอทานแล้วนะคะ" can read as "beg" (ขอทาน); → "ขอรับประทานนะคะ", matching the meaning field.
+- Needs human review: none new. Note: last check's "n5b-79 ストーブ" is n5b-78 by the counter (n5b-79 is 電話).
