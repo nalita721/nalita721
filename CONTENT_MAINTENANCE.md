@@ -71,3 +71,18 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-17 · Day 1 · English vocabulary, chapters 8–13
+
+- Checked: `src/data/vocabulary.ts` chapters marketing, IT, logistics, real estate, manufacturing and advanced business C1 (240 words): Thai meanings in the business sense, part of speech, Thai pronunciation, mnemonic roots, examples and their Thai, synonyms/antonyms; duplicate terms across all 520 words (none).
+- Fix `it-6` backup example: "Please backup your files" used the noun as a verb; → "back up".
+- Fix `log-27` tariff mnemonic: the town of Tarifa story is folk etymology; → Arabic ta'rif (notification) via Italian tariffa.
+- Fix `log-9` dispatch mnemonic: not from pactum; → dis- + Italian impacciare (hinder) = remove what hinders.
+- Fix `re-26` foreclosure mnemonic: for- is Old French "out" (forclore), not fore = "in advance"; corrected.
+- Fix `c1-4` contingency mnemonic: Latin tingere means "dye"; the root is contingere (con + tangere "touch"); corrected.
+- Fix `it-31` cybersecurity pronunciation: "ซี-คิว" → "ซิ-เคียว" (/sɪˈkjʊr-/).
+- Fix `mkt-12` demographic: meaning "ข้อมูลประชากร" is demographics, and the example uses the adjective; → pos "n./adj.", "กลุ่มประชากร/เกี่ยวกับประชากร", Thai example to match.
+- Fix `mf-19` maintenance example: a machine is not "closed"; → "The machine is down for scheduled maintenance." with matching Thai.
+- Fix pos n./v. or v./n. with only one meaning: `it-29` malfunction, `mkt-28` segment, `re-18` sublease — the missing sense added.
+- Improvement `mkt-16` impression: meaning gave only the ad-metric sense; → "การแสดงผลโฆษณา (ต่อครั้ง)/ความประทับใจ".
+- Needs human review: `c1-4` contingency meaning fits only "contingency plan"; `c1-24` stipulate straw story is doubtful; `c1-25` conglomerate (noun) ends "-เริท" not "-เรท"; `mf-8` capacity mnemonic splits "city"; `it-36` deploy, `log-40` expedite, `log-2` inventory, `log-7` logistics roots loosely stated; `it-27` configure "เกอร์" vs /ɡjər/; `log-34` just-in-time meaning written as a noun; `log-33` Thai repeats คำสั่งซื้อ; `log-24` freight cost overlaps `log-3` freight; `mf-3`, `mf-5` examples slightly stilted. Left as is.
