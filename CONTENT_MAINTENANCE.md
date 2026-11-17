@@ -71,3 +71,16 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-18 · Day 2 · English grammar
+
+- Checked: `src/data/grammar.ts` — all 11 topics (word-form, tense, preposition, conjunction, relative-clause, comparative, basic-sentence, present-tenses, inversion, mixed-conditionals, cleft-sentences): every key point, example and Thai, check, writing prompt and practice question (keys, single defensible answer, explanations).
+- Fix two defensible answers (distractor replaced, key unchanged): `inv-1` "The company had never faced…" was also correct → "Never" moved into the stem; `inv-7` "could we" also correct → "we can"; `mix-9` "would have been finished by now" also correct → "will be"; `clft-9` "who" is allowed by the lesson for people → "what"/"whose"; `tn-6` "opens" (scheduled present simple) also correct → "open"; `bs-1`, `bs-3`, `bs-7`, `pt-3`, `pt-9` the past-tense distractor (reviewed, worked, placed, exported, announced) was also correct with no past time marker → "to review", "to work", "to place", "exporting", "announcing".
+- Fix `mix-2`: "he would catch the error before submission" also worked as a general statement; stem → "…the error in last week's report"; explanation and `mix-7` explanation called "If he were…" "a condition that is always true"; → "unreal in the present".
+- Fix `pt-3` explanation: "every year" is a repeated action, not a general truth; reworded.
+- Fix inversion intro: "คำจำกัดความ" means "definition"; → "คำที่มีความหมายจำกัด".
+- Fix `cj-w3` hint "..., however, ..." was a comma splice the lesson warns against; → "...; however, ...".
+- Fix `wf-4` explanation: "ประธานรอง" (secondary subject) → "แกนของประธานในประโยค".
+- Fix basic-sentence tip: "he/she/it always adds -s" holds only in the present simple; now says so.
+- Improvement word-form suffix rule: the caution now also names -al/-ive nouns (approval, proposal, representative, initiative), common TOEIC Part 5 traps.
+- Needs human review: `pp-6` "at the third floor conference room" is arguably acceptable besides "in"; `bs-10` "attend orientation this week" reads oddly in the simple present; word-form possessive point says a noun follows "always" (an adjective may come between); cleft tip says It is…that emphasises only nouns (key point 5 also covers time/place phrases); `rc-8` could note formal "whom"; suffix example Thai "อนุมัติแนวทางแก้ไขที่ได้ผลอย่างรวดเร็ว" is ambiguous. Left as is.
