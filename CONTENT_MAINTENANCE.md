@@ -71,3 +71,15 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-16 · Day 0 · English vocabulary, chapters 1–7
+
+- Checked: `src/data/vocabulary.ts` chapters travel, office-hr, meetings, communication, health-safety, customer-service and finance (280 words): Thai meanings in the business sense, part of speech, Thai pronunciation, mnemonic roots, examples and their Thai, synonyms/antonyms. Items already in the unpushed 2026-11-02 branch were not repeated.
+- Fix `trv-10` refund mnemonic: root is Latin refundere "pour back" (fundere), not fund = capital; corrected.
+- Fix `trv-2` reservation mnemonic: glossed English serve as "สงวนไว้"; the root is servare "keep"; corrected.
+- Fix `hs-34` hygiene mnemonic: said the word comes from the goddess Hygieia; it comes from Greek hygieinē (from hygiēs "healthy"), the same root as her name; corrected.
+- Fix `hs-9` inspect example: "Inspectors inspect the equipment" was redundant; → "Safety officers inspect the equipment every month." with matching Thai.
+- Fix `hs-3` evacuate Thai example: "อาคารถูกอพยพ" (the building was evacuated) is a calque; people are evacuated → "มีการอพยพผู้คนออกจากอาคาร…".
+- Fix `cs-26` bargain pronunciation: "บาร์-เกน" → "บาร์-กิน" (/ˈbɑːrɡɪn/); mnemonic keeps the bar + gain spelling hook but no longer claims it sounds like "gain".
+- Improvement `trv-9` connecting flight: Thai example said ต่อเครื่อง twice; → "เรามีเวลาแวะพักสองชั่วโมงก่อนขึ้นเที่ยวบินต่อเครื่อง".
+- Needs human review: `trv-26` excursion is glossed ทัศนศึกษา (educational trip), while TOEIC usage is a short leisure trip; `trv-1` itinerary pronunciation 4th syllable "รา" vs US /ɛ/. Left as is.
