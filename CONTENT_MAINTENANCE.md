@@ -71,3 +71,19 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-02 · Day 0 · English vocabulary, chapters 1–7
+
+- Checked: `src/data/vocabulary.ts` chapters travel, office-hr, meetings, communication, health-safety, customer-service and finance (280 words): Thai meanings in the business sense, part of speech, Thai pronunciation, mnemonic roots, examples and their Thai; duplicate ids/terms across all 520 words (none).
+- Fix mnemonic roots that were wrong: `ohr-8` resign (re- = back, not "again"), `ohr-14` proficient (pro- = forward, from facere), `ohr-21` delegate (legare "send as envoy", not "leg"), `ohr-33` incentive (from canere "sing", not "stimulate"), `ohr-37` colleague (legare "appoint", not "bind"), `ohr-38` cubicle (cubiculum/cubare "lie down", not "cube"; kept as a picture aid), `mtg-26` deliberate (librare, not "liberate"), `mtg-29` consult (consulere; there is no Latin "sulere = sit"), `trv-4` delay (Old French laier "leave", not "lay"), `hs-6` injury (injuria first meant "a wrong", not bodily harm), `cs-25` estimate (from aestimare like esteem, not from esteem).
+- Fix `mtg-26` deliberate: pos "v./adj." with only the verb meaning (the adjective means "intentional" and is pronounced differently); → "v.".
+- Fix `trv-29` embark: meaning "เริ่มออกเดินทาง" did not cover the main sense used in its own example (board a ship); → "ขึ้นเรือ/ขึ้นเครื่องบิน; เริ่มต้น (embark on)".
+- Fix `fin-17` amortize: meaning and example used ตัดจำหน่าย (writing off assets) for a loan; → paying off in installments (accounting sense kept).
+- Fix `fin-11` installment: meaning "การผ่อนชำระ" (paying by installments) → "งวดการผ่อนชำระ, เงินผ่อนแต่ละงวด" (one payment).
+- Fix `fin-36` forecast: pos n./v. but only the noun meaning; verb added.
+- Fix `cs-36` gift certificate: pronunciation ended in the verb form "-เคท"; → "-เคิท".
+- Fix `com-36` versatile: Thai example used ใช้งานได้ (for objects) for a person; → "มีความสามารถรอบด้าน".
+- Fix `com-10` carry out: Thai "แบบสำรวจ" (the questionnaire) where the sentence means the act of surveying; → "การสำรวจ".
+- Improvement `fin-8` deficit: meaning "ขาดดุล" read as a verb; → "การขาดดุล, ยอดขาดดุล" (noun, matching pos).
+- Needs human review: `fin-11` installment mnemonic (install) is folk etymology (Anglo-French estaler); `hs-11` fire extinguisher pronunciation drops /s/; `cs-27` brochure stress; `trv-19` example uses พนักงานต้อนรับ for concierge; `mtg-15` "gave a unanimous approval"; synonyms/antonyms `ohr-3`, `ohr-11`, `ohr-2` are loose. Left as is.
+- Note: the push of the 2026-11-01 branch was refused (403, Claude has no GitHub access to the repo); this run is committed locally as well until access is restored.
