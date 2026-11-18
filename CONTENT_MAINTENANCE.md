@@ -71,3 +71,10 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-13 · Day 11 · Japanese kana + N5 kanji
+
+- Checked: `src/data/langs/ja-kana.ts` (every hiragana and katakana romaji in the basic, voiced and combined rows, every tip) and `src/data/langs/ja-n5-kanji.ts` (all 109 kanji, no duplicates: stroke counts, on/kun readings and okurigana, Thai meanings, every example reading including irregular and rendaku ones such as 今日, 下手, 三百 さんびゃく, 入口 いりぐち, 中古 ちゅうこ). Items already in the open 2026-10-30 content PR were not repeated.
+- Fixes: none needed — no errors found.
+- Improvement: katakana tip シ/ツ said "ขีดสั้นเรียงแนวนอน" for シ and "เรียงแนวตั้ง" for ツ, which reads as the layout of the two dashes and is the reverse of it (シ's dashes are stacked on the left, ツ's sit side by side on top). Rewritten to state both the position of the dashes and the direction each one points.
+- Needs human review: none new.
