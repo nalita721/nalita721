@@ -1645,7 +1645,7 @@ const grammar: LangGrammarTopic[] = [
     tipTh: 'こと・前に・つもり・のが ทั้งหมดต่อจากรูปพจนานุกรม (～る/～う) — มีแค่ 後で ที่ใช้รูป た',
     questions: [
       { id: 'n5-g12-q1', sentence: 'わたしは ピアノを ___ ことが できます。', choices: ['ひく', 'ひいて', 'ひき', 'ひいた'], answerIndex: 0, explanation: 'ことができる ต่อจากรูปพจนานุกรม: ひく' },
-      { id: 'n5-g12-q2', sentence: '寝る ___、シャワーを あびます。(ก่อนนอนอาบน้ำ)', choices: ['あとで', '前に', 'から', 'とき'], answerIndex: 1, explanation: 'ก่อน... = V-る + 前に' },
+      { id: 'n5-g12-q2', sentence: '寝る ___、シャワーを あびます。(ก่อนนอนอาบน้ำ)', choices: ['あとで', '前に', 'ながら', 'のが'], answerIndex: 1, explanation: 'ก่อน... = V-る + 前に' },
       { id: 'n5-g12-q3', sentence: '夏休みは 国へ ___ つもりです。', choices: ['帰って', '帰り', '帰る', '帰った'], answerIndex: 2, explanation: 'つもり ต่อจากรูปพจนานุกรม: 帰る' },
       { id: 'n5-g12-q4', sentence: 'わたしは スキー ___ できません。', choices: ['を', 'が', 'に', 'の'], answerIndex: 1, explanation: 'N + が + できる' },
       { id: 'n5-g12-q5', sentence: '食事の ___、くすりを 飲んで ください。(ก่อนอาหาร)', choices: ['前に', '前', '前で', '前を'], answerIndex: 0, explanation: 'ก่อน... = N の 前に' },
@@ -1788,7 +1788,7 @@ const grammar: LangGrammarTopic[] = [
     tipTh: 'คำแสดงความรู้สึก/ความสามารถ ใช้ が ไม่ใช้ を · 2 สิ่ง → どちら / のほうが · 3 สิ่งขึ้นไป → 何・だれ・どこ + いちばん',
     questions: [
       { id: 'n5-g13-q1', sentence: 'わたしは スポーツ ___ 好きです。', choices: ['を', 'で', 'が', 'に'], answerIndex: 2, explanation: '好き ใช้คู่กับ が' },
-      { id: 'n5-g13-q2', sentence: 'リンさんは 英語が とても ___ です。(เก่งมาก)', choices: ['上手', '好き', '下手', 'ほしい'], answerIndex: 0, explanation: 'เก่ง = 上手' },
+      { id: 'n5-g13-q2', sentence: 'リンさんは 英語が とても ___ です。(เก่งมาก)', choices: ['上手', '大きい', '下手', 'ほしい'], answerIndex: 0, explanation: 'เก่ง = 上手' },
       { id: 'n5-g13-q3', sentence: '新幹線は バス ___ 速いです。(เร็วกว่ารถบัส)', choices: ['のほう', 'より', 'でも', 'まで'], answerIndex: 1, explanation: 'กว่า = より' },
       { id: 'n5-g13-q4', sentence: 'A：夏と 冬と どちらが 好きですか。B：夏の ___ が 好きです。', choices: ['より', 'どちら', 'いちばん', 'ほう'], answerIndex: 3, explanation: 'ตอบคำถาม どちら ใช้ N のほうが' },
       { id: 'n5-g13-q5', sentence: 'A：1年で ___ が いちばん 寒いですか。B：1月です。', choices: ['いつ', 'どこ', 'だれ', 'どちら'], answerIndex: 0, explanation: 'คำตอบเป็นเวลา (เดือน) ถามด้วย いつ' },
@@ -2160,7 +2160,7 @@ const mock: LangMockExam = {
           prompt: 'あの ひとは 【わたしの ははの おとうと】です。',
           choices: ['あの ひとは わたしの おばさんです。', 'あの ひとは わたしの おじいさんです。', 'あの ひとは わたしの あにです。', 'あの ひとは わたしの おじさんです。'],
           answerIndex: 3,
-          explanationTh: 'น้องชายของแม่ = ลุง/น้า/อา (ผู้ชาย) = おじさん (おばさん = ป้า/น้า ผู้หญิง)',
+          explanationTh: 'น้องชายของแม่ = น้า (ผู้ชาย) — ภาษาญี่ปุ่นเรียก ลุง/น้า/อา ผู้ชายรวมกันว่า おじさん (おばさん = ป้า/น้า/อา ผู้หญิง)',
         },
       ],
     },

@@ -71,3 +71,12 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-15 · Day 13 · N5 grammar + mock + HSK 4 vocabulary
+
+- Checked: `src/data/langs/ja-n5.ts` — all 15 grammar topics (key points, explanations, examples and readings, checks, practice questions) and the full mock (keys, ★ word-order items, passages, arithmetic, times and days, Thai explanations, pass rules). Items already in the open 2026-11-01 content branch were not repeated.
+- Fix `n5-m-v4-q3` explanation: said the mother's younger brother is "ลุง/น้า/อา"; in Thai he is น้า; now says so and that Japanese uses おじさん for all of them.
+- Fix `n5-g12-q2`: distractors とき and から (寝るとき／寝るから、シャワーをあびます) are also natural Japanese; → ながら, のが (key 前に unchanged).
+- Fix `n5-g13-q2`: distractor 好き (英語がとても好きです) is also natural; → 大きい (key 上手 unchanged).
+- Backlog (Sunday): HSK 4 vocabulary part 1 completed — new file `src/data/langs/zh-hsk4-vocab-c.ts` with words h4-201 … h4-300 in chapters 9–12 (connecting words; adverbs of tone and frequency; descriptive adjectives; measure words and everyday verbs), same format as parts A and B. A separate file so it does not depend on the still-open PRs with h4-1 … h4-200; checked against HSK 1–3 and h4-1 … h4-200 for repeats (none); pinyin cross-checked syllable by syllable with pypinyin. Not shown in the app yet. Progress: 300 of 300 words for part 1 (once the three files are merged).
+- Needs human review: HSK 4 level of 与, 而, 例如, 只要, 台 (measure word) and 宽 should be checked against the official HSK 2.0 list; mnemonics for 浪漫 (sound link to "romance") and 马虎 (told as a folk tale) are memory hooks, not etymology; a native-speaker spot-check of the 100 new examples.
