@@ -71,3 +71,11 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-12 · Day 10 · HSK 3
+
+- Checked: `src/data/langs/zh-hsk3-vocab.ts` (all 300 words: pinyin syllable by syllable in word and example, cross-checked with pypinyin; Thai, part of speech, mnemonics, examples) and `src/data/langs/zh-hsk3.ts` (grammar topics hsk3-g1 … g10 with every key point, example, check and question; the full mock: listening l1–l40, reading r1–r30, writing w1–w10, keys, true/false direction, explanations, numbers). Items already fixed in the open 2026-10-29 content PR were not repeated.
+- Fix `hsk3-g10-q5` Thai cue: "สักหลายเล่ม" pairs สัก (a small amount) with หลาย (many) and misrenders 几本; → "สักสองสามเล่ม".
+- Fix `h3-49` 用 mnemonic: "โยฺ่ง" had a stray phinthu (ฺ is used in this file only for cluster sounds); → "โย่ง".
+- Improvement `hsk3-g6` key point "A 比 B 更/还 + Adj": the Thai example dropped the "even more" sense of 更 that the key point teaches; → "นั่งรถไฟใต้ดินเร็วกว่านั่งรถเมล์อีก".
+- Needs human review: `hsk3-g2` negation check "这个问题还没被解决" is correct for the rule (没 before 被) but sounds textbook-made (natives say 还没(有)解决); `h3-38` example "这个楼" — 这座楼/这栋楼 is more standard; `h3-17` 腿 mnemonic treats the phonetic 退 as meaning. Left as is.
