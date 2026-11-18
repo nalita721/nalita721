@@ -203,7 +203,7 @@ export const listeningLessons: ListeningLesson[] = [
       {
         label: 'ข้อเสนอและคำขอร้อง',
         explanation:
-          '"Why don\'t we...?" "How about...?" คือ "การชวน" ไม่ได้ถามเหตุผล ส่วน "Could you...?" "Would you mind...?" คือการขอร้อง คำตอบที่ดีคือการตอบรับหรือปฏิเสธอย่างสุภาพ เช่น "Sure." "Good idea." "Sorry, I\'m busy." — ระวังคำตอบที่ขึ้นต้นด้วย Because',
+          '"Why don\'t we...?" "How about...?" คือ "การชวน" ไม่ได้ถามเหตุผล ส่วน "Could you...?" "Would you mind...?" คือการขอร้อง คำตอบที่ดีคือการตอบรับหรือปฏิเสธอย่างสุภาพ เช่น "Sure." "Good idea." "Not at all." (ตอบรับ Would you mind...?) "Sorry, I\'m busy." — ระวังคำตอบที่ขึ้นต้นด้วย Because',
         pattern: 'Why don\'t we...? = ชวน ≠ ถามเหตุผล',
         exampleEn: 'Why don\'t we take a short break? — That sounds good.',
         exampleTh: 'พักกันสักหน่อยไหม — ฟังดูดีนะ',

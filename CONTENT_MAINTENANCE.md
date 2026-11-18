@@ -71,3 +71,10 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-19 · Day 3 · English listening + Mock set 1 listening
+
+- Checked: `src/data/listeningLessons.ts` (all 4 strategy lessons: tips, examples, quick checks, exam-format facts) and Mock set 1 listening in `src/data/fullMockExam.ts` (Part 1 L1-1–L1-6, Part 2 L2-1–L2-25, Part 3 L3-1–L3-13, Part 4 L4-1–L4-10: keys against scripts, single defensible answer, Thai explanations, numbers and times).
+- Fixes: none needed — no errors found.
+- Improvement: Part 2 tip on offers and requests did not teach "Not at all." as the yes to "Would you mind…?", which the mock uses in L2-25; added.
+- Needs human review: `L2-25-q` distractor "The numbers looked wrong." and `L2-11-q` distractor "I haven't met her." could be heard as indirect replies (weak); `L2-16` explanation "หารหัส" may be misread (หาร = divide), "หารหัสผ่าน" is clearer. Left as is.
