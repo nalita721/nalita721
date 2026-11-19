@@ -71,3 +71,11 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-20 · Day 4 · English reading + Mock set 1 reading
+
+- Checked: `src/data/reading.ts` (all 10 passages, 37 questions: keys against passages, cross-passage dates and fees, Part 6 blanks) and Mock set 1 reading in `src/data/fullMockExam.ts` (Part 5 R5-1 – R5-30, Part 6 R6-1 – R6-4, Part 7 single, double and triple passages; 100 questions). Items already in the open 2026-10-23 content PR were not repeated.
+- Fix `R7-T2-q4`: distractor "Monday, April 21" — with Thursday, April 18 in the passage, April 21 is a Sunday; → "Monday, April 22".
+- Fix `R6-3-q1`: "Due to a schedule conflict" is also natural, so "schedule" was a second answer; → "scheduler" (key "scheduling" unchanged).
+- Improvement `r7-8-4`: distractor "November 17 at 2:00 p.m." named a session that does not exist; → "November 17 at 10:00 a.m." (Mr. Lee's real second choice, a stronger distractor for "most want").
+- Needs human review: `R6-2` blank 2 "equipment, supported by certified personal trainers" reads oddly (trainers do not support equipment); `R7-T1` letter signed "Mr. Nakamura" (a writer does not sign with his own title). Left as is.
