@@ -71,3 +71,15 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-21 · Day 5 · Mock sets 2 and 3
+
+- Checked: `src/data/fullMockExamSet2.ts` and `src/data/fullMockExamSet3.ts`, Parts 1–7: every key against its script or passage, single defensible answer, numbers, dates and weekdays, speaker roles, item counts (100 + 100 per set), Thai Part 1 descriptions. Items already in the open 2026-10-24 content PR were not repeated.
+- Fix `S2-L1-3-q` distractor: "stacked inside a warehouse shelf" → "on a warehouse shelf".
+- Fix `S2-R5-1-q`: with the key filled in the sentence read "The finalization of the merger will be finalized"; → "The __ of the merger is expected by the end of the year." (key unchanged).
+- Fix `S2-L3-8` script: "register two tickets" is not natural English; → "register two guests".
+- Fix `S2-L3-10-q3`: question "What does the woman ask about the aisles?" did not match its choices (requests); → "What does the woman ask the man to do about the aisles?".
+- Fix `S3-R7-S10-q1`: "What position is being recommended for?" had no subject; → "What position is Mr. Saelee being recommended for?".
+- Fix `S3-L2-23-q`: distractor "Maintenance is on the third floor." was a plausible indirect answer to "How do I submit a maintenance request?"; → "The maintenance crew was very helpful.".
+- Improvement `S2-R7-S3`: "from March 4 to March 6" → "from March 4 through March 6", so the keyed "Three days" is unambiguous.
+- Needs human review: `S2-L1-2`/`S2-L1-3` transcripts differ slightly from the keyed choices ("late at night", "the loading dock"). Left as is.
