@@ -157,7 +157,7 @@ const part2Data: { script: string; choices: string[]; answerIndex: number }[] = 
   { script: 'Can you recommend a reliable courier service?', choices: ["Try SpeedEx, they're very reliable.", 'I received the package.', 'The course starts Monday.'], answerIndex: 0 },
   { script: 'Who approved the budget for the trade show booth?', choices: ['The marketing director did.', 'The booth looked great.', 'We approved of the idea.'], answerIndex: 0 },
   { script: "Isn't the quarterly report due this Friday?", choices: ['Yes, we should finish it soon.', 'The report was interesting.', "It's due for renewal."], answerIndex: 0 },
-  { script: 'How do I submit a maintenance request?', choices: ['Just fill out the online form.', 'The request was submitted.', 'Maintenance is on the third floor.'], answerIndex: 0 },
+  { script: 'How do I submit a maintenance request?', choices: ['Just fill out the online form.', 'The request was submitted.', 'The maintenance crew was very helpful.'], answerIndex: 0 },
   { script: 'Would you like a window or an aisle seat?', choices: ['A window seat, please.', 'The seat is broken.', 'I sat by the window.'], answerIndex: 0 },
   { script: 'What time should we expect the auditors tomorrow?', choices: ['Around nine in the morning.', 'The audit went well.', 'We expect good news.'], answerIndex: 0 },
 ]
@@ -702,7 +702,7 @@ Sincerely,
 Piyaporn Wattana, Finance Manager`,
     ],
     qs: [
-      { question: 'What position is being recommended for?', choices: ['Marketing Manager', 'Senior Accountant', 'Operations Director', 'Sales Executive'], answerIndex: 1 },
+      { question: 'What position is Mr. Saelee being recommended for?', choices: ['Marketing Manager', 'Senior Accountant', 'Operations Director', 'Sales Executive'], answerIndex: 1 },
       { question: 'What achievement is mentioned?', choices: ['Winning an industry award', 'Reducing departmental expenses by 12 percent', 'Publishing a finance textbook', 'Doubling the company\'s revenue'], answerIndex: 1 },
       { question: 'What else did Mr. Saelee do?', choices: ['Hired new managers', 'Trained two junior accountants', 'Relocated the office', 'Negotiated a merger'], answerIndex: 1 },
     ],

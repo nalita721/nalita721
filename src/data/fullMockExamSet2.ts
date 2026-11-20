@@ -62,7 +62,7 @@ const part1: ExamItem[] = [
           'Workers are loading boxes onto a truck at a loading dock.',
           'A truck is parked empty near the entrance.',
           'A worker is signing a delivery form indoors.',
-          'Boxes are being stacked inside a warehouse shelf.',
+          'Boxes are being stacked on a warehouse shelf.',
         ],
         answerIndex: 0,
       },
@@ -270,7 +270,7 @@ const part3Data: ConvoData[] = [
   },
   {
     script:
-      'Woman: I\'d like to register two tickets for the charity gala next month.\n' +
+      'Woman: I\'d like to register two guests for the charity gala next month.\n' +
       'Man: Great, would you like the standard or VIP table?\n' +
       'Woman: The VIP table, please. Does that include a reserved parking spot?\n' +
       'Man: It does, and I\'ll email your confirmation and payment link shortly.',
@@ -301,7 +301,7 @@ const part3Data: ConvoData[] = [
     qs: [
       { question: 'What is happening tomorrow?', choices: ['A staff meeting', 'A safety inspection', 'A product delivery', 'A company tour'], answerIndex: 1 },
       { question: 'What will the man check?', choices: ['The lighting', 'The fire extinguishers', 'The security cameras', 'The loading dock'], answerIndex: 1 },
-      { question: 'What does the woman ask about the aisles?', choices: ['To paint them', 'To keep them clear of boxes', 'To widen them', 'To add new shelves'], answerIndex: 1 },
+      { question: 'What does the woman ask the man to do about the aisles?', choices: ['To paint them', 'To keep them clear of boxes', 'To widen them', 'To add new shelves'], answerIndex: 1 },
     ],
   },
   {
@@ -475,7 +475,7 @@ export const listeningExamItems: ExamItem[] = [...part1, ...part2, ...part3, ...
 // ============================================================
 
 const part5Data: { sentence: string; choices: string[]; answerIndex: number }[] = [
-  { sentence: 'The __ of the merger will be finalized by the end of the year.', choices: ['finalize', 'finalization', 'finalizing', 'finalized'], answerIndex: 1 },
+  { sentence: 'The __ of the merger is expected by the end of the year.', choices: ['finalize', 'finalization', 'finalizing', 'finalized'], answerIndex: 1 },
   { sentence: 'Please review the attached file __ replying to this email.', choices: ['before', 'despite', 'unless', 'although'], answerIndex: 0 },
   { sentence: 'The technician responded __ to the emergency call.', choices: ['quick', 'quickly', 'quickness', 'quickened'], answerIndex: 1 },
   { sentence: 'Neither the supervisor nor the interns __ informed about the change.', choices: ['was', 'were', 'is', 'be'], answerIndex: 1 },
@@ -616,7 +616,7 @@ Aurora Freight is seeking a Logistics Coordinator to oversee shipment scheduling
   {
     texts: [
       `NOTICE: Elevator Maintenance
-The east elevator will be out of service for scheduled maintenance from March 4 to March 6. During this period, employees are asked to use the west elevator or the stairwell near the lobby. We apologize for any inconvenience and thank you for your patience.`,
+The east elevator will be out of service for scheduled maintenance from March 4 through March 6. During this period, employees are asked to use the west elevator or the stairwell near the lobby. We apologize for any inconvenience and thank you for your patience.`,
     ],
     qs: [
       { question: 'Why is the elevator out of service?', choices: ['It broke down', 'Scheduled maintenance', 'A power outage', 'A safety inspection failed'], answerIndex: 1 },
