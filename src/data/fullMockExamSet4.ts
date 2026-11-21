@@ -158,7 +158,7 @@ const part2Data: { script: string; choices: string[]; answerIndex: number }[] = 
   { script: 'Can I pay for the workshop by credit card?', choices: ["It's held every week.", 'Twelve participants.', 'Yes, we accept all major cards.'], answerIndex: 2 },
   { script: 'The quarterly sales figures look encouraging.', choices: ['Yes, the new campaign really helped.', 'At a quarter past.', 'I figured it out.'], answerIndex: 0 },
   { script: 'Who should I contact about a broken air conditioner?', choices: ["It's too cold in here.", 'Call building maintenance at extension 210.', 'It was installed last year.'], answerIndex: 1 },
-  { script: 'Are you going to the product launch, or are you staying at the office?', choices: ['It launched successfully.', "Yes, I'm going.", 'I have to finish a report here.'], answerIndex: 2 },
+  { script: 'Are you going to the product launch, or are you staying at the office?', choices: ['It launched successfully.', 'At the convention center.', 'I have to finish a report here.'], answerIndex: 2 },
   { script: 'How was the flight from Singapore?', choices: ['Smooth, and we landed early.', 'Gate fifteen.', 'Twice a week.'], answerIndex: 0 },
 ]
 

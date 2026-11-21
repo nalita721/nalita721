@@ -71,3 +71,10 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-22 · Day 6 · Mock set 4 + HSK 4 vocabulary
+
+- Checked: `src/data/fullMockExamSet4.ts`, Parts 1–7: every key against its script or passage, single defensible answer, arithmetic (D1, T1, T2, S10), weekdays against dates (2025), speaker roles, item counts (100 + 100), Thai image descriptions.
+- Fix `S4-L2-24-q`: distractor "Yes, I'm going." still answers "Are you going to the product launch, or are you staying at the office?"; → "At the convention center." (key unchanged).
+- Backlog (Sunday): HSK 4 vocabulary part 2 started — new file `src/data/langs/zh-hsk4-vocab-d.ts` with words h4-301 … h4-400 in chapters 13–16 (food and restaurants; sports, hobbies and entertainment; money and the economy; communication, media and technology), same format as parts A–C. Checked against HSK 1–3 and h4-1 … h4-300 (open PRs) for repeats (none); pinyin cross-checked with pypinyin. Not shown in the app yet. Progress: 100 of 300 words for part 2.
+- Needs human review: `S4-L1-4` distractor "Some pots are hanging on the wall." could be true depending on the kitchen photo; `S4-L4-10` "keep the handout on your seat" can be read as "leave it on your seat"; HSK 4 level of 小吃, 香, 刀, 毛, 响, 占线; h4-350 example 这个跳舞动作 is slightly unnatural; a native-speaker spot-check of the 100 new examples.
