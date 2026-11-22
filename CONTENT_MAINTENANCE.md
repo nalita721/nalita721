@@ -71,3 +71,10 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-23 · Day 7 · Chinese pinyin foundations
+
+- Checked: `src/data/langs/zh-foundations.ts` — all initials and finals (pinyin, Thai approximations, demo characters), the 5 tones, the tone-change rules and every example, all 40 listening-drill items (tone numbers, confusables), basic strokes, stroke-order rules and every radical example (simplified forms). Items already in the open 2026-10-26 content PR were not repeated.
+- Fixes: none needed — no errors found.
+- Improvement: final "o" note said it follows b p m f "only" (เท่านั้น), but o also stands alone (哦 ó); now "o เดี่ยว ๆ มักตามหลัง b p m f (bo po mo fo)".
+- Needs human review: none new (the neutral-tone `written` values mā mā / xiè xiè are covered by the explanation fix in the 2026-10-26 PR).
