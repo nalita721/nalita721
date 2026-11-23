@@ -71,3 +71,12 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-24 · Day 8 · HSK 1
+
+- Checked: `src/data/langs/zh-hsk1.ts` — all 150 words (pinyin syllable by syllable in word and example, 一/不 sandhi, Thai, part of speech, mnemonics and component claims), all 7 grammar topics (key points, examples, checks, practice questions) and the full 40-item mock (keys, true/false direction, picture words, pinyin, Thai explanations, count and pass mark). Items already in the open 2026-10-27 content PR were not repeated.
+- Fix `hsk1-g7` 想 check: distractor 会 (中午你会吃什么？) is also grammatical and taught in the same topic; → 和 (key 想 unchanged).
+- Fix `hsk1-g7-q6`: distractors 会 and 想 (明天我不会去 / 不想去你家) are also grammatical; → 是, 和, 很 (key 能 unchanged).
+- Improvement `h1-83` 在: meaning lists กำลัง (the progressive 我在看书) but pos was "v./prep."; → "v./prep./adv.".
+- Note: the 2026-10-27 log's "h1-137 很" is h1-139 by the counter (h1-137 is 没有).
+- Needs human review: `l2-3` 今天太冷了 glossed "หนาวเกินไป"; "หนาวมาก" may read more naturally. Left as is.
