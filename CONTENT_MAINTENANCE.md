@@ -71,3 +71,12 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-25 · Day 9 · HSK 2
+
+- Checked: `src/data/langs/zh-hsk2.ts` — all 150 words (pinyin syllable by syllable, Thai, part of speech, mnemonics), all 8 grammar topics (key points, examples, checks, practice questions) and the full 60-item mock (structure 35 + 25, keys, true/false direction, picture and response matching, times and prices, Thai explanations, pass mark). Items already in the open 2026-10-28 content PR were not repeated.
+- Fix `hsk2-g7` intro: "Chinese prepositions always come before the verb" is false in general (住在, 走到; the file's own h2-75 uses 住在); now limited to the three prepositions the topic teaches (从, 离, 往).
+- Fix mock `passTh`: said the real exam is about 50 minutes plus 5 minutes for filling in the answer sheet; officially about 55 minutes including 5 minutes for personal details; corrected.
+- Fix `h2-97` 快: meaning includes รีบ (adverb use, 快走吧) but pos was only คุณศัพท์; → "คุณศัพท์/คำวิเศษณ์".
+- Improvement `hsk2-g1` 已经…了 key point: "มักมี 了 ปิดท้ายเสมอ" said "usually" and "always" at once; → "มักมี 了 ปิดท้ายประโยค".
+- Needs human review: none new.
