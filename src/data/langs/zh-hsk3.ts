@@ -521,7 +521,7 @@ const content: LangLevelContent = {
           highlight: '拿出来',
           check: {
             sentence: '请把你的护照拿___。(กรุณาหยิบพาสปอร์ตของคุณออกมา)',
-            choices: ['起去', '下去', '出来', '进去'],
+            choices: ['起去', '来出', '出来', '去进'],
             answerIndex: 2,
             explanation: 'หยิบออกมา (จากกระเป๋ามาหาผู้พูด) = 拿出来',
           },
@@ -735,7 +735,7 @@ const content: LangLevelContent = {
         },
         {
           id: 'hsk3-g5-q5',
-          sentence: '这个汉字太难了，我写___。(อักษรจีนตัวนี้ยากมาก ฉันเขียนไม่ได้)',
+          sentence: '我的手很疼，今天写___。(มือฉันเจ็บมาก วันนี้เขียนไม่ได้)',
           choices: ['没了', '得不', '不得', '不了'],
           answerIndex: 3,
           explanation: 'เขียนไม่ได้ = 写不了 (bu liǎo)',
@@ -1328,7 +1328,7 @@ const content: LangLevelContent = {
         {
           id: 'hsk3-g9-q4',
           sentence: '除了我以外，我们班的同学___去过上海。(ยกเว้นฉัน เพื่อนร่วมชั้นทุกคนเคยไปเซี่ยงไฮ้)',
-          choices: ['还', '也', '再', '都'],
+          choices: ['和', '很', '再', '都'],
           answerIndex: 3,
           explanation: 'ความหมาย "ยกเว้น" ใช้ 除了…以外，…都…',
         },
@@ -1489,7 +1489,7 @@ const content: LangLevelContent = {
         {
           id: 'hsk3-g10-q4',
           sentence: '你是___来的？坐地铁还是坐出租车？(คุณมาอย่างไร นั่งรถไฟใต้ดินหรือแท็กซี่)',
-          choices: ['什么', '哪儿', '怎么', '谁'],
+          choices: ['什么', '几', '怎么', '谁'],
           answerIndex: 2,
           explanation: 'ถามวิธีการ ใช้ 是怎么来的？',
         },

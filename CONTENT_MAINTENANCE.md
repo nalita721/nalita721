@@ -71,3 +71,15 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-26 · Day 10 · HSK 3
+
+- Checked (third pass, focused on what earlier checks could miss): `src/data/langs/zh-hsk3-vocab.ts` (300 words: Thai examples dropping details or the headword, pos vs meaning, measure words, component claims) and `src/data/langs/zh-hsk3.ts` (grammar g1–g10: distractors that are also grammatical, absolute rules, example pinyin and Thai; mock: 80 keys, numbers, true/false, pass mark). Items in the open 2026-10-29 and 2026-11-12 PRs were not repeated.
+- Fix `h3-177` 水平: Thai example dropped the headword ("ภาษาจีนของเธอพัฒนาเร็วมาก"); → "ระดับภาษาจีนของเธอพัฒนาขึ้นเร็วมาก".
+- Fix `h3-266` 又: meaning "(เกิดซ้ำในอดีต)" was too narrow (明天又是星期一了); → "อีกแล้ว อีกครั้ง (มักใช้กับสิ่งที่เกิดซ้ำไปแล้ว)".
+- Fix `hsk3-g9-q4`: distractors 也 and 还 (我们班的同学也/还去过上海) are natural Chinese; → 和, 很 (key 都 unchanged).
+- Fix `hsk3-g10-q4`: distractor 哪儿 (你是哪儿来的？) is natural colloquial Chinese; → 几 (key 怎么 unchanged).
+- Fix `hsk3-g4` 拿出来 check: 拿进去 and 拿下去 are grammatical; → ungrammatical 来出, 去进 (key 出来 unchanged).
+- Fix `hsk3-g5-q5`: "this character is too hard, I 写不了" — natives say 写不出来/不会写, and the topic's own key point says 不了 is for an outside obstacle; sentence → "我的手很疼，今天写___。" (key 不了 unchanged).
+- Improvement `h3-99` 起飞: Thai example "เครื่องบินออก" blurred it with 出发; → "เครื่องบินขึ้นบินตอนสิบโมง".
+- Needs human review: `h3-141` 刮风 example Thai "ลมแรง" adds "strong"; `h3-265` 才 example "เพิ่งตื่นตอนสิบโมง" can read as "just woke up"; `hsk3-g10` 为了 check keeps 因为 as a deliberate meaning contrast (grammatical); `hsk3-g3-q1` 找好了 is borderline acceptable; `g10-q2`, `g7-q7`, `g3-q4` similar but low risk. Left as is.
