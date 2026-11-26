@@ -71,3 +71,11 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-27 · Day 11 · Japanese kana + N5 kanji
+
+- Checked (third pass): `src/data/langs/ja-kana.ts` (romaji tables, hiragana/katakana consistency, every tip) and `src/data/langs/ja-n5-kanji.ts` (example-word meanings and readings, okurigana markers). Items in the open 2026-10-30 and 2026-11-13 PRs were not repeated.
+- Fix hiragana long-vowel tip: "おう อ่านเป็น ō" was absolute (おもう is o-mo-u); → "มักอ่านเป็น ō"; and おばさん/おばあさん glossed only ป้า/น้า and คุณยาย; → "ป้า/น้า/อา" and "คุณย่า/คุณยาย".
+- Fix 病 example 病気: glossed "ป่วย" (a verb/adjective) for a noun; → "ความเจ็บป่วย / โรค".
+- Improvement 前/後 examples 午前, 午後: added "a.m." / "p.m.", matching the 午 entry.
+- Needs human review: を/ヲ romaji is "wo" while the particle tip says it is read "o" (the data may be used for romaji input, so not changed here); 日 kun reading "ひ, -び, -か" uses "-" for suffix forms while the header says "-" marks okurigana; katakana tip "คำเน้นเสียง" may read as "stressed words" (meant: words written in katakana for emphasis; onomatopoeia missing); 西口/南口/北口 glossed "ทางออก" though station gates are also entrances; a tip on ん before b/p/m and k/g could help Thai learners. Left as is.
