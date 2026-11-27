@@ -71,3 +71,15 @@ log. People can edit the backlog and rotation; the session appends to the log.
 ## Log
 
 <!-- newest first: ### YYYY-MM-DD · Day N · Area -->
+
+### 2026-11-28 · Day 12 · N5 vocabulary
+
+- Checked (third pass, focused on Thai meanings, example translations, mnemonics and verb groups): `src/data/langs/ja-n5-vocab-a.ts` (371 words) and `src/data/langs/ja-n5-vocab-b.ts` (350 words). Items in the open 2026-10-31 and 2026-11-14 PRs were not repeated.
+- Fix `n5a-132` 二十歳: mnemonic called 20 the age of majority; it has been 18 since April 2022; → the legal drinking age.
+- Fix `n5a-256` 安い: mnemonic transliteration "ยาซุย" → "ยาสุย" (file convention す = สุ).
+- Fix `n5a-67` 生徒: "(ประถม-มัธยม)" — elementary pupils are 児童; → "(มัธยม)".
+- Fix loanword sources: `n5b-220` ボタン and `n5b-34` ビール said "from button/beer (Portuguese/Dutch …)", teaching English as the source; → "from Portuguese botão / Dutch bier".
+- Fix false etymology: `n5b-111` 銀行 (行 = firm, not "go"); `n5b-12` くだもの (く = old reading of 木, not "basket"); `n5b-160` 宿題 (宿 = carried over, not "home"); `n5b-226` 雨 (rain from the sky, not "under a roof").
+- Fix `n5b-30` 紅茶: Thai example "ชา" reads as お茶; → "ชาฝรั่ง".
+- Improvement `n5a-171` 金曜日: mnemonic "Friday is payday" → the planet 金星, like the other weekdays.
+- Needs human review: `n5a-244` 右 "มิกิ" (voiced ぎ); `n5a-58` 女 pictograph (kneeling, not cross-legged); `n5b-53` 台所; `n5b-131` 電車 "รถไฟฟ้า" may read as BTS/MRT; `n5b-152` 東 and `n5b-206` 背広 folk etymologies stated as fact; `n5b-19`, `n5b-2` calque "อาหาร…เป็น…"; `n5b-121` "อ่านหนังสือ" for 勉強; `n5b-210` "ได้เลย" for a request. Left as is.
